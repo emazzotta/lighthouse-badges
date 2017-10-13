@@ -1,0 +1,71 @@
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="Layer_1" data-name="Layer 1" viewBox="0 0 750 750" version="1.1" inkscape:version="0.91" sodipodi:docname="PWA_Illustration_Lighthouse_05_Lighthouse.svg" inkscape:export-filename="/Users/ericbidelman/Desktop/lh_logo_icon.png" inkscape:export-xdpi="180" inkscape:export-ydpi="180" width="750" height="750">
+  <metadata id="metadata85">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>
+          image/svg+xml
+        </dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title>
+          PWA_Illustration_Lighthouse
+        </dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1143" inkscape:window-height="714" id="namedview83" showgrid="false" borderlayer="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="50" fit-margin-bottom="0" inkscape:zoom="0.49" inkscape:cx="330.81" inkscape:cy="423.37" inkscape:window-x="44" inkscape:window-y="42" inkscape:window-maximized="0" inkscape:current-layer="layer6"/>
+  <defs id="defs3">
+    <style id="style5">
+      .cls-1,.cls-10{fill:#304ffe;}.cls-2{fill:#ffe082;}.cls-10,.cls-2{opacity:0.5;}.cls-3{fill:#2979ff;}.cls-4{fill:#ffd54f;}.cls-5{fill:#fff176;}.cls-6{fill:#f4511e;}.cls-7{fill:#e64a19;}.cls-8{fill:#c5cae9;}.cls-9{fill:#ff7043;}.cls-11{fill:#fdd835;}.cls-12{fill:#fff9c4;}.cls-13{fill:#448aff;}.cls-14{fill:#00c853;}.cls-15{fill:#64dd17;}
+    </style>
+  </defs>
+  <title id="title7">
+    PWA_Illustration_Lighthouse
+  </title>
+  <path class="cls-1" d="m92.43 571.02c52.32 0 52.32-33.94 104.64-33.94 52.32 0 52.31 33.94 104.63 33.94 52.32 0 52.32-33.94 104.63-33.94 52.31 0 52.32 33.94 104.64 33.94 52.32 0 52.32-33.94 104.64-33.94 49.48 0 52.17 30.34 96.56 33.64a326.73 326.73 0 0 0 8.09-72.39c0-179.87-145.82-325.69-325.69-325.69-179.87 0-325.7 145.82-325.7 325.69a326.75 326.75 0 0 0 7.9 71.51 98.88 98.88 0 0 0 15.66 1.18z" id="path9" inkscape:connector-curvature="0" fill="#304ffe"/>
+  <path class="cls-3" d="M346 377.16" id="path13" inkscape:connector-curvature="0" fill="#2979ff"/>
+  <rect class="cls-4" x="362.98" y="213.56" width="84.84" height="78.49" id="rect15" fill="#ffd54f"/>
+  <rect class="cls-5" x="362.98" y="213.56" width="29.95" height="78.49" id="rect17" fill="#fff176"/>
+  <ellipse class="cls-5" cx="392.3" cy="233.21" rx="19.84" ry="24.89" id="ellipse19" fill="#fff176"/>
+  <path class="cls-6" d="m360.9 204.7a43.84 43.84 0 1 1 87.67 0" id="path21" inkscape:connector-curvature="0" fill="#f4511e"/>
+  <path class="cls-7" d="m405.11 160.87a43.51 43.51 0 0 1 43.46 43.83l-43.46 0 0-43.83z" id="path23" inkscape:connector-curvature="0" fill="#e64a19"/>
+  <rect class="cls-6" x="352.42" y="203.29" width="104.64" height="11.31" rx="5.66" ry="5.66" id="rect25" fill="#f4511e"/>
+  <polygon class="cls-8" points="393 416 405.23 173.5 490.07 173.5 501 404 501 404 " id="polygon27" transform="translate(-42.202351,118.02434)" fill="#c5cae9"/>
+  <line class="cls-9" x1="449.04" y1="310.25" x2="452.3" y2="374.42" id="line29" fill="#ff7043"/>
+  <polygon class="cls-9" points="402.05 233.8 398.63 301.09 494.5 256.4 491.24 192.23 491.24 192.23 " id="polygon31" transform="translate(-42.202351,118.02434)" fill="#ff7043"/>
+  <line class="cls-9" x1="455.52" y1="437.66" x2="458.79" y2="501.84" id="line33" fill="#ff7043"/>
+  <polygon class="cls-9" points="395.25 367.4 391.83 434.7 500.99 383.82 497.72 319.64 497.72 319.64 " id="polygon35" transform="translate(-42.202351,118.02434)" fill="#ff7043"/>
+  <rect class="cls-7" x="349.99" y="255.9" width="109.49" height="35.82" id="rect39" fill="#e64a19"/>
+  <rect class="cls-6" x="349.99" y="255.9" width="71.78" height="35.82" id="rect41" fill="#f4511e"/>
+  <path class="cls-2" d="m403.98 255.9c0 13-12.1 23.5-27 23.5-14.9 0-27-10.52-27-23.5" id="path43" inkscape:connector-curvature="0" style="fill:#ffe082;opacity:0.5"/>
+  <g inkscape:groupmode="layer" id="layer1" inkscape:label="clouds" transform="translate(-111.06999,296.26999)" display="inline">
+    <path class="cls-3" d="m653.73-50.46a19.59 19.59 0 0 1 8.32 1.84 34.49 34.49 0 0 1 66.7-9l0.12 0a23.25 23.25 0 0 1 0 46.5l-75.14 0a19.67 19.67 0 1 1 0-39.34z" id="path71" inkscape:connector-curvature="0" fill="#2979ff"/>
+    <path class="cls-13" d="m430.73 137.02a16.6 16.6 0 0 1 7 1.56 29.23 29.23 0 0 1 56.53-7.63l0.1 0a19.71 19.71 0 1 1 0 39.41l-63.63 0a16.67 16.67 0 1 1 0-33.34z" id="path77" inkscape:connector-curvature="0" fill="#448aff"/>
+  </g>
+  <g inkscape:groupmode="layer" id="layer2" inkscape:label="stars" transform="translate(-111.06999,296.26999)" display="inline">
+    <circle class="cls-11" cx="593.87" cy="-88.78" r="3.53" id="circle45" fill="#fdd835"/>
+    <circle class="cls-12" cx="624.87" cy="109.62" r="6.13" id="circle47" fill="#fff9c4"/>
+    <circle class="cls-12" cx="253.47" cy="53.59" r="6.13" id="circle49" fill="#fff9c4"/>
+    <circle class="cls-12" cx="353.42" cy="160.21" r="6.13" id="circle51" fill="#fff9c4"/>
+    <circle class="cls-12" cx="598.48" cy="11.64" r="6.13" id="circle53" fill="#fff9c4"/>
+    <circle class="cls-12" cx="727.63" cy="169.54" r="6.13" id="circle55" fill="#fff9c4"/>
+    <circle class="cls-11" cx="240.27" cy="192.4" r="3.53" id="circle57" fill="#fdd835"/>
+    <circle class="cls-11" cx="272.83" cy="121.09" r="3.53" id="circle59" fill="#fdd835"/>
+    <circle class="cls-11" cx="294.74" cy="102.71" r="3.53" id="circle61" fill="#fdd835"/>
+    <circle class="cls-11" cx="387.35" cy="20" r="3.53" id="circle63" fill="#fdd835"/>
+    <circle class="cls-11" cx="679.87" cy="30.22" r="3.53" id="circle65" fill="#fdd835"/>
+    <circle class="cls-11" cx="818.6" cy="177.65" r="3.53" id="circle67" fill="#fdd835"/>
+    <circle class="cls-11" cx="328.68" cy="9.39" r="3.53" id="circle69" fill="#fdd835"/>
+    <circle class="cls-11" cx="640.9" cy="179.2" r="3.53" id="circle73" fill="#fdd835"/>
+    <circle class="cls-11" cx="747.87" cy="90.75" r="3.53" id="circle75" fill="#fdd835"/>
+  </g>
+  <g inkscape:groupmode="layer" id="layer3" inkscape:label="light" transform="translate(-111.06999,296.26999)" display="inline">
+    <path class="cls-2" d="m475.49-83.9-334.62-47.79a3.65 3.65 0 0 0-1-0.14c-8.67 0-16 31.89-16 71.15 0 39.26 7.33 71.07 16 71.07a3.66 3.66 0 0 0 0.93-0.13l334.64-47.88 0-46.28z" id="path11" inkscape:connector-curvature="0" style="fill:#ffe082;opacity:0.5"/>
+  </g>
+  <g inkscape:groupmode="layer" id="layer6" inkscape:label="shade" display="inline">
+    <polygon class="cls-10" points="493.27 173.5 450.37 173.5 450.37 393 502 416 493.27 173.5 " id="polygon37" transform="translate(-42.202351,118.02434)" style="fill:#304ffe;opacity:0.5"/>
+  </g>
+  <g inkscape:groupmode="layer" id="layer5" inkscape:label="GRASS" transform="translate(-111.06999,296.26999)" display="inline">
+    <path class="cls-14" d="m413.77 275.48c52.32 0 52.32-33.94 104.63-33.94 52.31 0 52.32 33.94 104.63 33.94 44.42 0 51.13-24.46 84.16-31.84-45.13-24.66-112.53-40.33-187.84-40.33-75.63 0-143.28 15.79-188.41 40.64 31.93 7.73 39.02 31.53 82.83 31.53z" id="path79" inkscape:connector-curvature="0" fill="#00c853"/>
+    <path class="cls-15" d="m413.87 275.01c52.32 0 52.32-33.94 104.63-33.94l1.1 0-0.58-37.32c-74.89 0-142 15.49-187.08 39.91 31.16 7.98 38.55 31.35 81.93 31.35z" id="path81" inkscape:connector-curvature="0" fill="#64dd17"/>
+  </g>
+</svg>

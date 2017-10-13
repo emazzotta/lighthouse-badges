@@ -9,14 +9,7 @@ const color_ranges = {
   60: 'yellow',
   40: 'orange',
   0: 'red',
-}
-
-const lighthouse_metrics = {
-  'Lighthouse Progressive Web App': 90,
-  'Lighthouse Performance': 67,
-  'Lighthouse Accessibility': 77,
-  'Lighthouse Best Practices': 50
-}
+};
 
 const get_color_for_percentage = async (percentage) => {
   let highest = 0;
@@ -32,10 +25,9 @@ const get_color_for_percentage = async (percentage) => {
   return color;
 };
 
-
-badge.loadFont(path.join(__dirname, 'fonts', 'Verdana.ttf'), (err) => {
+const metrics_to_svg = (lighthouse_metrics) => {
   Object.keys(lighthouse_metrics).forEach(description => {
-    const svg = get_color_for_percentage(lighthouse_metrics[description]).then(color => {
+    const generated_svg = get_color_for_percentage(lighthouse_metrics[description]).then(color => {
       return new Promise((res, err) => {
         badge({
           text: [description, lighthouse_metrics[description] + '%'],
@@ -47,8 +39,25 @@ badge.loadFont(path.join(__dirname, 'fonts', 'Verdana.ttf'), (err) => {
       });
     });
 
-    svg.then((svg) => {
-      fs.writeFile(path.join(__dirname, 'badges', description + '.svg'), svg, (err) => {})
+    generated_svg.then((svg) => {
+      fs.writeFile(path.join(__dirname, 'badges', description + '.svg'), svg, (err) => {
+      })
     });
   });
+};
+
+badge.loadFont(path.join(__dirname, 'fonts', 'Verdana.ttf'), (err) => {
+  const report_reader = (cb) => {
+    fs.readFile(path.join(__dirname, 'myfile.report.json'), 'utf8', (err, data) => {
+      let lighthouse_metrics = {};
+      JSON.parse(data).reportCategories.forEach((element) => {
+        lighthouse_metrics[`Lighthouse ${element.name}`] = element.score;
+        console.log(lighthouse_metrics)
+      });
+      cb(lighthouse_metrics)
+    });
+  };
+
+  report_reader(metrics_to_svg)
 });
+
