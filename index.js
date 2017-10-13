@@ -30,7 +30,7 @@ const metrics_to_svg = (lighthouse_metrics) => {
     const generated_svg = get_color_for_percentage(lighthouse_metrics[description]).then(color => {
       return new Promise((res, err) => {
         badge({
-          text: [description, lighthouse_metrics[description] + '%'],
+          text: [description, Math.round(lighthouse_metrics[description]) + '%'],
           colorscheme: color,
           template: "flat"
         }, (svg, err) => {
@@ -40,13 +40,13 @@ const metrics_to_svg = (lighthouse_metrics) => {
     });
 
     generated_svg.then((svg) => {
-      fs.writeFile(path.join(__dirname, 'badges', description + '.svg'), svg, (err) => {
+      fs.writeFile(path.join(__dirname, 'assets', 'badges', description + '.svg'), svg, (err) => {
       })
     });
   });
 };
 
-badge.loadFont(path.join(__dirname, 'fonts', 'Verdana.ttf'), (err) => {
+badge.loadFont(path.join(__dirname, 'assets', 'fonts', 'Verdana.ttf'), (err) => {
   const report_reader = (cb) => {
     fs.readFile(path.join(__dirname, 'myfile.report.json'), 'utf8', (err, data) => {
       let lighthouse_metrics = {};
