@@ -4,7 +4,7 @@ const fs = require('fs');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-const color_ranges = {
+const COLOR_RANGES = {
   95: 'brightgreen',
   90: 'green',
   75: 'yellowgreen',
@@ -13,58 +13,44 @@ const color_ranges = {
   0: 'red',
 };
 
-const get_color_for_percentage = async (percentage) => {
+const percentage_to_color = async (percentage) => {
   let highest = 0;
-  let color = color_ranges[0];
+  let color = COLOR_RANGES[0];
 
-  Object.keys(color_ranges).forEach(element => {
-    if (percentage >= element && element >= highest) {
-      highest = element;
-      color = color_ranges[element];
+  for (let current_color of Object.keys(COLOR_RANGES)) {
+    if (percentage >= current_color && current_color >= highest) {
+      highest = current_color;
+      color = COLOR_RANGES[current_color];
     }
-  });
+  }
 
   return color;
 };
 
+
 async function metrics_to_svg(lighthouse_metrics) {
   for (let description of Object.keys(lighthouse_metrics)) {
-    const badge_color = await get_color_for_percentage(lighthouse_metrics[description]);
+    const badge_color = await percentage_to_color(lighthouse_metrics[description]);
+    const badge_text = [description, Math.round(lighthouse_metrics[description]) + '%'];
 
-    badge({
-      text: [description, Math.round(lighthouse_metrics[description]) + '%'],
-      colorscheme: badge_color,
-      template: "flat"
-    }, (svg, err) => {
-      fs.writeFile(path.join(__dirname, 'assets', 'badges', description + '.svg'), svg, (err) => {
-      })
+    badge.loadFont(path.join(__dirname, 'assets', 'fonts', 'Verdana.ttf'), (_) => {
+      badge({text: badge_text, colorscheme: badge_color, template: "flat"}, (svg, _) => {
+        fs.writeFile(path.join(__dirname, 'badges', description + '.svg'), svg, () => {
+        })
+      });
     });
   }
 }
 
-badge.loadFont(path.join(__dirname, 'assets', 'fonts', 'Verdana.ttf'), (err) => {
-  const report_reader = (cb) => {
-    fs.readFile(path.join(__dirname, 'report.report.json'), 'utf8', (err, data) => {
-      let lighthouse_metrics = {};
-      JSON.parse(data).reportCategories.forEach((element) => {
-        lighthouse_metrics[`Lighthouse ${element.name}`] = element.score;
-        console.log(lighthouse_metrics)
-      });
-      cb(lighthouse_metrics)
-    });
-  };
 
-  report_reader(metrics_to_svg)
-});
+async function lighthouse_badge() {
+  const lighthouse_command = './node_modules/.bin/lighthouse --quiet https://emanuelemazzotta.com --chrome-flags=\'--headless\'';
+  const {stdout} = await exec(lighthouse_command + ' --output=json --output-path=stdout', {maxBuffer: 1024 * 5000});
+  let lighthouse_metrics = {};
+  for (let element of  JSON.parse(stdout).reportCategories) {
+    lighthouse_metrics[`Lighthouse ${element.name}`] = element.score;
+  }
+  await metrics_to_svg(lighthouse_metrics)
+}
 
-
-
-// async function lighthouse_badge() {
-//   const { stdout } = await exec('ls');
-//
-//   console.log('stdout:', stdout);
-// }
-//
-// lighthouse_badge();
-
-// ./node_modules/.bin/lighthouse --output=json --quiet https://siroop.ch --chrome-flags='--headless' --output json --output-path ./report.json
+lighthouse_badge();
