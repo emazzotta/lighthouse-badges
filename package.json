@@ -1,5 +1,5 @@
 {
-  "name": "lighthouse-badge",
+  "name": "lighthouse-badges",
   "version": "1.0.0",
   "description": "A lighthouse badge generator",
   "main": "index.js",
