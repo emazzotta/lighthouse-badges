@@ -1,3 +1,5 @@
+#!/usr/bin/env
+
 const badge = require('gh-badges');
 const path = require('path');
 const fs = require('fs');
