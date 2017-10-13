@@ -37,11 +37,9 @@ async function metrics_to_svg(lighthouse_metrics) {
 
     badge.loadFont(path.join(__dirname, 'assets', 'fonts', 'Verdana.ttf'), (err) => {
       badge({text: badge_text, colorscheme: badge_color, template: 'flat'}, (svg, err) => {
-        fs.writeFile(path.join(__dirname, description + '.svg'), svg, (err) => {
+        fs.writeFile(path.join(path.dirname(fs.realpathSync(__filename)), description.replace(/ /g,"_") + '.svg'), svg, (err) => {
           if (err) {
             return console.log(err);
-          } else {
-            return console.log(`Written svg to ${path.join(__dirname, description + '.svg')}`);
           }
         })
       });
