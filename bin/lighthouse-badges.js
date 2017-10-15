@@ -27,7 +27,7 @@ async function metrics_to_svg(lighthouse_metrics) {
 
 
 async function get_lighthouse_score(url) {
-  const lighthouse_command = `./node_modules/.bin/lighthouse --quiet ${url} --chrome-flags='--headless'`;
+  const lighthouse_command = `${path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse')} --quiet ${url} --chrome-flags='--headless'`;
   const {stdout} = await exec(lighthouse_command + ' --output=json --output-path=stdout', {maxBuffer: 1024 * 5000});
   let lighthouse_metrics = {};
   for (let element of  JSON.parse(stdout).reportCategories) {
@@ -39,7 +39,7 @@ async function get_lighthouse_score(url) {
 
 (async function () {
   if (process.argv.length < 3) {
-    console.error('Please provide a url to perform lighthouse test')
+    console.error('Please provide a url to perform lighthouse test');
   } else {
     let metrics = [];
     for (let i = 2; i < process.argv.length; i++) {
