@@ -5,7 +5,9 @@
 
 [![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/lighthouse.svg){:height="200px" width="200px"}](https://github.com/GoogleChrome/lighthouse)
 
-Sorry, currently WIP. Please come back soon!
+This package allows you to easily create Lighthouse badges for all four Lighthouse categories.
+
+Dockerized version coming soon™...
 
 ## Installation
 
@@ -17,7 +19,8 @@ npm i -g lighthouse-badges
 
 ```bash
 # Add as many sites as you like
-# The lighthouse badges will be the average scores of all the pages combined
+# The four Lighthouse badges will be the average scores of all the pages combined
+# The badges will be saved in your current directory
 lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending
 ```
 
