@@ -3,6 +3,8 @@
 
 # Lighthouse Badges
 
+[![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/lighthouse.svg){:height="200px" width="200px"}](https://github.com/GoogleChrome/lighthouse)
+
 Sorry, currently WIP. Please come back soon!
 
 ## Installation
@@ -29,4 +31,3 @@ lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending
 ## Author(s)
 
 Emanuele Mazzotta
-
