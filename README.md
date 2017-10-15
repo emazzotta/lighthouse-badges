@@ -3,7 +3,7 @@
 
 # Lighthouse Badges
 
-[![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/lighthouse.svg){:height="200px" width="200px"}](https://github.com/GoogleChrome/lighthouse)
+[![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/lighthouse.svg)](https://github.com/GoogleChrome/lighthouse)
 
 This package allows you to easily create Lighthouse badges for all four Lighthouse categories.
 
