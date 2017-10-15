@@ -69,6 +69,9 @@ async function get_average_score(metrics) {
     }
     lighthouse_metrics[metric] = total / i;
   }
+
+  console.dir(`Average Metrics: ${JSON.stringify(lighthouse_metrics)}`);
+
   return lighthouse_metrics;
 }
 
@@ -81,8 +84,9 @@ async function get_average_score(metrics) {
 
     for (let i = 2; i < process.argv.length; i++) {
       metrics.push(await get_lighthouse_score(process.argv[i]));
-      console.log(`Metrics: ${metrics}`)
     }
+
+    console.dir(`Metrics: ${JSON.stringify(metrics)}`);
 
     await metrics_to_svg(await get_average_score(metrics))
   }
