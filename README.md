@@ -1,5 +1,7 @@
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license) 
 [![Twitter](https://img.shields.io/badge/Twitter-emazzotta-00aced.svg?style=flat)](https://twitter.com/emazzotta)
+[![Downloads Today](https://img.shields.io/npm/dt/lighthouse-badges.svg?style=flat)](https://badge.fury.io/js/lighthouse-badges)
+[![Dev Dependencies](https://david-dm.org/emazzotta/lighthouse-badges.svg?style=flat)](https://david-dm.org/ProjectThor/aerospikedown)
 
 # Lighthouse Badges
 
