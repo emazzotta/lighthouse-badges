@@ -1,33 +1,11 @@
-#!/usr/bin/env
+#!/usr/bin/env node
 
 const badge = require('gh-badges');
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
+const {percentage_to_color, get_average_score} = require('../lib/calculations');
 const exec = util.promisify(require('child_process').exec);
-
-const COLOR_RANGES = {
-  95: 'brightgreen',
-  90: 'green',
-  75: 'yellowgreen',
-  60: 'yellow',
-  40: 'orange',
-  0: 'red',
-};
-
-async function percentage_to_color(percentage) {
-  let highest = 0;
-  let color = COLOR_RANGES[0];
-
-  for (let current_color of Object.keys(COLOR_RANGES)) {
-    if (percentage >= current_color && current_color >= highest) {
-      highest = current_color;
-      color = COLOR_RANGES[current_color];
-    }
-  }
-
-  return color;
-}
 
 
 async function metrics_to_svg(lighthouse_metrics) {
@@ -59,37 +37,14 @@ async function get_lighthouse_score(url) {
 }
 
 
-async function get_average_score(metrics) {
-  let lighthouse_metrics = {};
-  for (let metric of Object.keys(metrics[0])) {
-    let i = 0;
-    let total = 0;
-    for (; i < metrics.length; i++) {
-      total += metrics[i][metric];
-    }
-    lighthouse_metrics[metric] = total / i;
-  }
-
-  console.dir(`Average Metrics: ${JSON.stringify(lighthouse_metrics)}`);
-
-  return lighthouse_metrics;
-}
-
-
 (async function () {
   if (process.argv.length < 3) {
     console.error('Please provide a url to perform lighthouse test')
   } else {
     let metrics = [];
-
     for (let i = 2; i < process.argv.length; i++) {
       metrics.push(await get_lighthouse_score(process.argv[i]));
     }
-
-    console.dir(`Metrics: ${JSON.stringify(metrics)}`);
-
     await metrics_to_svg(await get_average_score(metrics))
   }
 })();
-
-module.exports = {get_average_score};
