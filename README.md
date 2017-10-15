@@ -4,7 +4,21 @@
 
 # Lighthouse Badges
 
-Sorry, currently WIP. Commands coming soon.
+Sorry, currently WIP. Please come back soon!
+
+## Installation
+
+```bash
+npm i -g lighthouse-badges
+```
+
+## Usage
+
+```bash
+# Add as many sites as you like
+# The lighthouse badges will be the average scores of all the pages combined
+lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending
+```
 
 ## Example Badges
 
