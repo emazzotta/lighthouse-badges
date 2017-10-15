@@ -1,6 +1,5 @@
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://doge.mit-license.org) 
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license) 
 [![Twitter](https://img.shields.io/badge/Twitter-emazzotta-00aced.svg?style=flat)](https://twitter.com/emazzotta)
-[![Developed By](https://img.shields.io/badge/developed%20with%20♥%20by-Emanuele-red.svg?style=flat)](https://emanuelemazzotta.com/) 
 
 # Lighthouse Badges
 
@@ -30,8 +29,4 @@ lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending
 ## Author(s)
 
 Emanuele Mazzotta
-
-## License
-
-[MIT License](LICENSE.md) © Emanuele Mazzotta
 

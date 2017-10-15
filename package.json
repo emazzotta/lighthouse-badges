@@ -1,10 +1,14 @@
 {
   "name": "lighthouse-badges",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "A lighthouse badge generator",
   "main": "index.js",
   "bin": {
     "lighthouse-badges": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emazzotta/lighthouse-badges.git"
   },
   "dependencies": {
     "gh-badges": "^1.3.0",
