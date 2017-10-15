@@ -127,15 +127,12 @@ Desktop.ini
 Thumbs.db
 __pycache__
 backup
-bin
-build
 coverage
 coverage.xml
 data
 dist
 eggs
 gen
-lib
 lib-cov
 lib64
 logs3
