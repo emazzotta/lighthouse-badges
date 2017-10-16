@@ -46,10 +46,6 @@ npm i -g lighthouse-badges
 lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending
 ```
 
-## TODO
-
-* [ ] Proper tests (adapt script command too)
-
 ## Author(s)
 
 Emanuele Mazzotta
