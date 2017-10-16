@@ -15,8 +15,8 @@ This package allows you to easily create Lighthouse badges for all four Lighthou
 # Replace $(pwd) with the badges save path on your host 
 docker run \
     -v $(pwd):/badges \
-    --cap-add=SYS_ADMIN emazzotta/lighthouse-badges \
-    /bin/bash -c "lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending"
+    --cap-add=SYS_ADMIN \
+    emazzotta/lighthouse-badges /bin/bash -c "lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
 ## Installation
