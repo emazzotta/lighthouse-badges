@@ -41,6 +41,7 @@ async function get_lighthouse_score(url) {
   if (process.argv.length < 3) {
     console.error('Please provide a url to perform lighthouse test');
   } else {
+    console.log('Lighthouse performance test running... (this might take a while)');
     let metrics = [];
     for (let i = 2; i < process.argv.length; i++) {
       metrics.push(await get_lighthouse_score(process.argv[i]));

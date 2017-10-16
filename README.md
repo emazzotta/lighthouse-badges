@@ -9,6 +9,13 @@
 
 This package allows you to easily create Lighthouse badges for all four Lighthouse categories.
 
+## Usage via Docker
+
+```bash
+# Replace $(pwd) with the path where you'd like the badges to be stored on your host system
+docker run -v $(pwd):/badges --cap-add=SYS_ADMIN emazzotta/lighthouse-badges /bin/bash -c "lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending"
+```
+
 ## Installation
 
 ```bash
@@ -35,7 +42,6 @@ lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending
 
 * [ ] Proper tests (adapt script command too)
 * [ ] Add Codeclimate badge
-* [ ] Add Dockerized version
 
 ## Author(s)
 
