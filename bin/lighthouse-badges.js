@@ -9,9 +9,10 @@ const exec = util.promisify(require('child_process').exec);
 
 
 async function metricsToSvg(lighthouseMetrics) {
-  for (const description of Object.keys(lighthouseMetrics)) {
-    const badgeColor = percentageToColor(lighthouseMetrics[description]);
-    const badgeText = [description, `${Math.round(lighthouseMetrics[description])}%`];
+  const metricKeys = Object.keys(lighthouseMetrics);
+  for (let i = 0; i < metricKeys.length; i += 1) {
+    const badgeColor = percentageToColor(lighthouseMetrics[metricKeys[i]]);
+    const badgeText = [metricKeys[i], `${Math.round(lighthouseMetrics[metricKeys[i]])}%`];
 
     badge.loadFont(path.join(__dirname, '..', 'assets', 'fonts', 'Verdana.ttf'), (err) => {
       if (err) {
@@ -21,7 +22,7 @@ async function metricsToSvg(lighthouseMetrics) {
         if (err) {
           throw err;
         }
-        const filepath = path.join(process.cwd(), `${description.replace(/ /g, '_')}.svg`);
+        const filepath = path.join(process.cwd(), `${metricKeys[i].replace(/ /g, '_')}.svg`);
         fs.writeFile(filepath, svg, (err) => {
           if (err) {
             return console.log(err);
@@ -51,10 +52,12 @@ async function getLighthouseScore(url) {
     console.error('Please provide a url to perform lighthouse test');
   } else {
     console.log('Lighthouse performance test running... (this might take a while)');
-    const metrics = [];
+
+    const promisesToAwait = [];
     for (let i = 2; i < process.argv.length; i += 1) {
-      metrics.push(await getLighthouseScore(process.argv[i]));
+      promisesToAwait.push(getLighthouseScore(process.argv[i]));
     }
+    const metrics = await Promise.all(promisesToAwait);
     await metricsToSvg(await getAverageScore(metrics));
   }
 }());
