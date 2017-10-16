@@ -1,7 +1,7 @@
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license) 
-[![Twitter](https://img.shields.io/badge/Twitter-emazzotta-00aced.svg?style=flat)](https://twitter.com/emazzotta)
 [![Downloads Today](https://img.shields.io/npm/dt/lighthouse-badges.svg?style=flat)](https://badge.fury.io/js/lighthouse-badges)
 [![Dev Dependencies](https://david-dm.org/emazzotta/lighthouse-badges.svg?style=flat)](https://david-dm.org/ProjectThor/aerospikedown)
+[![Twitter](https://img.shields.io/badge/Twitter-emazzotta-00aced.svg?style=flat)](https://twitter.com/emazzotta)
 
 # Lighthouse Badges
 
@@ -12,8 +12,11 @@ This package allows you to easily create Lighthouse badges for all four Lighthou
 ## Usage via Docker
 
 ```bash
-# Replace $(pwd) with the path where you'd like the badges to be stored on your host system
-docker run -v $(pwd):/badges --cap-add=SYS_ADMIN emazzotta/lighthouse-badges /bin/bash -c "lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending"
+# Replace $(pwd) with the badges save path on your host 
+docker run \
+    -v $(pwd):/badges \
+    --cap-add=SYS_ADMIN emazzotta/lighthouse-badges \
+    /bin/bash -c "lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
 ## Installation
