@@ -7,9 +7,21 @@
 
 [![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/lighthouse.svg)](https://github.com/GoogleChrome/lighthouse)
 
-This package allows you to easily create Lighthouse badges for all four Lighthouse categories.
+This package allows you to easily create Lighthouse badges for all four Lighthouse categories.  
+Ever wanted to brag about your sites's awesome Ligthhouse performance? Then this is the package for you!  
 
-## Usage via Docker
+## Example Badges
+
+[![Lighthouse Accessibility Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Accessibility.svg)](https://github.com/emazzotta/lighthouse-badges)  
+[![Lighthouse Best Practices Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Best_Practices.svg)](https://github.com/emazzotta/lighthouse-badges)  
+[![Lighthouse Progressive Web App Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Progressive_Web_App.svg)](https://github.com/emazzotta/lighthouse-badges)  
+[![Lighthouse Performance Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Performance.svg)](https://github.com/emazzotta/lighthouse-badges)  
+
+## Usage
+
+The four Lighthouse badges will contain their respective average scores of all the pages supplied, combined.
+
+### Docker
 
 ```bash
 # Replace $(pwd) with the badges save path on your host 
@@ -19,27 +31,20 @@ docker run \
     emazzotta/lighthouse-badges /bin/bash -c "lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
-## Installation
+### NPM 
+    
+#### Installation
 
 ```bash
 npm i -g lighthouse-badges
 ```
 
-## Usage
+#### Usage
 
 ```bash
-# Add as many sites as you like
-# The four Lighthouse badges will be the average scores of all the pages combined
 # The badges will be saved in your current directory
 lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending
 ```
-
-## Example Badges
-
-[![Lighthouse Accessibility Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Accessibility.svg)](https://github.com/emazzotta/lighthouse-badges)  
-[![Lighthouse Best Practices Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Best_Practices.svg)](https://github.com/emazzotta/lighthouse-badges)  
-[![Lighthouse Progressive Web App Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Progressive_Web_App.svg)](https://github.com/emazzotta/lighthouse-badges)  
-[![Lighthouse Performance Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Performance.svg)](https://github.com/emazzotta/lighthouse-badges)  
 
 ## TODO
 
