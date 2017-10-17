@@ -16,10 +16,10 @@ Ever wanted to brag about your sites's awesome Ligthhouse performance? Then this
 
 ### Four Badges
 
-[![Lighthouse Accessibility Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Accessibility.svg)](https://github.com/emazzotta/lighthouse-badges)
-[![Lighthouse Best Practices Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Best_Practices.svg)](https://github.com/emazzotta/lighthouse-badges)
-[![Lighthouse Progressive Web App Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Progressive_Web_App.svg)](https://github.com/emazzotta/lighthouse-badges)
-[![Lighthouse Performance Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Performance.svg)](https://github.com/emazzotta/lighthouse-badges)
+[![Lighthouse Accessibility Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/lighthouse_accessibility.svg)](https://github.com/emazzotta/lighthouse-badges)
+[![Lighthouse Best Practices Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/lighthouse_best_practices.svg)](https://github.com/emazzotta/lighthouse-badges)
+[![Lighthouse Progressive Web App Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/lighthouse_progressive_web_app.svg)](https://github.com/emazzotta/lighthouse-badges)
+[![Lighthouse Performance Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/lighthouse_performance.svg)](https://github.com/emazzotta/lighthouse-badges)
 
 ### Single Badge
 
@@ -37,16 +37,17 @@ usage: lighthouse-badges.js [-h] [-v] [-s] -u URLS [URLS ...]
 A simple npm package to generate gh-badges (shields.io) based on lighthouse
 performance.
 
-required arguments:
-  -u URLS [URLS ...], --urls URLS [URLS ...]
-                        the lighthouse badge(s) will contain the respective
-                        average score(s) of all the urls supplied, combined
-
 optional arguments:
   -h, --help            Show this help message and exit.
   -v, --version         Show program's version number and exit.
   -s, --single-badge    Only output one single badge averaging the four
                         lighthouse scores
+
+required arguments:
+  -u URLS [URLS ...], --urls URLS [URLS ...]
+                        The lighthouse badge(s) will contain the respective
+                        average score(s) of all the urls supplied, combined
+
 ```
 
 ### Docker
