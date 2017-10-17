@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-
 const badge = require('gh-badges');
 const path = require('path');
 const fs = require('fs');
@@ -65,5 +64,7 @@ async function getLighthouseMetrics(url) {
   }
   console.log('Lighthouse performance test running... (this might take a while)');
   const metrics = await Promise.all(promisesToAwait);
-  await metricsToSvg(args.single_badge === true ? await getSquashedScore(metrics) : await getAverageScore(metrics));
+  const metricsResults = args.single_badge === true ?
+    await getSquashedScore(metrics) : await getAverageScore(metrics);
+  await metricsToSvg(metricsResults);
 }());
