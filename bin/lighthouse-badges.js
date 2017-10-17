@@ -59,16 +59,11 @@ async function getLighthouseMetrics(url) {
 
 
 (async function () {
-  process.on('unhandledRejection', (reason, p) => {
-    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
-  });
   const args = await parser.parseArgs();
   const promisesToAwait = [];
   for (let i = 0; i < args.urls.length; i += 1) {
     promisesToAwait.push(getLighthouseMetrics(args.urls[i]));
   }
   const metrics = await Promise.all(promisesToAwait);
-  const calculatedMetrics = args.single_badge ?
-    await getSquashedScore(metrics) : await getAverageScore(metrics);
-  await metricsToSvg(calculatedMetrics);
+  await metricsToSvg(args.single_badge === true ? await getSquashedScore(metrics) : await getAverageScore(metrics));
 }());
