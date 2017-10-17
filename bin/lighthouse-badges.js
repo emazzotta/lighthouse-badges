@@ -43,7 +43,7 @@ async function getLighthouseScore(url) {
   const { stdout } = await exec(`${lighthouseCommand} --output=json --output-path=stdout`, { maxBuffer: 1024 * 5000 });
   const { reportCategories } = JSON.parse(stdout);
   for (let i = 0; i < reportCategories.length; i += 1) {
-    lighthouseMetrics[`Lighthouse ${reportCategories[i].name}`] = reportCategories[i].score;
+    lighthouseMetrics[`lighthouse ${reportCategories[i].name.toLowerCase()}`] = reportCategories[i].score;
   }
   return lighthouseMetrics;
 }
@@ -51,7 +51,6 @@ async function getLighthouseScore(url) {
 
 (async function () {
   const args = parser.parseArgs();
-  console.dir(args);
   if (process.argv.length < 3) {
     console.error('Please provide a url to perform lighthouse test');
   } else {
