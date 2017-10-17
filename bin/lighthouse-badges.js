@@ -3,10 +3,10 @@
 const badge = require('gh-badges');
 const path = require('path');
 const fs = require('fs');
-const util = require('util');
+const { promisify } = require('util');
 const { percentageToColor, getAverageScore, getSquashedScore } = require('../lib/calculations');
 const { parser } = require('../lib/argparser');
-const exec = util.promisify(require('child_process').exec);
+const exec = promisify(require('child_process').exec);
 
 // Buffer size for stdout, must be big enough to handle lighthouse CLI output
 const maxBuffer = 1024 * 5000;
