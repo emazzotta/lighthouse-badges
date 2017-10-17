@@ -15,10 +15,10 @@ describe('Calculations work', () => {
 
     it('should round the expected average correctly', async () => {
       const expectedResult = {
-        'lighthouse accessibility': 99.5,
-        'lighthouse performance': 99.5,
-        'lighthouse progressive web app': 99.5,
-        'lighthouse best practices': 99.5,
+        'lighthouse accessibility': 99,
+        'lighthouse performance': 99,
+        'lighthouse progressive web app': 99,
+        'lighthouse best practices': 99,
       };
       const input = [{
         'lighthouse accessibility': 100,
@@ -26,10 +26,10 @@ describe('Calculations work', () => {
         'lighthouse progressive web app': 100,
         'lighthouse best practices': 100,
       }, {
-        'lighthouse accessibility': 99,
-        'lighthouse performance': 99,
-        'lighthouse progressive web app': 99,
-        'lighthouse best practices': 99,
+        'lighthouse accessibility': 98.9,
+        'lighthouse performance': 98.9,
+        'lighthouse progressive web app': 98.9,
+        'lighthouse best practices': 98.9,
       }];
       const actualResult = await getAverageScore(input);
       assert.deepEqual(expectedResult, actualResult);
@@ -48,7 +48,7 @@ describe('Calculations work', () => {
     });
 
     it('should round the expected squashed average correctly', async () => {
-      const expectedResult = { lighthouse: 82.5 };
+      const expectedResult = { lighthouse: 83 };
       const input = [{
         'lighthouse accessibility': 100,
         'lighthouse performance': 100,
