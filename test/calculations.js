@@ -1,7 +1,33 @@
 const assert = require('assert');
-const { getAverageScore, getSquashedScore } = require('../lib/calculations');
+const { percentageToColor, getAverageScore, getSquashedScore } = require('../lib/calculations');
 
 describe('Calculations work', () => {
+  describe('the colors are returned as expected', () => {
+    it('should return brightgreen for very high number', async () => {
+      assert.equal('brightgreen', await percentageToColor(97));
+    });
+
+    it('should return green for high number', async () => {
+      assert.equal('green', await percentageToColor(92));
+    });
+
+    it('should return yellowgreen for medium high number', async () => {
+      assert.equal('yellowgreen', await percentageToColor(85));
+    });
+
+    it('should return yellow for medium number', async () => {
+      assert.equal('yellow', await percentageToColor(62));
+    });
+
+    it('should return orange for low number', async () => {
+      assert.equal('orange', await percentageToColor(45));
+    });
+
+    it('should return red for very low number', async () => {
+      assert.equal('red', await percentageToColor(23));
+    });
+  });
+
   describe('the average is calculated correctly', () => {
     it('should contain the expected average', async () => {
       const expectedResult = { 'lighthouse accessibility': 60, 'lighthouse performance': 51 };
