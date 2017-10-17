@@ -45,7 +45,6 @@ async function getLighthouseMetrics(url) {
   const lighthouseBinary = path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse');
   const lighthouseCommand = `${lighthouseBinary} --quiet ${url} --chrome-flags='--headless'`;
   try {
-    console.log('Lighthouse performance test running... (this might take a while)');
     const { stdout } = await exec(`${lighthouseCommand} --output=json --output-path=stdout`, { maxBuffer });
     const { reportCategories } = JSON.parse(stdout);
     for (let i = 0; i < reportCategories.length; i += 1) {
@@ -64,6 +63,7 @@ async function getLighthouseMetrics(url) {
   for (let i = 0; i < args.urls.length; i += 1) {
     promisesToAwait.push(getLighthouseMetrics(args.urls[i]));
   }
+  console.log('Lighthouse performance test running... (this might take a while)');
   const metrics = await Promise.all(promisesToAwait);
   await metricsToSvg(args.single_badge === true ? await getSquashedScore(metrics) : await getAverageScore(metrics));
 }());
