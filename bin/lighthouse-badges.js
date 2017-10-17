@@ -8,7 +8,9 @@ const util = require('util');
 const { percentageToColor, getAverageScore } = require('../lib/calculations');
 const { parser } = require('../lib/argparser');
 const exec = util.promisify(require('child_process').exec);
-const maxBuffer = 1024 * 5000; // Buffer size for stdout, must be big enough to handle lighthouse CLI output
+
+// Buffer size for stdout, must be big enough to handle lighthouse CLI output
+const maxBuffer = 1024 * 5000;
 
 
 async function metricsToSvg(lighthouseMetrics) {
@@ -38,9 +40,10 @@ async function metricsToSvg(lighthouseMetrics) {
 }
 
 
-async function getLighthouseScore(url) {
+async function getLighthouseReport(url) {
   const lighthouseMetrics = {};
-  const lighthouseCommand = `${path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse')} --quiet ${url} --chrome-flags='--headless'`;
+  const lighthouseCommand = `
+      ${path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse')} --quiet ${url} --chrome-flags='--headless'`;
 
   const { stdout } = await exec(`${lighthouseCommand} --output=json --output-path=stdout`, { maxBuffer });
   const { reportCategories } = JSON.parse(stdout);
@@ -57,7 +60,7 @@ async function getLighthouseScore(url) {
   console.log('Lighthouse performance test running... (this might take a while)');
   const promisesToAwait = [];
   for (let i = 2; i < process.argv.length; i += 1) {
-    promisesToAwait.push(getLighthouseScore(process.argv[i]));
+    promisesToAwait.push(getLighthouseReport(process.argv[i]));
   }
   const metrics = await Promise.all(promisesToAwait);
   await metricsToSvg(await getAverageScore(metrics));
