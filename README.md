@@ -14,10 +14,16 @@ Ever wanted to brag about your sites's awesome Ligthhouse performance? Then this
 
 ## Example Badges
 
+### Four Badges
+
 [![Lighthouse Accessibility Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Accessibility.svg)](https://github.com/emazzotta/lighthouse-badges)
 [![Lighthouse Best Practices Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Best_Practices.svg)](https://github.com/emazzotta/lighthouse-badges)
 [![Lighthouse Progressive Web App Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Progressive_Web_App.svg)](https://github.com/emazzotta/lighthouse-badges)
 [![Lighthouse Performance Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/Lighthouse_Performance.svg)](https://github.com/emazzotta/lighthouse-badges)
+
+### Single Badge
+
+[![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/examples/lighthouse.svg)](https://github.com/emazzotta/lighthouse-badges)  
 
 ## Usage
 

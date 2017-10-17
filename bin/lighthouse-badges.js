@@ -5,7 +5,7 @@ const badge = require('gh-badges');
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
-const { percentageToColor, getAverageScore } = require('../lib/calculations');
+const { percentageToColor, getAverageScore, getSquashedScore } = require('../lib/calculations');
 const { parser } = require('../lib/argparser');
 const exec = util.promisify(require('child_process').exec);
 
@@ -40,28 +40,35 @@ async function metricsToSvg(lighthouseMetrics) {
 }
 
 
-async function getLighthouseReport(url) {
+async function getLighthouseMetrics(url) {
   const lighthouseMetrics = {};
-  const lighthouseCommand = `
-      ${path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse')} --quiet ${url} --chrome-flags='--headless'`;
-
-  const { stdout } = await exec(`${lighthouseCommand} --output=json --output-path=stdout`, { maxBuffer });
-  const { reportCategories } = JSON.parse(stdout);
-  for (let i = 0; i < reportCategories.length; i += 1) {
-    lighthouseMetrics[`lighthouse ${reportCategories[i].name.toLowerCase()}`] = reportCategories[i].score;
+  const lighthouseBinary = path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse');
+  const lighthouseCommand = `${lighthouseBinary} --quiet ${url} --chrome-flags='--headless'`;
+  try {
+    console.log('Lighthouse performance test running... (this might take a while)');
+    const { stdout } = await exec(`${lighthouseCommand} --output=json --output-path=stdout`, { maxBuffer });
+    const { reportCategories } = JSON.parse(stdout);
+    for (let i = 0; i < reportCategories.length; i += 1) {
+      lighthouseMetrics[`lighthouse ${reportCategories[i].name.toLowerCase()}`] = reportCategories[i].score;
+    }
+    return lighthouseMetrics;
+  } catch (err) {
+    throw err;
   }
-  return lighthouseMetrics;
 }
 
 
 (async function () {
-  const args = parser.parseArgs();
-  console.dir(args);
-  console.log('Lighthouse performance test running... (this might take a while)');
+  process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+  });
+  const args = await parser.parseArgs();
   const promisesToAwait = [];
-  for (let i = 2; i < process.argv.length; i += 1) {
-    promisesToAwait.push(getLighthouseReport(process.argv[i]));
+  for (let i = 0; i < args.urls.length; i += 1) {
+    promisesToAwait.push(getLighthouseMetrics(args.urls[i]));
   }
   const metrics = await Promise.all(promisesToAwait);
-  await metricsToSvg(await getAverageScore(metrics));
+  const calculatedMetrics = args.single_badge ?
+    await getSquashedScore(metrics) : await getAverageScore(metrics);
+  await metricsToSvg(calculatedMetrics);
 }());
