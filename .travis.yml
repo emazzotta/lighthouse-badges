@@ -2,5 +2,5 @@ language: node_js
 node_js:
 - "stable"
 script:
-- npm lint
+- npm run lint
 - npm test
