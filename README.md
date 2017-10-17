@@ -18,7 +18,7 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 
 [![Lighthouse Accessibility Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_accessibility.svg)](https://github.com/emazzotta/lighthouse-badges)
 [![Lighthouse Best Practices Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_best_practices.svg)](https://github.com/emazzotta/lighthouse-badges)
-[![Lighthouse Progressive Web App Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/img/scores/lighthouse_progressive_web_app.svg)](https://github.com/emazzotta/lighthouse-badges)
+[![Lighthouse Progressive Web App Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_progressive_web_app.svg)](https://github.com/emazzotta/lighthouse-badges)
 [![Lighthouse Performance Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_performance.svg)](https://github.com/emazzotta/lighthouse-badges)
 
 ### Single Badge
