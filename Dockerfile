@@ -35,7 +35,7 @@ RUN apt-get update && apt-get install -y \
   && apt-get purge --auto-remove -y curl gnupg \
   && rm -rf /var/lib/apt/lists/*
 
-RUN yarn global add lighthouse-badges
+RUN yarn global add lighthouse-badges@0.2.5
 
 RUN mkdir -p /badges
 WORKDIR /badges
