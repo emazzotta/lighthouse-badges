@@ -6,6 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const util = require('util');
 const { percentageToColor, getAverageScore } = require('../lib/calculations');
+const { parser } = require('../lib/argparser');
 const exec = util.promisify(require('child_process').exec);
 
 
@@ -49,11 +50,12 @@ async function getLighthouseScore(url) {
 
 
 (async function () {
+  const args = parser.parseArgs();
+  console.dir(args);
   if (process.argv.length < 3) {
     console.error('Please provide a url to perform lighthouse test');
   } else {
     console.log('Lighthouse performance test running... (this might take a while)');
-
     const promisesToAwait = [];
     for (let i = 2; i < process.argv.length; i += 1) {
       promisesToAwait.push(getLighthouseScore(process.argv[i]));
