@@ -10,7 +10,7 @@
 [![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/lighthouse.svg)](https://github.com/GoogleChrome/lighthouse)
 
 This package allows you to easily create Lighthouse badges for all four Lighthouse categories.  
-Ever wanted to brag about your sites's awesome Ligthhouse performance? Then this is the package for you!  
+Ever wanted to brag about your sites's awesome Lighthouse performance? Then this is the package for you!  
 
 ## Example Badges
 
