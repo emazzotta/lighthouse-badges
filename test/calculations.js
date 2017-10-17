@@ -25,12 +25,12 @@ describe('Calculations work', () => {
         'lighthouse performance': 100,
         'lighthouse progressive web app': 100,
         'lighthouse best practices': 100,
-      },{
+      }, {
         'lighthouse accessibility': 99,
         'lighthouse performance': 99,
         'lighthouse progressive web app': 99,
         'lighthouse best practices': 99,
-      },];
+      }];
       const actualResult = await getAverageScore(input);
       assert.deepEqual(expectedResult, actualResult);
     });
@@ -53,8 +53,8 @@ describe('Calculations work', () => {
         'lighthouse accessibility': 100,
         'lighthouse performance': 100,
         'lighthouse progressive web app': 55,
-        'lighthouse best practices': 75
-      },];
+        'lighthouse best practices': 75,
+      }];
       const actualResult = await getSquashedScore(input);
       assert.deepEqual(expectedResult, actualResult);
     });
