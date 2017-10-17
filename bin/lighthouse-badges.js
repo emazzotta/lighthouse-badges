@@ -13,23 +13,28 @@ const maxBuffer = 1024 * 5000;
 
 
 async function metricsToSvg(lighthouseMetrics) {
-  try {
-    const metricKeys = Object.keys(lighthouseMetrics);
-    for (let i = 0; i < metricKeys.length; i += 1) {
-      const badgeColor = percentageToColor(lighthouseMetrics[metricKeys[i]]);
-      const badgeText = [metricKeys[i], `${lighthouseMetrics[metricKeys[i]]}%`];
-      await badge.loadFont(path.join(__dirname, '..', 'assets', 'fonts', 'Verdana.ttf'));
-      const svg = await badge({ text: badgeText, colorscheme: badgeColor, template: 'flat' });
-      const filepath = path.join(process.cwd(), `${metricKeys[i].replace(/ /g, '_')}.svg`);
-      fs.writeFile(filepath, svg, (err) => {
+  const metricKeys = Object.keys(lighthouseMetrics);
+  for (let i = 0; i < metricKeys.length; i += 1) {
+    const badgeColor = percentageToColor(lighthouseMetrics[metricKeys[i]]);
+    const badgeText = [metricKeys[i], `${lighthouseMetrics[metricKeys[i]]}%`];
+
+    badge.loadFont(path.join(__dirname, '..', 'assets', 'fonts', 'Verdana.ttf'), (err) => {
+      if (err) {
+        throw err;
+      }
+      badge({ text: badgeText, colorscheme: badgeColor, template: 'flat' }, (svg, err) => {
         if (err) {
-          return console.log(err);
+          throw err;
         }
-        return console.log(`Saved file to ${filepath}`);
+        const filepath = path.join(process.cwd(), `${metricKeys[i].replace(/ /g, '_')}.svg`);
+        fs.writeFile(filepath, svg, (err) => {
+          if (err) {
+            return console.log(err);
+          }
+          return console.log(`Saved file to ${filepath}`);
+        });
       });
-    }
-  } catch (err) {
-    throw err;
+    });
   }
 }
 
