@@ -21,7 +21,7 @@ Ever wanted to brag about your sites's awesome Ligthhouse performance? Then this
 
 ## Usage
 
-The four Lighthouse badges will contain their respective average scores of all the pages supplied, combined.
+You have the option to choose between Docker or npm. 
 
 ### Docker
 
@@ -31,10 +31,10 @@ docker run \
     -v $(pwd):/badges \
     --cap-add=SYS_ADMIN \
     emazzotta/lighthouse-badges \
-    /bin/bash -c "lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending"
+    /bin/bash -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
-### NPM 
+### npm 
     
 #### Installation
 
@@ -46,7 +46,7 @@ npm i -g lighthouse-badges
 
 ```bash
 # The badges will be saved in your current directory
-lighthouse-badges https://www.youtube.com/ https://www.youtube.com/feed/trending
+lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending
 ```
 
 ## Author(s)
