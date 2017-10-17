@@ -23,6 +23,26 @@ Ever wanted to brag about your sites's awesome Ligthhouse performance? Then this
 
 You have the option to choose between Docker or npm. 
 
+### Help
+
+```bash
+usage: lighthouse-badges.js [-h] [-v] [-s] -u URLS [URLS ...]
+
+A simple npm package to generate gh-badges (shields.io) based on lighthouse
+performance.
+
+required arguments:
+  -u URLS [URLS ...], --urls URLS [URLS ...]
+                        the lighthouse badge(s) will contain the respective
+                        average score(s) of all the urls supplied, combined
+
+optional arguments:
+  -h, --help            Show this help message and exit.
+  -v, --version         Show program's version number and exit.
+  -s, --single-badge    Only output one single badge averaging the four
+                        lighthouse scores
+```
+
 ### Docker
 
 ```bash
