@@ -16,7 +16,7 @@ describe('Calculations work', () => {
 
   describe('the average is calculated correctly for squashed score', () => {
     it('should contain the expected squashed average', async () => {
-      const expectedResult = { lighthouse: 56 };
+      const expectedResult = { lighthouse: 55.5 };
       const input = [
         { 'lighthouse accessibility': 100, 'lighthouse performance': 52 },
         { 'lighthouse accessibility': 20, 'lighthouse performance': 50 },
