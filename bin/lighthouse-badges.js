@@ -8,6 +8,7 @@ const util = require('util');
 const { percentageToColor, getAverageScore } = require('../lib/calculations');
 const { parser } = require('../lib/argparser');
 const exec = util.promisify(require('child_process').exec);
+const maxBuffer = 1024 * 5000; // Buffer size for stdout, must be big enough to handle lighthouse CLI output
 
 
 async function metricsToSvg(lighthouseMetrics) {
@@ -40,7 +41,8 @@ async function metricsToSvg(lighthouseMetrics) {
 async function getLighthouseScore(url) {
   const lighthouseMetrics = {};
   const lighthouseCommand = `${path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse')} --quiet ${url} --chrome-flags='--headless'`;
-  const { stdout } = await exec(`${lighthouseCommand} --output=json --output-path=stdout`, { maxBuffer: 1024 * 5000 });
+
+  const { stdout } = await exec(`${lighthouseCommand} --output=json --output-path=stdout`, { maxBuffer });
   const { reportCategories } = JSON.parse(stdout);
   for (let i = 0; i < reportCategories.length; i += 1) {
     lighthouseMetrics[`lighthouse ${reportCategories[i].name.toLowerCase()}`] = reportCategories[i].score;
@@ -51,15 +53,12 @@ async function getLighthouseScore(url) {
 
 (async function () {
   const args = parser.parseArgs();
-  if (process.argv.length < 3) {
-    console.error('Please provide a url to perform lighthouse test');
-  } else {
-    console.log('Lighthouse performance test running... (this might take a while)');
-    const promisesToAwait = [];
-    for (let i = 2; i < process.argv.length; i += 1) {
-      promisesToAwait.push(getLighthouseScore(process.argv[i]));
-    }
-    const metrics = await Promise.all(promisesToAwait);
-    await metricsToSvg(await getAverageScore(metrics));
+  console.dir(args);
+  console.log('Lighthouse performance test running... (this might take a while)');
+  const promisesToAwait = [];
+  for (let i = 2; i < process.argv.length; i += 1) {
+    promisesToAwait.push(getLighthouseScore(process.argv[i]));
   }
+  const metrics = await Promise.all(promisesToAwait);
+  await metricsToSvg(await getAverageScore(metrics));
 }());
