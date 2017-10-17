@@ -37,13 +37,13 @@ usage: lighthouse-badges.js [-h] [-v] [-s] -u URLS [URLS ...]
 A simple npm package to generate gh-badges (shields.io) based on lighthouse
 performance.
 
-optional arguments:
+Optional arguments:
   -h, --help            Show this help message and exit.
   -v, --version         Show program's version number and exit.
   -s, --single-badge    Only output one single badge averaging the four
                         lighthouse scores
 
-required arguments:
+Required arguments:
   -u URLS [URLS ...], --urls URLS [URLS ...]
                         The lighthouse badge(s) will contain the respective
                         average score(s) of all the urls supplied, combined
