@@ -53,6 +53,7 @@ Required arguments:
 ### Docker
 
 ```bash
+docker pull emazzotta/lighthouse-badges
 # Replace $(pwd) with the badges save path on your host 
 docker run \
     -v $(pwd):/badges \
@@ -75,6 +76,12 @@ npm i -g lighthouse-badges
 # The badges will be saved in your current directory
 lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending
 ```
+
+## TODO
+
+* [ ] Switch to Jest
+* [ ] Add system test in travis
+* [ ] Implement saving artifact
 
 ## Author(s)
 
