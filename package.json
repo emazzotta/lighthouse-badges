@@ -4,7 +4,7 @@
   "description": "A lighthouse badge generator",
   "main": "bin/lighthouse-badges.js",
   "bin": {
-    "lighthouse-badges": "bin/lighthouse-badges.js"
+    "lighthouse-badges": "bin/main.js"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "lint": "eslint .",
-    "lintfix": "eslint --fix ."
+    "lint": "eslint --fix .",
+    "precommit": "yarn lint && yarn test"
   },
   "author": "Emanuele Mazzotta",
   "license": "MIT"
