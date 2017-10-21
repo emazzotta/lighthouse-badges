@@ -1,7 +1,7 @@
 const assert = require('assert');
 const { percentageToColor, getAverageScore, getSquashedScore } = require('../lib/calculations');
 
-describe('Calculations work', () => {
+describe('test calculations', () => {
   describe('the colors are returned as expected', () => {
     it('should return brightgreen for very high number', async () => {
       assert.equal('brightgreen', await percentageToColor(97));
