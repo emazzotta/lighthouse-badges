@@ -14,5 +14,5 @@ const { parser } = require('../lib/argparser');
   const metrics = await Promise.all(promisesToAwait);
   const metricsResults = args.single_badge === true ?
     await getSquashedScore(metrics) : await getAverageScore(metrics);
-  await metricsToSvg(metricsResults);
+  await metricsToSvg(metricsResults, args.badge_style);
 }());

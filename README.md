@@ -32,7 +32,9 @@ You have the option to choose between Docker or npm.
 ### Help
 
 ```bash
-usage: lighthouse-badges.js [-h] [-v] [-s] -u URLS [URLS ...]
+usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic}] -u
+                         URLS [URLS ...]
+
 
 A simple npm package to generate gh-badges (shields.io) based on lighthouse
 performance.
@@ -42,6 +44,8 @@ Optional arguments:
   -v, --version         Show program's version number and exit.
   -s, --single-badge    Only output one single badge averaging the four
                         lighthouse scores
+  -b {flat,flat-square,plastic}, --badge-style {flat,flat-square,plastic}
+                        Badge style for the svg
 
 Required arguments:
   -u URLS [URLS ...], --urls URLS [URLS ...]
