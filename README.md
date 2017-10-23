@@ -27,11 +27,9 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 
 ## Usage
 
-You have the option to choose between Docker or npm. 
-
 ### Help
 
-```bash
+```txt
 usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic}] [-a]
                          -u URLS [URLS ...]
 
@@ -55,7 +53,7 @@ Required arguments:
 
 ```
 
-### Docker
+### Option 1: Docker
 
 ```bash
 docker pull emazzotta/lighthouse-badges
@@ -67,17 +65,10 @@ docker run \
     /bin/bash -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
-### npm 
-    
-#### Installation
+### Option 2: npm
 
 ```bash
 npm i -g lighthouse-badges
-```
-
-#### Usage
-
-```bash
 # The badges will be saved in your current directory
 lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending
 ```
