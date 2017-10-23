@@ -73,10 +73,9 @@ npm i -g lighthouse-badges
 lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending
 ```
 
-## TODO
+## Tasks
 
-* [ ] Switch to Jest
-* [ ] Add system test in travis
+* [ ] Rewrite tests (System test(s)? Jest?)
 
 ## Author(s)
 
