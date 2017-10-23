@@ -30,7 +30,7 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 ### Help
 
 ```txt
-usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic}] [-a]
+usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic}] [-r]
                          -u URLS [URLS ...]
 
 
@@ -44,7 +44,7 @@ Optional arguments:
                         lighthouse categories' scores
   -b {flat,flat-square,plastic}, --badge-style {flat,flat-square,plastic}
                         Define look and feel for the badge
-  -a, --save-report     Save lighthouse report as html for every supplied url
+  -r, --save-report     Save lighthouse report as html for every supplied url
 
 Required arguments:
   -u URLS [URLS ...], --urls URLS [URLS ...]
