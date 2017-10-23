@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { getLighthouseMetrics, metricsToSvg } = require('../lib/lighthouse-badges');
+const { getLighthouseMetrics, metricsToSvg, htmlReportsToFile } = require('../lib/lighthouse-badges');
 const { getAverageScore, getSquashedScore } = require('../lib/calculations');
 const { parser } = require('../lib/argparser');
 
@@ -8,11 +8,13 @@ const { parser } = require('../lib/argparser');
   const args = await parser.parseArgs();
   const promisesToAwait = [];
   for (let i = 0; i < args.urls.length; i += 1) {
-    promisesToAwait.push(getLighthouseMetrics(args.urls[i]));
+    promisesToAwait.push(getLighthouseMetrics(args.urls[i], args.save_report));
   }
   console.log('Lighthouse performance test running... (this might take a while)');
-  const metrics = await Promise.all(promisesToAwait);
+  const results = await Promise.all(promisesToAwait);
+  const metrics = results.map(result => result.metrics);
+  const reports = results.map(result => result.report);
   const metricsResults = args.single_badge === true ?
     await getSquashedScore(metrics) : await getAverageScore(metrics);
-  await metricsToSvg(metricsResults, args.badge_style);
+  await Promise.all([htmlReportsToFile(reports), metricsToSvg(metricsResults, args.badge_style)]);
 }());
