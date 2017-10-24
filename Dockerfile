@@ -5,7 +5,6 @@ MAINTAINER Emanuele Mazzotta <hello@mazzotta.me>
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
-ARG CACHEBUST=1
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.name="Lighthouse Badges" \
@@ -35,7 +34,19 @@ RUN apt-get update && apt-get install -y \
   && apt-get purge --auto-remove -y curl gnupg \
   && rm -rf /var/lib/apt/lists/*
 
+ARG CACHEBUST=1
 RUN yarn global add lighthouse-badges
 
-RUN mkdir -p /badges
-WORKDIR /badges
+# Add Chrome as a user
+RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+    && mkdir -p /home/chrome/reports && chown -R chrome:chrome /home/chrome
+
+# some place we can mount and view lighthouse reports
+VOLUME /home/chrome/reports
+WORKDIR /home/chrome/reports
+
+# Run Chrome non-privileged
+USER chrome
+
+# Drop to cli
+CMD ["/bin/bash"]
