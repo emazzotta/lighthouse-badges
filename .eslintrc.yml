@@ -3,3 +3,5 @@ plugins:
   - import
 rules:
   no-shadow: 1
+env:
+  jest: true

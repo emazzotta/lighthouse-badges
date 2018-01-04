@@ -75,7 +75,7 @@ lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/t
 
 ## Tasks
 
-* [ ] Rewrite tests (System test(s)? Jest?)
+* Add tests (e.g. system test)
 
 ## Author(s)
 
