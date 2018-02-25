@@ -25,6 +25,10 @@
     "eslint-plugin-import": "^2.9.0"
   },
   "jest": {
+    "collectCoverageFrom": [
+      "lib/**/*.{js,jsx,mjs}",
+      "bin/**/*.{js,jsx,mjs}"
+    ],
     "collectCoverage": true,
     "coverageReporters": [
       "json",
