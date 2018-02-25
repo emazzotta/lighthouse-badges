@@ -24,10 +24,18 @@
     "eslint-config-airbnb-base": "^11.3.2",
     "eslint-plugin-import": "^2.7.0"
   },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
+  },
   "scripts": {
     "test": "jest",
-    "lint": "eslint --fix .",
-    "precommit": "yarn lint && yarn test"
+    "lint:fix": "eslint --fix .",
+    "lint": "eslint .",
+    "prepush": "yarn lint && yarn test"
   },
   "author": "Emanuele Mazzotta",
   "license": "MIT"

@@ -1,5 +1,5 @@
-const assert = require('assert');
-const { percentageToColor, getAverageScore, getSquashedScore } = require('../lib/calculations');
+import assert from 'assert';
+import { percentageToColor, getAverageScore, getSquashedScore } from '../lib/calculations';
 
 describe('test calculations', () => {
   describe('the colors are returned as expected', () => {
