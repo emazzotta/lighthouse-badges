@@ -64,10 +64,10 @@ describe('test calculations', () => {
 
   describe('the average is calculated correctly for squashed score', () => {
     it('should contain the expected squashed average', async () => {
-      const expectedResult = { lighthouse: 60 };
+      const expectedResult = { lighthouse: 50 };
       const input = [
-        { 'lighthouse accessibility': 100, 'lighthouse performance': 65 },
-        { 'lighthouse accessibility': 20, 'lighthouse performance': 55 },
+        { 'lighthouse accessibility': 100, 'lighthouse performance': 60 },
+        { 'lighthouse accessibility': 20, 'lighthouse performance': 20 },
       ];
       const actualResult = await getSquashedScore(input);
       assert.deepEqual(expectedResult, actualResult);
