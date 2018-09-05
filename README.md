@@ -10,7 +10,7 @@
 
 [![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/lighthouse.svg)](https://github.com/GoogleChrome/lighthouse)
 
-This package allows you to easily create Lighthouse badges for all four Lighthouse categories.  
+This package allows you to easily create Lighthouse badges for all Lighthouse categories.  
 Ever wanted to brag about your sites's awesome Lighthouse performance? Then this is the package for you!  
 
 ## Example Badges
@@ -41,7 +41,7 @@ performance.
 Optional arguments:
   -h, --help            Show this help message and exit.
   -v, --version         Show program's version number and exit.
-  -s, --single-badge    Output only one single badge averaging the four
+  -s, --single-badge    Output only one single badge averaging all
                         lighthouse categories' scores
   -b {flat,flat-square,plastic}, --badge-style {flat,flat-square,plastic}
                         Define look and feel for the badge
