@@ -14,12 +14,13 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 
 ## Example Badges
 
-### Four Badges
+### All Badges
 
 [![Lighthouse Accessibility Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_accessibility.svg)](https://github.com/emazzotta/lighthouse-badges)
-[![Lighthouse Best Practices Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_best_practices.svg)](https://github.com/emazzotta/lighthouse-badges)
-[![Lighthouse Progressive Web App Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_progressive_web_app.svg)](https://github.com/emazzotta/lighthouse-badges)
+[![Lighthouse Best Practices Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_best-practices.svg)](https://github.com/emazzotta/lighthouse-badges)
 [![Lighthouse Performance Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_performance.svg)](https://github.com/emazzotta/lighthouse-badges)
+[![Lighthouse PWA Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_pwa.svg)](https://github.com/emazzotta/lighthouse-badges)
+[![Lighthouse SEO Badge](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse_seo.svg)](https://github.com/emazzotta/lighthouse-badges)
 
 ### Single Badge
 
