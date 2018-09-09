@@ -1,8 +1,18 @@
 language: node_js
 node_js:
 - "stable"
+services:
+- docker
 script:
   - npm run lint
   - npm run test
   - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
-  - npm run system-test
+  - npm run system-test:run
+  - npm run system-test:clean
+  - docker build -t emazzotta/lighthouse-badges .
+  - docker run \
+    -v $(pwd):/home/chrome/reports \
+    --cap-add=SYS_ADMIN \
+    emazzotta/lighthouse-badges \
+    /bin/bash -c "lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com'"
+  - npm run system-test:verify

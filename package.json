@@ -8,7 +8,10 @@
   },
   "scripts": {
     "test": "jest",
-    "system-test": "rm -f lighthouse.svg emanuelemazzotta_com.html && npm uninstall -g . && npm i -g . && lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com' && grep -q '<svg xmlns' 'lighthouse.svg' && grep -q '<title>Lighthouse Report</title>' 'emanuelemazzotta_com.html'",
+    "system-test:run": "npm run system-test:clean && npm run system-test:reinstall && lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com' && npm run system-test:verify",
+    "system-test:clean": "rm -f *.svg *.html",
+    "system-test:reinstall": "npm uninstall -g . && npm i -g .",
+    "system-test:verify": "grep -q '<svg xmlns' 'lighthouse.svg' && grep -q '<title>Lighthouse Report</title>' 'emanuelemazzotta_com.html'",
     "lint:fix": "eslint --fix .",
     "lint": "eslint .",
     "prepush": "yarn lint && yarn test"
