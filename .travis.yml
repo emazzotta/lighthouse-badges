@@ -8,7 +8,5 @@ script:
   - npm run test
   - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
   - npm run system-test:run
-  - npm run system-test:clean
   - docker build -t emazzotta/lighthouse-badges .
-  - docker run -v "$(pwd)":/home/chrome/reports --cap-add=SYS_ADMIN emazzotta/lighthouse-badges /bin/sh -c "lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com'"
-  - npm run system-test:verify
+  - docker run emazzotta/lighthouse-badges /bin/sh -c "lighthouse-badges --single-badge --save-report --urls https://emanuelemazzotta.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse"

@@ -17,13 +17,9 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.schema-version="1.0"
 
 # Update apk repositories & install chromium
-RUN echo "http://dl-2.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories \
-    && echo "http://dl-2.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && apk -U --no-cache add \
+RUN apk --no-cache add \
     chromium \
     ttf-freefont \
-    grep \
-    && apk del --purge --force linux-headers binutils-gold gnupg zlib-dev libc-utils \
     && rm -rf /var/lib/apt/lists/* \
     /var/cache/apk/* \
     /usr/share/man \
@@ -46,7 +42,7 @@ RUN npm i -g .
 RUN addgroup -S chrome && adduser -S -g chrome chrome \
     && mkdir -p /home/chrome/reports && chown -R chrome:chrome /home/chrome
 
-# some place we can mount and view lighthouse reports
+# Some place we can mount and view lighthouse reports
 VOLUME /home/chrome/reports
 WORKDIR /home/chrome/reports
 
