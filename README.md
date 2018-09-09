@@ -73,6 +73,6 @@ docker run \
     /bin/bash -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
-## Authors
+## Author
 
 Emanuele Mazzotta
