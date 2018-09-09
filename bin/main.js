@@ -6,10 +6,10 @@ const { parser } = require('../lib/argparser');
 
 (async () => {
   const args = await parser.parseArgs();
-  console.log('Lighthouse performance test running... (this might take a while)');
+  process.stdout.write('Lighthouse performance test running... (this might take a while)\n');
   processParameters(args, getLighthouseMetrics).then(() => {
-    console.log('Done!');
+    process.stderr.write('Done!\n');
   }).catch((err) => {
-    console.error(`An error occurred! ${err}`);
+    process.stderr.write(`An error occurred! ${err}\n`);
   });
 })();
