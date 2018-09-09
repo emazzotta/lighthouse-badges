@@ -1,4 +1,4 @@
-FROM debian:sid
+FROM zenika/alpine-node:latest
 
 MAINTAINER Emanuele Mazzotta <hello@mazzotta.me>
 
@@ -16,23 +16,32 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
-# Install deps + add Chrome Stable + purge all the things
-RUN apt-get update && apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    --no-install-recommends \
-  && curl -sSL https://deb.nodesource.com/setup_8.x | bash - \
-  && curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
-  && apt-get update && apt-get install -y \
-    google-chrome-stable \
-    nodejs \
-    --no-install-recommends \
-  && apt-get purge --auto-remove -y curl gnupg \
-  && rm -rf /var/lib/apt/lists/*
+# Update apk repositories & install chromium
+RUN echo "http://dl-2.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories \
+    && echo "http://dl-2.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && echo "http://dl-2.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk -U --no-cache \
+	--allow-untrusted add \
+    zlib-dev \
+    chromium \
+    xvfb \
+    wait4ports \
+    xorg-server \
+    dbus \
+    ttf-freefont \
+    grep \
+    udev \
+    && apk del --purge --force linux-headers binutils-gold gnupg zlib-dev libc-utils \
+    && rm -rf /var/lib/apt/lists/* \
+    /var/cache/apk/* \
+    /usr/share/man \
+    /tmp/* \
+    /usr/lib/node_modules/npm/man \
+    /usr/lib/node_modules/npm/doc \
+    /usr/lib/node_modules/npm/html \
+    /usr/lib/node_modules/npm/scripts
 
+# Add lighthouse
 RUN mkdir -p /home/lighthouse
 WORKDIR /home/lighthouse
 COPY bin /home/lighthouse/bin
@@ -42,7 +51,7 @@ COPY package.json /home/lighthouse/package.json
 RUN npm i -g .
 
 # Add Chrome as a user
-RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+RUN addgroup -S chrome && adduser -S -g chrome chrome \
     && mkdir -p /home/chrome/reports && chown -R chrome:chrome /home/chrome
 
 # some place we can mount and view lighthouse reports
