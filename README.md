@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/emazzotta/lighthouse-badges.svg?branch=master)](https://travis-ci.org/emazzotta/lighthouse-badges)
+[![Code Coverage](https://codecov.io/gh/emazzotta/lighthouse-badges/branch/master/graph/badge.svg)](https://travis-ci.org/emazzotta/lighthouse-badges)
 [![Dependencies](https://david-dm.org/emazzotta/lighthouse-badges.svg?style=flat)](https://david-dm.org/emazzotta/lighthouse-badges)
 [![Downloads Today](https://img.shields.io/npm/dt/lighthouse-badges.svg?style=flat)](https://badge.fury.io/js/lighthouse-badges)
 [![NPM version](https://img.shields.io/npm/v/lighthouse-badges.svg)](https://www.npmjs.org/package/lighthouse-badges)
@@ -12,7 +13,7 @@
 This package allows you to easily create Lighthouse badges for all Lighthouse categories.  
 Ever wanted to brag about your sites's awesome Lighthouse performance? Then this is the package for you!  
 
-## Example Badges
+## Examples
 
 ### All Badges
 
@@ -54,9 +55,15 @@ Required arguments:
 
 ```
 
-### Option 1: Docker
+### Run
 
 ```bash
+# Using npm
+npm i -g lighthouse-badges
+# The badges will be saved in your current directory
+lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending
+
+# Using Docker
 docker pull emazzotta/lighthouse-badges
 # Replace $(pwd) with the report/svg save path on your host 
 docker run \
@@ -66,14 +73,6 @@ docker run \
     /bin/bash -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
-### Option 2: npm
-
-```bash
-npm i -g lighthouse-badges
-# The badges will be saved in your current directory
-lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending
-```
-
-## Author(s)
+## Authors
 
 Emanuele Mazzotta
