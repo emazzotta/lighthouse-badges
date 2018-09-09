@@ -10,5 +10,5 @@ script:
   - npm run system-test:run
   - npm run system-test:clean
   - docker build -t emazzotta/lighthouse-badges .
-  - docker run -v $(pwd):/home/chrome/reports --cap-add=SYS_ADMIN emazzotta/lighthouse-badges /bin/sh -c "lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com'"
+  - docker run -v "$(pwd)":/home/chrome/reports --cap-add=SYS_ADMIN emazzotta/lighthouse-badges /bin/sh -c "lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com'"
   - npm run system-test:verify

@@ -67,7 +67,7 @@ lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/t
 docker pull emazzotta/lighthouse-badges
 # Replace $(pwd) with the report/svg save path on your host 
 docker run \
-    -v $(pwd):/home/chrome/reports \
+    -v "$(pwd)":/home/chrome/reports \
     --cap-add=SYS_ADMIN \
     emazzotta/lighthouse-badges \
     /bin/sh -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
