@@ -8,7 +8,7 @@ ARG VERSION
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.name="Lighthouse Badges" \
-    org.label-schema.description="A simple npm package to generate gh-badges (shields.io) based on lighthouse performance." \
+    org.label-schema.description="Generate gh-badges (shields.io) based on lighthouse performance." \
     org.label-schema.url="https://github.com/emazzotta/lighthouse-badges" \
     org.label-schema.vcs-ref=$VCS_REF \
     org.label-schema.vcs-url="https://github.com/emazzotta/lighthouse-badges" \

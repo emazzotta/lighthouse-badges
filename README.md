@@ -35,7 +35,7 @@ usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic}] [-r]
                          -u URLS [URLS ...]
 
 
-A simple npm package to generate gh-badges (shields.io) based on lighthouse
+Generate gh-badges (shields.io) based on lighthouse
 performance.
 
 Optional arguments:
@@ -73,10 +73,6 @@ npm i -g lighthouse-badges
 # The badges will be saved in your current directory
 lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending
 ```
-
-## Tasks
-
-* Add tests 
 
 ## Author(s)
 
