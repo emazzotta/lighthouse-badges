@@ -1,7 +1,7 @@
 coverage:
   precision: 2
   round: down
-  range: "70...100"
+  range: "50...100"
 
   status:
     project:
@@ -17,4 +17,3 @@ comment:
   require_changes: no
   require_base: no
   require_head: yes
-
