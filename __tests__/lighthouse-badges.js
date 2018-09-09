@@ -9,9 +9,9 @@ describe('test lighthouse badges', () => {
     it('should return correct metrics and no report', async () => {
       const lighthouseCommandResult = JSON.parse(fs.readFileSync('assets/report/emanuelemazzotta.com.json', 'utf8'));
       const url = 'https://emanuelemazzotta.com';
-      const htmlReportToggle = false;
+      const shouldSaveReport = false;
       const result = await processRawLighthouseResult(
-        lighthouseCommandResult, url, htmlReportToggle,
+        lighthouseCommandResult, url, shouldSaveReport,
       );
       assert.deepEqual({
         metrics: {
@@ -31,9 +31,9 @@ describe('test lighthouse badges', () => {
       const lighthouseCommandResult = JSON.parse(fs.readFileSync('assets/report/emanuelemazzotta.com.json', 'utf8'));
       const expectedHtmlReport = ReportGenerator.generateReportHtml(lighthouseCommandResult);
       const url = 'https://emanuelemazzotta.com';
-      const htmlReportToggle = true;
+      const shouldSaveReport = true;
       const result = await processRawLighthouseResult(
-        lighthouseCommandResult, url, htmlReportToggle,
+        lighthouseCommandResult, url, shouldSaveReport,
       );
       assert.deepEqual({
         metrics: {

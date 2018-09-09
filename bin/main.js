@@ -12,7 +12,6 @@ const { parser } = require('../lib/argparser');
   );
   const metrics = results.map(result => result.metrics);
   const reports = results.map(result => result.report);
-  const metricsResults = args.single_badge === true
-    ? await getSquashedScore(metrics) : await getAverageScore(metrics);
+  const metricsResults = args.single_badge ? await getSquashedScore(metrics) : await getAverageScore(metrics);
   await Promise.all([htmlReportsToFile(reports), metricsToSvg(metricsResults, args.badge_style)]);
 })();
