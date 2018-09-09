@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-badges",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "description": "A lighthouse badge generator",
   "main": "bin/main.js",
   "bin": {
