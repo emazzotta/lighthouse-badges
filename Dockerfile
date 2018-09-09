@@ -30,12 +30,16 @@ RUN apt-get update && apt-get install -y \
     google-chrome-stable \
     nodejs \
     --no-install-recommends \
-  && npm --global install yarn \
   && apt-get purge --auto-remove -y curl gnupg \
   && rm -rf /var/lib/apt/lists/*
 
-ARG CACHEBUST=1
-RUN yarn global add lighthouse-badges
+RUN mkdir -p /home/lighthouse
+WORKDIR /home/lighthouse
+COPY bin /home/lighthouse/bin
+COPY lib /home/lighthouse/lib
+COPY assets /home/lighthouse/assets
+COPY package.json /home/lighthouse/package.json
+RUN npm i -g .
 
 # Add Chrome as a user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
@@ -47,6 +51,3 @@ WORKDIR /home/chrome/reports
 
 # Run Chrome non-privileged
 USER chrome
-
-# Drop to cli
-CMD ["/bin/bash"]

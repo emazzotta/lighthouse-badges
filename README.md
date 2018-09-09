@@ -70,7 +70,7 @@ docker run \
     -v $(pwd):/home/chrome/reports \
     --cap-add=SYS_ADMIN \
     emazzotta/lighthouse-badges \
-    /bin/bash -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
+    /bin/sh -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
 ## Author
