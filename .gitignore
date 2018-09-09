@@ -146,3 +146,5 @@ testlib
 tmp
 var
 venv
+/*.svg
+/*.html
