@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/emazzotta/lighthouse-badges.svg?branch=master)](https://travis-ci.org/emazzotta/lighthouse-badges)
 [![Code Coverage](https://codecov.io/gh/emazzotta/lighthouse-badges/branch/master/graph/badge.svg)](https://travis-ci.org/emazzotta/lighthouse-badges)
 [![Dependencies](https://david-dm.org/emazzotta/lighthouse-badges.svg?style=flat)](https://david-dm.org/emazzotta/lighthouse-badges)
+[![Greenkeeper badge](https://badges.greenkeeper.io/emazzotta/lighthouse-badges.svg)](https://greenkeeper.io/)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license) 
 
 # Lighthouse Badges
@@ -22,7 +23,7 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 
 ### Single Badge
 
-[![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse.svg)](https://github.com/emazzotta/lighthouse-badges) [![Greenkeeper badge](https://badges.greenkeeper.io/emazzotta/lighthouse-badges.svg)](https://greenkeeper.io/)  
+[![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse.svg)](https://github.com/emazzotta/lighthouse-badges)
 
 ## Usage
 
