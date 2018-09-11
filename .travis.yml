@@ -11,8 +11,4 @@ script:
   - npm run system-test:run
   - npm run docker:build
   - npm run docker:system-test:run
-after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ;
-      npm run docker:push ;
-    fi
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; npm run docker:push ; fi
