@@ -25,7 +25,7 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 
 ### Single Badge
 
-[![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse.svg)](https://github.com/emazzotta/lighthouse-badges)  
+[![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/scores/lighthouse.svg)](https://github.com/emazzotta/lighthouse-badges) [![Greenkeeper badge](https://badges.greenkeeper.io/emazzotta/lighthouse-badges.svg)](https://greenkeeper.io/)  
 
 ## Usage
 
