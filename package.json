@@ -14,7 +14,10 @@
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$(pwd) ; grep -q '<svg xmlns' ${EXEC_PATH}/lighthouse.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/emanuelemazzotta_com.html",
     "lint:fix": "eslint --fix .",
     "lint": "eslint .",
-    "prepush": "yarn lint && yarn test"
+    "prepush": "yarn lint && yarn test",
+    "docker:build": "docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
+    "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c \"lighthouse-badges --single-badge --save-report --urls https://emanuelemazzotta.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse\"",
+    "docker:push": "docker push emazzotta/lighthouse-badges"
   },
   "repository": {
     "type": "git",
