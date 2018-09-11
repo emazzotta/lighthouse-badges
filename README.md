@@ -67,6 +67,11 @@ docker pull emazzotta/lighthouse-badges
 docker run -v $(pwd):/home/chrome/reports emazzotta/lighthouse-badges /bin/sh -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
+## Contributing
+
+See [contribution guideline](./CONTRIBUTING.md)
+
 ## Author
 
-Emanuele Mazzotta
+[Emanuele Mazzotta](mailto:hello@mazzotta.me)
+
