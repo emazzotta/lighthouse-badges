@@ -8,5 +8,10 @@ script:
   - npm run test
   - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
   - npm run system-test:run
-  - docker build -t emazzotta/lighthouse-badges .
+  - docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .
   - docker run emazzotta/lighthouse-badges /bin/sh -c "lighthouse-badges --single-badge --save-report --urls https://emanuelemazzotta.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse"
+after_success:
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+      docker push emazzotta/lighthouse-badges ;
+    fi
