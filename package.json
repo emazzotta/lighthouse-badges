@@ -17,10 +17,11 @@
     "system-test:reinstall": "npm uninstall -g . && npm i -g .",
     "system-test:run": "npm run system-test:clean && npm run system-test:reinstall && lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com' && npm run system-test:verify && npm run system-test:clean",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$(pwd) ; grep -q '<svg xmlns' ${EXEC_PATH}/lighthouse.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/emanuelemazzotta_com.html",
-    "test": "jest"
+    "test": "jest",
+    "test:related": "jest --findRelatedTests"
   },
   "lint-staged": {
-    "*.js": ["npm run lint:fix", "npm run test", "npm run system-test:run", "git add"]
+    "*.js": ["npm run lint:fix", "npm run test:related", "git add"]
   },
   "repository": {
     "type": "git",
