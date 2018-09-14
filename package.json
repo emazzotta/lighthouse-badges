@@ -1,23 +1,26 @@
 {
   "name": "lighthouse-badges",
-  "version": "0.2.26",
-  "description": "A lighthouse badge generator",
+  "version": "1.0.0",
+  "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "bin/main.js",
   "bin": {
     "lighthouse-badges": "bin/main.js"
   },
   "scripts": {
-    "test": "jest",
-    "system-test:run": "npm run system-test:clean && npm run system-test:reinstall && lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com' && npm run system-test:verify && npm run system-test:clean",
+    "docker:build": "docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
+    "docker:push": "docker push emazzotta/lighthouse-badges",
+    "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c \"lighthouse-badges --single-badge --save-report --urls https://emanuelemazzotta.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "precommit": "lint-staged",
     "system-test:clean": "rm -f *.svg *.html",
     "system-test:reinstall": "npm uninstall -g . && npm i -g .",
+    "system-test:run": "npm run system-test:clean && npm run system-test:reinstall && lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com' && npm run system-test:verify && npm run system-test:clean",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$(pwd) ; grep -q '<svg xmlns' ${EXEC_PATH}/lighthouse.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/emanuelemazzotta_com.html",
-    "lint:fix": "eslint --fix .",
-    "lint": "eslint .",
-    "prepush": "yarn lint && yarn test",
-    "docker:build": "docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
-    "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c \"lighthouse-badges --single-badge --save-report --urls https://emanuelemazzotta.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse\"",
-    "docker:push": "docker push emazzotta/lighthouse-badges"
+    "test": "jest"
+  },
+  "lint-staged": {
+    "*.js": ["npm run lint:fix", "npm run test", "npm run system-test:run", "git add"]
   },
   "repository": {
     "type": "git",
@@ -35,7 +38,9 @@
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "jest": "^23.5.0"
+    "husky": "^0.14.3",
+    "jest": "^23.5.0",
+    "lint-staged": "^7.2.2"
   },
   "jest": {
     "collectCoverageFrom": [
