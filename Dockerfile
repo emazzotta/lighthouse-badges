@@ -38,6 +38,9 @@ COPY assets /home/lighthouse/assets
 COPY package.json /home/lighthouse/package.json
 RUN npm i -g .
 
+# Set Chromium bin path
+ENV CHROME_PATH=/usr/bin/chromium-browser
+
 # Add Chrome as a user
 RUN addgroup -S chrome && adduser -S -g chrome chrome \
     && mkdir -p /home/chrome/reports && chown -R chrome:chrome /home/chrome
