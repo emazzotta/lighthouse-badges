@@ -7,6 +7,7 @@
 # Lighthouse Badges
 
 [![Lighthouse](https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/lighthouse.svg)](https://github.com/GoogleChrome/lighthouse)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Femazzotta%2Flighthouse-badges.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Femazzotta%2Flighthouse-badges?ref=badge_shield)
 
 This package allows you to easily create Lighthouse badges for all Lighthouse categories.  
 Ever wanted to brag about your sites's awesome Lighthouse performance? Then this is the package for you!  
@@ -75,3 +76,7 @@ See [contribution guideline](./CONTRIBUTING.md)
 
 [Emanuele Mazzotta](mailto:hello@mazzotta.me)
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Femazzotta%2Flighthouse-badges.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Femazzotta%2Flighthouse-badges?ref=badge_large)
