@@ -17,7 +17,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.schema-version="1.0"
 
 # Update apk repositories & install chromium
-RUN apk --no-cache add \
+RUN apk --update --no-cache add \
     chromium \
     ttf-freefont \
     && rm -rf /var/lib/apt/lists/* \
