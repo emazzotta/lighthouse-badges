@@ -32,19 +32,19 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 ### Help
 
 ```txt
-usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic}] [-r]
-                         -u URLS [URLS ...]
+usage: lighthouse-badges [-h] [-v] [-s]
+                         [-b {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}]
+                         [-r] -u URLS [URLS ...]
 
 
-Generate gh-badges (shields.io) based on lighthouse
-performance.
+Generate gh-badges (shields.io) based on lighthouse performance.
 
 Optional arguments:
   -h, --help            Show this help message and exit.
   -v, --version         Show program's version number and exit.
-  -s, --single-badge    Output only one single badge averaging all
-                        lighthouse categories' scores
-  -b {flat,flat-square,plastic}, --badge-style {flat,flat-square,plastic}
+  -s, --single-badge    Output only one single badge averaging all lighthouse
+                        categories' scores
+  -b {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}, --badge-style {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}
                         Define look and feel for the badge
   -r, --save-report     Save lighthouse report as html for every supplied url
 
@@ -52,18 +52,17 @@ Required arguments:
   -u URLS [URLS ...], --urls URLS [URLS ...]
                         The lighthouse badge(s) will contain the respective
                         average score(s) of all the urls supplied, combined
-
 ```
 
 ### Run
 
 ```bash
-# Using npm
+# Option 1: Using npm
 npm i -g lighthouse-badges
 # The badges will be saved in your current directory
 lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending
 
-# Using Docker
+# Option 2: Using Docker
 docker pull emazzotta/lighthouse-badges
 # Replace $(pwd) with the report/svg save path on your host 
 docker run -v $(pwd):/home/chrome/reports emazzotta/lighthouse-badges /bin/sh -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
