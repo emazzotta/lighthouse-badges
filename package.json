@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-badges",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "src/index.js",
   "bin": {
@@ -13,10 +13,13 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "precommit": "lint-staged",
+    "run:local": "/usr/local/bin/node src/index.js",
+    "run:npm": "lighthouse-badges",
     "system-test:clean": "rm -f *.svg *.html",
     "system-test:reinstall": "npm uninstall -g . && npm i -g .",
-    "system-test:run": "npm run system-test:clean && npm run system-test:reinstall && lighthouse-badges --save-report --single-badge --urls 'https://emanuelemazzotta.com' && npm run system-test:verify && npm run system-test:clean",
-    "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$(pwd) ; grep -q '<svg xmlns' ${EXEC_PATH}/lighthouse.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/emanuelemazzotta_com.html",
+    "system-test:full-run": "npm run system-test:clean && npm run system-test:reinstall && npm run run:npm -- --save-report --single-badge --urls 'https://emanuelemazzotta.com' && npm run system-test:verify && npm run system-test:clean",
+    "system-test:light-run": "npm run system-test:clean && npm run run:local -- --save-report --single-badge --urls 'https://emanuelemazzotta.com' && npm run system-test:verify && npm run system-test:clean",
+    "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD ; grep -q '<svg xmlns' ${EXEC_PATH}/lighthouse.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/emanuelemazzotta_com.html",
     "test": "jest",
     "test:related": "jest --findRelatedTests"
   },
