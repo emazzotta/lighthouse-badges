@@ -1,20 +1,14 @@
 import assert from 'assert';
 import { parser } from '../lib/argparser';
-import { objectAttributesToObject } from '../lib/util';
 
 
 describe('test argparser', () => {
   it('should return expected default values', () => {
     const actualArgs = parser.parseArgs(['--urls', 'https://emanuelemazzotta.com', 'https://emanuelemazzotta.com/cv']);
-    assert.deepEqual({
-      single_badge: false,
-      badge_style: 'flat',
-      save_report: false,
-      urls: [
-        'https://emanuelemazzotta.com',
-        'https://emanuelemazzotta.com/cv',
-      ],
-    }, objectAttributesToObject(actualArgs));
+    assert.equal(actualArgs.single_badge, false);
+    assert.equal(actualArgs.badge_style, 'flat');
+    assert.equal(actualArgs.save_report, false);
+    assert.deepEqual(actualArgs.urls, ['https://emanuelemazzotta.com', 'https://emanuelemazzotta.com/cv']);
   });
 
   it('should overwrite values', () => {
@@ -24,13 +18,10 @@ describe('test argparser', () => {
       '--badge-style', 'flat-square',
       '--urls', 'https://emanuelemazzotta.com',
     ]);
-    assert.deepEqual({
-      single_badge: true,
-      badge_style: 'flat-square',
-      save_report: true,
-      urls: [
-        'https://emanuelemazzotta.com',
-      ],
-    }, objectAttributesToObject(actualArgs));
+
+    assert.equal(actualArgs.single_badge, true);
+    assert.equal(actualArgs.badge_style, 'flat-square');
+    assert.equal(actualArgs.save_report, true);
+    assert.deepEqual(actualArgs.urls, ['https://emanuelemazzotta.com']);
   });
 });
