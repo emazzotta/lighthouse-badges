@@ -5,9 +5,9 @@ import lighthouseBadges, {
   htmlReportsToFile,
   metricsToSvg,
   processRawLighthouseResult,
-} from '../lib/lighthouse-badges';
-import { zip } from '../lib/util';
-import { parser } from '../lib/argparser';
+} from '../src/lighthouse-badges';
+import { zip } from '../src/util';
+import { parser } from '../src/argparser';
 import reportFixture from '../assets/report/emanuelemazzotta.com.json';
 
 

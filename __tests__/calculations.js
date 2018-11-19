@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { getAverageScore, getSquashedScore, percentageToColor } from '../lib/calculations';
+import { getAverageScore, getSquashedScore, percentageToColor } from '../src/calculations';
 
 describe('test calculations', () => {
   describe('the colors are returned as expected', () => {

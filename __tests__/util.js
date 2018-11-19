@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { urlEscaper, zip } from '../lib/util';
+import { urlEscaper, zip } from '../src/util';
 
 
 describe('test util', () => {

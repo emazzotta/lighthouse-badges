@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { parser } from '../lib/argparser';
+import { parser } from '../src/argparser';
 
 
 describe('test argparser', () => {

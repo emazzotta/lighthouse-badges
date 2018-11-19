@@ -29,12 +29,11 @@ RUN apk --update --no-cache add \
     /usr/lib/node_modules/npm/html \
     /usr/lib/node_modules/npm/scripts
 
-# Add lighthouse
 RUN mkdir -p /home/lighthouse
 WORKDIR /home/lighthouse
-COPY bin /home/lighthouse/bin
-COPY lib /home/lighthouse/lib
-COPY assets /home/lighthouse/assets
+
+# Add lighthouse
+COPY src /home/lighthouse/src
 COPY package.json /home/lighthouse/package.json
 RUN npm i -g .
 

@@ -1,34 +1,30 @@
 import assert from 'assert';
-import { parser } from '../lib/argparser';
-import { handleUserInput } from '../bin';
-import * as lighthouseBadges from '../lib/lighthouse-badges';
+import { parser } from '../src/argparser';
+import { handleUserInput } from '../src/index';
+import * as lighthouseBadges from '../src/lighthouse-badges';
 
-jest.mock('../lib/lighthouse-badges');
+jest.mock('../src/lighthouse-badges');
 
 describe('test index', () => {
-  let stdoutOutput = '';
   let stderrOutput = '';
   let parseMock;
   let processMock;
-  const stdoutWrite = process.stdout.write;
   const stderrWrite = process.stderr.write;
+  const processExit = process.exit;
 
   beforeEach(() => {
     parseMock = jest.spyOn(parser, 'parseArgs');
     processMock = jest.spyOn(lighthouseBadges, 'processParameters');
-    process.stdout.write = (x) => {
-      stdoutOutput += `${x}\n`;
-    };
     process.stderr.write = (x) => {
       stderrOutput += `${x}\n`;
     };
-    stdoutOutput = '';
+    process.exit = () => {};
     stderrOutput = '';
   });
 
   afterEach(() => {
-    process.stdout.write = stdoutWrite;
     process.stderr.write = stderrWrite;
+    process.exit = processExit;
     parseMock.mockRestore();
     processMock.mockRestore();
   });
@@ -41,14 +37,13 @@ describe('test index', () => {
 
     assert.equal(parser.parseArgs.mock.calls.length, 1);
     assert.equal(lighthouseBadges.processParameters.mock.calls.length, 1);
-    assert.equal(stdoutOutput !== '', true);
+    assert.equal(stderrOutput, '');
   });
 
 
   it('should handle parse errors gracefully', async () => {
     await handleUserInput();
-    assert.equal(stdoutOutput === '', true);
-    assert.equal(stderrOutput.includes('Argument "-u/--urls" is required\n\n\n'), true);
+    assert.equal(stderrOutput.includes('Argument "-u/--urls" is required'), true);
   });
 
   it('should handle processing errors gracefully', async () => {
@@ -56,7 +51,6 @@ describe('test index', () => {
     processMock.mockRejectedValue(new Error('Async error'));
 
     await handleUserInput();
-    assert.equal(stdoutOutput === '', true);
-    assert.equal(stderrOutput, 'Error: Async error\n\n');
+    assert.equal(stderrOutput.includes('Error: Async error'), true);
   });
 });
