@@ -41,12 +41,13 @@ describe('test index', () => {
 
     assert.equal(parser.parseArgs.mock.calls.length, 1);
     assert.equal(lighthouseBadges.processParameters.mock.calls.length, 1);
-    assert.equal(stdoutOutput, 'Running lighthouse tests... (this might take a while)\n\nDone!\n\n');
+    assert.equal(stdoutOutput !== '', true);
   });
 
 
   it('should handle parse errors gracefully', async () => {
     await handleUserInput();
+    assert.equal(stdoutOutput === '', true);
     assert.equal(stderrOutput.includes('Argument "-u/--urls" is required\n\n\n'), true);
   });
 
@@ -55,6 +56,7 @@ describe('test index', () => {
     processMock.mockRejectedValue(new Error('Async error'));
 
     await handleUserInput();
+    assert.equal(stdoutOutput === '', true);
     assert.equal(stderrOutput, 'Error: Async error\n\n');
   });
 });
