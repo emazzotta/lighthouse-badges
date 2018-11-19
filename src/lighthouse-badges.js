@@ -2,7 +2,8 @@ const { BadgeFactory } = require('gh-badges');
 const path = require('path');
 const fs = require('fs');
 const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
-const exec = require('util').promisify(require('child_process').exec);
+const { promisify } = require('util');
+const { exec } = require('child_process');
 const { getAverageScore, getSquashedScore } = require('./calculations');
 const { urlEscaper } = require('./util');
 const { percentageToColor } = require('./calculations');
@@ -70,7 +71,8 @@ const getLighthouseMetrics = async (url, shouldSaveReport) => {
   const lighthouseBinary = path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse');
   const params = '--chrome-flags=\'--headless --no-sandbox --no-default-browser-check --no-first-run --disable-default-apps\' --output=json --output-path=stdout --quiet';
   const lighthouseCommand = `${lighthouseBinary} ${params} ${url}`;
-  const { stdout } = await exec(`${lighthouseCommand}`, { maxBuffer });
+  const execPromise = promisify(exec);
+  const { stdout } = await execPromise(`${lighthouseCommand}`, { maxBuffer });
   return processRawLighthouseResult(JSON.parse(stdout), url, shouldSaveReport);
 };
 
