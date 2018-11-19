@@ -34,7 +34,7 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 ```txt
 usage: lighthouse-badges [-h] [-v] [-s]
                          [-b {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}]
-                         [-r] -u URLS [URLS ...]
+                         [-o OUTPUT_PATH] [-r] -u URLS [URLS ...]
 
 
 Generate gh-badges (shields.io) based on lighthouse performance.
@@ -46,6 +46,8 @@ Optional arguments:
                         categories' scores
   -b {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}, --badge-style {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}
                         Define look and feel for the badge
+  -o OUTPUT_PATH, --output-path OUTPUT_PATH
+                        Define output path for artifacts
   -r, --save-report     Save lighthouse report as html for every supplied url
 
 Required arguments:

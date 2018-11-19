@@ -75,7 +75,8 @@ describe('test lighthouse badges', () => {
         { 'https://emanuelemazzotta.com': 'a report' },
         { 'https://emanuelemazzotta.com/cv': 'another report' },
       ];
-      await htmlReportsToFile(htmlReports);
+      const outputPath = process.cwd();
+      await htmlReportsToFile(htmlReports, outputPath);
 
       zip([output, htmlReports]).map((items) => {
         const [actual, expected] = items;
@@ -117,7 +118,8 @@ describe('test lighthouse badges', () => {
       };
 
       const badgeStyle = 'flat';
-      await metricsToSvg(lighthouseMetrics, badgeStyle);
+      const outputPath = process.cwd();
+      await metricsToSvg(lighthouseMetrics, badgeStyle, outputPath);
 
       assert.equal(output.length, 5);
     });
