@@ -1,12 +1,14 @@
 import assert from 'assert';
 import fs from 'fs';
 import ReportGenerator from 'lighthouse/lighthouse-core/report/report-generator';
-import { htmlReportsToFile, metricsToSvg, processRawLighthouseResult } from '../lib/lighthouse-badges';
+import lighthouseBadges, {
+  htmlReportsToFile,
+  metricsToSvg,
+  processRawLighthouseResult,
+} from '../lib/lighthouse-badges';
 import { zip } from '../lib/util';
 import { parser } from '../lib/argparser';
-
-const lighthouseBadges = require('../lib/lighthouse-badges');
-const reportFixture = require('../assets/report/emanuelemazzotta.com.json');
+import reportFixture from '../assets/report/emanuelemazzotta.com.json';
 
 
 describe('test lighthouse badges', () => {
@@ -142,6 +144,7 @@ describe('test lighthouse badges', () => {
         '--save-report',
         '--urls', 'https://example.org',
       ]);
+
       const getLighthouseMetrics = jest.fn();
       getLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
       await lighthouseBadges.processParameters(args, getLighthouseMetrics);
@@ -154,6 +157,7 @@ describe('test lighthouse badges', () => {
         '--save-report',
         '--urls', 'https://example.org',
       ]);
+
       const getLighthouseMetrics = jest.fn();
       getLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
       await lighthouseBadges.processParameters(args, getLighthouseMetrics);
@@ -166,6 +170,7 @@ describe('test lighthouse badges', () => {
         '--single-badge',
         '--urls', 'https://example.org',
       ]);
+
       const getLighthouseMetrics = jest.fn();
       getLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
       await lighthouseBadges.processParameters(args, getLighthouseMetrics);
@@ -177,6 +182,7 @@ describe('test lighthouse badges', () => {
       const args = parser.parseArgs([
         '--urls', 'https://example.org',
       ]);
+
       const getLighthouseMetrics = jest.fn();
       getLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
       await lighthouseBadges.processParameters(args, getLighthouseMetrics);

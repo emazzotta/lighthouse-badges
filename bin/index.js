@@ -3,14 +3,20 @@
 const { processParameters, getLighthouseMetrics } = require('../lib/lighthouse-badges');
 const { parser } = require('../lib/argparser');
 
-
-(async () => {
+const handleUserInput = async () => {
   try {
     const args = await parser.parseArgs();
-    process.stdout.write('Lighthouse performance test running... (this might take a while)\n');
+    process.stdout.write('Running lighthouse tests... (this might take a while)\n');
     await processParameters(args, getLighthouseMetrics);
-    process.stderr.write('Done!\n');
+    process.stdout.write('Done!\n');
   } catch (err) {
     process.stderr.write(`${err}\n`);
   }
-})();
+};
+
+// Self-invoke if not imported but called directly as executable
+(() => !module.parent && handleUserInput())();
+
+module.exports = {
+  handleUserInput,
+};
