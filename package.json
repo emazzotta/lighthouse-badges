@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-badges",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "bin/index.js",
   "bin": {
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "argparse": "^1.0.10",
-    "gh-badges": "^2.0.0",
+    "gh-badges": "^2.1.0",
     "lighthouse": "^3.1.1"
   },
   "devDependencies": {

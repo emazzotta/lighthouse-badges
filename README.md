@@ -4,7 +4,6 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/emazzotta/lighthouse-badges.svg)](https://greenkeeper.io/)
 [![NPM version](https://img.shields.io/npm/v/lighthouse-badges.svg)](https://www.npmjs.org/package/lighthouse-badges)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license) 
-[![Twitter](https://img.shields.io/badge/Twitter-emazzotta-00aced.svg?style=flat)](https://twitter.com/emazzotta)
 
 # Lighthouse Badges
 
@@ -59,15 +58,16 @@ Required arguments:
 ### Run
 
 ```bash
-# Option 1: Using npm
-npm i -g lighthouse-badges
-# The badges will be saved in your current directory
-lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending
+# Option 1: npm
+npm i -g lighthouse-badges && \
+    mkdir test_results && \
+    lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o test_results
 
-# Option 2: Using Docker
-docker pull emazzotta/lighthouse-badges
-# Replace $(pwd) with the report/svg save path on your host 
-docker run -v $(pwd):/home/chrome/reports emazzotta/lighthouse-badges /bin/sh -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
+# Option 2: Docker
+docker run --rm \
+    -v $PWD/test_results:/home/chrome/reports \
+    emazzotta/lighthouse-badges \
+    /bin/sh -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
 ```
 
 ## Contributing
