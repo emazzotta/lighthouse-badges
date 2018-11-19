@@ -14,8 +14,7 @@ const handleUserInput = async () => {
   }
 };
 
-// Self-invoke if not imported but called directly as executable
-(() => !module.parent && handleUserInput())();
+(handleUserInput)();
 
 module.exports = {
   handleUserInput,
