@@ -7,18 +7,18 @@
     "lighthouse-badges": "src/index.js"
   },
   "scripts": {
+    "clean": "rm -f *.svg *.html",
     "docker:build": "docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
     "docker:push": "docker push emazzotta/lighthouse-badges",
     "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c \"lighthouse-badges --single-badge --save-report --urls https://emanuelemazzotta.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse\"",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "precommit": "lint-staged",
-    "run:local": "/usr/local/bin/node src/index.js",
-    "run:npm": "lighthouse-badges",
-    "system-test:clean": "rm -f *.svg *.html",
-    "system-test:reinstall": "npm uninstall -g . && npm i -g .",
-    "system-test:full-run": "npm run system-test:clean && npm run system-test:reinstall && npm run run:npm -- --save-report --single-badge --urls 'https://emanuelemazzotta.com' && npm run system-test:verify && npm run system-test:clean",
-    "system-test:light-run": "npm run system-test:clean && npm run run:local -- --save-report --single-badge --urls 'https://emanuelemazzotta.com' && npm run system-test:verify && npm run system-test:clean",
+    "reinstall": "npm uninstall -g . && npm i -g .",
+    "run:example:global": "lighthouse-badges -rsu https://emanuelemazzotta.com",
+    "run:example:local": "/usr/local/bin/node src/index.js -rsu https://emanuelemazzotta.com",
+    "system-test:full-run": "npm-run-all clean reinstall run:example:global system-test:verify clean",
+    "system-test:light-run": "npm-run-all clean run:example:local system-test:verify clean",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD ; grep -q '<svg xmlns' ${EXEC_PATH}/lighthouse.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/emanuelemazzotta_com.html",
     "test": "jest",
     "test:related": "jest --findRelatedTests"
@@ -49,7 +49,8 @@
     "eslint-plugin-import": "^2.14.0",
     "husky": "^1.1.1",
     "jest": "^23.6.0",
-    "lint-staged": "^8.0.0"
+    "lint-staged": "^8.0.0",
+    "npm-run-all": "^4.1.3"
   },
   "jest": {
     "collectCoverageFrom": [
