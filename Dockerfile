@@ -1,7 +1,5 @@
 FROM node:10-alpine
 
-MAINTAINER Emanuele Mazzotta <hello@mazzotta.me>
-
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
