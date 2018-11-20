@@ -1,34 +1,29 @@
-const colorRanges = {
-  95: 'brightgreen',
-  90: 'green',
-  75: 'yellowgreen',
-  60: 'yellow',
-  40: 'orange',
-  0: 'red',
-};
+const R = require('ramda');
 
 const percentageToColor = (percentage) => {
-  let key = percentage;
-  while (!(key in colorRanges)) {
-    key -= 1;
-  }
-  return colorRanges[key];
+  if (percentage >= 95) return 'brightgreen';
+  if (percentage >= 90) return 'green';
+  if (percentage >= 75) return 'yellowgreen';
+  if (percentage >= 60) return 'yellow';
+  if (percentage >= 40) return 'orange';
+  return 'red';
 };
 
-
-const getAverageScore = async metrics => Object.assign({}, ...Object.keys(metrics[0]).map(
-  (category) => {
-    const categoryScoreSum = metrics.map(metric => metric[category]).reduce((a, b) => a + b, 0);
-    return { [category]: Math.round(categoryScoreSum / metrics.length) };
-  },
-));
+const getAverageScore = async metrics => R.pipe(
+  R.head,
+  R.keys,
+  R.map(category => (
+    { [category]: Math.round(R.sum(R.pluck(category, metrics)) / R.length(metrics)) })),
+  R.mergeAll,
+)(metrics);
 
 const getSquashedScore = async metrics => ({
-  lighthouse: Math.round(
-    metrics.map(
-      metric => Object.values(metric).reduce((a, b) => a + b, 0),
-    ).reduce((a, b) => a + b, 0) / (metrics.length * Object.keys(metrics[0]).length),
-  ),
+  lighthouse: R.pipe(
+    R.map(metric => R.sum(R.values(metric))),
+    R.sum,
+    R.divide(R.__, R.length(metrics) * R.length(R.keys(R.head(metrics)))),
+    R.curry(Math.round),
+  )(metrics),
 });
 
 module.exports = {

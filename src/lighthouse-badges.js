@@ -4,6 +4,7 @@ const fs = require('fs');
 const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
 const { promisify } = require('util');
 const { exec } = require('child_process');
+const R = require('ramda');
 const { getAverageScore, getSquashedScore } = require('./calculations');
 const { urlEscaper } = require('./util');
 const { percentageToColor } = require('./calculations');
@@ -13,7 +14,7 @@ const maxBuffer = 1024 * 50000;
 
 
 const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
-  Object.keys(lighthouseMetrics).map((lighthouseMetricKey) => {
+  R.keys(lighthouseMetrics).map((lighthouseMetricKey) => {
     const filepath = path.join(outputPath, `${lighthouseMetricKey.replace(/ /g, '_')}.svg`);
     const text = [lighthouseMetricKey, `${lighthouseMetrics[lighthouseMetricKey]}%`];
     const badgeColor = percentageToColor(lighthouseMetrics[lighthouseMetricKey]);
@@ -36,14 +37,14 @@ const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
 };
 
 const htmlReportsToFile = async (htmlReports, outputPath) => htmlReports.map((htmlReport) => {
-  const url = Object.keys(htmlReport)[0];
+  const url = R.head(R.keys(htmlReport));
   if (htmlReport[url]) {
     const filepath = path.join(outputPath, `${urlEscaper(url)}.html`);
     fs.writeFile(filepath, htmlReport[url], (err) => {
       if (err) {
         throw new Error(`Failed to save report to ${outputPath}`);
       }
-      return process.stdout.write(`Saved report to ${filepath}\n`);
+      process.stdout.write(`Saved report to ${filepath}\n`);
     });
   }
   return false;
@@ -60,7 +61,7 @@ const generateArtifacts = async ({ reports, svg, savePath }) => {
 const processRawLighthouseResult = async (data, url, shouldSaveReport) => {
   const htmlReport = shouldSaveReport ? ReportGenerator.generateReportHtml(data) : false;
   const { categories } = data;
-  const scores = Object.keys(categories).map(category => (
+  const scores = R.keys(categories).map(category => (
     { [`lighthouse ${category.toLowerCase()}`]: categories[category].score * 100 }
   ));
   const lighthouseMetrics = Object.assign({}, ...scores);
@@ -81,8 +82,9 @@ const processParameters = async (args, lighthouseMetricFunction) => {
     url => lighthouseMetricFunction(url, args.save_report),
   ));
 
-  const metrics = results.map(result => result.metrics);
-  const reports = results.map(result => result.report);
+  const metrics = R.pluck('metrics', results);
+  const reports = R.pluck('report', results);
+
   const metricsResults = args.single_badge
     ? await getSquashedScore(metrics)
     : await getAverageScore(metrics);
