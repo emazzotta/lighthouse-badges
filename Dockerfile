@@ -6,7 +6,8 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
 
-LABEL org.label-schema.build-date=$BUILD_DATE \
+LABEL maintainer="hello@mazzotta.me" \
+    org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.name="Lighthouse Badges" \
     org.label-schema.description="Generate gh-badges (shields.io) based on lighthouse performance." \
     org.label-schema.url="https://github.com/emazzotta/lighthouse-badges" \
