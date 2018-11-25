@@ -13,7 +13,6 @@
     "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c \"lighthouse-badges --single-badge --save-report --urls https://emanuelemazzotta.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse\"",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "precommit": "lint-staged",
     "reinstall": "npm uninstall -g . && npm i -g .",
     "run:example:global": "lighthouse-badges -rsu https://emanuelemazzotta.com",
     "run:example:local": "/usr/local/bin/node src/index.js -rsu https://emanuelemazzotta.com",
@@ -22,6 +21,11 @@
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD ; grep -q '<svg xmlns' ${EXEC_PATH}/lighthouse.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/emanuelemazzotta_com.html",
     "test": "jest",
     "test:related": "jest --findRelatedTests"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.js": [
