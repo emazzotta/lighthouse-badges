@@ -42,20 +42,21 @@
     "argparse": "^1.0.10",
     "clui": "^0.3.6",
     "gh-badges": "^2.1.0",
-    "lighthouse": "^3.1.1",
-    "ramda": "^0.26.0"
+    "lighthouse": "^4.0.0-alpha.2-3.2.1",
+    "ramda": "^0.26.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^5.5.0",
+    "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "husky": "^1.1.1",
+    "husky": "^1.2.0",
     "jest": "^23.6.0",
-    "lint-staged": "^8.0.0",
-    "npm-run-all": "^4.1.3"
+    "lint-staged": "^8.1.0",
+    "npm-run-all": "^4.1.5"
   },
   "jest": {
     "collectCoverageFrom": [
