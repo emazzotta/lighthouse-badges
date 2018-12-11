@@ -16,9 +16,7 @@ LABEL maintainer="hello@mazzotta.me" \
     org.label-schema.schema-version="1.0"
 
 # Update apk repositories & install chromium
-RUN apk --update --no-cache add \
-    chromium \
-    ttf-freefont \
+RUN apk --update --no-cache add chromium \
     && rm -rf /var/lib/apt/lists/* \
     /var/cache/apk/* \
     /usr/share/man \
