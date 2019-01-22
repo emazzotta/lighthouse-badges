@@ -8,7 +8,7 @@ script:
   - npm run lint
   - npm run test
   - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
-  - npm run system-test:full-run
+  # - npm run system-test:full-run
   - npm run docker:build
   - npm run docker:system-test:run
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; npm run docker:push ; fi
