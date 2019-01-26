@@ -1,4 +1,3 @@
-import assert from 'assert';
 import { parser } from '../src/argparser';
 import { handleUserInput } from '../src/index';
 import * as lighthouseBadges from '../src/lighthouse-badges';
@@ -35,15 +34,15 @@ describe('test index', () => {
 
     await handleUserInput();
 
-    assert.equal(parser.parseArgs.mock.calls.length, 1);
-    assert.equal(lighthouseBadges.processParameters.mock.calls.length, 1);
-    assert.equal(stderrOutput, '');
+    expect(parser.parseArgs.mock.calls.length).toBe(1);
+    expect(lighthouseBadges.processParameters.mock.calls.length).toBe(1);
+    expect(stderrOutput).toBe('');
   });
 
 
   it('should handle parse errors gracefully', async () => {
     await handleUserInput();
-    assert.equal(stderrOutput.includes('Argument "-u/--urls" is required'), true);
+    expect(stderrOutput.includes('Argument "-u/--urls" is required')).toBe(true);
   });
 
   it('should handle processing errors gracefully', async () => {
@@ -51,6 +50,6 @@ describe('test index', () => {
     processMock.mockRejectedValue(new Error('Async error'));
 
     await handleUserInput();
-    assert.equal(stderrOutput.includes('Error: Async error'), true);
+    expect(stderrOutput.includes('Error: Async error')).toBe(true);
   });
 });

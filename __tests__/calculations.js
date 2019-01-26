@@ -1,30 +1,29 @@
-import assert from 'assert';
 import { getAverageScore, getSquashedScore, percentageToColor } from '../src/calculations';
 
 describe('test calculations', () => {
   describe('the colors are returned as expected', () => {
     it('should return brightgreen for very high number', async () => {
-      assert.equal('brightgreen', await percentageToColor(97));
+      expect('brightgreen').toBe(await percentageToColor(97));
     });
 
     it('should return green for high number', async () => {
-      assert.equal('green', await percentageToColor(92));
+      expect('green').toBe(await percentageToColor(92));
     });
 
     it('should return yellowgreen for medium high number', async () => {
-      assert.equal('yellowgreen', await percentageToColor(85));
+      expect('yellowgreen').toBe(await percentageToColor(85));
     });
 
     it('should return yellow for medium number', async () => {
-      assert.equal('yellow', await percentageToColor(62));
+      expect('yellow').toBe(await percentageToColor(62));
     });
 
     it('should return orange for low number', async () => {
-      assert.equal('orange', await percentageToColor(45));
+      expect('orange').toBe(await percentageToColor(45));
     });
 
     it('should return red for very low number', async () => {
-      assert.equal('red', await percentageToColor(23));
+      expect('red').toBe(await percentageToColor(23));
     });
   });
 
@@ -36,7 +35,7 @@ describe('test calculations', () => {
         { 'lighthouse accessibility': 20, 'lighthouse performance': 50 },
       ];
       const actualResult = await getAverageScore(input);
-      assert.deepEqual(expectedResult, actualResult);
+      expect(expectedResult).toStrictEqual(actualResult);
     });
 
     it('should round the expected average correctly', async () => {
@@ -58,7 +57,7 @@ describe('test calculations', () => {
         'lighthouse best practices': 98.9,
       }];
       const actualResult = await getAverageScore(input);
-      assert.deepEqual(expectedResult, actualResult);
+      expect(expectedResult).toStrictEqual(actualResult);
     });
   });
 
@@ -70,7 +69,7 @@ describe('test calculations', () => {
         { 'lighthouse accessibility': 20, 'lighthouse performance': 20 },
       ];
       const actualResult = await getSquashedScore(input);
-      assert.deepEqual(expectedResult, actualResult);
+      expect(expectedResult).toStrictEqual(actualResult);
     });
 
     it('should round the expected squashed average correctly', async () => {
@@ -82,7 +81,7 @@ describe('test calculations', () => {
         'lighthouse best practices': 75,
       }];
       const actualResult = await getSquashedScore(input);
-      assert.deepEqual(expectedResult, actualResult);
+      expect(expectedResult).toStrictEqual(actualResult);
     });
   });
 });

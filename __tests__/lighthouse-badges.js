@@ -1,4 +1,3 @@
-import assert from 'assert';
 import fs from 'fs';
 import ReportGenerator from 'lighthouse/lighthouse-core/report/report-generator';
 import lighthouseBadges, {
@@ -19,7 +18,7 @@ describe('test lighthouse badges', () => {
       const result = await processRawLighthouseResult(
         reportFixture, url, shouldSaveReport,
       );
-      assert.deepEqual({
+      expect({
         metrics: {
           'lighthouse performance': 98,
           'lighthouse pwa': 85,
@@ -30,7 +29,7 @@ describe('test lighthouse badges', () => {
         report: {
           [url]: false,
         },
-      }, result);
+      }).toStrictEqual(result);
     });
 
     it('should return correct metrics and a valid report', async () => {
@@ -40,7 +39,7 @@ describe('test lighthouse badges', () => {
       const result = await processRawLighthouseResult(
         reportFixture, url, shouldSaveReport,
       );
-      assert.deepEqual({
+      expect({
         metrics: {
           'lighthouse performance': 98,
           'lighthouse pwa': 85,
@@ -51,7 +50,7 @@ describe('test lighthouse badges', () => {
         report: {
           [url]: expectedHtmlReport,
         },
-      }, result);
+      }).toStrictEqual(result);
     });
   });
 
@@ -80,16 +79,16 @@ describe('test lighthouse badges', () => {
 
       zip([output, htmlReports]).map((items) => {
         const [actual, expected] = items;
-        return assert.deepEqual(Object.values(actual), Object.values(expected));
+        return expect(Object.values(actual)).toStrictEqual(Object.values(expected));
       });
 
-      assert.equal(output.length, 2);
+      expect(output.length).toBe(2);
     });
 
     it('should not save html report if toggle is false', async () => {
       const htmlReports = [false, false];
       await htmlReportsToFile(htmlReports);
-      assert.equal(output.length, 0);
+      expect(output.length).toBe(0);
     });
   });
 
@@ -121,7 +120,7 @@ describe('test lighthouse badges', () => {
       const outputPath = process.cwd();
       await metricsToSvg(lighthouseMetrics, badgeStyle, outputPath);
 
-      assert.equal(output.length, 5);
+      expect(output.length).toBe(5);
     });
   });
 
@@ -151,7 +150,7 @@ describe('test lighthouse badges', () => {
       calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
       await lighthouseBadges.processParameters(args, calculateLighthouseMetrics);
 
-      assert.equal(output.length, 2);
+      expect(output.length).toBe(2);
     });
 
     it('should create multiple badges with report', async () => {
@@ -164,7 +163,7 @@ describe('test lighthouse badges', () => {
       calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
       await lighthouseBadges.processParameters(args, calculateLighthouseMetrics);
 
-      assert.equal(output.length, 6);
+      expect(output.length).toBe(6);
     });
 
     it('should create single badge without report', async () => {
@@ -177,7 +176,7 @@ describe('test lighthouse badges', () => {
       calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
       await lighthouseBadges.processParameters(args, calculateLighthouseMetrics);
 
-      assert.equal(output.length, 1);
+      expect(output.length).toBe(1);
     });
 
     it('should create multiple badges without report', async () => {
@@ -189,7 +188,7 @@ describe('test lighthouse badges', () => {
       calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
       await lighthouseBadges.processParameters(args, calculateLighthouseMetrics);
 
-      assert.equal(output.length, 5);
+      expect(output.length).toBe(5);
     });
   });
 });
