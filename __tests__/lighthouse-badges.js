@@ -147,9 +147,9 @@ describe('test lighthouse badges', () => {
         '--urls', 'https://example.org',
       ]);
 
-      const getLighthouseMetrics = jest.fn();
-      getLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
-      await lighthouseBadges.processParameters(args, getLighthouseMetrics);
+      const calculateLighthouseMetrics = jest.fn();
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
+      await lighthouseBadges.processParameters(args, calculateLighthouseMetrics);
 
       assert.equal(output.length, 2);
     });
@@ -160,9 +160,9 @@ describe('test lighthouse badges', () => {
         '--urls', 'https://example.org',
       ]);
 
-      const getLighthouseMetrics = jest.fn();
-      getLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
-      await lighthouseBadges.processParameters(args, getLighthouseMetrics);
+      const calculateLighthouseMetrics = jest.fn();
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
+      await lighthouseBadges.processParameters(args, calculateLighthouseMetrics);
 
       assert.equal(output.length, 6);
     });
@@ -173,9 +173,9 @@ describe('test lighthouse badges', () => {
         '--urls', 'https://example.org',
       ]);
 
-      const getLighthouseMetrics = jest.fn();
-      getLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
-      await lighthouseBadges.processParameters(args, getLighthouseMetrics);
+      const calculateLighthouseMetrics = jest.fn();
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
+      await lighthouseBadges.processParameters(args, calculateLighthouseMetrics);
 
       assert.equal(output.length, 1);
     });
@@ -185,9 +185,9 @@ describe('test lighthouse badges', () => {
         '--urls', 'https://example.org',
       ]);
 
-      const getLighthouseMetrics = jest.fn();
-      getLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
-      await lighthouseBadges.processParameters(args, getLighthouseMetrics);
+      const calculateLighthouseMetrics = jest.fn();
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
+      await lighthouseBadges.processParameters(args, calculateLighthouseMetrics);
 
       assert.equal(output.length, 5);
     });

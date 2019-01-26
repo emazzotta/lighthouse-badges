@@ -1,24 +1,15 @@
 #!/usr/bin/env node
 
 const CLI = require('clui');
-const { processParameters, getLighthouseMetrics } = require('./lighthouse-badges');
+const { processParameters, calculateLighthouseMetrics } = require('./lighthouse-badges');
 const { parser } = require('./argparser');
 
 
 const handleUserInput = async () => {
   try {
-    const args = await parser.parseArgs();
-    const text = 'Running Lighthouse, please wait';
-    const spinner = new CLI.Spinner(`${text}   `, ['◜', '◠', '◝', '◞', '◡', '◟']);
+    const spinner = new CLI.Spinner('Running Lighthouse, please wait...', ['◜', '◠', '◝', '◞', '◡', '◟']);
     spinner.start();
-    let dotCounter = 0;
-    const intervalId = setInterval(() => {
-      const maxDots = 3;
-      dotCounter = (dotCounter % maxDots) + 1;
-      spinner.message(`${text}${'.'.repeat(dotCounter)}${' '.repeat(maxDots - dotCounter)}`);
-    }, 1000);
-    await processParameters(args, getLighthouseMetrics);
-    clearInterval(intervalId);
+    await processParameters(await parser.parseArgs(), calculateLighthouseMetrics);
     spinner.stop();
   } catch (err) {
     process.stderr.write(`${err}\n`);
