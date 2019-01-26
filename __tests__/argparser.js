@@ -1,14 +1,12 @@
-import assert from 'assert';
 import { parser } from '../src/argparser';
-
 
 describe('test argparser', () => {
   it('should return expected default values', () => {
     const actualArgs = parser.parseArgs(['--urls', 'https://emanuelemazzotta.com', 'https://emanuelemazzotta.com/cv']);
-    assert.equal(actualArgs.single_badge, false);
-    assert.equal(actualArgs.badge_style, 'flat');
-    assert.equal(actualArgs.save_report, false);
-    assert.deepEqual(actualArgs.urls, ['https://emanuelemazzotta.com', 'https://emanuelemazzotta.com/cv']);
+    expect(actualArgs.single_badge).toBe(false);
+    expect(actualArgs.badge_style).toBe('flat');
+    expect(actualArgs.save_report).toBe(false);
+    expect(actualArgs.urls).toStrictEqual(['https://emanuelemazzotta.com', 'https://emanuelemazzotta.com/cv']);
   });
 
   it('should overwrite values', () => {
@@ -19,9 +17,9 @@ describe('test argparser', () => {
       '--urls', 'https://emanuelemazzotta.com',
     ]);
 
-    assert.equal(actualArgs.single_badge, true);
-    assert.equal(actualArgs.badge_style, 'flat-square');
-    assert.equal(actualArgs.save_report, true);
-    assert.deepEqual(actualArgs.urls, ['https://emanuelemazzotta.com']);
+    expect(actualArgs.single_badge).toBe(true);
+    expect(actualArgs.badge_style).toBe('flat-square');
+    expect(actualArgs.save_report).toBe(true);
+    expect(actualArgs.urls).toStrictEqual(['https://emanuelemazzotta.com']);
   });
 });
