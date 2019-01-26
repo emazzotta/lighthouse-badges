@@ -58,13 +58,15 @@ Required arguments:
 
 ### Run
 
+#### Option 1: npm
 ```bash
-# Option 1: npm
 npm i -g lighthouse-badges && \
     mkdir test_results && \
     lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o test_results
+```
 
-# Option 2: Docker
+#### Option 2: Docker
+```bash
 docker run --rm \
     -v $PWD/test_results:/home/chrome/reports \
     emazzotta/lighthouse-badges \
