@@ -7,12 +7,12 @@ addons:
 services:
 - docker
 env:
-  - PAGE=https://google.com
+  - PAGE=http://127.0.0.1:8080
 script:
   - npm run lint
   - npm run test
   - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
-#  - npm run system-test:start-server
+  - npm run system-test:start-server
   - npm run system-test:full-run
   - npm run docker:build
   - npm run docker:system-test:run
