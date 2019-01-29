@@ -67,7 +67,7 @@ const processRawLighthouseResult = async (data, url, shouldSaveReport) => {
 
 const calculateLighthouseMetrics = async (url, shouldSaveReport) => {
   const lighthouseBinary = path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse');
-  const params = '--chrome-flags=\'--headless --no-sandbox --no-default-browser-check --no-first-run --disable-default-apps\' --output=json --output-path=stdout --quiet';
+  const params = '--chrome-flags=\'--headless --no-sandbox --no-default-browser-check --no-first-run --disable-default-apps\' --output=json --output-path=stdout';
   const lighthouseCommand = `${lighthouseBinary} ${params} ${url}`;
   const execPromise = promisify(exec);
   const { stdout } = await execPromise(`${lighthouseCommand}`, { maxBuffer });
