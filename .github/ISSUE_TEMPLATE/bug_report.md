@@ -4,32 +4,35 @@ about: Create a report to help us improve
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+Thanks for reporting an issue for lighthouse-badges, please review the tasks below before submitting the issue.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+### Steps to Reproduce
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+1. TODO
+2. TODO
+3. TODO
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+### Expected Behaviour
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+Describe what should happen
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+### Actual Behaviour
 
-**Additional context**
-Add any other context about the problem here.
+Describe what happens instead
+
+### Stacktrace
+
+TODO
+
+### Environment Information
+
+- **Operating System**: TODO
+- **Lighthouse-Badges Version:** TODO
+- **Node Version:** TODO
+
+### Additional Information 
+
+(Please tick where applicable)
+- [ ] The issue persists with the npm version
+- [ ] The issue persists with the docker version
+
