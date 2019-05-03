@@ -3,7 +3,7 @@ language: node_js
 node_js:
 - "stable"
 addons:
-  chrome: stable
+  chrome: beta
 services:
 - docker
 env:
