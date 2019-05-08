@@ -43,7 +43,7 @@
     "argparse": "^1.0.10",
     "clui": "^0.3.6",
     "gh-badges": "^2.1.0",
-    "lighthouse": "^4.3.1",
+    "lighthouse": "^5.0.0",
     "ramda": "^0.26.1"
   },
   "devDependencies": {
