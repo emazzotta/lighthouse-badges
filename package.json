@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-badges",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "src/index.js",
   "bin": {
@@ -21,7 +21,8 @@
     "system-test:light-run": "npm-run-all clean run:local-installation system-test:verify clean",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",
     "test": "jest",
-    "test:related": "jest --findRelatedTests"
+    "test:related": "jest --findRelatedTests",
+    "pre-push": "npm-run-all lint:fix test system-test:full-run"
   },
   "husky": {
     "hooks": {
@@ -43,7 +44,7 @@
     "argparse": "^1.0.10",
     "clui": "^0.3.6",
     "gh-badges": "^2.2.1",
-    "lighthouse": "^5.0.0",
+    "lighthouse": "^5.1.0",
     "ramda": "^0.26.1"
   },
   "devDependencies": {
