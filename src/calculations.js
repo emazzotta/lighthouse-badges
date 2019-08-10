@@ -9,17 +9,17 @@ const percentageToColor = (percentage) => {
   return 'red';
 };
 
-const getAverageScore = async metrics => R.pipe(
+const getAverageScore = async (metrics) => R.pipe(
   R.head,
   R.keys,
-  R.map(category => (
+  R.map((category) => (
     { [category]: Math.round(R.sum(R.pluck(category, metrics)) / R.length(metrics)) })),
   R.mergeAll,
 )(metrics);
 
-const getSquashedScore = async metrics => ({
+const getSquashedScore = async (metrics) => ({
   lighthouse: R.pipe(
-    R.map(metric => R.sum(R.values(metric))),
+    R.map((metric) => R.sum(R.values(metric))),
     R.sum,
     R.divide(R.__, R.length(metrics) * R.length(R.keys(R.head(metrics)))),
     R.curry(Math.round),

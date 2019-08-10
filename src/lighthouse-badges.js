@@ -25,7 +25,7 @@ const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
       colorscheme: badgeColor,
       template: badgeStyle,
     });
-    fs.writeFile(filepath, svg, error => statusMessage(
+    fs.writeFile(filepath, svg, (error) => statusMessage(
       `Saved svg to ${filepath}\n`,
       `Failed to save svg to ${outputPath}`,
       error,
@@ -38,7 +38,7 @@ const htmlReportsToFile = async (htmlReports, outputPath) => htmlReports.map((ht
   const url = R.head(R.keys(htmlReport));
   if (htmlReport[url]) {
     const filepath = path.join(outputPath, `${urlEscaper(url)}.html`);
-    fs.writeFile(filepath, htmlReport[url], error => statusMessage(
+    fs.writeFile(filepath, htmlReport[url], (error) => statusMessage(
       `Saved report to ${filepath}\n`,
       `Failed to save report to ${outputPath}`,
       error,
@@ -58,7 +58,7 @@ const generateArtifacts = async ({ reports, svg, savePath }) => {
 const processRawLighthouseResult = async (data, url, shouldSaveReport) => {
   const htmlReport = shouldSaveReport ? ReportGenerator.generateReportHtml(data) : false;
   const { categories } = data;
-  const scores = R.keys(categories).map(category => (
+  const scores = R.keys(categories).map((category) => (
     { [`lighthouse ${category.toLowerCase()}`]: categories[category].score * 100 }
   ));
   const lighthouseMetrics = Object.assign({}, ...scores);
@@ -76,7 +76,7 @@ const calculateLighthouseMetrics = async (url, shouldSaveReport) => {
 
 const processParameters = async (args, lighthouseMetricFunction) => {
   const results = await Promise.all(args.urls.map(
-    url => lighthouseMetricFunction(url, args.save_report),
+    (url) => lighthouseMetricFunction(url, args.save_report),
   ));
 
   const metrics = R.pluck('metrics', results);
