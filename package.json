@@ -40,6 +40,9 @@
     "type": "git",
     "url": "https://github.com/emazzotta/lighthouse-badges.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@emazzotta"
+  },
   "dependencies": {
     "argparse": "^1.0.10",
     "clui": "^0.3.6",
