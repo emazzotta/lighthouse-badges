@@ -6,9 +6,9 @@ services:
 - docker
 script:
   - set -e # This makes build to fail on first error
-  - npm run lint
-  - npm run test
+  - yarn run lint
+  - yarn run test
   - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
-  - npm run docker:build
-  - npm run docker:system-test:run
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; npm run docker:push ; fi
+  - yarn run docker:build
+  - yarn run docker:system-test:run
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; yarn run docker:push ; fi
