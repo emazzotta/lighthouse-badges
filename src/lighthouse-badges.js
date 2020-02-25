@@ -47,8 +47,7 @@ const htmlReportsToFile = async (htmlReports, outputPath) => htmlReports.map((ht
   return false;
 });
 
-const generateArtifacts = async ({ reports, svg, savePath }) => {
-  const outputPath = savePath || process.cwd();
+const generateArtifacts = async ({ reports, svg, outputPath }) => {
   await Promise.all([
     htmlReportsToFile(reports, outputPath),
     metricsToSvg(svg.results, svg.style, outputPath),
@@ -75,6 +74,12 @@ const calculateLighthouseMetrics = async (url, shouldSaveReport) => {
 };
 
 const processParameters = async (args, lighthouseMetricFunction) => {
+  const outputPath = args.output_path || process.cwd();
+
+  fs.mkdir(outputPath, { recursive: true }, (err) => {
+    if (err) throw err;
+  });
+
   const results = await Promise.all(args.urls.map(
     (url) => lighthouseMetricFunction(url, args.save_report),
   ));
@@ -89,7 +94,7 @@ const processParameters = async (args, lighthouseMetricFunction) => {
   await generateArtifacts({
     reports,
     svg: { results: metricsResults, style: args.badge_style },
-    savePath: args.output_path,
+    outputPath,
   });
 };
 

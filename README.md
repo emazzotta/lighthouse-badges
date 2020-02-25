@@ -59,14 +59,13 @@ Required arguments:
 
 #### Option 1: npm
 ```bash
-npm i -g lighthouse-badges && \
-    mkdir test_results && \
-    lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o test_results
+npm i -g lighthouse-badges
+lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o test_results
 ```
 
 #### Option 2: npx
 ```bash
-npx lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o $(PWD)
+npx lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o test_results
 ```
 
 #### Option 3: Docker
