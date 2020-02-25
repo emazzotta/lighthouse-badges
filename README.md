@@ -64,7 +64,12 @@ npm i -g lighthouse-badges && \
     lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o test_results
 ```
 
-#### Option 2: Docker
+#### Option 2: npx
+```bash
+npx lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o $(PWD)
+```
+
+#### Option 3: Docker
 ```bash
 docker run --rm \
     -v $PWD/test_results:/home/chrome/reports \
