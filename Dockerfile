@@ -16,15 +16,7 @@ LABEL maintainer="hello@mazzotta.me" \
     org.label-schema.schema-version="1.0"
 
 # Update apk repositories & install chromium
-RUN apk --update --no-cache add chromium \
-    && rm -rf /var/lib/apt/lists/* \
-    /var/cache/apk/* \
-    /usr/share/man \
-    /tmp/* \
-    /usr/lib/node_modules/npm/man \
-    /usr/lib/node_modules/npm/doc \
-    /usr/lib/node_modules/npm/html \
-    /usr/lib/node_modules/npm/scripts
+RUN apk --update --no-cache add chromium
 
 RUN mkdir -p /home/lighthouse
 WORKDIR /home/lighthouse
@@ -32,7 +24,7 @@ WORKDIR /home/lighthouse
 # Add lighthouse
 COPY src /home/lighthouse/src
 COPY package.json /home/lighthouse/package.json
-RUN npm i -g .
+RUN npm install -g . && rm -rf /root/.npm
 
 # Set Chromium bin path
 ENV CHROME_PATH=/usr/bin/chromium-browser
