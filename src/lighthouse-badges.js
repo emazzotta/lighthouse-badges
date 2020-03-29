@@ -64,24 +64,25 @@ const processRawLighthouseResult = async (data, url, shouldSaveReport) => {
   return { metrics: lighthouseMetrics, report: { [url]: htmlReport } };
 };
 
-const calculateLighthouseMetrics = async (url, shouldSaveReport) => {
+const calculateLighthouseMetrics = async (url, shouldSaveReport, additionalParams = '') => {
   const lighthouseBinary = path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse');
-  const params = '--chrome-flags=\'--headless --no-sandbox --no-default-browser-check --no-first-run --disable-default-apps\' --output=json --output-path=stdout --quiet';
+  const params = `--chrome-flags='--headless --no-sandbox --no-default-browser-check --no-first-run --disable-default-apps' --output=json --output-path=stdout --quiet ${additionalParams}`;
   const lighthouseCommand = `${lighthouseBinary} ${params} ${url}`;
   const execPromise = promisify(exec);
   const { stdout } = await execPromise(`${lighthouseCommand}`, { maxBuffer });
   return processRawLighthouseResult(JSON.parse(stdout), url, shouldSaveReport);
 };
 
-const processParameters = async (args, lighthouseMetricFunction) => {
+const processParameters = async (args, func) => {
   const outputPath = args.output_path || process.cwd();
 
   fs.mkdir(outputPath, { recursive: true }, (err) => {
     if (err) throw err;
   });
 
+  const additionalParams = process.env.LIGHTHOUSE_BADGES_PARAMS || '';
   const results = await Promise.all(args.urls.map(
-    (url) => lighthouseMetricFunction(url, args.save_report),
+    (url) => func(url, args.save_report, additionalParams),
   ));
 
   const metrics = R.pluck('metrics', results);

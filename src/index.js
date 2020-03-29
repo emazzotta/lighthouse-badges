@@ -7,6 +7,7 @@ const { parser } = require('./argparser');
 
 const handleUserInput = async () => {
   try {
+    process.stdout.write(`LIGHTHOUSE_BADGES_PARAMS: ${process.env.LIGHTHOUSE_BADGES_PARAMS || 'No additional parameters specified.'}\n`);
     const spinner = new CLI.Spinner('Running Lighthouse, please wait...', ['◜', '◠', '◝', '◞', '◡', '◟']);
     spinner.start();
     await processParameters(await parser.parseArgs(), calculateLighthouseMetrics);

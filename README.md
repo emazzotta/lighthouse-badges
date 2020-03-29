@@ -55,6 +55,14 @@ Required arguments:
                         average score(s) of all the urls supplied, combined
 ```
 
+Additionally you can pass parameters to the lighthouse process directly via environment variable:
+
+```bash
+# This will pass '--emulated-form-factor=desktop' to the lighthouse process
+export LIGHTHOUSE_BADGES_PARAMS="--emulated-form-factor=desktop"
+lighthouse-badges --urls https://www.youtube.com/
+```
+
 ### Run
 
 #### Option 1: npm
