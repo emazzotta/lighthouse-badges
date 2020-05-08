@@ -1557,9 +1557,9 @@ camelcase@^6.0.0:
   integrity sha512-8KMDF1Vz2gzOq54ONPJS65IvTUaB1cHJ2DMM7MbPmLZljDH1qpzzLsWdiN9pHh6qvkRVDTi/07+eNGch/oLU4w==
 
 caniuse-lite@^1.0.30001043:
-  version "1.0.30001053"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001053.tgz#b7ae027567ce2665b965b0437e4512b296ccd20d"
-  integrity sha512-HtV4wwIZl6GA4Oznse8aR274XUOYGZnQLcf/P8vHgmlfqSNelwD+id8CyHOceqLqt9yfKmo7DUZTh1EuS9pukg==
+  version "1.0.30001054"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001054.tgz#7e82fc42d927980b0ce1426c4813df12381e1a75"
+  integrity sha512-jiKlTI6Ur8Kjfj8z0muGrV6FscpRvefcQVPSuMuXnvRCfExU7zlVLNjmOz1TnurWgUrAY7MMmjyy+uTgIl1XHw==
 
 canonicalize@^1.0.1:
   version "1.0.1"
@@ -2227,9 +2227,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.413:
-  version "1.3.430"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.430.tgz#33914f7c2db771bdcf30977bd4fd6258ee8a2f37"
-  integrity sha512-HMDYkANGhx6vfbqpOf/hc6hWEmiOipOHGDeRDeUb3HLD3XIWpvKQxFgWf0tgHcr3aNv6I/8VPecplqmQsXoZSw==
+  version "1.3.431"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.431.tgz#705dd8ef46200415ba837b31d927cdc1e43db303"
+  integrity sha512-2okqkXCIda7qDwjYhUFxPcQdZDIZZ/zBLDzVOif7WW/TSNfEhdT6SO07O1x/sFteEHX189Z//UwjbZKKCOn2Fg==
 
 elegant-spinner@^2.0.0:
   version "2.0.0"
@@ -2863,10 +2863,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gh-badges@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/gh-badges/-/gh-badges-2.2.1.tgz#d06e5baa09c0c51c890efd7f362cd0bf9a9e01c6"
-  integrity sha512-/z1QPpWKNvaqitVgd2kOqXUW75K8ZsSumGf5IZhdewER1TSL5P+m7aTOIUPZXUq6dH5f75lNqPvzcvy/837BSA==
+gh-badges@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/gh-badges/-/gh-badges-2.2.2.tgz#5e2e0dc1349c25a17cbab5a4524ea0b74d0a56a4"
+  integrity sha512-+KKu/Clh49ZudptGktISxm0eAk16qGJtRTD4LNC+sDvPZ3pb146uIL5oiwou7TmSeLEza8ChpY5Tp94LkuDztA==
   dependencies:
     anafanafo "^1.0.0"
     dot "^1.1.2"
