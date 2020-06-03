@@ -1,4 +1,4 @@
-const { BadgeFactory } = require('gh-badges');
+const { makeBadge } = require('badge-maker');
 const path = require('path');
 const fs = require('fs');
 const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
@@ -17,19 +17,21 @@ const maxBuffer = 1024 * 50000;
 const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
   R.keys(lighthouseMetrics).map((lighthouseMetricKey) => {
     const filepath = path.join(outputPath, `${lighthouseMetricKey.replace(/ /g, '_')}.svg`);
-    const text = [lighthouseMetricKey, `${lighthouseMetrics[lighthouseMetricKey]}%`];
     const badgeColor = percentageToColor(lighthouseMetrics[lighthouseMetricKey]);
-    const svg = new BadgeFactory().create({
-      text,
-      format: 'svg',
-      colorscheme: badgeColor,
-      template: badgeStyle,
+
+    const svg = makeBadge({
+      label: lighthouseMetricKey,
+      message: `${lighthouseMetrics[lighthouseMetricKey]}%`,
+      color: badgeColor,
+      style: badgeStyle,
     });
+
     fs.writeFile(filepath, svg, (error) => statusMessage(
       `Saved svg to ${filepath}\n`,
       `Failed to save svg to ${outputPath}`,
       error,
     ));
+
     return true;
   });
 };
