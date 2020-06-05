@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-badges",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "src/index.js",
   "bin": {
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "argparse": "^1.0.10",
-    "badge-maker": "^3.0.1",
+    "badge-maker": "^3.1.0",
     "clui": "^0.3.6",
     "lighthouse": "^6.0.0",
     "ramda": "^0.27.0"
@@ -60,7 +60,7 @@
     "eslint-plugin-import": "^2.20.2",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
-    "lint-staged": "^10.2.7",
+    "lint-staged": "^10.2.9",
     "npm-run-all": "^4.1.5"
   },
   "jest": {
