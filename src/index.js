@@ -4,7 +4,6 @@ const CLI = require('clui');
 const { processParameters, calculateLighthouseMetrics } = require('./lighthouse-badges');
 const { parser } = require('./argparser');
 
-
 const handleUserInput = async () => {
   try {
     if (process.env.LIGHTHOUSE_BADGES_PARAMS) {

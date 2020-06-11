@@ -9,7 +9,6 @@ import { zip } from '../src/util';
 import { parser } from '../src/argparser';
 import reportFixture from '../assets/report/emanuelemazzotta.com.json';
 
-
 describe('test lighthouse badges', () => {
   describe('the lighthouse command results are processed as expected', () => {
     it('should return correct metrics and no report', async () => {

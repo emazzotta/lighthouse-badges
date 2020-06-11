@@ -39,7 +39,6 @@ describe('test index', () => {
     expect(stderrOutput).toBe('');
   });
 
-
   it('should handle parse errors gracefully', async () => {
     await handleUserInput();
     expect(stderrOutput.includes('Argument "-u/--urls" is required')).toBe(true);

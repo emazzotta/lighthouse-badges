@@ -13,7 +13,6 @@ const { percentageToColor } = require('./calculations');
 // Buffer size for stdout, must be big enough to handle lighthouse CLI output
 const maxBuffer = 1024 * 50000;
 
-
 const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
   R.keys(lighthouseMetrics).map((lighthouseMetricKey) => {
     const filepath = path.join(outputPath, `${lighthouseMetricKey.replace(/ /g, '_')}.svg`);
@@ -100,7 +99,6 @@ const processParameters = async (args, func) => {
     outputPath,
   });
 };
-
 
 module.exports = {
   metricsToSvg,
