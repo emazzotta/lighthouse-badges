@@ -2175,9 +2175,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.488:
-  version "1.3.518"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.518.tgz#c54ee9cf1a7bafd6e482a1a6cceac86448d941e8"
-  integrity sha512-IspiwXYDKZMxo+qc3Vof4WtwbG9BMDbJfati8PYj7uS4DJmJ67pwjCKZxlTBSAuCZSMcbRnj2Xz2H14uiKT7bQ==
+  version "1.3.519"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.519.tgz#d1da9c8a8a96ee7f60c32b2ca2593533a970c210"
+  integrity sha512-2r/p/9YOjIpX10KxcH1HcAGz1oadSD9Cwwotoek8wNJx/SRpklea14qdAMzCTTZlIezvsJ8sNsBQN05bJ/ZjhA==
 
 emittery@^0.7.1:
   version "0.7.1"
@@ -3201,9 +3201,9 @@ is-descriptor@^1.0.0, is-descriptor@^1.0.2:
     kind-of "^6.0.2"
 
 is-docker@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/is-docker/-/is-docker-2.1.0.tgz#25dc043e4fdc3cf969d622735e05a86ba9952e2b"
-  integrity sha512-mB2WygGsSeoXtLKpSYzP6sa0Z9DyU9ZyKlnvuZWxCociaI0qsF8u12sR72DFTX236g1u6oWSWYFuUk09nGQEjg==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/is-docker/-/is-docker-2.1.1.tgz#4125a88e44e450d384e09047ede71adc2d144156"
+  integrity sha512-ZOoqiXfEwtGknTiuDEy8pN2CfE3TxMHprvNer1mXiqwkOT77Rw3YVrUQ52EqAOU3QAWDQ+bQdx7HJzrv7LS2Hw==
 
 is-extendable@^0.1.0, is-extendable@^0.1.1:
   version "0.1.1"
