@@ -43,7 +43,7 @@
     "registry": "https://npm.pkg.github.com/@emazzotta"
   },
   "dependencies": {
-    "argparse": "^1.0.10",
+    "argparse": "1.0.10",
     "badge-maker": "^3.2.0",
     "clui": "^0.3.6",
     "lighthouse": "^6.2.0",
@@ -55,7 +55,7 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/runtime": "^7.11.2",
     "babel-jest": "^26.3.0",
-    "eslint": "^7.6.0",
+    "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "husky": "^4.2.5",
