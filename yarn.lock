@@ -2205,9 +2205,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.523:
-  version "1.3.548"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.548.tgz#b1bda6b24f7a1c1fa6250bb039a0bbed148f26f2"
-  integrity sha512-Xf4m3GFwCEcQ+4W45IHeZ6enPC1i+8/3aaXz8Pcd2VkNLULP0DMvoP7aKv2tQ+M/CH2SC7Qlm4S6DpzZUS2w1Q==
+  version "1.3.550"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.550.tgz#bf9bbb78182aac0fe2d23d3bd1483dde4483f512"
+  integrity sha512-MWDHoJsSieBaJ6mObvi3V0eKZufR1iMJl56VIGdXCgFHyCUbVDGm2IMXUNjDxgbGbKa3tA5+zJmHuBQqRxGiLA==
 
 emittery@^0.7.1:
   version "0.7.1"
@@ -3116,9 +3116,9 @@ intl-messageformat@^4.4.0:
     intl-messageformat-parser "^1.8.1"
 
 intl-pluralrules@^1.0.3:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/intl-pluralrules/-/intl-pluralrules-1.2.1.tgz#4c819fcdf56b3ca8acb7e43f22a374882fa20e24"
-  integrity sha512-Wx7Pm3aQ5ME/PoDnkEaKAsLEuVNLbjN9cAiX8TUqvpob6WbExxA2x6kU/GJ403ptGMWOfcNGZKQTlg8q4fsInw==
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/intl-pluralrules/-/intl-pluralrules-1.2.2.tgz#2b73542a9502a8a3a742cdd917f3d969fb5482fe"
+  integrity sha512-SBdlNCJAhTA0I0uHg2dn7I+c6BCvSVk6zJ/01ozjwJK7BvKms9RH3w3Sd/Ag24KffZ/Yx6KJRCKAc7eE8TZLNg==
 
 intl@^1.2.5:
   version "1.2.5"
@@ -4057,10 +4057,10 @@ lighthouse-logger@^1.0.0, lighthouse-logger@^1.2.0:
     debug "^2.6.8"
     marky "^1.2.0"
 
-lighthouse@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-6.2.0.tgz#d87ae66bd148ab0e428081f3506df65f2c567a69"
-  integrity sha512-N6E+YJAMmYL4vEP653dK6qGXaCmeFV8wQ+vimsULs0PYCU5M25GX646+Lm7W6v8qN3sZ+ZFRs7O3T4ZxEHKPbA==
+lighthouse@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-6.3.0.tgz#7a8af15435ed7f175b6c7d30821a6a3fa9094163"
+  integrity sha512-ZiU6e6S5haKfHPIxCrmMXg9ZIyt4XrzOdbSIMPvKSCfFttUYYm4jdtA3nO4hox7lm+/eo7dE6JBSO0QAfA9bBg==
   dependencies:
     axe-core "3.5.5"
     chrome-launcher "^0.13.3"
