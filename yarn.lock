@@ -1661,9 +1661,9 @@ camelcase@^6.0.0:
   integrity sha512-8KMDF1Vz2gzOq54ONPJS65IvTUaB1cHJ2DMM7MbPmLZljDH1qpzzLsWdiN9pHh6qvkRVDTi/07+eNGch/oLU4w==
 
 caniuse-lite@^1.0.30001135:
-  version "1.0.30001137"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001137.tgz#6f0127b1d3788742561a25af3607a17fc778b803"
-  integrity sha512-54xKQZTqZrKVHmVz0+UvdZR6kQc7pJDgfhsMYDG19ID1BWoNnDMFm5Q3uSBSU401pBvKYMsHAt9qhEDcxmk8aw==
+  version "1.0.30001140"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001140.tgz#30dae27599f6ede2603a0962c82e468bca894232"
+  integrity sha512-xFtvBtfGrpjTOxTpjP5F2LmN04/ZGfYV8EQzUIC/RmKpdrmzJrjqlJ4ho7sGuAMPko2/Jl08h7x9uObCfBFaAA==
 
 canonicalize@^1.0.1:
   version "1.0.3"
@@ -2210,9 +2210,9 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.571:
-  version "1.3.575"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.575.tgz#57065cfad7b977a817dba47b28e7eb4dbce3fc37"
-  integrity sha512-031VrjcilnE8bXivDGhEeuGjMZrjTAeyAKm3XWPY9SvGYE6Hn8003gCqoNszFu6lh1v0gDx5hrM0VE1cPSMUkQ==
+  version "1.3.576"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.576.tgz#2e70234484e03d7c7e90310d7d79fd3775379c34"
+  integrity sha512-uSEI0XZ//5ic+0NdOqlxp0liCD44ck20OAGyLMSymIWTEAtHKVJi6JM18acOnRgUgX7Q65QqnI+sNncNvIy8ew==
 
 emittery@^0.7.1:
   version "0.7.1"
@@ -6114,9 +6114,9 @@ unset-value@^1.0.0:
     isobject "^3.0.0"
 
 update-notifier@^4.1.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-4.1.1.tgz#895fc8562bbe666179500f9f2cebac4f26323746"
-  integrity sha512-9y+Kds0+LoLG6yN802wVXoIfxYEwh3FlZwzMwpCZp62S2i1/Jzeqb9Eeeju3NSHccGGasfGlK5/vEHbAifYRDg==
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-4.1.3.tgz#be86ee13e8ce48fb50043ff72057b5bd598e1ea3"
+  integrity sha512-Yld6Z0RyCYGB6ckIjffGOSOmHXj1gMeE7aROz4MG+XMkmixBX4jUngrGXNYz7wPKBmtoD4MnBa2Anu7RSKht/A==
   dependencies:
     boxen "^4.2.0"
     chalk "^3.0.0"
