@@ -12,7 +12,7 @@ describe('test index', () => {
   const processExit = process.exit;
 
   beforeEach(() => {
-    parseMock = jest.spyOn(parser, 'parseArgs');
+    parseMock = jest.spyOn(parser, 'parse_args');
     processMock = jest.spyOn(lighthouseBadges, 'processParameters');
     process.stderr.write = (x) => {
       stderrOutput += `${x}\n`;
@@ -34,14 +34,14 @@ describe('test index', () => {
 
     await handleUserInput();
 
-    expect(parser.parseArgs.mock.calls.length).toBe(1);
+    expect(parser.parse_args.mock.calls.length).toBe(1);
     expect(lighthouseBadges.processParameters.mock.calls.length).toBe(1);
     expect(stderrOutput).toBe('');
   });
 
   it('should handle parse errors gracefully', async () => {
     await handleUserInput();
-    expect(stderrOutput.includes('Argument "-u/--urls" is required')).toBe(true);
+    expect(stderrOutput.includes('the following arguments are required: -u/--urls')).toBe(true);
   });
 
   it('should handle processing errors gracefully', async () => {

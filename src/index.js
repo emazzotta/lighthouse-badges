@@ -11,7 +11,7 @@ const handleUserInput = async () => {
     }
     const spinner = new CLI.Spinner('Running Lighthouse, please wait...', ['◜', '◠', '◝', '◞', '◡', '◟']);
     spinner.start();
-    await processParameters(await parser.parseArgs(), calculateLighthouseMetrics);
+    await processParameters(await parser.parse_args(), calculateLighthouseMetrics);
     spinner.stop();
   } catch (err) {
     process.stderr.write(`${err}\n`);

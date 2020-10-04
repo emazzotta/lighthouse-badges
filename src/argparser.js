@@ -1,45 +1,48 @@
-const { ArgumentParser, Const } = require('argparse');
+const { ArgumentParser, ONE_OR_MORE } = require('argparse');
 const { version } = require('../package.json');
 
 const parser = new ArgumentParser({
-  version,
-  addHelp: true,
-  debug: true,
+  add_help: true,
   description: 'Generate gh-badges (shields.io) based on lighthouse performance.',
 });
 
-const requiredArgs = parser.addArgumentGroup({ title: 'Required arguments' });
+const requiredArgs = parser.add_argument_group({ title: 'Required arguments' });
 
-parser.addArgument(['-s', '--single-badge'], {
-  action: 'storeTrue',
+parser.add_argument('-v', '--version', {
+  action: 'version',
+  version,
+});
+
+parser.add_argument('-s', '--single-badge', {
+  action: 'store_true',
   required: false,
   help: 'Output only one single badge averaging all lighthouse categories\' scores ',
 });
 
-parser.addArgument(['-b', '--badge-style'], {
+parser.add_argument('-b', '--badge-style', {
   action: 'store',
   required: false,
   choices: ['flat', 'flat-square', 'plastic', 'for-the-badge', 'popout', 'popout-square', 'social'],
-  defaultValue: 'flat',
+  default: 'flat',
   help: 'Define look and feel for the badge',
 });
 
-parser.addArgument(['-o', '--output-path'], {
+parser.add_argument('-o', '--output-path', {
   action: 'store',
   required: false,
   help: 'Define output path for artifacts',
 });
 
-parser.addArgument(['-r', '--save-report'], {
-  action: 'storeTrue',
+parser.add_argument('-r', '--save-report', {
+  action: 'store_true',
   required: false,
   help: 'Save lighthouse report as html for every supplied url',
 });
 
-requiredArgs.addArgument(['-u', '--urls'], {
+requiredArgs.add_argument('-u', '--urls', {
   action: 'store',
   required: true,
-  nargs: Const.ONE_OR_MORE,
+  nargs: ONE_OR_MORE,
   help: 'The lighthouse badge(s) will contain the respective average score(s) of all the urls supplied, combined',
 });
 
