@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "argparse": "2.0.1",
-    "badge-maker": "^3.2.0",
+    "badge-maker": "^3.3.0",
     "clui": "^0.3.6",
     "lighthouse": "^6.4.1",
     "ramda": "^0.27.0"
