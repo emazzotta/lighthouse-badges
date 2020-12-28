@@ -65,6 +65,8 @@ lighthouse-badges --urls https://www.youtube.com/
 
 ### Run
 
+Hint: node versions below 12 are not supported.
+
 #### Option 1: npm
 ```bash
 npm i -g lighthouse-badges
@@ -78,7 +80,7 @@ npx lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/fe
 
 #### Option 3: Docker
 ```bash
-# Warning, this may alter the results
+# Warning, the docker version may alter the lighthouse results
 docker run --rm \
     -v $PWD/test_results:/home/chrome/reports \
     emazzotta/lighthouse-badges \
