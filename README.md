@@ -78,6 +78,7 @@ npx lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/fe
 
 #### Option 3: Docker
 ```bash
+# Warning, this may alter the results
 docker run --rm \
     -v $PWD/test_results:/home/chrome/reports \
     emazzotta/lighthouse-badges \
