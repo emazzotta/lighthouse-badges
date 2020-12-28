@@ -1,4 +1,4 @@
-FROM node:14.11-alpine
+FROM node:15.5-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -24,7 +24,7 @@ WORKDIR /home/lighthouse
 # Add lighthouse
 COPY src /home/lighthouse/src
 COPY package.json /home/lighthouse/package.json
-RUN npm install -g . && rm -rf /root/.npm
+RUN npm install . && npm link && rm -rf /root/.npm
 
 # Set Chromium bin path
 ENV CHROME_PATH=/usr/bin/chromium-browser
