@@ -93,10 +93,10 @@ See [contribution guideline](./CONTRIBUTING.md)
 
 ## Sponsors
 
-Sponsored by JetBrains
+Sponsored by [JetBrains](https://www.jetbrains.com/?from=Lighthouse-Badges)
 
 <a href="https://www.jetbrains.com/?from=Lighthouse-Badges">
-  <img alt="Jetbrains Logo" src="./assets/img/jetbrains.svg" width="100%" height="100">
+  <img alt="Jetbrains Logo" src="./assets/img/jetbrains.svg" height="100">
 </a>
 
 ## Author
