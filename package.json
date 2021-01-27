@@ -1,5 +1,5 @@
 {
-  "name": "lighthouse-badges",
+  "name": "@emazzotta/lighthouse-badges",
   "version": "1.1.1",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "src/index.js",
@@ -40,7 +40,7 @@
     "url": "https://github.com/emazzotta/lighthouse-badges.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@emazzotta"
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "argparse": "2.0.1",
