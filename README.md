@@ -91,7 +91,14 @@ docker run --rm \
 
 See [contribution guideline](./CONTRIBUTING.md)
 
+## Sponsors
+
+Sponsored by JetBrains
+
+<a href="https://www.jetbrains.com/?from=Lighthouse-Badges">
+  <img alt="Jetbrains Logo" src="https://rawgit.com/emazzotta/lighthouse-badges/master/assets/img/jetbrains.svg" width="100%" height="100">
+</a>
+
 ## Author
 
 [Emanuele Mazzotta](mailto:hello@mazzotta.me)
-
