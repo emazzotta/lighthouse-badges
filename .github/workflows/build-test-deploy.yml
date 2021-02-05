@@ -24,32 +24,48 @@ jobs:
           yarn run docker:build
           yarn run docker:system-test:run # System test with docker installation
 
+      - name: Show current lighthouse-badges version
+        id: version
+        run: jq -r '.version' package.json
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
       - name: Deploy to Github Registry
         if: github.ref == 'refs/heads/master'
         run: |
           package_name=$(jq -r '.name' package.json)
-          current_version=$(jq -r '.version' package.json)
           npm config set registry https://npm.pkg.github.com
           npm config set //npm.pkg.github.com/:_authToken ${GITHUB_TOKEN}
-          [[ "$(npm show ${package_name} version)" ==  "${current_version}" ]] && \
-            echo "Current version ${current_version} already published" || \
+          [[ "$(npm show ${package_name} version)" ==  "${CURRENT_VERSION}" ]] && \
+            echo "Current version ${CURRENT_VERSION} already published" || \
             npm publish --ignore-scripts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CURRENT_VERSION: ${{ steps.version.outputs.stdout }}
 
       - name: Deploy to npm.js Registry
         if: github.ref == 'refs/heads/master'
         run: |
           jq '.name="lighthouse-badges"' package.json > package.json.temp && mv -f package.json.temp package.json
           package_name=$(jq -r '.name' package.json)
-          current_version=$(jq -r '.version' package.json)
           npm config set registry https://registry.npmjs.org
           npm config set //registry.npmjs.org/:_authToken ${NPM_AUTH_TOKEN}
-          [[ "$(npm show ${package_name} version)" ==  "${current_version}" ]] && \
-            echo "Current version ${current_version} already published" || \
+          [[ "$(npm show ${package_name} version)" ==  "${CURRENT_VERSION}" ]] && \
+            echo "Current version ${CURRENT_VERSION} already published" || \
             npm publish --ignore-scripts
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          CURRENT_VERSION: ${{ steps.version.outputs.stdout }}
 
       - name: Deploy to Dockerhub
         if: github.ref == 'refs/heads/master'
