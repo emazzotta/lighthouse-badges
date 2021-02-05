@@ -38,10 +38,10 @@ jobs:
         run: |
           jq '.name="lighthouse-badges"' package.json > package.json.temp && mv -f package.json.temp package.json
           npm config set registry https://registry.npmjs.org
-          npm config set //registry.npmjs.org/:_authToken ${NPMJS_TOKEN}
+          npm config set //registry.npmjs.org/:_authToken ${NPM_AUTH_TOKEN}
           npm publish --ignore-scripts
         env:
-          NPMJS_TOKEN: ${{ secrets.NPMJS_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Deploy to Dockerhub
         if: github.ref == 'refs/heads/master'
