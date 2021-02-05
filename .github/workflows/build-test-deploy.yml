@@ -14,10 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build
+      - name: NPM Build
         run: |
           yarn install
           yarn run lint
+
+      - name: Docker Build
+        run: yarn run docker:build
 
       - name: Unit & Integration Test
         run: |
@@ -28,9 +31,7 @@ jobs:
         run: yarn run system-test:light-run
 
       - name: Docker System Test
-        run: |
-          yarn run docker:build
-          yarn run docker:system-test:run
+        run: yarn run docker:system-test:run
 
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
