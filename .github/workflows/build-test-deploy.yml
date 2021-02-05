@@ -1,0 +1,35 @@
+name: "Build, Test & Deploy"
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build-test-deploy:
+    name: "Build, Test & Deploy"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build & Test
+        run: |
+          set -e # This makes build to fail on first error
+          yarn run lint
+          yarn run test
+          bash <(curl -s https://codecov.io/bash)
+          yarn run docker:build
+          yarn run docker:system-test:run
+
+      - name: Deploy to Docker
+        if: github.ref == 'refs/heads/master'
+        run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; yarn run docker:push
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Deploy to NPM
+        if: github.ref == 'refs/heads/master'
+        run: echo TODO
