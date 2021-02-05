@@ -20,10 +20,11 @@ jobs:
           yarn run lint
           yarn run test
           bash <(curl -s https://codecov.io/bash)
+          yarn run system-test:full-run # System test with node installation
           yarn run docker:build
-          yarn run docker:system-test:run
+          yarn run docker:system-test:run # System test with docker installation
 
-      - name: Deploy to Docker
+      - name: Deploy to Dockerhub
         if: github.ref == 'refs/heads/master'
         run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; yarn run docker:push
         env:
