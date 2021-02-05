@@ -16,7 +16,7 @@ jobs:
 
       - name: Build & Test
         run: |
-          set -e # This makes build to fail on first error
+          yarn install
           yarn run lint
           yarn run test
           bash <(curl -s https://codecov.io/bash)
