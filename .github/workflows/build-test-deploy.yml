@@ -20,7 +20,7 @@ jobs:
           yarn run lint
           yarn run test
           bash <(curl -s https://codecov.io/bash)
-          yarn run system-test:full-run # System test with node installation
+          yarn run system-test:light-run # System test with node installation
           yarn run docker:build
           yarn run docker:system-test:run # System test with docker installation
 
