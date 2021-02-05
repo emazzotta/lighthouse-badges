@@ -36,7 +36,7 @@ jobs:
       - name: Deploy to npm.js Registry
         if: github.ref == 'refs/heads/master'
         run: |
-          sed "name": "@emazzotta/lighthouse-badges"
+          jq '.name="lighthouse-badges"' package.json > package.json.temp && mv -f package.json.temp package.json
           npm config set registry https://registry.npmjs.org
           npm config set //registry.npmjs.org/:_authToken ${NPMJS_TOKEN}
           npm publish --ignore-scripts
