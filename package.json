@@ -39,9 +39,6 @@
     "type": "git",
     "url": "https://github.com/emazzotta/lighthouse-badges.git"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "dependencies": {
     "argparse": "2.0.1",
     "badge-maker": "^3.3.0",

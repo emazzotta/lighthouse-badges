@@ -24,13 +24,28 @@ jobs:
           yarn run docker:build
           yarn run docker:system-test:run # System test with docker installation
 
+      - name: Deploy to Github Registry
+        if: github.ref == 'refs/heads/master'
+        run: |
+          npm config set registry https://npm.pkg.github.com
+          npm config set //npm.pkg.github.com/:_authToken ${NPM_AUTH_TOKEN}
+          npm publish --ignore-scripts
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Deploy to npm.js Registry
+        if: github.ref == 'refs/heads/master'
+        run: |
+          sed "name": "@emazzotta/lighthouse-badges"
+          npm config set registry https://registry.npmjs.org
+          npm config set //registry.npmjs.org/:_authToken ${NPMJS_TOKEN}
+          npm publish --ignore-scripts
+        env:
+          NPMJS_TOKEN: ${{ secrets.NPMJS_TOKEN }}
+
       - name: Deploy to Dockerhub
         if: github.ref == 'refs/heads/master'
         run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; yarn run docker:push
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Deploy to NPM
-        if: github.ref == 'refs/heads/master'
-        run: echo TODO
