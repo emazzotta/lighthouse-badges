@@ -57,8 +57,8 @@ Required arguments:
 Additionally you can pass parameters to the lighthouse process directly via environment variable:
 
 ```bash
-# This will pass '--emulated-preset=desktop' to the lighthouse process
-export LIGHTHOUSE_BADGES_PARAMS="--emulated-preset=desktop"
+# This will pass '--preset=desktop' to the lighthouse process
+export LIGHTHOUSE_BADGES_PARAMS="--preset=desktop"
 lighthouse-badges --urls https://www.youtube.com/
 ```
 
