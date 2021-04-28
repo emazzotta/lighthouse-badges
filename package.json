@@ -43,7 +43,7 @@
     "argparse": "2.0.1",
     "badge-maker": "^3.3.0",
     "clui": "^0.3.6",
-    "lighthouse": "^7.3.0",
+    "lighthouse": "^7.4.0",
     "ramda": "^0.27.0"
   },
   "devDependencies": {
