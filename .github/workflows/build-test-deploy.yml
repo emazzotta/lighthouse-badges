@@ -16,9 +16,9 @@ jobs:
 
       - name: Versions
         run: |
-          echo $(node -v)
-          echo $(npm -v)
-          echo $(docker -v)
+          echo "node: $(node -v)"
+          echo "npm: $(npm -v)"
+          echo "Docker: $(docker -v)"
 
       - name: NPM Build
         run: |
