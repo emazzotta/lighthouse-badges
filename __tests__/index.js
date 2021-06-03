@@ -8,6 +8,7 @@ describe('test index', () => {
   let stderrOutput = '';
   let parseMock;
   let processMock;
+  const spinnerFake = { start: () => null, stop: () => null };
   const stderrWrite = process.stderr.write;
   const processExit = process.exit;
 
@@ -32,7 +33,7 @@ describe('test index', () => {
     parseMock.mockReturnValue(undefined);
     processMock.mockReturnValue(undefined);
 
-    await handleUserInput();
+    await handleUserInput(spinnerFake);
 
     expect(parser.parse_args.mock.calls.length).toBe(1);
     expect(lighthouseBadges.processParameters.mock.calls.length).toBe(1);
@@ -40,7 +41,7 @@ describe('test index', () => {
   });
 
   it('should handle parse errors gracefully', async () => {
-    await handleUserInput();
+    await handleUserInput(spinnerFake);
     expect(stderrOutput.includes('the following arguments are required: -u/--urls')).toBe(true);
   });
 
@@ -48,7 +49,7 @@ describe('test index', () => {
     parseMock.mockReturnValue(['--urls', 'http://example.org']);
     processMock.mockRejectedValue(new Error('Async error'));
 
-    await handleUserInput();
+    await handleUserInput(spinnerFake);
     expect(stderrOutput.includes('Error: Async error')).toBe(true);
   });
 });
