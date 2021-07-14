@@ -1,5 +1,5 @@
 import fs from 'fs';
-import ReportGenerator from 'lighthouse/lighthouse-core/report/report-generator';
+import ReportGenerator from 'lighthouse/report/report-generator';
 import lighthouseBadges, {
   htmlReportsToFile,
   metricsToSvg,

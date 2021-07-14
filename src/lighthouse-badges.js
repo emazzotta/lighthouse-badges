@@ -1,7 +1,7 @@
 const { makeBadge } = require('badge-maker');
 const path = require('path');
 const fs = require('fs');
-const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
+const ReportGenerator = require('lighthouse/report/report-generator');
 const { promisify } = require('util');
 const { exec } = require('child_process');
 const R = require('ramda');
