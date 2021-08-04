@@ -3611,7 +3611,7 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lighthouse-logger@^1.0.0, lighthouse-logger@^1.2.0:
+lighthouse-logger@^1.0.0, lighthouse-logger@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/lighthouse-logger/-/lighthouse-logger-1.3.0.tgz#ba6303e739307c4eee18f08249524e7dafd510db"
   integrity sha512-BbqAKApLb9ywUli+0a+PcV04SyJ/N1q/8qgCNe6U97KbPCS1BTksEuHFLYdvc8DltuhfxIUBqDZsC0bBGtl3lA==
@@ -3624,10 +3624,10 @@ lighthouse-stack-packs@^1.5.0:
   resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.5.0.tgz#c191f2b94db21602254baaebfb0bb90307a00ffa"
   integrity sha512-ntVOqFsrrTQYrNf+W+sNE9GjddW+ab5QN0WrrCikjMFsUvEQ28CvT0SXcHPZXFtcsb1lMSuVaNCmEuj7oXtYGQ==
 
-lighthouse@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-8.1.0.tgz#c3c0395dd8446fdb08452af678c4edc47a8bfa0e"
-  integrity sha512-kAe06yax70VFdfX38OWIDqzQ77H313BXTXbGxqs4l1SOnhnu/ao6qF7VZ6TNz3+YGbSXPJgC3KOYif/sE79KTA==
+lighthouse@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-8.2.0.tgz#97909157186200fbcd366a5ef38a26423e91a25c"
+  integrity sha512-uiAuiUTCP9kyib0UfG2j9CrXVVtVU1eoPhsj35jYXQS2cFM7gKG6dB0v+OrRl3/0loplKyW/w5KYsHb2lZwvaA==
   dependencies:
     axe-core "4.2.3"
     chrome-launcher "^0.14.0"
@@ -3639,7 +3639,7 @@ lighthouse@^8.1.0:
     intl-messageformat "^4.4.0"
     jpeg-js "^0.4.1"
     js-library-detector "^6.4.0"
-    lighthouse-logger "^1.2.0"
+    lighthouse-logger "^1.3.0"
     lighthouse-stack-packs "^1.5.0"
     lodash.clonedeep "^4.5.0"
     lodash.get "^4.4.2"
@@ -3654,7 +3654,7 @@ lighthouse@^8.1.0:
     robots-parser "^2.0.1"
     semver "^5.3.0"
     speedline-core "^1.4.3"
-    third-party-web "^0.12.2"
+    third-party-web "^0.12.4"
     update-notifier "^4.1.0"
     ws "^7.0.0"
     yargs "^16.1.1"
@@ -4903,10 +4903,10 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-third-party-web@^0.12.2:
-  version "0.12.4"
-  resolved "https://registry.yarnpkg.com/third-party-web/-/third-party-web-0.12.4.tgz#e189d97e6e86c42b470e96b9c46719cd906ccb64"
-  integrity sha512-SaJdgPjCus/5ftexuCk8wJnYwe/nW9ZNDcWZc/dq90SREN6PvFEUva+kgaPZfT8opLDHvjJVAG9mNVvMnHeVgw==
+third-party-web@^0.12.4:
+  version "0.12.5"
+  resolved "https://registry.yarnpkg.com/third-party-web/-/third-party-web-0.12.5.tgz#df336053ddcbce68aa2da3787641233739ad5a64"
+  integrity sha512-A8YS1bpOzm9os0w7wH/BbN5WZgzyf0zbrrWHckX57v+EkCaM7jZPoRpzgqrakh2e7IWP1KwAnMtlcGTATYZw8A==
 
 throat@^6.0.1:
   version "6.0.1"
