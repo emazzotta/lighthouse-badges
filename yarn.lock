@@ -1899,7 +1899,7 @@ crypto-random-string@^2.0.0:
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
 
-csp_evaluator@^1.0.1:
+csp_evaluator@1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/csp_evaluator/-/csp_evaluator-1.0.4.tgz#152deb224683020d55a9dce853266ecab6c56129"
   integrity sha512-hs1lAKCbx/SWXYwpUWu3bS/k1CS10HRLh/7Kjh+VMW2ZZ8GmzymMGlModz+IIgh4gpn+PGuSVoJFkBPU3wGR7Q==
@@ -3629,15 +3629,15 @@ lighthouse-stack-packs@^1.5.0:
   resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.5.0.tgz#c191f2b94db21602254baaebfb0bb90307a00ffa"
   integrity sha512-ntVOqFsrrTQYrNf+W+sNE9GjddW+ab5QN0WrrCikjMFsUvEQ28CvT0SXcHPZXFtcsb1lMSuVaNCmEuj7oXtYGQ==
 
-lighthouse@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-8.2.0.tgz#97909157186200fbcd366a5ef38a26423e91a25c"
-  integrity sha512-uiAuiUTCP9kyib0UfG2j9CrXVVtVU1eoPhsj35jYXQS2cFM7gKG6dB0v+OrRl3/0loplKyW/w5KYsHb2lZwvaA==
+lighthouse@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-8.3.0.tgz#2dd8e1440500c3e70235d13bf8946425e21eb616"
+  integrity sha512-EPSm4TaC6B6VusCsPtifGtp+eLxOGlbeqAE69GAMlOtFoMRxM0VTXHcNENHzSBhaiR9j5aHZ06/6PRzb2orxEg==
   dependencies:
     axe-core "4.2.3"
     chrome-launcher "^0.14.0"
     configstore "^5.0.1"
-    csp_evaluator "^1.0.1"
+    csp_evaluator "1.0.4"
     cssstyle "1.2.1"
     enquirer "^2.3.6"
     http-link-header "^0.8.0"
