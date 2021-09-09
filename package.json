@@ -1,6 +1,6 @@
 {
   "name": "@emazzotta/lighthouse-badges",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "src/index.js",
   "bin": {
