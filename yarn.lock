@@ -3668,10 +3668,10 @@ lighthouse-stack-packs@^1.5.0:
   resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.5.0.tgz#c191f2b94db21602254baaebfb0bb90307a00ffa"
   integrity sha512-ntVOqFsrrTQYrNf+W+sNE9GjddW+ab5QN0WrrCikjMFsUvEQ28CvT0SXcHPZXFtcsb1lMSuVaNCmEuj7oXtYGQ==
 
-lighthouse@^8.3.0:
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-8.5.0.tgz#0f878646c6966f39302ab0045dd5be2c1216ef23"
-  integrity sha512-jBYe6IfE29dVFjONi+bTxLUFx+XA4O4qQueAPMvBPdDujLOehLXgTKDr7mW8ABFsiVop0uKGi1C/mMKG0+OfgQ==
+lighthouse@^8.5.1:
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-8.5.1.tgz#0cf4f2d3ebf67e40cd14fcbb027c9d5fb3cfa912"
+  integrity sha512-phe3g77N5AE5pf5TARUBb9uHLvvzwpd2z/S0G+6KrC5ShEe2laSxkiiTLo/jYxsrmy5kL7qohVztdOuafy4HGQ==
   dependencies:
     axe-core "4.2.3"
     chrome-launcher "^0.14.0"
