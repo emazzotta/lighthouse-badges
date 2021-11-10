@@ -14,9 +14,7 @@ describe('test lighthouse badges', () => {
     it('should return correct metrics and no report', async () => {
       const url = 'https://emanuelemazzotta.com';
       const shouldSaveReport = false;
-      const result = await processRawLighthouseResult(
-        reportFixture, url, shouldSaveReport,
-      );
+      const result = await processRawLighthouseResult(reportFixture, url, shouldSaveReport);
       expect({
         metrics: {
           'lighthouse performance': 98,
@@ -35,9 +33,7 @@ describe('test lighthouse badges', () => {
       const expectedHtmlReport = ReportGenerator.generateReportHtml(reportFixture);
       const url = 'https://emanuelemazzotta.com';
       const shouldSaveReport = true;
-      const result = await processRawLighthouseResult(
-        reportFixture, url, shouldSaveReport,
-      );
+      const result = await processRawLighthouseResult(reportFixture, url, shouldSaveReport);
       expect({
         metrics: {
           'lighthouse performance': 98,
