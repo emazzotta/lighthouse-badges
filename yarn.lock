@@ -1429,10 +1429,10 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-axe-core@4.2.3:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.2.3.tgz#2a3afc332f0031b42f602f4a3de03c211ca98f72"
-  integrity sha512-pXnVMfJKSIWU2Ml4JHP7pZEPIrgBO1Fd3WGx+fPBsS+KRGhE4vxooD8XBGWbQOIVSZsVK7pUDBBkCicNu80yzQ==
+axe-core@4.3.5:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.5.tgz#78d6911ba317a8262bfee292aeafcc1e04b49cc5"
+  integrity sha512-WKTW1+xAzhMS5dJsxWkliixlO/PqC4VhmO9T4juNYcaTg9jzWiJsou6m5pxWYGfigWbwzJWeFY6z47a+4neRXA==
 
 babel-jest@^27.4.5:
   version "27.4.5"
@@ -3655,12 +3655,12 @@ lighthouse-stack-packs@^1.6.0:
   resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.6.0.tgz#f7327352089f65f4ca61135956c77b9d13f6d681"
   integrity sha512-isv4qY9YCiRis5Z3ijy14IUyAbl6AoD+Q8Co1t0GBBuQK2ZUTSK6mLgFd91MVJrhXaF3LXJRcO+JXaUFHedHhA==
 
-lighthouse@^9.1.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-9.1.0.tgz#41e544ab06231e00f50c35d878ca95aa21097c27"
-  integrity sha512-KUrEKP3KBo1c0Ao7GvWtUqQgJjblALQslOd9d0c9/rONLNM1X17+rZZv8bRS7FVmicdqlIIwGTxk1CjPTH3Vyw==
+lighthouse@^9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-9.2.0.tgz#a193ddf8afe56d482b38e7b772d13f35467d44c8"
+  integrity sha512-lkD0soCiFFh1diZ1xL2R+aDO4WvSUwEF/ajNRDWWEobE9ta7Qm2EwhCMmA2v39WCI4QIBxJQ1OBNStNKaLfGCw==
   dependencies:
-    axe-core "4.2.3"
+    axe-core "4.3.5"
     chrome-launcher "^0.15.0"
     configstore "^5.0.1"
     csp_evaluator "1.1.0"
