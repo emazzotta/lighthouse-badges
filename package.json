@@ -9,20 +9,21 @@
   "scripts": {
     "clean": "rm -f *.svg *.html",
     "docker:build": "docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
+    "docker:pull": "docker pull emazzotta/lighthouse-badges",
     "docker:push": "docker push emazzotta/lighthouse-badges",
     "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c 'lighthouse-badges -rsu https://google.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "pre-push": "npm-run-all lint:fix test system-test:full-run",
     "reinstall": "npm uninstall -g . && npm i -g .",
     "run:global-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; lighthouse-badges -rsu ${PAGE}",
     "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; node ./src/index.js -rsu ${PAGE}",
-    "system-test:start-server": "npx http-server -a 127.0.0.1 -p 8080 &",
     "system-test:full-run": "npm-run-all clean reinstall run:global-installation system-test:verify clean",
     "system-test:light-run": "npm-run-all clean run:local-installation system-test:verify clean",
+    "system-test:start-server": "npx http-server -a 127.0.0.1 -p 8080 &",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",
     "test": "jest",
-    "test:related": "jest --findRelatedTests",
-    "pre-push": "npm-run-all lint:fix test system-test:full-run"
+    "test:related": "jest --findRelatedTests"
   },
   "husky": {
     "hooks": {

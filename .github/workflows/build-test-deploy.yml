@@ -26,7 +26,9 @@ jobs:
           yarn run lint
 
       - name: Docker Build
-        run: yarn run docker:build
+        run: |
+          yarn run docker:pull
+          yarn run docker:build
 
       - name: Unit & Integration Test
         run: |
