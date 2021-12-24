@@ -1182,9 +1182,9 @@
     "@types/babel__traverse" "*"
 
 "@types/babel__generator@*":
-  version "7.6.3"
-  resolved "https://registry.yarnpkg.com/@types/babel__generator/-/babel__generator-7.6.3.tgz#f456b4b2ce79137f768aa130d2423d2f0ccfaba5"
-  integrity sha512-/GWCmzJWqV7diQW54smJZzWbSFf4QYtF71WCKhcx6Ru/tFyQIY2eiiITcCAeuPbNSvT9YCGkVMqqvSk2Z0mXiA==
+  version "7.6.4"
+  resolved "https://registry.yarnpkg.com/@types/babel__generator/-/babel__generator-7.6.4.tgz#1f20ce4c5b1990b37900b63f050182d28c2439b7"
+  integrity sha512-tFkciB9j2K755yrTALxD44McOrk+gfpIpvC3sxHjRawj6PfnQxrse4Clq5y/Rq+G3mrBurMax/lG8Qn2t9mSsg==
   dependencies:
     "@babel/types" "^7.0.0"
 
@@ -1211,9 +1211,9 @@
     "@types/node" "*"
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.3.tgz#4ba8ddb720221f432e443bd5f9117fd22cfd4762"
-  integrity sha512-sz7iLqvVUg1gIedBOvlkxPlc8/uVzyS5OwGz1cKjXzkl3FpL3al0crU8YGU1WoHkxn0Wxbw5tyi6hvzJKNzFsw==
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.4.tgz#8467d4b3c087805d63580480890791277ce35c44"
+  integrity sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g==
 
 "@types/istanbul-lib-report@*":
   version "3.0.0"
@@ -1235,9 +1235,9 @@
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
 "@types/node@*":
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.0.tgz#62797cee3b8b497f6547503b2312254d4fe3c2bb"
-  integrity sha512-eMhwJXc931Ihh4tkU+Y7GiLzT/y/DBNpNtr4yU9O2w3SYBsr9NaOPhQlLKRmoWtI54uNwuo0IOUFQjVOTZYRvw==
+  version "17.0.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.4.tgz#fec0ce0526abb6062fd206d72a642811b887a111"
+  integrity sha512-6xwbrW4JJiJLgF+zNypN5wr2ykM9/jHcL7rQ8fZe2vuftggjzZeRSM4OwRc6Xk8qWjwJ99qVHo/JgOGmomWRog==
 
 "@types/prettier@^2.1.5":
   version "2.4.2"
@@ -1638,9 +1638,9 @@ camelcase@^6.2.0:
   integrity sha512-tVI4q5jjFV5CavAU8DXfza/TJcZutVKo/5Foskmsqcm0MsL91moHvwiGNnqaa2o6PF/7yT5ikDRcVcl8Rj6LCA==
 
 caniuse-lite@^1.0.30001286:
-  version "1.0.30001287"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001287.tgz#5fab6a46ab9e47146d5dd35abfe47beaf8073c71"
-  integrity sha512-4udbs9bc0hfNrcje++AxBuc6PfLNHwh3PO9kbwnfCQWyqtlzg3py0YgFu8jyRTTo85VAz4U+VLxSlID09vNtWA==
+  version "1.0.30001292"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001292.tgz#4a55f61c06abc9595965cfd77897dc7bc1cdc456"
+  integrity sha512-jnT4Tq0Q4ma+6nncYQVe7d73kmDmE9C3OGTx3MvW7lBM/eY1S1DZTMBON7dqV481RhNiS5OxD7k9JQvmDOTirw==
 
 chalk@^2.0.0, chalk@^2.4.1:
   version "2.4.2"
@@ -1866,9 +1866,9 @@ cookie@0.3.1:
   integrity sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
 
 core-js-compat@^3.18.0, core-js-compat@^3.19.1:
-  version "3.20.0"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.20.0.tgz#fd704640c5a213816b6d10ec0192756111e2c9d1"
-  integrity sha512-relrah5h+sslXssTTOkvqcC/6RURifB0W5yhYBdBkaPYa5/2KBMiog3XiD+s3TwEHWxInWVv4Jx2/Lw0vng+IQ==
+  version "3.20.1"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.20.1.tgz#96917b4db634fbbbc7b36575b2e8fcbf7e4f9691"
+  integrity sha512-AVhKZNpqMV3Jz8hU0YEXXE06qoxtQGsAqU0u1neUngz5IusDJRX/ZJ6t3i7mS7QxNyEONbCo14GprkBrxPlTZA==
   dependencies:
     browserslist "^4.19.1"
     semver "7.0.0"
@@ -2084,9 +2084,9 @@ duplexer3@^0.1.4:
   integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
 
 electron-to-chromium@^1.4.17:
-  version "1.4.23"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.23.tgz#c8fa28db6354062bbd388e24d95c4a263fff5cac"
-  integrity sha512-q3tB59Api3+DMbLnDPkW/UBHBO7KTGcF+rDCeb0GAGyqFj562s6y+c/2tDKTS/y5lbC+JOvT4MSUALJLPqlcSA==
+  version "1.4.28"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.28.tgz#fef0e92e281df6d568f482d8d53c34ca5374de48"
+  integrity sha512-Gzbf0wUtKfyPaqf0Plz+Ctinf9eQIzxEqBHwSvbGfeOm9GMNdLxyu1dNiCUfM+x6r4BE0xUJNh3Nmg9gfAtTmg==
 
 emittery@^0.8.1:
   version "0.8.1"
@@ -3077,9 +3077,9 @@ istanbul-lib-source-maps@^4.0.0:
     source-map "^0.6.1"
 
 istanbul-reports@^3.0.2:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/istanbul-reports/-/istanbul-reports-3.1.1.tgz#7085857f17d2441053c6ce5c3b8fdf6882289397"
-  integrity sha512-q1kvhAXWSsXfMjCdNHNPKZZv94OlspKnoGv+R9RGbnqOOQ0VbNfLFgQDVgi7hHenKsndGq3/o0OBdzDXthWcNw==
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/istanbul-reports/-/istanbul-reports-3.1.2.tgz#b80e13cbab0120e1c367ebaa099862361aed5ead"
+  integrity sha512-0gHxuT1NNC0aEIL1zbJ+MTgPbbHhU77eJPuU35WKA7TgXiSNlCAx4PENoMrH0Or6M2H80TaZcWKhM0IK6V8gRw==
   dependencies:
     html-escaper "^2.0.0"
     istanbul-lib-report "^3.0.0"
@@ -3696,10 +3696,10 @@ lilconfig@2.0.4:
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.0.4.tgz#f4507d043d7058b380b6a8f5cb7bcd4b34cee082"
   integrity sha512-bfTIN7lEsiooCocSISTWXkiWJkRqtL9wYtYy+8EK3Y41qh3mpwPU0ycTOgjdY9ErwXCc8QyrQp82bdL0Xkm9yA==
 
-lint-staged@^12.1.3:
-  version "12.1.3"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.1.3.tgz#a16e885c0a5e77de9cf559724d29a10348670e68"
-  integrity sha512-ajapdkaFxx+MVhvq6xQRg9zCnCLz49iQLJZP7+w8XaA3U4B35Z9xJJGq9vxmWo73QTvJLG+N2NxhjWiSexbAWQ==
+lint-staged@^12.1.4:
+  version "12.1.4"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.1.4.tgz#a92ec8509f13018caaafade61d515c2d5873316e"
+  integrity sha512-RgDz9nsFsE0/5eL9Vat0AvCuk0+j5mEuzBIVfrRH5FRtt5wibYe8zTjZs2nuqLFrLAGQGYnj8+HJxolcj08i/A==
   dependencies:
     cli-truncate "^3.1.0"
     colorette "^2.0.16"
@@ -4505,9 +4505,9 @@ rimraf@^3.0.0, rimraf@^3.0.2:
     glob "^7.1.3"
 
 robots-parser@^2.0.1:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/robots-parser/-/robots-parser-2.3.0.tgz#d79e86e26e13fa0a806adbc37f4cf1b96aebc8c3"
-  integrity sha512-RvuCITckrHM9k8DxCCU9rqWpuuKRfVX9iHG751dC3/EdERxp9gJATxYYdYOT3L0T+TAT4+27lENisk/VbHm47A==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/robots-parser/-/robots-parser-2.4.0.tgz#c0e45f66108ad5950adc86b6737349189b41f864"
+  integrity sha512-oO8f2SI04dJk3pbj2KOMJ4G6QfPAgqcGmrYGmansIcpRewIPT2ljWEt5I+ip6EgiyaLo+RXkkUWw74M25HDkMA==
 
 rxjs@^7.4.0:
   version "7.4.0"
