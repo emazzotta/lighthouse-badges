@@ -22,24 +22,24 @@ jobs:
 
       - name: NPM Build
         run: |
-          yarn install
-          yarn run lint
+          npm install
+          npm run lint
 
       - name: Docker Build
         run: |
-          yarn run docker:pull
-          yarn run docker:build
+          npm run docker:pull
+          npm run docker:build
 
       - name: Unit & Integration Test
         run: |
-          yarn run test
+          npm run test
           bash <(curl -s https://codecov.io/bash)
 
       - name: Node System Test
-        run: yarn run system-test:light-run
+        run: npm run system-test:light-run
 
       - name: Docker System Test
-        run: yarn run docker:system-test:run
+        run: npm run docker:system-test:run
 
       - name: Deploy to Github Registry
         if: github.ref == 'refs/heads/master'
@@ -70,7 +70,7 @@ jobs:
 
       - name: Deploy to Dockerhub
         if: github.ref == 'refs/heads/master'
-        run: echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin ; yarn run docker:push
+        run: echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin ; npm run docker:push
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
