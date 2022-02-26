@@ -21,7 +21,7 @@ const getSquashedScore = async (metrics) => ({
   lighthouse: R.pipe(
     R.map((metric) => R.sum(R.values(metric))),
     R.sum,
-    R.divide(R.__, R.length(metrics) * R.length(R.keys(R.head(metrics)))),
+    (x) => (x / (R.length(metrics) * R.length(R.keys(R.head(metrics))))),
     R.curry(Math.round),
   )(metrics),
 });
