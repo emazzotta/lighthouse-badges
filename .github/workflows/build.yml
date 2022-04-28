@@ -94,9 +94,9 @@ jobs:
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
-      - name: Set outputs
-        id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - name: Set Environment Variables
+        run: |
+          echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Deploy to Dockerhub
         if: github.ref == 'refs/heads/master'
@@ -106,7 +106,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ env.TAG_PREFIX }}:${{ steps.vars.outputs.sha_short }}
+            ${{ env.TAG_PREFIX }}:${{ env.GIT_SHA }}
             ${{ env.TAG_PREFIX }}:latest
           platforms: linux/amd64,linux/arm64
 
