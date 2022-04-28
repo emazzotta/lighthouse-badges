@@ -64,7 +64,7 @@ lighthouse-badges --urls https://www.youtube.com/
 
 ### Run
 
-Hint: node versions below 12 are not supported.
+Hint: Only node >= 12 is supported.
 
 #### Option 1: npm
 ```bash
