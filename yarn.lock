@@ -1030,9 +1030,9 @@
     jest-haste-map "^28.0.2"
     slash "^3.0.0"
 
-"@jest/transform@^28.0.2":
-  version "28.0.2"
-  resolved "https://registry.yarnpkg.com/@jest/transform/-/transform-28.0.2.tgz#2b33d93fdf5827309cbd332bf968fa0dd049e7b2"
+"@jest/transform@^28.0.2", "@jest/transform@^28.0.3":
+  version "28.0.3"
+  resolved "https://registry.yarnpkg.com/@jest/transform/-/transform-28.0.3.tgz#591fb5ebc1d84db5c5f21e1225c7406c35f5eb1e"
   dependencies:
     "@babel/core" "^7.11.6"
     "@jest/types" "^28.0.2"
@@ -1343,11 +1343,11 @@ axe-core@4.3.5:
   version "4.3.5"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.5.tgz#78d6911ba317a8262bfee292aeafcc1e04b49cc5"
 
-babel-jest@^28.0.2:
-  version "28.0.2"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-28.0.2.tgz#72c050b4fbd108e561f9d9c7bad4893b20399b12"
+babel-jest@^28.0.2, babel-jest@^28.0.3:
+  version "28.0.3"
+  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-28.0.3.tgz#843dc170da5b9671d4054ada9fdcd28f85f92a6e"
   dependencies:
-    "@jest/transform" "^28.0.2"
+    "@jest/transform" "^28.0.3"
     "@types/babel__core" "^7.1.14"
     babel-plugin-istanbul "^6.1.1"
     babel-preset-jest "^28.0.2"
