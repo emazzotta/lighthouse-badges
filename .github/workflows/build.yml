@@ -109,5 +109,7 @@ jobs:
           tags: |
             ${{ env.TAG_PREFIX }}:${{ env.GIT_SHA }}
             ${{ env.TAG_PREFIX }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           platforms: linux/amd64,linux/arm64
 
