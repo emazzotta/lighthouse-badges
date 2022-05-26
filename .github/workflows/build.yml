@@ -7,7 +7,8 @@ on:
   pull_request:
 
 env:
-  TAG_PREFIX: ${{ secrets.DOCKERHUB_USERNAME }}/lighthouse-badges
+  DOCKERHUB_USERNAME: emazzotta
+  TAG_PREFIX: ${{ env.DOCKERHUB_USERNAME }}/lighthouse-badges
 
 jobs:
   build:
@@ -44,7 +45,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: docker/login-action@v1 
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker Build
