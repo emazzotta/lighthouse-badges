@@ -3479,10 +3479,10 @@ lighthouse-stack-packs@^1.8.1:
   resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.8.1.tgz#d0772a79f5e7f933109077fb80ccdbd68a43a283"
   integrity sha512-LSCu9Ugt9NPvRfBNzAjMDLvYev9r/93OTmbIWt9iXwiCmd999I/zneRTwsFLtlQWGKwNbDHS9vXnU+KpXUb1qg==
 
-lighthouse@^9.6.2:
-  version "9.6.2"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-9.6.2.tgz#e67db7246d2001a076ad43f2ace767766c3bfdf2"
-  integrity sha512-JNLDbN2v5FcKE3izld7pprWcTIRqaRz4sDTkMVtF3aRKwBc5xP+wjfwRQ0tAi1Mf7ATIF2eF20SqNwqyNLB4Jg==
+lighthouse@^9.6.3:
+  version "9.6.3"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-9.6.3.tgz#32273801935c6d28ed847fe15264bfd7d4add07c"
+  integrity sha512-ysMuOHN5BFxN7xkj7u6nmyiC9tpF/C0JFqDSSo5i5XX9mGgVMHQ7tnK/+GK0SI577GsKNegCGQeoSJgXSPQcJA==
   dependencies:
     "@sentry/node" "^6.17.4"
     axe-core "4.4.1"
