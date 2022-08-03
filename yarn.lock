@@ -2137,9 +2137,9 @@ eastasianwidth@^0.2.0:
   integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
 
 electron-to-chromium@^1.4.202:
-  version "1.4.208"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.208.tgz#ecb5b47c8cc212a43172ffc5ce50178a638a5d74"
-  integrity sha512-diMr4t69FigAGUk2KovP0bygEtN/9AkqEVkzjEp0cu+zFFbZMVvwACpTTfuj1mAmFR5kNoSW8wGKDFWIvmThiQ==
+  version "1.4.210"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.210.tgz#12611fe874b833a3bf3671438b5893aba7858980"
+  integrity sha512-kSiX4tuyZijV7Cz0MWVmGT8K2siqaOA4Z66K5dCttPPRh0HicOcOAEj1KlC8O8J1aOS/1M8rGofOzksLKaHWcQ==
 
 emittery@^0.10.2:
   version "0.10.2"
@@ -2223,9 +2223,9 @@ es-to-primitive@^1.2.1:
     is-symbol "^1.0.2"
 
 es5-ext@^0.10.35, es5-ext@^0.10.50, es5-ext@~0.10.11, es5-ext@~0.10.14, es5-ext@~0.10.2, es5-ext@~0.10.46, es5-ext@~0.10.5, es5-ext@~0.10.6:
-  version "0.10.61"
-  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.61.tgz#311de37949ef86b6b0dcea894d1ffedb909d3269"
-  integrity sha512-yFhIqQAzu2Ca2I4SE2Au3rxVfmohU9Y7wqGR+s7+H7krk26NXhIRAZDgqd6xqjCEFUomDEA3/Bo/7fKmIkW1kA==
+  version "0.10.62"
+  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.62.tgz#5e6adc19a6da524bf3d1e02bbc8960e5eb49a9a5"
+  integrity sha512-BHLqn0klhEpnOKSrzn/Xsz2UIW8j+cGmo9JLzr8BiUapV8hPL9+FliFqjwr9ngW7jWdnxv6eO+/LqyhJVqgrjA==
   dependencies:
     es6-iterator "^2.0.3"
     es6-symbol "^3.1.3"
@@ -3574,10 +3574,10 @@ lighthouse-stack-packs@1.8.2:
   resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.8.2.tgz#55111bebe50ed516de3fad0a474795a2556ac36e"
   integrity sha512-vlCUxxQAB8Nu6LQHqPpDRiMi06Du593/my/6JbMttQeEfJ7pf4OS8obSTh5xSOS80U/O7fq59Q8rQGAUxQatUQ==
 
-lighthouse@^9.6.4:
-  version "9.6.4"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-9.6.4.tgz#0ccfdfeca0c35e697c805f5eb4efccfc6ec6381f"
-  integrity sha512-huZnW1m3ZCR9cDgTvakRNcAdbPdRmgbR+S6UUTw+VM5t0WdTbkox6EYG+moeN9hghp/tsamj7ozTNxIQNpS+vw==
+lighthouse@^9.6.5:
+  version "9.6.5"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-9.6.5.tgz#b6a2eb07c59ee94dc86010760402b9eea8b3d289"
+  integrity sha512-Biv5Lvcs0Tb8f4mnKch0t6Jzsa50RfAz5ysauPUjzSUnT9yb14j942KypbXv39i1BQWfr7ZX9IBeD+W5lIRkZw==
   dependencies:
     "@sentry/node" "^6.17.4"
     axe-core "4.4.1"
