@@ -1,6 +1,5 @@
 import { ArgumentParser, ONE_OR_MORE } from 'argparse';
-
-const version = process.env.npm_package_version;
+import { version } from '../package.json';
 
 const parser = new ArgumentParser({
   add_help: true,
