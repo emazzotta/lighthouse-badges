@@ -10,7 +10,7 @@
     "app:install": "npm i -g .",
     "app:reinstall": "npm-run-all app:uninstall app:install",
     "app:uninstall": "npm uninstall -g @emazzotta/lighthouse-badges",
-    "build": "npm run clean && babel src --out-dir dist/src && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json",
+    "build": "npm run clean && babel src --out-dir dist/src && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist",
     "ci:publish": "npm run build && npm publish dist",
     "clean": "rm -rf *.svg *.html coverage dist results",
     "docker:build": "npm run build && docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
