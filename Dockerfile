@@ -15,15 +15,14 @@ LABEL maintainer="hello@mazzotta.me" \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
-# Update apk repositories & install chromium
-RUN apk --update --no-cache add chromium
-
-RUN mkdir -p /home/lighthouse
-WORKDIR /home/lighthouse
+RUN apk --update --no-cache add chromium git
 
 # Add lighthouse
-COPY src /home/lighthouse/src
-COPY package.json /home/lighthouse/package.json
+RUN mkdir -p /home/lighthouse
+WORKDIR /home/lighthouse
+COPY dist/src /home/lighthouse/src
+COPY dist/package.json /home/lighthouse/package.json
+
 RUN npm install . && npm link && rm -rf /root/.npm
 
 # Set Chromium bin path

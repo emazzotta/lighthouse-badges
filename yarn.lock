@@ -4327,7 +4327,7 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-"quibble@github:connorjclark/quibble#fork":
+quibble@connorjclark/quibble#fork:
   version "0.6.12"
   resolved "https://codeload.github.com/connorjclark/quibble/tar.gz/f49c6c6122f08a4872a1fafc1d2aca68a7fdc2df"
   dependencies:
