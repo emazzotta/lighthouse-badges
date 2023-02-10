@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: "node"
+          cache: "npm"
 
       - name: Cache node_modules
         uses: actions/cache@v3
