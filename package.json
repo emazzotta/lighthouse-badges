@@ -1,26 +1,27 @@
 {
   "name": "@emazzotta/lighthouse-badges",
-  "version": "1.1.27",
+  "version": "1.2.0",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "lighthouse-badges": "src/index.js"
+    "lighthouse-badges": "dist/index.js"
   },
   "scripts": {
-    "clean": "rm -f *.svg *.html",
+    "build": "npm run clean && babel src --out-dir dist",
+    "clean": "rm -rf *.svg *.html coverage dist",
     "docker:build": "docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
     "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c 'lighthouse-badges -rsu https://google.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "pre-push": "npm-run-all lint:fix test system-test:full-run",
+    "pre-push": "npm-run-all lint:fix test:all",
     "reinstall": "npm uninstall -g . && npm i -g .",
     "run:global-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; lighthouse-badges -rsu ${PAGE}",
-    "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; node ./src/index.js -rsu ${PAGE}",
-    "system-test:full-run": "npm-run-all clean reinstall run:global-installation system-test:verify clean",
-    "system-test:light-run": "npm-run-all clean run:local-installation system-test:verify clean",
-    "system-test:start-server": "npx http-server -a 127.0.0.1 -p 8080 &",
+    "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; node ./dist/index.js -rsu ${PAGE}",
+    "system-test:full-run": "npm-run-all clean build reinstall run:global-installation system-test:verify clean",
+    "system-test:light-run": "npm-run-all clean build run:local-installation system-test:verify clean",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",
     "test": "jest",
+    "test:all": "npm-run-all test system-test:full-run",
     "test:related": "jest --findRelatedTests"
   },
   "husky": {
@@ -46,11 +47,11 @@
     "ramda": "^0.28.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",
     "@babel/plugin-transform-runtime": "^7.19.6",
     "@babel/preset-env": "^7.20.2",
-    "@babel/runtime": "^7.20.13",
-    "babel-jest": "^29.4.2",
+    "@types/jest": "^29.4.0",
     "eslint": "^8.33.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
@@ -59,16 +60,12 @@
     "lint-staged": "^13.1.1",
     "npm-run-all": "^4.1.5"
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
-    ],
-    "collectCoverage": true,
-    "coverageReporters": [
-      "json",
-      "html"
-    ]
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
   },
+  "packageManager": "yarn@1.21.1",
+  "private": false,
   "author": "Emanuele Mazzotta",
   "license": "MIT"
 }

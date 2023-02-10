@@ -1,5 +1,6 @@
-const { ArgumentParser, ONE_OR_MORE } = require('argparse');
-const { version } = require('../package.json');
+import { ArgumentParser, ONE_OR_MORE } from 'argparse';
+
+const version = process.env.npm_package_version;
 
 const parser = new ArgumentParser({
   add_help: true,
@@ -46,6 +47,4 @@ requiredArgs.add_argument('-u', '--urls', {
   help: 'The lighthouse badge(s) will contain the respective average score(s) of all the urls supplied, combined',
 });
 
-module.exports = {
-  parser,
-};
+export default parser;

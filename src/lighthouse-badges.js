@@ -1,19 +1,17 @@
-const { makeBadge } = require('badge-maker');
-const path = require('path');
-const fs = require('fs');
-const ReportGenerator = require('lighthouse/report/generator/report-generator');
-const { promisify } = require('util');
-const { exec } = require('child_process');
-const R = require('ramda');
-const { statusMessage } = require('./util');
-const { getAverageScore, getSquashedScore } = require('./calculations');
-const { urlEscaper } = require('./util');
-const { percentageToColor } = require('./calculations');
+import { makeBadge } from 'badge-maker';
+import path from 'path';
+import fs from 'fs';
+import { generateReport } from 'lighthouse/report/generator/report-generator';
+import { promisify } from 'util';
+import { exec } from 'child_process';
+import * as R from 'ramda';
+import { statusMessage, urlEscaper } from './util';
+import { getAverageScore, getSquashedScore, percentageToColor } from './calculations';
 
 // Buffer size for stdout, must be big enough to handle lighthouse CLI output
 const maxBuffer = 1024 * 50000;
 
-const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
+export const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
   R.keys(lighthouseMetrics).map((lighthouseMetricKey) => {
     const filepath = path.join(outputPath, `${lighthouseMetricKey.replace(/ /g, '_')}.svg`);
     const badgeColor = percentageToColor(lighthouseMetrics[lighthouseMetricKey]);
@@ -35,11 +33,11 @@ const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
   });
 };
 
-const htmlReportsToFile = async (htmlReports, outputPath) => htmlReports.map((htmlReport) => {
-  const url = R.head(R.keys(htmlReport));
-  if (htmlReport[url]) {
+export const htmlReportsToFile = async (htmlReports, outputPath) => htmlReports.map((report) => {
+  const url = R.head(R.keys(report));
+  if (report[url]) {
     const filepath = path.join(outputPath, `${urlEscaper(url)}.html`);
-    fs.writeFile(filepath, htmlReport[url], (error) => statusMessage(
+    fs.writeFile(filepath, report[url], (error) => statusMessage(
       `Saved report to ${filepath}\n`,
       `Failed to save report to ${outputPath}`,
       error,
@@ -55,8 +53,8 @@ const generateArtifacts = async ({ reports, svg, outputPath }) => {
   ]);
 };
 
-const processRawLighthouseResult = async (data, url, shouldSaveReport) => {
-  const htmlReport = shouldSaveReport ? ReportGenerator.generateReportHtml(data) : false;
+export const processRawLighthouseResult = async (data, url, shouldSaveReport) => {
+  const htmlReport = shouldSaveReport ? generateReport(data, 'html') : false;
   const { categories } = data;
   const scores = R.keys(categories).map((category) => (
     { [`lighthouse ${category.toLowerCase()}`]: categories[category].score * 100 }
@@ -65,7 +63,9 @@ const processRawLighthouseResult = async (data, url, shouldSaveReport) => {
   return { metrics: lighthouseMetrics, report: { [url]: htmlReport } };
 };
 
-const calculateLighthouseMetrics = async (url, shouldSaveReport, additionalParams = '') => {
+export const calculateLighthouseMetrics = async (url, shouldSaveReport, additionalParams = '') => {
+  // todo seems like could be done better
+  // https://github.com/GoogleChrome/lighthouse/blob/HEAD/docs/readme.md#using-programmatically
   const lighthouseBinary = path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse');
   const params = `--chrome-flags='--headless --no-sandbox --disable-gpu --disable-dev-shm-usage --no-default-browser-check --no-first-run --disable-default-apps' --output=json --output-path=stdout --quiet ${additionalParams}`;
   const lighthouseCommand = `${lighthouseBinary} ${params} ${url}`;
@@ -74,7 +74,7 @@ const calculateLighthouseMetrics = async (url, shouldSaveReport, additionalParam
   return processRawLighthouseResult(JSON.parse(stdout), url, shouldSaveReport);
 };
 
-const processParameters = async (args, func) => {
+export const processParameters = async (args, func) => {
   const outputPath = args.output_path || process.cwd();
 
   fs.mkdir(outputPath, { recursive: true }, (err) => {
@@ -98,12 +98,4 @@ const processParameters = async (args, func) => {
     svg: { results: metricsResults, style: args.badge_style },
     outputPath,
   });
-};
-
-module.exports = {
-  metricsToSvg,
-  htmlReportsToFile,
-  processRawLighthouseResult,
-  calculateLighthouseMetrics,
-  processParameters,
 };

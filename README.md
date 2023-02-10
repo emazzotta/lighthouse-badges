@@ -54,7 +54,7 @@ Required arguments:
                         average score(s) of all the urls supplied, combined
 ```
 
-Additionally you can pass parameters to the lighthouse process directly via environment variable:
+Additionally, you can pass parameters to the lighthouse process directly via environment variable:
 
 ```bash
 # This will pass '--preset=desktop' to the lighthouse process

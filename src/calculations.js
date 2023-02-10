@@ -1,6 +1,6 @@
-const R = require('ramda');
+import * as R from 'ramda';
 
-const percentageToColor = (percentage) => {
+export const percentageToColor = (percentage) => {
   if (percentage >= 95) return 'brightgreen';
   if (percentage >= 90) return 'green';
   if (percentage >= 75) return 'yellowgreen';
@@ -9,7 +9,7 @@ const percentageToColor = (percentage) => {
   return 'red';
 };
 
-const getAverageScore = async (metrics) => R.pipe(
+export const getAverageScore = async (metrics) => R.pipe(
   R.head,
   R.keys,
   R.map((category) => (
@@ -17,7 +17,7 @@ const getAverageScore = async (metrics) => R.pipe(
   R.mergeAll,
 )(metrics);
 
-const getSquashedScore = async (metrics) => ({
+export const getSquashedScore = async (metrics) => ({
   lighthouse: R.pipe(
     R.map((metric) => R.sum(R.values(metric))),
     R.sum,
@@ -25,9 +25,3 @@ const getSquashedScore = async (metrics) => ({
     R.curry(Math.round),
   )(metrics),
 });
-
-module.exports = {
-  percentageToColor,
-  getAverageScore,
-  getSquashedScore,
-};
