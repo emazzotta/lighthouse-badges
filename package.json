@@ -2,13 +2,13 @@
   "name": "@emazzotta/lighthouse-badges",
   "version": "1.2.0",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "bin": {
-    "lighthouse-badges": "dist/index.js"
+    "lighthouse-badges": "./dist/index.js"
   },
   "scripts": {
     "build": "npm run clean && babel src --out-dir dist",
-    "ci-publish": "npm run build && cp package.json dist && cp -r node_modules dist && cd dist && npm publish --ignore-scripts",
+    "ci-publish": "npm run build && sed 's#\"./dist/index.js\"#\"./index.js\"#' package.json > ./dist/package.json && cp -r node_modules dist && cp yarn.lock dist && cd dist && npm publish --ignore-scripts",
     "clean": "rm -rf *.svg *.html coverage dist results",
     "docker:build": "docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
     "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c 'lighthouse-badges -rsu https://google.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse'",
