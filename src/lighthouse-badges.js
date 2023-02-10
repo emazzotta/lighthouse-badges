@@ -1,12 +1,11 @@
 import { makeBadge } from 'badge-maker';
 import path from 'path';
 import fs from 'fs';
-import { generateReport } from 'lighthouse/report/generator/report-generator';
-import { promisify } from 'util';
-import { exec } from 'child_process';
 import * as R from 'ramda';
 import { statusMessage, urlEscaper } from './util';
 import { getAverageScore, getSquashedScore, percentageToColor } from './calculations';
+import lighthouse from 'lighthouse';
+import * as chromeLauncher from 'chrome-launcher';
 
 // Buffer size for stdout, must be big enough to handle lighthouse CLI output
 const maxBuffer = 1024 * 50000;
@@ -53,8 +52,8 @@ const generateArtifacts = async ({ reports, svg, outputPath }) => {
   ]);
 };
 
-export const processRawLighthouseResult = async (data, url, shouldSaveReport) => {
-  const htmlReport = shouldSaveReport ? generateReport(data, 'html') : false;
+export const processRawLighthouseResult = async (data, html, url, shouldSaveReport) => {
+  const htmlReport = shouldSaveReport ? html : false;
   const { categories } = data;
   const scores = R.keys(categories).map((category) => (
     { [`lighthouse ${category.toLowerCase()}`]: categories[category].score * 100 }
@@ -64,14 +63,27 @@ export const processRawLighthouseResult = async (data, url, shouldSaveReport) =>
 };
 
 export const calculateLighthouseMetrics = async (url, shouldSaveReport, additionalParams = '') => {
-  // todo seems like could be done better
-  // https://github.com/GoogleChrome/lighthouse/blob/HEAD/docs/readme.md#using-programmatically
-  const lighthouseBinary = path.join(__dirname, '..', 'node_modules', '.bin', 'lighthouse');
-  const params = `--chrome-flags='--headless --no-sandbox --disable-gpu --disable-dev-shm-usage --no-default-browser-check --no-first-run --disable-default-apps' --output=json --output-path=stdout --quiet ${additionalParams}`;
-  const lighthouseCommand = `${lighthouseBinary} ${params} ${url}`;
-  const execPromise = promisify(exec);
-  const { stdout } = await execPromise(`${lighthouseCommand}`, { maxBuffer });
-  return processRawLighthouseResult(JSON.parse(stdout), url, shouldSaveReport);
+  const chromeParameters = [
+    '--headless',
+    '--no-sandbox',
+    '--disable-gpu',
+    '--disable-dev-shm-usage',
+    '--no-default-browser-check',
+    '--no-first-run',
+    '--disable-default-apps',
+    '--output=json',
+    '--output-path=stdout',
+    '--quiet',
+    additionalParams
+  ];
+  const chrome = await chromeLauncher.launch({ chromeFlags: chromeParameters });
+  const options = { logLevel: 'silent', output: 'html', port: chrome.port };
+  const runnerResult = await lighthouse(url, options);
+  const reportHtml = runnerResult.report;
+  const reportJson = runnerResult.lhr;
+  await chrome.kill();
+
+  return processRawLighthouseResult(reportJson, reportHtml, url, shouldSaveReport);
 };
 
 export const processParameters = async (args, func) => {
