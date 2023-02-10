@@ -17,8 +17,8 @@
     "reinstall": "npm uninstall -g . && npm i -g .",
     "run:global-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; lighthouse-badges -rsu ${PAGE}",
     "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; node ./dist/index.js -rsu ${PAGE}",
-    "system-test:full-run": "npm-run-all clean build reinstall run:global-installation system-test:verify clean",
-    "system-test:light-run": "npm-run-all clean build run:local-installation system-test:verify clean",
+    "system-test:full-run": "npm-run-all clean build reinstall run:global-installation system-test:verify",
+    "system-test:light-run": "npm-run-all clean build run:local-installation system-test:verify",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",
     "test": "jest",
     "test:all": "npm-run-all test system-test:full-run",
@@ -42,6 +42,7 @@
   "dependencies": {
     "argparse": "2.0.1",
     "badge-maker": "^3.3.1",
+    "chrome-launcher": "^0.15.1",
     "clui": "^0.3.6",
     "lighthouse": "^9.6.8",
     "ramda": "^0.28.0"

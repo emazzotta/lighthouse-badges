@@ -15,7 +15,7 @@ describe('test lighthouse badges', () => {
     it('should return correct metrics and no report', async () => {
       const url = 'https://emanuelemazzotta.com';
       const shouldSaveReport = false;
-      const result = await processRawLighthouseResult(reportFixture, url, shouldSaveReport);
+      const result = await processRawLighthouseResult(reportFixture, '', url, shouldSaveReport);
       expect({
         metrics: {
           'lighthouse performance': 98,
@@ -34,7 +34,7 @@ describe('test lighthouse badges', () => {
       const expectedHtmlReport = generateReport(reportFixture, 'html');
       const url = 'https://emanuelemazzotta.com';
       const shouldSaveReport = true;
-      const result = await processRawLighthouseResult(reportFixture, url, shouldSaveReport);
+      const result = await processRawLighthouseResult(reportFixture, '', url, shouldSaveReport);
       expect({
         metrics: {
           'lighthouse performance': 98,
@@ -143,7 +143,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '', 'https://example.org', args.save_report));
       await processParameters(args, calculateLighthouseMetrics);
 
       expect(output.length).toBe(2);
@@ -156,7 +156,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '', 'https://example.org', args.save_report));
       await processParameters(args, calculateLighthouseMetrics);
 
       expect(output.length).toBe(6);
@@ -169,7 +169,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '', 'https://example.org', args.save_report));
       await processParameters(args, calculateLighthouseMetrics);
 
       expect(output.length).toBe(1);
@@ -181,7 +181,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, 'https://example.org', args.save_report));
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '', 'https://example.org', args.save_report));
       await processParameters(args, calculateLighthouseMetrics);
 
       expect(output.length).toBe(5);
