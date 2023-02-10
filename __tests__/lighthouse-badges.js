@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { generateReport } from 'lighthouse/report/generator/report-generator';
 import {
   htmlReportsToFile,
   metricsToSvg,
@@ -31,10 +30,15 @@ describe('test lighthouse badges', () => {
     });
 
     it('should return correct metrics and a valid report', async () => {
-      const expectedHtmlReport = generateReport(reportFixture, 'html');
+      const expectedHtmlReport = '<html>Fake report</html>';
       const url = 'https://emanuelemazzotta.com';
       const shouldSaveReport = true;
-      const result = await processRawLighthouseResult(reportFixture, '', url, shouldSaveReport);
+      const result = await processRawLighthouseResult(
+        reportFixture,
+        expectedHtmlReport,
+        url,
+        shouldSaveReport,
+      );
       expect({
         metrics: {
           'lighthouse performance': 98,

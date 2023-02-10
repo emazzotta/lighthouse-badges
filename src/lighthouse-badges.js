@@ -2,13 +2,10 @@ import { makeBadge } from 'badge-maker';
 import path from 'path';
 import fs from 'fs';
 import * as R from 'ramda';
+import * as chromeLauncher from 'chrome-launcher';
+import lighthouse from "lighthouse/core/index.cjs";
 import { statusMessage, urlEscaper } from './util';
 import { getAverageScore, getSquashedScore, percentageToColor } from './calculations';
-import lighthouse from 'lighthouse';
-import * as chromeLauncher from 'chrome-launcher';
-
-// Buffer size for stdout, must be big enough to handle lighthouse CLI output
-const maxBuffer = 1024 * 50000;
 
 export const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
   R.keys(lighthouseMetrics).map((lighthouseMetricKey) => {
@@ -74,7 +71,7 @@ export const calculateLighthouseMetrics = async (url, shouldSaveReport, addition
     '--output=json',
     '--output-path=stdout',
     '--quiet',
-    additionalParams
+    additionalParams,
   ];
   const chrome = await chromeLauncher.launch({ chromeFlags: chromeParameters });
   const options = { logLevel: 'silent', output: 'html', port: chrome.port };
