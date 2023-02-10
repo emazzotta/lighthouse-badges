@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import * as R from 'ramda';
 import * as chromeLauncher from 'chrome-launcher';
-import lighthouse from "lighthouse/core/index.cjs";
+import lighthouse from 'lighthouse/core/index.cjs';
 import { statusMessage, urlEscaper } from './util';
 import { getAverageScore, getSquashedScore, percentageToColor } from './calculations';
 

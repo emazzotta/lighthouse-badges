@@ -147,7 +147,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '', 'https://example.org', args.save_report));
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '<html>Fake report</html>', 'https://example.org', args.save_report));
       await processParameters(args, calculateLighthouseMetrics);
 
       expect(output.length).toBe(2);
@@ -160,7 +160,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '', 'https://example.org', args.save_report));
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '<html>Fake report</html>', 'https://example.org', args.save_report));
       await processParameters(args, calculateLighthouseMetrics);
 
       expect(output.length).toBe(6);
@@ -173,7 +173,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '', 'https://example.org', args.save_report));
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, null, 'https://example.org', args.save_report));
       await processParameters(args, calculateLighthouseMetrics);
 
       expect(output.length).toBe(1);
@@ -185,7 +185,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '', 'https://example.org', args.save_report));
+      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, null, 'https://example.org', args.save_report));
       await processParameters(args, calculateLighthouseMetrics);
 
       expect(output.length).toBe(5);
