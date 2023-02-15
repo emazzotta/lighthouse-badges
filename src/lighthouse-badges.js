@@ -59,7 +59,7 @@ export const processRawLighthouseResult = async (data, html, url, shouldSaveRepo
   return { metrics: lighthouseMetrics, report: { [url]: htmlReport } };
 };
 
-export const calculateLighthouseMetrics = async (url, shouldSaveReport, additionalParams = '') => {
+export const calculateLighthouseMetrics = async (url, shouldSaveReport) => {
   const chromeParameters = [
     '--headless',
     '--no-sandbox',
@@ -68,10 +68,6 @@ export const calculateLighthouseMetrics = async (url, shouldSaveReport, addition
     '--no-default-browser-check',
     '--no-first-run',
     '--disable-default-apps',
-    '--output=json',
-    '--output-path=stdout',
-    '--quiet',
-    additionalParams,
   ];
   const chrome = await chromeLauncher.launch({ chromeFlags: chromeParameters });
   const options = { logLevel: 'silent', output: 'html', port: chrome.port };
@@ -90,9 +86,8 @@ export const processParameters = async (args, func) => {
     if (err) throw err;
   });
 
-  const additionalParams = process.env.LIGHTHOUSE_BADGES_PARAMS || '';
   const results = await Promise.all(args.urls.map(
-    (url) => func(url, args.save_report, additionalParams),
+    (url) => func(url, args.save_report),
   ));
 
   const metrics = R.pluck('metrics', results);

@@ -6,9 +6,6 @@ import parser from './argparser';
 
 const handleUserInput = async (spinner) => {
   try {
-    if (process.env.LIGHTHOUSE_BADGES_PARAMS) {
-      process.stdout.write(`LIGHTHOUSE_BADGES_PARAMS: ${process.env.LIGHTHOUSE_BADGES_PARAMS}\n`);
-    }
     spinner.start();
     await processParameters(await parser.parse_args(), calculateLighthouseMetrics);
     spinner.stop();

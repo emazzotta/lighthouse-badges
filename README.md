@@ -54,17 +54,9 @@ Required arguments:
                         average score(s) of all the urls supplied, combined
 ```
 
-Additionally, you can pass parameters to the lighthouse process directly via environment variable:
-
-```bash
-# This will pass '--preset=desktop' to the lighthouse process
-export LIGHTHOUSE_BADGES_PARAMS="--preset=desktop"
-lighthouse-badges --urls https://www.youtube.com/
-```
-
 ### Run
 
-Hint: Only node >= 12 is supported.
+node >= 16 is required.
 
 #### Option 1: npm
 ```bash
