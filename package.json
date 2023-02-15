@@ -1,6 +1,6 @@
 {
   "name": "@emazzotta/lighthouse-badges",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "dist/src/index.js",
   "bin": {
@@ -9,7 +9,7 @@
   "scripts": {
     "app:install": "npm i -g .",
     "app:reinstall": "npm-run-all app:uninstall app:install",
-    "app:uninstall": "npm uninstall -g @emazzotta/lighthouse-badges",
+    "app:uninstall": "npm uninstall -g @emazzotta/lighthouse-badges; npm uninstall -g .; npm uninstall -g lighthouse-badges",
     "build": "npm run clean && babel src --out-dir dist/src && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist",
     "ci:publish": "npm run build && npm publish --prefix dist",
     "clean": "rm -rf *.svg *.html coverage dist results",
@@ -44,10 +44,11 @@
   },
   "dependencies": {
     "argparse": "2.0.1",
+    "babel-runtime": "^6.26.0",
     "badge-maker": "^3.3.1",
     "chrome-launcher": "^0.15.1",
     "clui": "^0.3.6",
-    "lighthouse": "^10.0.0",
+    "lighthouse": "^10.0.1",
     "ramda": "^0.28.0"
   },
   "devDependencies": {
