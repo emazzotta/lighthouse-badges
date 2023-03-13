@@ -80,6 +80,8 @@ EOF
 lighthouse-badges --urls https://www.youtube.com/
 ```
 
+See [here](https://github.com/GoogleChrome/lighthouse/blob/main/docs/configuration.md) for more configuration examples in the official lighthouse docs.
+
 ### Run
 
 node >= 16 is required.
