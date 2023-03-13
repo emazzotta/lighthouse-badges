@@ -9,7 +9,7 @@ describe('test util', () => {
     });
 
     it('should return escaped http url', () => {
-      const actualUrl = 'http://abcöd%f&/?get=hi';
+      const actualUrl = 'https://abcöd%f&/?get=hi';
       const expectedUrl = 'abc_d_f___get_hi';
       expect(urlEscaper(actualUrl)).toBe(expectedUrl);
     });

@@ -1,6 +1,6 @@
 {
   "name": "@emazzotta/lighthouse-badges",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "dist/src/index.js",
   "bin": {
@@ -10,9 +10,11 @@
     "app:install": "npm run build && cd dist && npm i -g .",
     "app:reinstall": "npm-run-all app:uninstall app:install",
     "app:uninstall": "npm uninstall -g @emazzotta/lighthouse-badges; npm uninstall -g .; npm uninstall -g lighthouse-badges",
-    "build": "npm run clean && babel src --out-dir dist/src && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist && cp -r node_modules dist",
+    "build": "npm run build:prepare && babel src --out-dir dist/src",
+    "build:prepare": "npm run clean && mkdir dist && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist && cp -r node_modules dist",
     "ci:publish": "npm run build && npm publish --prefix dist",
     "clean": "rm -rf *.svg *.html coverage dist results",
+    "dev": "npm run build:prepare && babel src --watch --out-dir dist/src",
     "docker:build": "npm run build && docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
     "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c 'lighthouse-badges -rsu https://google.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse'",
     "lint": "eslint .",
@@ -20,6 +22,7 @@
     "pre-push": "npm-run-all lint:fix test:all",
     "run:global-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; lighthouse-badges -rsu ${PAGE} -o results",
     "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; node dist/src/index.js -rsu ${PAGE} -o results",
+    "start": "npm run run:local-installation",
     "system-test:full-run": "npm-run-all clean build app:reinstall run:global-installation system-test:verify",
     "system-test:light-run": "npm-run-all clean build run:local-installation system-test:verify",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD/results ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",

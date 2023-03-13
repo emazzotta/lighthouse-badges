@@ -2,7 +2,7 @@
 [![Code Coverage](https://codecov.io/gh/emazzotta/lighthouse-badges/branch/master/graph/badge.svg)](https://github.com/emazzotta/lighthouse-badges/actions)
 [![NPM downloads](https://img.shields.io/npm/dt/lighthouse-badges?color=blue)](https://www.npmjs.org/package/lighthouse-badges)
 [![NPM version](https://img.shields.io/npm/v/lighthouse-badges.svg)](https://www.npmjs.org/package/lighthouse-badges)
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license) 
+[![License](https://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license) 
 
 # Lighthouse Badges
 
@@ -54,6 +54,32 @@ Required arguments:
                         average score(s) of all the urls supplied, combined
 ```
 
+Additionally, you can pass parameters configurations to the lighthouse process directly via environment variable path to the config file:
+
+```bash
+# The variable name matters, but the path can be anything
+export LIGHTHOUSE_BADGES_CONFIGURATION_PATH="~/.lhb-config.json" 
+
+# "extends": "lighthouse:default" is needed, the rest is optional
+cat << EOF >! $LIGHTHOUSE_BADGES_CONFIGURATION_PATH
+{
+  "extends": "lighthouse:default",
+  "settings": {
+    "extraHeaders": {
+      "Authorization": "Bearer ..."
+    },
+    "onlyCategories": [
+      "performance",
+      "pwa"
+    ],
+    "formFactor": "mobile"
+  }
+}
+EOF
+
+lighthouse-badges --urls https://www.youtube.com/
+```
+
 ### Run
 
 node >= 16 is required.
@@ -76,6 +102,13 @@ docker run --rm \
     -v $PWD/test_results:/home/chrome/reports \
     emazzotta/lighthouse-badges \
     /bin/sh -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
+```
+
+### Develop
+
+```bash
+npm run dev # Starts babel transpiler in watch mode
+npm run start # To run the lighthouse-badges code on google.com
 ```
 
 ## Contributing

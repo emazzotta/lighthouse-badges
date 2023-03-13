@@ -59,7 +59,11 @@ export const processRawLighthouseResult = async (data, html, url, shouldSaveRepo
   return { metrics: lighthouseMetrics, report: { [url]: htmlReport } };
 };
 
-export const calculateLighthouseMetrics = async (url, shouldSaveReport) => {
+export const calculateLighthouseMetrics = async (
+  url,
+  shouldSaveReport,
+  lighthouseParameters = {},
+) => {
   const chromeParameters = [
     '--headless',
     '--no-sandbox',
@@ -71,7 +75,7 @@ export const calculateLighthouseMetrics = async (url, shouldSaveReport) => {
   ];
   const chrome = await chromeLauncher.launch({ chromeFlags: chromeParameters });
   const options = { logLevel: 'silent', output: 'html', port: chrome.port };
-  const runnerResult = await lighthouse(url, options);
+  const runnerResult = await lighthouse(url, options, lighthouseParameters);
   const reportHtml = runnerResult.report;
   const reportJson = runnerResult.lhr;
   await chrome.kill();
@@ -79,27 +83,27 @@ export const calculateLighthouseMetrics = async (url, shouldSaveReport) => {
   return processRawLighthouseResult(reportJson, reportHtml, url, shouldSaveReport);
 };
 
-export const processParameters = async (args, func) => {
-  const outputPath = args.output_path || process.cwd();
+export const processParameters = async (parserArgs, func, lighthouseParameters = {}) => {
+  const outputPath = parserArgs.output_path || process.cwd();
 
   fs.mkdir(outputPath, { recursive: true }, (err) => {
     if (err) throw err;
   });
 
-  const results = await Promise.all(args.urls.map(
-    (url) => func(url, args.save_report),
+  const results = await Promise.all(parserArgs.urls.map(
+    (url) => func(url, parserArgs.save_report, lighthouseParameters),
   ));
 
   const metrics = R.pluck('metrics', results);
   const reports = R.pluck('report', results);
 
-  const metricsResults = args.single_badge
+  const metricsResults = parserArgs.single_badge
     ? await getSquashedScore(metrics)
     : await getAverageScore(metrics);
 
   await generateArtifacts({
     reports,
-    svg: { results: metricsResults, style: args.badge_style },
+    svg: { results: metricsResults, style: parserArgs.badge_style },
     outputPath,
   });
 };

@@ -46,7 +46,7 @@ describe('test index', () => {
   });
 
   it('should handle processing errors gracefully', async () => {
-    parseMock.mockReturnValue(['--urls', 'http://example.org']);
+    parseMock.mockReturnValue(['--urls', 'https://example.org']);
     processMock.mockRejectedValue(new Error('Async error'));
 
     await handleUserInput(spinnerFake);
