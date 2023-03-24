@@ -2927,10 +2927,10 @@ html-escaper@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
-http-link-header@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/http-link-header/-/http-link-header-0.8.0.tgz#a22b41a0c9b1e2d8fac1bf1b697c6bd532d5f5e4"
-  integrity sha512-qsh/wKe1Mk1vtYEFr+LpQBFWTO1gxZQBdii2D0Umj+IUQ23r5sT088Rhpq4XzpSyIpaX7vwjB8Rrtx8u9JTg+Q==
+http-link-header@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/http-link-header/-/http-link-header-1.1.0.tgz#a1ca87efdbcb7778d8d0d4525de1e6964ec1f129"
+  integrity sha512-pj6N1yxOz/ANO8HHsWGg/OoIL1kmRYvQnXQ7PIRpgp+15AnEsRH8fmIJE6D1OdWG2Bov+BJHVla1fFXxg1JbbA==
 
 https-proxy-agent@5.0.1, https-proxy-agent@^5.0.0:
   version "5.0.1"
@@ -3729,10 +3729,10 @@ lighthouse-stack-packs@1.9.1:
   resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.9.1.tgz#e83f76e302cb3dec717ad6a3af2da07c91d8f8f5"
   integrity sha512-9prq6oMkVHz3GeCkphq4FHXXdj3M/WPiFWUvJAczLYV8j/oTxsgiHSPMqh1KVV11CP0VTxD40hFC0pDfXF+khQ==
 
-lighthouse@^10.0.2:
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-10.0.2.tgz#c14dfb9158f4d87367b89bdbdcbe4f8cd456b7ff"
-  integrity sha512-RVHBzDI0gi323oWKyG9JvU3y/DLdRvsOv1avlDbARwVoIWnoCCpB5uPE0LNYAipzwDwKc5sCEY7HVKafqwJjYQ==
+lighthouse@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-10.1.0.tgz#32018eb76c1feff1bafe8c102369c81a3703030b"
+  integrity sha512-lIBgCcKK9bdPg95lMA+9RW9f8JZPRewVruloBxxSuu+90Ln422S8dpxC70KhvojdaeqeOLT9zJazZYgG+k1s3g==
   dependencies:
     "@sentry/node" "^6.17.4"
     axe-core "4.6.3"
@@ -3740,7 +3740,7 @@ lighthouse@^10.0.2:
     configstore "^5.0.1"
     csp_evaluator "1.1.1"
     enquirer "^2.3.6"
-    http-link-header "^0.8.0"
+    http-link-header "^1.1.0"
     intl-messageformat "^4.4.0"
     jpeg-js "^0.4.4"
     js-library-detector "^6.6.0"
