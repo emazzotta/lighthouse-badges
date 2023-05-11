@@ -143,7 +143,7 @@ describe('test lighthouse badges', () => {
       const args = parser.parse_args([
         '--single-badge',
         '--save-report',
-        '--urls', 'https://example.org',
+        '--url', 'https://example.org',
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
@@ -156,7 +156,7 @@ describe('test lighthouse badges', () => {
     it('should create multiple badges with report', async () => {
       const args = parser.parse_args([
         '--save-report',
-        '--urls', 'https://example.org',
+        '--url', 'https://example.org',
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
@@ -169,7 +169,7 @@ describe('test lighthouse badges', () => {
     it('should create single badge without report', async () => {
       const args = parser.parse_args([
         '--single-badge',
-        '--urls', 'https://example.org',
+        '--url', 'https://example.org',
       ]);
 
       const calculateLighthouseMetrics = jest.fn();
@@ -181,7 +181,7 @@ describe('test lighthouse badges', () => {
 
     it('should create multiple badges without report', async () => {
       const args = parser.parse_args([
-        '--urls', 'https://example.org',
+        '--url', 'https://example.org',
       ]);
 
       const calculateLighthouseMetrics = jest.fn();

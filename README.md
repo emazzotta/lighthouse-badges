@@ -30,18 +30,14 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 ### Help
 
 ```txt
-usage: lighthouse-badges [-h] [-v] [-s]
-                         [-b {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}]
-                         [-o OUTPUT_PATH] [-r] -u URLS [URLS ...]
-
+usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}] [-o OUTPUT_PATH] [-r] -u URL
 
 Generate gh-badges (shields.io) based on lighthouse performance.
 
-Optional arguments:
-  -h, --help            Show this help message and exit.
-  -v, --version         Show program's version number and exit.
-  -s, --single-badge    Output only one single badge averaging all lighthouse
-                        categories' scores
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+  -s, --single-badge    Output only one single badge averaging all lighthouse categories' scores
   -b {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}, --badge-style {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}
                         Define look and feel for the badge
   -o OUTPUT_PATH, --output-path OUTPUT_PATH
@@ -49,9 +45,7 @@ Optional arguments:
   -r, --save-report     Save lighthouse report as html for every supplied url
 
 Required arguments:
-  -u URLS [URLS ...], --urls URLS [URLS ...]
-                        The lighthouse badge(s) will contain the respective
-                        average score(s) of all the urls supplied, combined
+  -u URL, --url URL     The lighthouse badge(s) will contain the score(s) of all the supplied url
 ```
 
 Additionally, you can pass parameters configurations to the lighthouse process directly via environment variable path to the config file:
@@ -77,7 +71,7 @@ cat << EOF >! $LIGHTHOUSE_BADGES_CONFIGURATION_PATH
 }
 EOF
 
-lighthouse-badges --urls https://www.youtube.com/
+lighthouse-badges --url https://www.youtube.com/
 ```
 
 See [here](https://github.com/GoogleChrome/lighthouse/blob/main/docs/configuration.md) for more configuration examples in the official lighthouse docs.
@@ -89,12 +83,12 @@ node >= 16 is required.
 #### Option 1: npm
 ```bash
 npm i -g lighthouse-badges
-lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o test_results
+lighthouse-badges --url https://www.youtube.com/ -o test_results
 ```
 
 #### Option 2: npx
 ```bash
-npx lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending -o test_results
+npx lighthouse-badges --url https://www.youtube.com/ -o test_results
 ```
 
 #### Option 3: Docker
@@ -103,7 +97,7 @@ npx lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/fe
 docker run --rm \
     -v $PWD/test_results:/home/chrome/reports \
     emazzotta/lighthouse-badges \
-    /bin/sh -c "lighthouse-badges --urls https://www.youtube.com/ https://www.youtube.com/feed/trending"
+    /bin/sh -c "lighthouse-badges --url https://www.youtube.com/"
 ```
 
 ### Develop

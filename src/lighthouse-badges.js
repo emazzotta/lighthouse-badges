@@ -90,7 +90,7 @@ export const processParameters = async (parserArgs, func, lighthouseParameters =
     if (err) throw err;
   });
 
-  const results = await Promise.all(parserArgs.urls.map(
+  const results = await Promise.all([parserArgs.url].map(
     (url) => func(url, parserArgs.save_report, lighthouseParameters),
   ));
 

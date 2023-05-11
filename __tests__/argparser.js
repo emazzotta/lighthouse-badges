@@ -4,11 +4,11 @@ describe('test argparser', () => {
   const baseUrl = 'https://emanuelemazzotta.com';
 
   it('should return expected default values', () => {
-    const actualArgs = parser.parse_args(['--urls', baseUrl, `${baseUrl}/cv`]);
+    const actualArgs = parser.parse_args(['--url', baseUrl]);
     expect(actualArgs.single_badge).toBe(false);
     expect(actualArgs.badge_style).toBe('flat');
     expect(actualArgs.save_report).toBe(false);
-    expect(actualArgs.urls).toStrictEqual([baseUrl, `${baseUrl}/cv`]);
+    expect(actualArgs.url).toStrictEqual(baseUrl);
   });
 
   it('should overwrite values', () => {
@@ -16,12 +16,12 @@ describe('test argparser', () => {
       '--single-badge',
       '--save-report',
       '--badge-style', 'flat-square',
-      '--urls', baseUrl,
+      '--url', baseUrl,
     ]);
 
     expect(actualArgs.single_badge).toBe(true);
     expect(actualArgs.badge_style).toBe('flat-square');
     expect(actualArgs.save_report).toBe(true);
-    expect(actualArgs.urls).toStrictEqual([baseUrl]);
+    expect(actualArgs.url).toStrictEqual(baseUrl);
   });
 });

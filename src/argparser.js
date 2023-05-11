@@ -1,4 +1,4 @@
-import { ArgumentParser, ONE_OR_MORE } from 'argparse';
+import { ArgumentParser } from 'argparse';
 import { version } from '../package.json';
 
 const parser = new ArgumentParser({
@@ -39,11 +39,10 @@ parser.add_argument('-r', '--save-report', {
   help: 'Save lighthouse report as html for every supplied url',
 });
 
-requiredArgs.add_argument('-u', '--urls', {
+requiredArgs.add_argument('-u', '--url', {
   action: 'store',
   required: true,
-  nargs: ONE_OR_MORE,
-  help: 'The lighthouse badge(s) will contain the respective average score(s) of all the urls supplied, combined',
+  help: 'The lighthouse badge(s) will contain the score(s) of the supplied url',
 });
 
 export default parser;

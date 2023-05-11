@@ -42,11 +42,11 @@ describe('test index', () => {
 
   it('should handle parse errors gracefully', async () => {
     await handleUserInput(spinnerFake);
-    expect(stderrOutput.includes('the following arguments are required: -u/--urls')).toBe(true);
+    expect(stderrOutput.includes('the following arguments are required: -u/--url')).toBe(true);
   });
 
   it('should handle processing errors gracefully', async () => {
-    parseMock.mockReturnValue(['--urls', 'https://example.org']);
+    parseMock.mockReturnValue(['--url', 'https://example.org']);
     processMock.mockRejectedValue(new Error('Async error'));
 
     await handleUserInput(spinnerFake);
