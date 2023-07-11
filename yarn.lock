@@ -2141,12 +2141,12 @@ core-js-compat@^3.30.1, core-js-compat@^3.31.0:
   dependencies:
     browserslist "^4.21.5"
 
-cross-fetch@3.1.6:
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.6.tgz#bae05aa31a4da760969756318feeee6e70f15d6c"
-  integrity sha512-riRvo06crlE8HiqOwIpQhxwdOk4fOeR7FVM/wXoxchFEqMNUjvbs3bfo4OTgMEMHzppd4DxFBDbyySj8Cv781g==
+cross-fetch@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-4.0.0.tgz#f037aef1580bb3a1a35164ea2a848ba81b445983"
+  integrity sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==
   dependencies:
-    node-fetch "^2.6.11"
+    node-fetch "^2.6.12"
 
 cross-spawn@^6.0.5:
   version "6.0.5"
@@ -3868,15 +3868,15 @@ lighthouse-logger@^1.0.0, lighthouse-logger@^1.4.1:
     debug "^2.6.9"
     marky "^1.2.2"
 
-lighthouse-stack-packs@1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.10.0.tgz#1036db27deb27506012e767202489689524a26e9"
-  integrity sha512-5nvJS+IkZUbnDpIeJLi1xdnCfftBFMkxXfA5HHlEC1EQFQ2a8YPos6vl11oERHuIlDFEnVkaOeNaSIrL2K/9Gg==
+lighthouse-stack-packs@1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.11.0.tgz#9b17b24651b60242581abf2086ea34ff1c869f58"
+  integrity sha512-sRr0z1S/I26VffRLq9KJsKtLk856YrJlNGmcJmbLX8dFn3MuzVPUbstuChEhqnSxZb8TZmVfthuXuwhG9vRoSw==
 
-lighthouse@^10.3.0:
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-10.3.0.tgz#ad877dcb84058eed5e7df897293fe7504b4af8c6"
-  integrity sha512-YdTZJPjpiBNl9sPXxauA/jZqKEi6fjD0U11rm+2IBEtBYwovE/ULXiYK0N6q/KrNOIiTA4KQ1ssyCO8pZFFQ2A==
+lighthouse@^10.4.0:
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-10.4.0.tgz#61be3f0a268867bcd7c08c088baf898c2533d0b0"
+  integrity sha512-XQWHEWkJ8YxSPsxttBJORy5+hQrzbvGkYfeP3fJjyYKioWkF2MXfFqNK4ZuV4jL8pBu7Z91qnQP6In0bq1yXww==
   dependencies:
     "@sentry/node" "^6.17.4"
     axe-core "4.7.2"
@@ -3890,18 +3890,18 @@ lighthouse@^10.3.0:
     jpeg-js "^0.4.4"
     js-library-detector "^6.6.0"
     lighthouse-logger "^1.4.1"
-    lighthouse-stack-packs "1.10.0"
+    lighthouse-stack-packs "1.11.0"
     lodash "^4.17.21"
     lookup-closest-locale "6.2.0"
     metaviewport-parser "0.3.0"
     open "^8.4.0"
     parse-cache-control "1.0.1"
     ps-list "^8.0.0"
-    puppeteer-core "^20.7.1"
+    puppeteer-core "^20.8.0"
     robots-parser "^3.0.0"
     semver "^5.3.0"
     speedline-core "^1.4.3"
-    third-party-web "^0.23.0"
+    third-party-web "^0.23.3"
     ws "^7.0.0"
     yargs "^17.3.1"
     yargs-parser "^21.0.0"
@@ -4169,7 +4169,7 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-node-fetch@^2.6.11:
+node-fetch@^2.6.12:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.12.tgz#02eb8e22074018e3d5a83016649d04df0e348fba"
   integrity sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==
@@ -4567,14 +4567,14 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
   integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
-puppeteer-core@^20.7.1:
-  version "20.7.4"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-20.7.4.tgz#4ea245aa8746873584f620222fc31a1781394b32"
-  integrity sha512-7YZ1LmTo+5yM9uBNFTMJpE+lJjcIoNjKVarsYIk7o5WhgQNI9o5XgiQK5f71y1vWwr7sT/eGG75HXAehjnTBTg==
+puppeteer-core@^20.8.0:
+  version "20.8.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-20.8.0.tgz#b20073fc31869c0373714a9c827679686819290c"
+  integrity sha512-sQcuH6nv9jnFiaaePk53+C0O9BaJP6OaPmYKqJ3sWhziThv6uaaosK49Kg3g1HUUEP9KYhbOhedPIUCXJSQUxw==
   dependencies:
     "@puppeteer/browsers" "1.4.3"
     chromium-bidi "0.4.16"
-    cross-fetch "3.1.6"
+    cross-fetch "4.0.0"
     debug "4.3.4"
     devtools-protocol "0.0.1135028"
     ws "8.13.0"
@@ -5116,7 +5116,7 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
 
-third-party-web@^0.23.0:
+third-party-web@^0.23.3:
   version "0.23.3"
   resolved "https://registry.yarnpkg.com/third-party-web/-/third-party-web-0.23.3.tgz#e437e952e387249446b041667c35972297dc608d"
   integrity sha512-ifZcy79XYPmt9kQSTaHVh3IaL3Pms60iumsBrBBm6PPrtlNGdj56wznKl1LgSw8KpMWOwqOrlI/WCasQjflIZA==
