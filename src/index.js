@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import CLI from 'clui';
 import fs from 'fs';
+import CLI from 'clui';
 import { calculateLighthouseMetrics, processParameters } from './lighthouse-badges';
 import parser from './argparser';
 

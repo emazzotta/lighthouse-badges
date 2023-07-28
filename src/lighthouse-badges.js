@@ -1,8 +1,8 @@
-import { makeBadge } from 'badge-maker';
 import path from 'path';
 import fs from 'fs';
+import { makeBadge } from 'badge-maker';
 import * as R from 'ramda';
-import * as chromeLauncher from 'chrome-launcher';
+import * as ChromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse/core/index.cjs';
 import { statusMessage, urlEscaper } from './util';
 import { getAverageScore, getSquashedScore, percentageToColor } from './calculations';
@@ -73,7 +73,7 @@ export const calculateLighthouseMetrics = async (
     '--no-first-run',
     '--disable-default-apps',
   ];
-  const chrome = await chromeLauncher.launch({ chromeFlags: chromeParameters });
+  const chrome = await ChromeLauncher.launch({ chromeFlags: chromeParameters });
   const options = { logLevel: 'silent', output: 'html', port: chrome.port };
   const runnerResult = await lighthouse(url, options, lighthouseParameters);
   const reportHtml = runnerResult.report;
