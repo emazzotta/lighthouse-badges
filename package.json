@@ -1,6 +1,6 @@
 {
   "name": "@emazzotta/lighthouse-badges",
-  "version": "1.2.12",
+  "version": "1.2.13",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "dist/src/index.js",
   "bin": {
@@ -70,7 +70,7 @@
   },
   "engines": {
     "npm": ">=7.0.0",
-    "node": ">=16.0.0"
+    "node": ">=16.18.0"
   },
   "packageManager": "yarn@1.21.1",
   "private": false,
