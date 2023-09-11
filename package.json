@@ -1,6 +1,6 @@
 {
   "name": "@emazzotta/lighthouse-badges",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "dist/src/index.js",
   "bin": {
@@ -51,16 +51,16 @@
     "badge-maker": "^3.3.1",
     "chrome-launcher": "0.15.2",
     "clui": "^0.3.6",
-    "lighthouse": "^11.0.0",
+    "lighthouse": "^11.1.0",
     "ramda": "^0.29.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.15",
-    "@babel/core": "^7.22.15",
+    "@babel/core": "^7.22.17",
     "@babel/plugin-transform-runtime": "^7.22.15",
     "@babel/preset-env": "^7.22.15",
     "@types/jest": "^29.5.4",
-    "eslint": "^8.48.0",
+    "eslint": "^8.49.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.28.1",
     "husky": "^8.0.3",
