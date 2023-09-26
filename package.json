@@ -55,7 +55,7 @@
     "ramda": "^0.29.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.15",
+    "@babel/cli": "^7.23.0",
     "@babel/core": "^7.22.17",
     "@babel/plugin-transform-runtime": "^7.22.15",
     "@babel/preset-env": "^7.22.15",
