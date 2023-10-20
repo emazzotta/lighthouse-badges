@@ -49,7 +49,7 @@
     "@babel/runtime": "^7.23.2",
     "argparse": "2.0.1",
     "badge-maker": "^3.3.1",
-    "chrome-launcher": "0.15.2",
+    "chrome-launcher": "1.1.0",
     "clui": "^0.3.6",
     "lighthouse": "^11.2.0",
     "ramda": "^0.29.1"
