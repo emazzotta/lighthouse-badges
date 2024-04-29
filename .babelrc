@@ -3,8 +3,14 @@
     "@babel/preset-env"
   ],
   "plugins": [
+    "@babel/plugin-transform-modules-commonjs",
     [
-      "@babel/transform-runtime"
+      "@babel/plugin-transform-runtime",
+      {
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": false
+      }
     ]
   ]
 }
