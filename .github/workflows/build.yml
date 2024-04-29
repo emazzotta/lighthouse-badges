@@ -68,9 +68,13 @@ jobs:
           platforms: linux/amd64,linux/arm64
 
       - name: Unit & Integration Test
+        run: npm run test
+
+      - name: Install and Run Codecov Uploader
         run: |
-          npm run test
-          bash <(curl -s https://codecov.io/bash)
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov
 
       - name: Node System Test
         run: npm run system-test:light-run
