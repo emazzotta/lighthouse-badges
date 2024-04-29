@@ -1,6 +1,0 @@
-extends: airbnb-base
-env:
-  jest: true
-rules:
-  no-underscore-dangle: warn
-  import/no-import-module-exports: warn
