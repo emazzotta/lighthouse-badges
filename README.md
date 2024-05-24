@@ -2,7 +2,7 @@
 [![Code Coverage](https://codecov.io/gh/emazzotta/lighthouse-badges/branch/master/graph/badge.svg)](https://github.com/emazzotta/lighthouse-badges/actions)
 [![NPM downloads](https://img.shields.io/npm/dt/lighthouse-badges?color=blue)](https://www.npmjs.org/package/lighthouse-badges)
 [![NPM version](https://img.shields.io/npm/v/lighthouse-badges.svg)](https://www.npmjs.org/package/lighthouse-badges)
-[![License](https://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license) 
+[![License](https://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license)
 
 # Lighthouse Badges
 
@@ -30,7 +30,7 @@ Ever wanted to brag about your sites's awesome Lighthouse performance? Then this
 ### Help
 
 ```txt
-usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}] [-o OUTPUT_PATH] [-r] -u URL
+usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic,for-the-badge,social}] [-o OUTPUT_PATH] [-r] -u URL
 
 Generate gh-badges (shields.io) based on lighthouse performance.
 
@@ -38,7 +38,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
   -s, --single-badge    Output only one single badge averaging all lighthouse categories' scores
-  -b {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}, --badge-style {flat,flat-square,plastic,for-the-badge,popout,popout-square,social}
+  -b {flat,flat-square,plastic,for-the-badge,social}, --badge-style {flat,flat-square,plastic,for-the-badge,social}
                         Define look and feel for the badge
   -o OUTPUT_PATH, --output-path OUTPUT_PATH
                         Define output path for artifacts
