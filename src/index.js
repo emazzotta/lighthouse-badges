@@ -10,6 +10,7 @@ const CLI_SPINNER = new CLI.Spinner('Running Lighthouse, please wait...', ['◜'
 const handleUserInput = async (spinner) => {
   try {
     spinner.start();
+    const parsedArgs = await parser.parse_args();
     let lighthouseParameters = { extends: 'lighthouse:default' };
     if (process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH) {
       process.stdout.write(` LIGHTHOUSE_BADGES_CONFIGURATION_PATH: ${process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH}\n`);
@@ -17,7 +18,7 @@ const handleUserInput = async (spinner) => {
       lighthouseParameters = JSON.parse(fileContent);
     }
     await processParameters(
-      await parser.parse_args(),
+      parsedArgs,
       calculateLighthouseMetrics,
       lighthouseParameters,
     );

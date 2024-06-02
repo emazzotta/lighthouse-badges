@@ -22,7 +22,7 @@ parser.add_argument('-s', '--single-badge', {
 parser.add_argument('-b', '--badge-style', {
   action: 'store',
   required: false,
-  choices: ['flat', 'flat-square', 'plastic', 'for-the-badge', 'popout', 'popout-square', 'social'],
+  choices: ['flat', 'flat-square', 'plastic', 'for-the-badge', 'social'],
   default: 'flat',
   help: 'Define look and feel for the badge',
 });
