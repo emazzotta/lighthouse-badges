@@ -52,7 +52,7 @@
     "chrome-launcher": "0.15.2",
     "clui": "^0.3.6",
     "lighthouse": "^12.0.0",
-    "ramda": "^0.30.0"
+    "ramda": "^0.30.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.6",
