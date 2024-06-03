@@ -55,7 +55,7 @@
     "ramda": "^0.30.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.1",
+    "@babel/cli": "^7.24.6",
     "@babel/core": "^7.24.6",
     "@babel/plugin-transform-modules-commonjs": "^7.24.1",
     "@babel/plugin-transform-runtime": "^7.24.6",
