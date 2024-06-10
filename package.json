@@ -58,7 +58,7 @@
     "@babel/cli": "^7.24.7",
     "@babel/core": "^7.24.6",
     "@babel/plugin-transform-modules-commonjs": "^7.24.1",
-    "@babel/plugin-transform-runtime": "^7.24.6",
+    "@babel/plugin-transform-runtime": "^7.24.7",
     "@babel/preset-env": "^7.24.6",
     "@eslint/js": "^9.4.0",
     "@types/jest": "^29.5.12",
