@@ -2074,20 +2074,10 @@ chokidar@^3.4.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-chrome-launcher@0.15.2:
-  version "0.15.2"
-  resolved "https://registry.yarnpkg.com/chrome-launcher/-/chrome-launcher-0.15.2.tgz#4e6404e32200095fdce7f6a1e1004f9bd36fa5da"
-  integrity sha512-zdLEwNo3aUVzIhKhTtXfxhdvZhUghrnmkvcAq2NoDd+LeOHKf03H5jwZ8T/STsAlzyALkBVK552iaG1fGf1xVQ==
-  dependencies:
-    "@types/node" "*"
-    escape-string-regexp "^4.0.0"
-    is-wsl "^2.2.0"
-    lighthouse-logger "^1.0.0"
-
-chrome-launcher@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/chrome-launcher/-/chrome-launcher-1.1.1.tgz#17b7302aaf951d79ac3910de377425c915913c94"
-  integrity sha512-OAQgBmpUzrIuShApIwOpjt7WFripGKcDMW/qeYU+kcl6jBPg87mRG+N2C3Vu+VeCVPqZ/ds3GfI2TK7tpz3Yyw==
+chrome-launcher@1.1.2, chrome-launcher@^1.1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/chrome-launcher/-/chrome-launcher-1.1.2.tgz#52eff6b3fd7f24b65192b2624a108dadbcca4b9d"
+  integrity sha512-YclTJey34KUm5jB1aEJCq807bSievi7Nb/TU4Gu504fUYi3jw3KCIaH6L7nFWQhdEgH3V+wCh+kKD1P5cXnfxw==
   dependencies:
     "@types/node" "*"
     escape-string-regexp "^4.0.0"
@@ -4148,14 +4138,6 @@ levn@^0.4.1:
   dependencies:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
-
-lighthouse-logger@^1.0.0:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/lighthouse-logger/-/lighthouse-logger-1.4.2.tgz#aef90f9e97cd81db367c7634292ee22079280aaa"
-  integrity sha512-gPWxznF6TKmUHrOQjlVo2UbaL2EJ71mb2CCeRs/2qBpi4L/g4LUVc9+3lKQ6DTUZwJswfM7ainGrLO1+fOqa2g==
-  dependencies:
-    debug "^2.6.9"
-    marky "^1.2.2"
 
 lighthouse-logger@^2.0.1:
   version "2.0.1"
