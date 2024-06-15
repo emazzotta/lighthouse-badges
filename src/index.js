@@ -4,4 +4,4 @@ import handleUserInput from "./main.js";
 import CLI from "clui";
 
 const CLI_SPINNER = new CLI.Spinner('Running Lighthouse, please wait...', ['◜', '◠', '◝', '◞', '◡', '◟']);
-handleUserInput(CLI_SPINNER).then(x => console.log(x));
+handleUserInput(CLI_SPINNER).then(() => process.exit(0));
