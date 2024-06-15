@@ -1,5 +1,5 @@
 import parser from '../src/argparser';
-import handleUserInput from '../src/index';
+import handleUserInput from '../src/main.js';
 import * as lighthouseBadges from '../src/lighthouse-badges';
 
 jest.mock('../src/lighthouse-badges');
@@ -18,7 +18,8 @@ describe('test index', () => {
     process.stderr.write = (x) => {
       stderrOutput += `${x}\n`;
     };
-    process.exit = () => {};
+    process.exit = () => {
+    };
     stderrOutput = '';
   });
 

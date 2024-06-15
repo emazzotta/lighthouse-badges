@@ -1,4 +1,4 @@
-module.exports = async () => ({
+module.exports = {
   collectCoverageFrom: [
     'src/**/*.{js,jsx,mjs}',
   ],
@@ -10,7 +10,4 @@ module.exports = async () => ({
   transform: {
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
-  transformIgnorePatterns: [
-    '/node_modules/(?!lighthouse)',
-  ],
-});
+};

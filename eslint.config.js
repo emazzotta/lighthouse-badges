@@ -1,10 +1,10 @@
-const { configs } = require('@eslint/js');
+import eslint from '@eslint/js';
 
-module.exports = [
+export default [
   {
     ignores: ["coverage/", "dist/", ".idea/"]
   },
-  configs.recommended,
+  eslint.configs.recommended,
   {
     rules: {
       "no-underscore-dangle": "warn",

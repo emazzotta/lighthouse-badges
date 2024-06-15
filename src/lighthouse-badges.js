@@ -2,10 +2,10 @@ import path from 'path';
 import fs from 'fs';
 import { makeBadge } from 'badge-maker';
 import * as R from 'ramda';
-import * as ChromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse/core/index.cjs';
-import { statusMessage, urlEscaper } from './util';
-import { getAverageScore, getSquashedScore, percentageToColor } from './calculations';
+
+import { statusMessage, urlEscaper } from './util.js';
+import { getAverageScore, getSquashedScore, percentageToColor } from './calculations.js';
 
 export const metricsToSvg = async (lighthouseMetrics, badgeStyle, outputPath) => {
   R.keys(lighthouseMetrics).map((lighthouseMetricKey) => {
@@ -64,23 +64,24 @@ export const calculateLighthouseMetrics = async (
   shouldSaveReport,
   lighthouseParameters = {},
 ) => {
-  const chromeParameters = [
-    '--headless',
-    '--no-sandbox',
-    '--disable-gpu',
-    '--disable-dev-shm-usage',
-    '--no-default-browser-check',
-    '--no-first-run',
-    '--disable-default-apps',
-  ];
-  const chrome = await ChromeLauncher.launch({ chromeFlags: chromeParameters });
-  const options = { logLevel: 'silent', output: 'html', port: chrome.port };
-  const runnerResult = await lighthouse(url, options, lighthouseParameters);
-  const reportHtml = runnerResult.report;
-  const reportJson = runnerResult.lhr;
-  await chrome.kill();
-
-  return processRawLighthouseResult(reportJson, reportHtml, url, shouldSaveReport);
+  return await import('chrome-launcher').then(async (chromeLauncher) => {
+    const chromeParameters = [
+      '--headless',
+      '--no-sandbox',
+      '--disable-gpu',
+      '--disable-dev-shm-usage',
+      '--no-default-browser-check',
+      '--no-first-run',
+      '--disable-default-apps',
+    ];
+    const chrome = await chromeLauncher.launch({ chromeFlags: chromeParameters });
+    const options = { logLevel: 'silent', output: 'html', port: chrome.port };
+    const runnerResult = await lighthouse(url, options, lighthouseParameters);
+    const reportHtml = runnerResult.report;
+    const reportJson = runnerResult.lhr;
+    await chrome.kill();
+    return processRawLighthouseResult(reportJson, reportHtml, url, shouldSaveReport);
+  })
 };
 
 export const processParameters = async (parserArgs, func, lighthouseParameters = {}) => {
