@@ -22,7 +22,7 @@
     "pre-push": "npm-run-all lint:fix test:all",
     "run:global-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; lighthouse-badges -rsu ${PAGE} -o results",
     "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; node dist/src/index.js -rsu ${PAGE} -o results",
-    "start": "npm run run:local-installation",
+    "start": "npm-run-all build run:local-installation",
     "system-test:full-run": "npm-run-all clean build app:reinstall run:global-installation system-test:verify",
     "system-test:light-run": "npm-run-all clean build run:local-installation system-test:verify",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD/results ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",

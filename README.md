@@ -103,7 +103,6 @@ docker run --rm \
 ### Develop
 
 ```bash
-npm run dev # Starts babel transpiler in watch mode
 npm run start # To run the lighthouse-badges code on google.com
 ```
 
