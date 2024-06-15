@@ -8,3 +8,4 @@ export const statusMessage = (successMessage, errorMessage, error) => {
   }
   process.stdout.write(successMessage);
 };
+
