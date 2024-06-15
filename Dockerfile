@@ -19,7 +19,7 @@ RUN apk --update --no-cache add chromium git
 
 # Add lighthouse
 RUN mkdir -p /home/lighthouse
-COPY src /home/lighthouse/
+COPY dist /home/lighthouse/
 WORKDIR /home/lighthouse
 
 RUN npm install . && npm link && rm -rf /root/.npm

@@ -2,16 +2,16 @@
   "name": "@emazzotta/lighthouse-badges",
   "version": "1.2.20",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
-  "main": "src/index.js",
+  "main": "dist/src/index.js",
   "bin": {
-    "lighthouse-badges": "src/index.js"
+    "lighthouse-badges": "dist/src/index.js"
   },
   "type": "module",
   "scripts": {
     "app:install": "npm run build && cd dist && npm i -g .",
     "app:reinstall": "npm-run-all app:uninstall app:install",
     "app:uninstall": "npm uninstall -g @emazzotta/lighthouse-badges; npm uninstall -g .; npm uninstall -g lighthouse-badges",
-    "build": "npm run build:prepare && babel src --out-dir dist/src",
+    "build": "npm run build:prepare && cp -r ./src ./dist/src",
     "build:prepare": "npm run clean && mkdir dist && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist && cp -r node_modules dist",
     "ci:publish": "npm run build && npm publish --prefix dist",
     "clean": "rm -rf *.svg *.html coverage dist results",
@@ -21,7 +21,7 @@
     "lint:fix": "eslint --fix .",
     "pre-push": "npm-run-all lint:fix test:all",
     "run:global-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; lighthouse-badges -rsu ${PAGE} -o results",
-    "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; node src/index.js -rsu ${PAGE} -o results",
+    "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; node dist/src/index.js -rsu ${PAGE} -o results",
     "start": "npm run run:local-installation",
     "system-test:full-run": "npm-run-all clean build app:reinstall run:global-installation system-test:verify",
     "system-test:light-run": "npm-run-all clean build run:local-installation system-test:verify",
