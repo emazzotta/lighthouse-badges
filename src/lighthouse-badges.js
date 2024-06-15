@@ -64,7 +64,7 @@ export const calculateLighthouseMetrics = async (
   shouldSaveReport,
   lighthouseParameters = {},
 ) => {
-  await import('chrome-launcher').then(async (chromeLauncher) => {
+  return await import('chrome-launcher').then(async (chromeLauncher) => {
     const chromeParameters = [
       '--headless',
       '--no-sandbox',
