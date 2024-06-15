@@ -78,7 +78,7 @@ See [here](https://github.com/GoogleChrome/lighthouse/blob/main/docs/configurati
 
 ### Run
 
-node >= 16 is required.
+node >= 18 is required.
 
 #### Option 1: npm
 ```bash
