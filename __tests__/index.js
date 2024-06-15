@@ -1,5 +1,5 @@
 import parser from '../src/argparser';
-import handleUserInput from '../src/index';
+import handleUserInput from '../src/index.js';
 import * as lighthouseBadges from '../src/lighthouse-badges';
 
 jest.mock('../src/lighthouse-badges');

@@ -2,8 +2,8 @@
 
 import fs from 'fs';
 import CLI from 'clui';
-import { calculateLighthouseMetrics, processParameters } from './lighthouse-badges';
-import parser from './argparser';
+import { calculateLighthouseMetrics, processParameters } from './lighthouse-badges.js';
+import parser from './argparser.js';
 
 const CLI_SPINNER = new CLI.Spinner('Running Lighthouse, please wait...', ['◜', '◠', '◝', '◞', '◡', '◟']);
 
@@ -32,4 +32,6 @@ const handleUserInput = async (spinner) => {
 export default handleUserInput;
 
 // Only self-invoke if not imported but called directly as executable
-(() => !module.parent && handleUserInput(CLI_SPINNER))();
+if (process.argv[1] && import.meta.url.endsWith(process.argv[1])) {
+  handleUserInput(CLI_SPINNER);
+}
