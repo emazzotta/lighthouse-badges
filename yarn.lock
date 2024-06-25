@@ -1779,10 +1779,10 @@ babel-preset-jest@^29.6.3:
     babel-plugin-jest-hoist "^29.6.3"
     babel-preset-current-node-syntax "^1.0.0"
 
-badge-maker@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/badge-maker/-/badge-maker-3.3.1.tgz#df1cb2d5943f25740672f37a95598d9ba2b109c9"
-  integrity sha512-OO/PS7Zg2E6qaUWzHEHt21Q5VjcFBAJVA8ztgT/fIdSZFBUwoyeo0ZhA6V5tUM8Vcjq8DJl6jfGhpjESssyqMQ==
+badge-maker@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/badge-maker/-/badge-maker-4.0.0.tgz#7d3675b82e6aeaa17765f511a8fce869eff1ce50"
+  integrity sha512-iq5WneL40H9WiT7fJQjYhIiFzYPXeO3FT+FMMTTljE4ZOSEZvw58WimIrFHyKRc0v5q4z3d/666RkQwZgAO/Xg==
   dependencies:
     anafanafo "2.0.0"
     css-color-converter "^2.0.0"
