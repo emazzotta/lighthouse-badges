@@ -18,12 +18,7 @@
     "@babel/highlight" "^7.24.7"
     picocolors "^1.0.0"
 
-"@babel/compat-data@^7.22.6", "@babel/compat-data@^7.25.0":
-  version "7.25.0"
-  resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.25.0.tgz#6b226a5da3a686db3c30519750e071dce292ad95"
-  integrity sha512-P4fwKI2mjEb3ZU5cnMJzvRsRKGBUcs8jvxIoRmr6ufAY9Xk2Bz7JubRTTivkw55c7WQJfTECeqYVa+HZ0FzREg==
-
-"@babel/compat-data@^7.25.2":
+"@babel/compat-data@^7.22.6", "@babel/compat-data@^7.25.2":
   version "7.25.2"
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.25.2.tgz#e41928bd33475305c586f6acbbb7e3ade7a6f7f5"
   integrity sha512-bYcppcpKBvX4znYaPEeFau03bp89ShqNMLs+rmdptMw+heSZh9+z84d2YG+K7cYLbWwzdjtDoW/uqZmPjulClQ==
@@ -99,9 +94,9 @@
     semver "^6.3.1"
 
 "@babel/helper-create-regexp-features-plugin@^7.18.6", "@babel/helper-create-regexp-features-plugin@^7.24.7", "@babel/helper-create-regexp-features-plugin@^7.25.0":
-  version "7.25.0"
-  resolved "https://registry.yarnpkg.com/@babel/helper-create-regexp-features-plugin/-/helper-create-regexp-features-plugin-7.25.0.tgz#17afe5d23b3a833a90f0fab9c2ae69fea192de5c"
-  integrity sha512-q0T+dknZS+L5LDazIP+02gEZITG5unzvb6yIjcmj5i0eFrs5ToBV2m2JGH4EsE/gtP8ygEGLGApBgRIZkTm7zg==
+  version "7.25.2"
+  resolved "https://registry.yarnpkg.com/@babel/helper-create-regexp-features-plugin/-/helper-create-regexp-features-plugin-7.25.2.tgz#24c75974ed74183797ffd5f134169316cd1808d9"
+  integrity sha512-+wqVGP+DFmqwFD3EH6TMTfUNeqDehV3E/dl+Sd54eaXqm17tEUNbEIn4sVivVowbvUpOtIGxdo3GoXyDH9N/9g==
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.24.7"
     regexpu-core "^5.3.1"
@@ -568,7 +563,7 @@
     "@babel/helper-plugin-utils" "^7.24.7"
     "@babel/helper-skip-transparent-expression-wrappers" "^7.24.7"
 
-"@babel/plugin-transform-function-name@^7.25.0":
+"@babel/plugin-transform-function-name@^7.25.1":
   version "7.25.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-function-name/-/plugin-transform-function-name-7.25.1.tgz#b85e773097526c1a4fc4ba27322748643f26fc37"
   integrity sha512-TVVJVdW9RKMNgJJlLtHsKDTydjZAbwIsn6ySBPQaEAUU5+gVvlJt/9nRmqVbsV/IBanRjzWoaAQKLoamWVOUuA==
@@ -585,12 +580,12 @@
     "@babel/helper-plugin-utils" "^7.24.7"
     "@babel/plugin-syntax-json-strings" "^7.8.3"
 
-"@babel/plugin-transform-literals@^7.24.7":
-  version "7.24.7"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-literals/-/plugin-transform-literals-7.24.7.tgz#36b505c1e655151a9d7607799a9988fc5467d06c"
-  integrity sha512-vcwCbb4HDH+hWi8Pqenwnjy+UiklO4Kt1vfspcQYFhJdpthSnW8XvWGyDZWKNVrVbVViI/S7K9PDJZiUmP2fYQ==
+"@babel/plugin-transform-literals@^7.25.2":
+  version "7.25.2"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-literals/-/plugin-transform-literals-7.25.2.tgz#deb1ad14fc5490b9a65ed830e025bca849d8b5f3"
+  integrity sha512-HQI+HcTbm9ur3Z2DkO+jgESMAMcYLuN/A7NRw9juzxAezN9AvqvUTnpKP/9kkYANz6u7dFlAyOu44ejuGySlfw==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.24.7"
+    "@babel/helper-plugin-utils" "^7.24.8"
 
 "@babel/plugin-transform-logical-assignment-operators@^7.24.7":
   version "7.24.7"
@@ -822,13 +817,13 @@
     "@babel/helper-create-regexp-features-plugin" "^7.24.7"
     "@babel/helper-plugin-utils" "^7.24.7"
 
-"@babel/preset-env@^7.25.0":
-  version "7.25.0"
-  resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.25.0.tgz#3fe92e470311e91478129efda101816c680f0479"
-  integrity sha512-vYAA8PrCOeZfG4D87hmw1KJ1BPubghXP1e2MacRFwECGNKL76dkA38JEwYllbvQCpf/kLxsTtir0b8MtxKoVCw==
+"@babel/preset-env@^7.25.2":
+  version "7.25.2"
+  resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.25.2.tgz#15918e9d050c4713a2ab8fa2fa82514eaf16676e"
+  integrity sha512-Y2Vkwy3ITW4id9c6KXshVV/x5yCGK7VdJmKkzOzNsDZMojRKfSA/033rRbLqlRozmhRXCejxWHLSJOg/wUHfzw==
   dependencies:
-    "@babel/compat-data" "^7.25.0"
-    "@babel/helper-compilation-targets" "^7.24.8"
+    "@babel/compat-data" "^7.25.2"
+    "@babel/helper-compilation-targets" "^7.25.2"
     "@babel/helper-plugin-utils" "^7.24.8"
     "@babel/helper-validator-option" "^7.24.8"
     "@babel/plugin-bugfix-firefox-class-in-computed-class-key" "^7.25.0"
@@ -872,9 +867,9 @@
     "@babel/plugin-transform-exponentiation-operator" "^7.24.7"
     "@babel/plugin-transform-export-namespace-from" "^7.24.7"
     "@babel/plugin-transform-for-of" "^7.24.7"
-    "@babel/plugin-transform-function-name" "^7.25.0"
+    "@babel/plugin-transform-function-name" "^7.25.1"
     "@babel/plugin-transform-json-strings" "^7.24.7"
-    "@babel/plugin-transform-literals" "^7.24.7"
+    "@babel/plugin-transform-literals" "^7.25.2"
     "@babel/plugin-transform-logical-assignment-operators" "^7.24.7"
     "@babel/plugin-transform-member-expression-literals" "^7.24.7"
     "@babel/plugin-transform-modules-amd" "^7.24.7"
@@ -1672,9 +1667,9 @@ available-typed-arrays@^1.0.7:
     possible-typed-array-names "^1.0.0"
 
 axe-core@^4.9.1:
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.9.1.tgz#fcd0f4496dad09e0c899b44f6c4bb7848da912ae"
-  integrity sha512-QbUdXJVTpvUTHU7871ppZkdOLBeGUKBQWHkHrvN2V9IQWGMt61zf3B45BtzjxEJzYuj0JBjBZP/hmYS/R9pmAw==
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.10.0.tgz#d9e56ab0147278272739a000880196cdfe113b59"
+  integrity sha512-Mr2ZakwQ7XUAjp7pAwQWRhhK8mQQ6JAaNWSjmjxil0R8BPioMtQsTLOolGYkji1rcL++3dCqZA3zWqpT+9Ew6g==
 
 b4a@^1.6.4:
   version "1.6.6"
@@ -1903,9 +1898,9 @@ camelcase@^6.2.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001640:
-  version "1.0.30001643"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001643.tgz#9c004caef315de9452ab970c3da71085f8241dbd"
-  integrity sha512-ERgWGNleEilSrHM6iUz/zJNSQTP8Mr21wDWpdgvRwcTXGAq6jMtOUPP4dqFPTdKqZ2wKTdtB+uucZ3MRpAUSmg==
+  version "1.0.30001644"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001644.tgz#bcd4212a7a03bdedba1ea850b8a72bfe4bec2395"
+  integrity sha512-YGvlOZB4QhZuiis+ETS0VXR+MExbFf4fZYYeMTEE0aTQd/RdIjkTyZjLrbYVKnHzppDvnOhritRVv+i7Go6mHw==
 
 chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
@@ -2282,9 +2277,9 @@ dot-prop@^5.2.0:
     is-obj "^2.0.0"
 
 electron-to-chromium@^1.4.820:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.2.tgz#6126ad229ce45e781ec54ca40db0504787f23d19"
-  integrity sha512-kc4r3U3V3WLaaZqThjYz/Y6z8tJe+7K0bbjUVo3i+LWIypVdMx5nXCkwRe6SWbY6ILqLdc1rKcKmr3HoH7wjSQ==
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.3.tgz#032bbb8661c0449656fd896e805c8f7150229a0f"
+  integrity sha512-QNdYSS5i8D9axWp/6XIezRObRHqaav/ur9z1VzCDUCH1XIFOr9WQk5xmgunhsTpjjgDy3oLxO/WMOVZlpUQrlA==
 
 emittery@^0.13.1:
   version "0.13.1"
@@ -5047,17 +5042,17 @@ timers-ext@0.1, timers-ext@0.1.x:
     es5-ext "^0.10.64"
     next-tick "^1.1.0"
 
-tldts-core@^6.1.35:
-  version "6.1.35"
-  resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-6.1.35.tgz#ca2ddb2dd1b047cc5f3b6a21f6f88ef2c86a7da8"
-  integrity sha512-JAwaxYLdlXI00Ch86/YlSCTJwadCHkedtZ9BTVsUpI2pVAJdGP0byEF3V8jV4nRMyG29ApXQeDzm1z9uYq5DjA==
+tldts-core@^6.1.36:
+  version "6.1.36"
+  resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-6.1.36.tgz#4b4b4b49df7d321682147d0792836463d3dc608a"
+  integrity sha512-znSW/7cUdiw7UQ662gfDhnMdDZrhsC6MpZt/cu07Ulmw1S2Gh4tr0pqGtHtDqKs9S2Sy9k7irSzvBnN98iGoLA==
 
 tldts-icann@^6.1.16:
-  version "6.1.35"
-  resolved "https://registry.yarnpkg.com/tldts-icann/-/tldts-icann-6.1.35.tgz#c2bac9608a16a8f282eac6ea8bdaa3c0007f4434"
-  integrity sha512-O1n0MBIPBFNbrZU0sKnbkAJUx0cUEfIcA8/ivSWygvTW1o+DDD1sCxoAmsgJun1GKNLhWbg6jBmpy0NGouvUCw==
+  version "6.1.36"
+  resolved "https://registry.yarnpkg.com/tldts-icann/-/tldts-icann-6.1.36.tgz#dd98aebc6fc691befcddfc40663e8b917b3c6f4e"
+  integrity sha512-nRu4i/pJbumLfNyrbYoJ20vAs6sy+99t4cnr+dyTgPr9XHr/xG5Oswl4d5KaERoXi2WBxkPWazDDUbhkpwRt0g==
   dependencies:
-    tldts-core "^6.1.35"
+    tldts-core "^6.1.36"
 
 tmpl@1.0.5:
   version "1.0.5"
