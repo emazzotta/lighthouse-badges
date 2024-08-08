@@ -1321,10 +1321,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@paulirish/trace_engine@^0.0.23":
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/@paulirish/trace_engine/-/trace_engine-0.0.23.tgz#b3eec22421ee562837b371ddcd4659483837ec92"
-  integrity sha512-2ym/q7HhC5K+akXkNV6Gip3oaHpbI6TsGjmcAsl7bcJ528MVbacPQeoauLFEeLXH4ulJvsxQwNDIg/kAEhFZxw==
+"@paulirish/trace_engine@0.0.32":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@paulirish/trace_engine/-/trace_engine-0.0.32.tgz#090fd603f9264aad6fce4461574693b1462f799f"
+  integrity sha512-KxWFdRNbv13U8bhYaQvH6gLG9CVEt2jKeosyOOYILVntWEVWhovbgDrbOiZ12pJO3vjZs0Zgbd3/Zgde98woEA==
 
 "@puppeteer/browsers@2.3.0":
   version "2.3.0"
@@ -3832,12 +3832,12 @@ lighthouse-stack-packs@1.12.1:
   resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.12.1.tgz#1dbebf795d50e6a96454ece7754bd4aa5be546ae"
   integrity sha512-i4jTmg7tvZQFwNFiwB+nCK6a7ICR68Xcwo+VIVd6Spi71vBNFUlds5HiDrSbClZdkQDON2Bhqv+KKJIo5zkPeA==
 
-lighthouse@^12.1.0:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-12.1.0.tgz#ebde6085a999aba0cb7484bfd5348a2c77270570"
-  integrity sha512-PQLaNcv3tQcybnYux6T8uoS6+RNrNYvVJBbGo0kkbD4XTjesGslOXWeMkUQDK7c28nLfVZi7gYWDUsicTLglKQ==
+lighthouse@^12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-12.2.0.tgz#aa5eb074444022dfd1a3f706ad2594e43eebfae4"
+  integrity sha512-JU9IvjcVxwtsFzB4xTuDWx46hRJF7yYfiTDgtFA0U4nt4TUom9mus81QNt/tDr4y18wlphBycuLysX8J6yplDw==
   dependencies:
-    "@paulirish/trace_engine" "^0.0.23"
+    "@paulirish/trace_engine" "0.0.32"
     "@sentry/node" "^6.17.4"
     axe-core "^4.9.1"
     chrome-launcher "^1.1.2"
@@ -3856,11 +3856,11 @@ lighthouse@^12.1.0:
     metaviewport-parser "0.3.0"
     open "^8.4.0"
     parse-cache-control "1.0.1"
-    puppeteer-core "^22.11.1"
+    puppeteer-core "^22.15.0"
     robots-parser "^3.0.1"
     semver "^5.3.0"
     speedline-core "^1.4.3"
-    third-party-web "^0.24.3"
+    third-party-web "^0.24.5"
     tldts-icann "^6.1.16"
     ws "^7.0.0"
     yargs "^17.3.1"
@@ -4458,7 +4458,7 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.1.tgz#027422e2faec0b25e1549c3e1bd8309b9133b6e5"
   integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
 
-puppeteer-core@^22.11.1:
+puppeteer-core@^22.15.0:
   version "22.15.0"
   resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-22.15.0.tgz#c76926cce5dbc177572797a9dacc325c313fa91a"
   integrity sha512-cHArnywCiAAVXa3t4GGL2vttNxh7GqXtIYGym99egkNJ3oG//wL9LkvO4WE8W1TJe95t1F1ocu9X4xWaGsOKOA==
@@ -5026,7 +5026,7 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
 
-third-party-web@^0.24.3:
+third-party-web@^0.24.5:
   version "0.24.5"
   resolved "https://registry.yarnpkg.com/third-party-web/-/third-party-web-0.24.5.tgz#7841c650bf0b589113709b0e2e8099ad3d6abfae"
   integrity sha512-1rUOdMYpNTRajgk1F7CmHD26oA6rTKekBjHay854J6OkPXeNyPcR54rhWDaamlWyi9t2wAVPQESdedBhucmOLA==
