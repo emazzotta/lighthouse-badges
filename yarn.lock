@@ -2254,10 +2254,10 @@ babel-preset-jest@30.0.1:
     babel-plugin-jest-hoist "30.0.1"
     babel-preset-current-node-syntax "^1.1.0"
 
-badge-maker@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/badge-maker/-/badge-maker-4.1.0.tgz#4035b31e7dd3036d915eddb81699b42f9070b019"
-  integrity sha512-qYImXoz0WZRMaauqSMo6QNurKp26K3RcOhefuGfno50xmAzHEJsgHbP4gnHs6Ps53KgQgFi4MJKB6Rq8H7siww==
+badge-maker@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/badge-maker/-/badge-maker-5.0.2.tgz#4c979d26fcaf184fc90ee5a0e2bfb43a3dfd6011"
+  integrity sha512-Xd3YUmKPEShQcn6PFB03Wxq0RNJRFwVVroyRz0qIjSXwniYUGsGWNHqtNsQYi/Sbs8Ni7qAEf7LKgDOtcAoCDg==
   dependencies:
     anafanafo "2.0.0"
     css-color-converter "^2.0.0"
