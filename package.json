@@ -54,7 +54,7 @@
     "ramda": "^0.31.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
+    "@babel/core": "^7.28.3",
     "@babel/preset-env": "^7.28.0",
     "@eslint/js": "^9.32.0",
     "@types/jest": "^30.0.0",
