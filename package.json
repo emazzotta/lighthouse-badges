@@ -48,7 +48,7 @@
   "dependencies": {
     "argparse": "2.0.1",
     "badge-maker": "^5.0.2",
-    "chrome-launcher": "1.2.0",
+    "chrome-launcher": "1.2.1",
     "clui": "^0.3.6",
     "lighthouse": "^12.8.1",
     "ramda": "^0.31.3"
