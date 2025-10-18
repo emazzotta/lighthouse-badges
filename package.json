@@ -50,7 +50,7 @@
     "badge-maker": "^5.0.2",
     "chrome-launcher": "1.2.1",
     "clui": "^0.3.6",
-    "lighthouse": "^12.8.1",
+    "lighthouse": "^13.0.0",
     "ramda": "^0.32.0"
   },
   "devDependencies": {
