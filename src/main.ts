@@ -3,23 +3,50 @@ import { calculateLighthouseMetrics, processParameters } from './lighthouse-badg
 import parser from './argparser.js';
 import type { Spinner, LighthouseConfig } from './types.js';
 
+const readFileAsync = (filePath: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (error, data) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+};
+
+const DEFAULT_LIGHTHOUSE_CONFIG: LighthouseConfig = {
+  extends: 'lighthouse:default',
+};
+
+const loadLighthouseConfig = async (): Promise<LighthouseConfig> => {
+  const configPath = process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH;
+  if (!configPath) {
+    return DEFAULT_LIGHTHOUSE_CONFIG;
+  }
+
+  process.stdout.write(` LIGHTHOUSE_BADGES_CONFIGURATION_PATH: ${configPath}\n`);
+
+  try {
+    const fileContent = await readFileAsync(configPath);
+    return JSON.parse(fileContent) as LighthouseConfig;
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to load Lighthouse configuration from ${configPath}: ${errorMessage}`);
+  }
+};
+
 const handleUserInput = async (spinner: Spinner): Promise<void> => {
   try {
     spinner.start();
     const parsedArgs = await parser.parse_args();
-    let lighthouseParameters: LighthouseConfig = { extends: 'lighthouse:default' };
-    if (process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH) {
-      process.stdout.write(` LIGHTHOUSE_BADGES_CONFIGURATION_PATH: ${process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH}\n`);
-      const fileContent = fs.readFileSync(process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH, 'utf8');
-      lighthouseParameters = JSON.parse(fileContent) as LighthouseConfig;
-    }
-    await processParameters(
-      parsedArgs,
-      calculateLighthouseMetrics,
-      lighthouseParameters,
-    );
+    const lighthouseParameters = await loadLighthouseConfig();
+
+    await processParameters(parsedArgs, calculateLighthouseMetrics, lighthouseParameters);
+
     spinner.stop();
   } catch (err) {
+    spinner.stop();
     const error = err instanceof Error ? err : new Error(String(err));
     process.stderr.write(`${error}\n`);
     process.exit(1);
@@ -27,4 +54,3 @@ const handleUserInput = async (spinner: Spinner): Promise<void> => {
 };
 
 export default handleUserInput;
-
