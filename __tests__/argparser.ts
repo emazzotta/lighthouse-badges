@@ -25,3 +25,4 @@ describe('test argparser', () => {
     expect(actualArgs.url).toStrictEqual(baseUrl);
   });
 });
+

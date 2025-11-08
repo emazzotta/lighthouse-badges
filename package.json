@@ -11,8 +11,9 @@
     "app:install": "npm run build && cd dist && npm i -g .",
     "app:reinstall": "npm-run-all app:uninstall app:install",
     "app:uninstall": "npm uninstall -g @emazzotta/lighthouse-badges; npm uninstall -g .; npm uninstall -g lighthouse-badges",
-    "build": "npm run build:prepare && cp -r ./src ./dist/src",
-    "build:prepare": "npm run clean && mkdir dist && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist",
+    "build": "npm run build:prepare && npm run build:compile",
+    "build:compile": "tsc",
+    "build:prepare": "npm run clean && mkdir -p dist && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist",
     "ci:publish": "npm run build && npm publish --prefix dist",
     "clean": "rm -rf *.svg *.html coverage dist results",
     "docker:build": "npm run build && docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
@@ -26,7 +27,7 @@
     "system-test:full-run": "npm-run-all clean build app:reinstall run:global-installation system-test:verify",
     "system-test:light-run": "npm-run-all clean build run:local-installation system-test:verify",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD/results ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",
-    "test": "jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test:all": "npm-run-all test system-test:full-run",
     "test:related": "jest --findRelatedTests"
   },
@@ -36,7 +37,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,ts}": [
       "npm run lint:fix",
       "npm run test:related"
     ]
@@ -54,15 +55,18 @@
     "ramda": "^0.32.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
     "@eslint/js": "^9.32.0",
     "@types/jest": "^30.0.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "eslint": "^9.32.0",
     "husky": "^9.1.7",
     "jest": "^30.0.5",
     "lint-staged": "^16.2.6",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.3.0"
   },
   "engines": {
     "npm": ">=7.0.0",

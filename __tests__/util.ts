@@ -26,8 +26,9 @@ describe('test util', () => {
     const stdoutWrite = process.stdout.write;
 
     beforeEach(() => {
-      process.stdout.write = (x) => {
+      process.stdout.write = (x: string) => {
         stdoutOutput += x;
+        return true;
       };
       stdoutOutput = '';
     });
@@ -45,9 +46,10 @@ describe('test util', () => {
     it('should not write a success metric if error is thrown', () => {
       const expectedErrorMessage = 'error';
       expect(() => {
-        statusMessage('success', expectedErrorMessage, 'error');
+        statusMessage('success', expectedErrorMessage, new Error('error'));
       }).toThrow(new Error(expectedErrorMessage));
       expect(stdoutOutput).toBe('');
     });
   });
 });
+

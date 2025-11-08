@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import fs from 'fs';
 import {
   htmlReportsToFile,
@@ -8,13 +9,14 @@ import {
 import { zip } from '../src/util';
 import parser from '../src/argparser';
 import reportFixture from '../assets/report/emanuelemazzotta.com.json';
+import type { LighthouseLHR, LighthouseMetrics, LighthouseReport, ProcessedLighthouseResult, LighthouseConfig } from '../src/types';
 
 describe('test lighthouse badges', () => {
   describe('the lighthouse command results are processed as expected', () => {
     it('should return correct metrics and no report', async () => {
       const url = 'https://emanuelemazzotta.com';
       const shouldSaveReport = false;
-      const result = await processRawLighthouseResult(reportFixture, '', url, shouldSaveReport);
+      const result = await processRawLighthouseResult(reportFixture as LighthouseLHR, '', url, shouldSaveReport);
       expect({
         metrics: {
           'lighthouse performance': 98,
@@ -34,7 +36,7 @@ describe('test lighthouse badges', () => {
       const url = 'https://emanuelemazzotta.com';
       const shouldSaveReport = true;
       const result = await processRawLighthouseResult(
-        reportFixture,
+        reportFixture as LighthouseLHR,
         expectedHtmlReport,
         url,
         shouldSaveReport,
@@ -55,13 +57,14 @@ describe('test lighthouse badges', () => {
   });
 
   describe('the html reports are saved correctly', () => {
-    let output;
+    let output: Array<Record<string, string>>;
     const { writeFile } = fs;
 
     beforeEach(() => {
       output = [];
-      fs.writeFile = (path, content) => {
-        output.push({ [path]: content });
+      (fs.writeFile as unknown) = (path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
+        output.push({ [path.toString()]: content.toString() });
+        if (callback) callback(null);
       };
     });
 
@@ -70,7 +73,7 @@ describe('test lighthouse badges', () => {
     });
 
     it('should save html report', async () => {
-      const htmlReports = [
+      const htmlReports: LighthouseReport[] = [
         { 'https://emanuelemazzotta.com': 'a report' },
         { 'https://emanuelemazzotta.com/cv': 'another report' },
       ];
@@ -86,20 +89,24 @@ describe('test lighthouse badges', () => {
     });
 
     it('should not save html report if toggle is false', async () => {
-      const htmlReports = [false, false];
-      await htmlReportsToFile(htmlReports);
+      const htmlReports: LighthouseReport[] = [
+        { 'https://example.com': false },
+        { 'https://example2.com': false },
+      ];
+      await htmlReportsToFile(htmlReports, process.cwd());
       expect(output.length).toBe(0);
     });
   });
 
   describe('the svg files are saved correctly', () => {
-    let output;
+    let output: Array<Record<string, string>>;
     const { writeFile } = fs;
 
     beforeEach(() => {
       output = [];
-      fs.writeFile = (path, content) => {
-        output.push({ [path]: content });
+      (fs.writeFile as unknown) = (path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
+        output.push({ [path.toString()]: content.toString() });
+        if (callback) callback(null);
       };
     });
 
@@ -108,7 +115,7 @@ describe('test lighthouse badges', () => {
     });
 
     it('should save all svg files', async () => {
-      const lighthouseMetrics = {
+      const lighthouseMetrics: LighthouseMetrics = {
         'lighthouse performance': 100,
         'lighthouse pwa': 85,
         'lighthouse accessibility': 100,
@@ -125,13 +132,14 @@ describe('test lighthouse badges', () => {
   });
 
   describe('test the main process function', () => {
-    let output;
+    let output: Array<Record<string, string>>;
     const { writeFile } = fs;
 
     beforeEach(() => {
       output = [];
-      fs.writeFile = (path, content) => {
-        output.push({ [path]: content });
+      (fs.writeFile as unknown) = (path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
+        output.push({ [path.toString()]: content.toString() });
+        if (callback) callback(null);
       };
     });
 
@@ -146,9 +154,9 @@ describe('test lighthouse badges', () => {
         '--url', 'https://example.org',
       ]);
 
-      const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '<html>Fake report</html>', 'https://example.org', args.save_report));
-      await processParameters(args, calculateLighthouseMetrics);
+      const calculateLighthouseMetrics = jest.fn<() => Promise<ProcessedLighthouseResult>>();
+      calculateLighthouseMetrics.mockResolvedValue(await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report));
+      await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
       expect(output.length).toBe(2);
     });
@@ -159,9 +167,9 @@ describe('test lighthouse badges', () => {
         '--url', 'https://example.org',
       ]);
 
-      const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, '<html>Fake report</html>', 'https://example.org', args.save_report));
-      await processParameters(args, calculateLighthouseMetrics);
+      const calculateLighthouseMetrics = jest.fn<() => Promise<ProcessedLighthouseResult>>();
+      calculateLighthouseMetrics.mockResolvedValue(await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report));
+      await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
       expect(output.length).toBe(6);
     });
@@ -172,9 +180,9 @@ describe('test lighthouse badges', () => {
         '--url', 'https://example.org',
       ]);
 
-      const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, null, 'https://example.org', args.save_report));
-      await processParameters(args, calculateLighthouseMetrics);
+      const calculateLighthouseMetrics = jest.fn<() => Promise<ProcessedLighthouseResult>>();
+      calculateLighthouseMetrics.mockResolvedValue(await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report));
+      await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
       expect(output.length).toBe(1);
     });
@@ -184,11 +192,12 @@ describe('test lighthouse badges', () => {
         '--url', 'https://example.org',
       ]);
 
-      const calculateLighthouseMetrics = jest.fn();
-      calculateLighthouseMetrics.mockReturnValue(await processRawLighthouseResult(reportFixture, null, 'https://example.org', args.save_report));
-      await processParameters(args, calculateLighthouseMetrics);
+      const calculateLighthouseMetrics = jest.fn<() => Promise<ProcessedLighthouseResult>>();
+      calculateLighthouseMetrics.mockResolvedValue(await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report));
+      await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
       expect(output.length).toBe(5);
     });
   });
 });
+

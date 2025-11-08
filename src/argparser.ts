@@ -1,10 +1,14 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { ArgumentParser } from 'argparse';
-import * as currentPath from "./currentPath.cjs"
+import type { ParsedArgs } from './types.js';
 
-const packageJsonPath = path.join(currentPath.default, '../package.json');
-const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const packageJsonPath = path.join(__dirname, '../package.json');
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8')) as { version: string };
 
 const parser = new ArgumentParser({
   description: 'Generate gh-badges (shields.io) based on lighthouse performance.',
@@ -50,4 +54,11 @@ requiredArgs.add_argument('-u', '--url', {
   help: 'The lighthouse badge(s) will contain the score(s) of the supplied url'
 });
 
-export default parser;
+const typedParser = {
+  parse_args: (args?: string[]): ParsedArgs => {
+    return parser.parse_args(args) as unknown as ParsedArgs;
+  }
+};
+
+export default typedParser;
+
