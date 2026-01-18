@@ -18,19 +18,18 @@
     "ci:publish": "bun run build && cd dist && bun publish",
     "clean": "rm -rf *.svg *.html coverage dist results",
     "docker:build": "bun run build && docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
-    "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c 'lighthouse-badges -rsu https://google.com && EXEC_PATH=/home/chrome/reports cd /home/lighthouse && bun run system-test:verify'",
+    "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c 'lighthouse-badges -rsu https://google.com && cd /home/lighthouse && EXEC_PATH=/home/chrome/reports && bun run system-test:verify'",
     "lint": "bunx eslint .",
     "lint:fix": "bunx eslint --fix .",
     "pre-push": "bun run lint:fix && bun run test:all",
-    "run:global-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; lighthouse-badges -rsu ${PAGE} -o results",
-    "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; bun dist/src/index.js -rsu ${PAGE} -o results",
+    "run:global": "[ -z ${PAGE} ] && PAGE=https://google.com ; lighthouse-badges -rsu ${PAGE} -o results",
+    "run:local": "[ -z ${PAGE} ] && PAGE=https://google.com ; bun dist/src/index.js -rsu ${PAGE} -o results",
     "start": "bun run build && bun run run:local-installation",
     "system-test:full-run": "bun run clean && bun run build && bun run app:reinstall && bun run run:global-installation && bun run system-test:verify",
     "system-test:light-run": "bun run clean && bun run build && bun run run:local-installation && bun run system-test:verify",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD/results ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",
     "test": "bun test",
     "test:all": "bun run test && bun run system-test:full-run",
-    "test:related": "bun test",
     "upgrade": "bunx npm-check-updates -i && bun install && bun update && bun run pre-push"
   },
   "husky": {
@@ -41,7 +40,7 @@
   "lint-staged": {
     "*.{js,ts}": [
       "bun run lint:fix",
-      "bun run test:related"
+      "bun run test"
     ]
   },
   "repository": {
@@ -60,7 +59,7 @@
     "@eslint/js": "^9.39.2",
     "@types/node": "^25.0.9",
     "@typescript-eslint/eslint-plugin": "^8.53.0",
-    "@typescript-eslint/parser": "^8.52.0",
+    "@typescript-eslint/parser": "^8.53.0",
     "eslint": "^9.39.2",
     "globals": "^17.0.0",
     "husky": "^9.1.7",
