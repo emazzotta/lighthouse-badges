@@ -66,7 +66,7 @@ describe('test lighthouse badges', () => {
       fs.writeFile = ((path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
         mockOutput.push({ [path.toString()]: content.toString() });
         if (callback) callback(null);
-        return undefined as any;
+        return undefined;
       }) as typeof fs.writeFile;
     });
 
@@ -107,7 +107,7 @@ describe('test lighthouse badges', () => {
       fs.writeFile = ((path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
         mockOutput.push({ [path.toString()]: content.toString() });
         if (callback) callback(null);
-        return undefined as any;
+        return undefined;
       }) as typeof fs.writeFile;
     });
 
@@ -139,7 +139,7 @@ describe('test lighthouse badges', () => {
       fs.writeFile = ((path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
         mockOutput.push({ [path.toString()]: content.toString() });
         if (callback) callback(null);
-        return undefined as any;
+        return undefined;
       }) as typeof fs.writeFile;
     });
 
