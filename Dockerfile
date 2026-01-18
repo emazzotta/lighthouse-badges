@@ -29,6 +29,7 @@ RUN bun install . && \
     rm -rf /root/.bun
 
 ENV CHROME_PATH=/usr/bin/chromium-browser
+ENV PATH=/usr/local/bin:$PATH
 
 RUN addgroup -S chrome && adduser -S -g chrome chrome \
     && mkdir -p /home/chrome/reports && chown -R chrome:chrome /home/chrome
