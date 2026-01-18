@@ -18,11 +18,9 @@ LABEL maintainer="hello@mazzotta.me" \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
-# Add lighthouse
 COPY dist /home/lighthouse/
 WORKDIR /home/lighthouse
 
-# Install dependencies and global binary
 RUN bun install . && \
     BIN_DIR="/usr/local/bin" && \
     mkdir -p "$BIN_DIR" && \
