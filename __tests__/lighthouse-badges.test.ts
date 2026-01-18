@@ -11,6 +11,10 @@ import parser from '../src/argparser';
 import reportFixture from '../assets/report/emanuelemazzotta.com.json';
 import type { LighthouseLHR, LighthouseMetrics, LighthouseReport, ProcessedLighthouseResult, LighthouseConfig } from '../src/types';
 
+// Global mock output storage
+let mockOutput: Array<Record<string, string>> = [];
+const originalWriteFile = fs.writeFile;
+
 describe('test lighthouse badges', () => {
   describe('the lighthouse command results are processed as expected', () => {
     it('should return correct metrics and no report', async () => {
@@ -57,19 +61,18 @@ describe('test lighthouse badges', () => {
   });
 
   describe('the html reports are saved correctly', () => {
-    let output: Array<Record<string, string>>;
-    const { writeFile } = fs;
-
     beforeEach(() => {
-      output = [];
-      (fs.writeFile as unknown) = (path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
-        output.push({ [path.toString()]: content.toString() });
+      mockOutput = [];
+      fs.writeFile = ((path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
+        mockOutput.push({ [path.toString()]: content.toString() });
         if (callback) callback(null);
-      };
+        return undefined as any;
+      }) as typeof fs.writeFile;
     });
 
     afterEach(() => {
-      fs.writeFile = writeFile;
+      fs.writeFile = originalWriteFile;
+      mockOutput = [];
     });
 
     it('should save html report', async () => {
@@ -80,12 +83,12 @@ describe('test lighthouse badges', () => {
       const outputPath = process.cwd();
       await htmlReportsToFile(htmlReports, outputPath);
 
-      zip([output, htmlReports]).map((items) => {
+      zip([mockOutput, htmlReports]).map((items) => {
         const [actual, expected] = items;
         return expect(Object.values(actual)).toStrictEqual(Object.values(expected));
       });
 
-      expect(output.length).toBe(2);
+      expect(mockOutput.length).toBe(2);
     });
 
     it('should not save html report if toggle is false', async () => {
@@ -94,24 +97,23 @@ describe('test lighthouse badges', () => {
         { 'https://example2.com': false },
       ];
       await htmlReportsToFile(htmlReports, process.cwd());
-      expect(output.length).toBe(0);
+      expect(mockOutput.length).toBe(0);
     });
   });
 
   describe('the svg files are saved correctly', () => {
-    let output: Array<Record<string, string>>;
-    const { writeFile } = fs;
-
     beforeEach(() => {
-      output = [];
-      (fs.writeFile as unknown) = (path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
-        output.push({ [path.toString()]: content.toString() });
+      mockOutput = [];
+      fs.writeFile = ((path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
+        mockOutput.push({ [path.toString()]: content.toString() });
         if (callback) callback(null);
-      };
+        return undefined as any;
+      }) as typeof fs.writeFile;
     });
 
     afterEach(() => {
-      fs.writeFile = writeFile;
+      fs.writeFile = originalWriteFile;
+      mockOutput = [];
     });
 
     it('should save all svg files', async () => {
@@ -127,24 +129,23 @@ describe('test lighthouse badges', () => {
       const outputPath = process.cwd();
       await metricsToSvg(lighthouseMetrics, badgeStyle, outputPath);
 
-      expect(output.length).toBe(5);
+      expect(mockOutput.length).toBe(5);
     });
   });
 
   describe('test the main process function', () => {
-    let output: Array<Record<string, string>>;
-    const { writeFile } = fs;
-
     beforeEach(() => {
-      output = [];
-      (fs.writeFile as unknown) = (path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
-        output.push({ [path.toString()]: content.toString() });
+      mockOutput = [];
+      fs.writeFile = ((path: fs.PathLike, content: string | NodeJS.ArrayBufferView, callback?: (err: NodeJS.ErrnoException | null) => void) => {
+        mockOutput.push({ [path.toString()]: content.toString() });
         if (callback) callback(null);
-      };
+        return undefined as any;
+      }) as typeof fs.writeFile;
     });
 
     afterEach(() => {
-      fs.writeFile = writeFile;
+      fs.writeFile = originalWriteFile;
+      mockOutput = [];
     });
 
     it('should create single badge with report', async () => {
@@ -158,7 +159,7 @@ describe('test lighthouse badges', () => {
       const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
       await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
-      expect(output.length).toBe(2);
+      expect(mockOutput.length).toBe(2);
     });
 
     it('should create multiple badges with report', async () => {
@@ -171,7 +172,7 @@ describe('test lighthouse badges', () => {
       const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
       await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
-      expect(output.length).toBe(6);
+      expect(mockOutput.length).toBe(6);
     });
 
     it('should create single badge without report', async () => {
@@ -184,7 +185,7 @@ describe('test lighthouse badges', () => {
       const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
       await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
-      expect(output.length).toBe(1);
+      expect(mockOutput.length).toBe(1);
     });
 
     it('should create multiple badges without report', async () => {
@@ -196,7 +197,7 @@ describe('test lighthouse badges', () => {
       const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
       await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
-      expect(output.length).toBe(5);
+      expect(mockOutput.length).toBe(5);
     });
   });
 });
