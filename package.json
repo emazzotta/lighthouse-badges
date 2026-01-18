@@ -15,7 +15,7 @@
     "build:compile": "tsc",
     "build:copy-declarations": "cp src/*.d.ts dist/src/ 2>/dev/null || true",
     "build:prepare": "bun run clean && mkdir -p dist && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist",
-    "ci:publish": "bun run build && cd dist && bun publish",
+    "ci:publish": "bun run build && cd dist && npm publish",
     "clean": "rm -rf *.svg *.html coverage dist results",
     "docker:build": "bun run build && docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
     "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c 'lighthouse-badges -rsu https://google.com && cd /home/lighthouse && EXEC_PATH=/home/chrome/reports bun run system-test:verify'",

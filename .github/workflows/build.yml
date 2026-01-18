@@ -80,11 +80,6 @@ jobs:
       - name: Docker System Test
         run: bun run docker:system-test:run
 
-      - name: Setup Node.js (for npm registry checks)
-        uses: actions/setup-node@v6
-        with:
-          node-version: 20
-
       - name: Deploy to Github Registry
         if: github.ref == 'refs/heads/master'
         run: |
