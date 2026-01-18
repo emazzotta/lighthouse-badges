@@ -149,3 +149,4 @@ venv
 results
 /*.svg
 /*.html
+__test_output__

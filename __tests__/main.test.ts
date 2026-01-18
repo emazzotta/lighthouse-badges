@@ -58,7 +58,7 @@ describe('test index', () => {
 
   it('should handle processing errors gracefully', async () => {
     parseMock.mockReturnValue({ url: 'https://example.org', single_badge: false, badge_style: 'flat', save_report: false } as never);
-    mockProcessParameters.mockRejectedValue(new Error('Async error'));
+    mockProcessParameters.mockImplementation(() => Promise.reject(new Error('Async error')));
 
     await handleUserInput(spinnerFake);
     expect(stderrOutput.includes('Error: Async error')).toBe(true);
