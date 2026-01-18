@@ -15,14 +15,21 @@ LABEL maintainer="hello@mazzotta.me" \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
-RUN apk --update --no-cache add chromium git
+RUN apk --update --no-cache add chromium && \
+    mkdir -p /home/lighthouse
 
 # Add lighthouse
-RUN mkdir -p /home/lighthouse
 COPY dist /home/lighthouse/
 WORKDIR /home/lighthouse
 
-RUN bun install . && BUN_BIN=$(bun pm bin -g) && mkdir -p "$BUN_BIN" && ln -sf "/home/lighthouse/src/index.js" "$BUN_BIN/lighthouse-badges" && chmod +x "$BUN_BIN/lighthouse-badges" && rm -rf /root/.bun
+# Install dependencies and global binary
+RUN bun install . && \
+    (bun install -g . 2>/dev/null || \
+     (BIN_DIR=$(bun pm bin -g) && \
+      mkdir -p "$BIN_DIR" && \
+      ln -sf "/home/lighthouse/src/index.js" "$BIN_DIR/lighthouse-badges" && \
+      chmod +x "$BIN_DIR/lighthouse-badges")) && \
+    rm -rf /root/.bun
 
 # Set Chromium bin path
 ENV CHROME_PATH=/usr/bin/chromium-browser
