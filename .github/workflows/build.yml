@@ -84,22 +84,29 @@ jobs:
       - name: Docker System Test
         run: bun run docker:system-test:run
 
-      - name: Deploy to GitHub Packages
+      - name: Setup Node.js for GitHub Packages
         if: github.ref == 'refs/heads/master'
         uses: actions/setup-node@v6
         with:
           node-version: '24'
           registry-url: 'https://npm.pkg.github.com'
-      - run: |
-          bun run ci:publish
 
-      - name: Deploy to npm.js Registry
+      - name: Publish to GitHub Packages
+        if: github.ref == 'refs/heads/master'
+        run: bun run ci:publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js for npm.js
         if: github.ref == 'refs/heads/master'
         uses: actions/setup-node@v6
         with:
-          node-version: 24
-          registry-url: 'https://npm.pkg.github.com'
-      - run: |
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish to npm.js Registry
+        if: github.ref == 'refs/heads/master'
+        run: |
           jq '.name="lighthouse-badges"' package.json > package.json.temp && mv -f package.json.temp package.json
           bun run ci:publish
 
