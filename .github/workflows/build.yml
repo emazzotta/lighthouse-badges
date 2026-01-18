@@ -9,6 +9,10 @@ on:
 env:
   TAG_PREFIX: emazzotta/lighthouse-badges
 
+permissions:
+  id-token: write  # Required for OIDC npm publish workflow
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -80,39 +84,38 @@ jobs:
       - name: Docker System Test
         run: bun run docker:system-test:run
 
-      - name: Setup Node.js (for npm registry checks)
+      - name: Deploy to GitHub Packages
+        if: github.ref == 'refs/heads/master'
         uses: actions/setup-node@v6
         with:
-          node-version: 20
-
-      - name: Deploy to Github Registry
-        if: github.ref == 'refs/heads/master'
-        run: |
-          package_name=$(jq -r '.name' package.json)
+          node-version: '24'
+          registry-url: 'https://npm.pkg.github.com'
+      - run: |
           current_version=$(jq -r '.version' package.json)
-          # Check if version already exists using npm (for registry check)
-          npm config set registry https://npm.pkg.github.com
-          npm config set //npm.pkg.github.com/:_authToken ${GITHUB_TOKEN}
-          [[ "$(npm show ${package_name} version 2>/dev/null || echo '')" ==  "${current_version}" ]] && \
-            echo "Current version ${current_version} already published" || \
+          package_name=$(jq -r '.name' package.json)
+          registry_version=$(npm show ${package_name} version 2>/dev/null || echo '')
+          if [[ "${registry_version}" == "${current_version}" ]]; then
+            echo "Current version ${current_version} already published to GitHub Packages"
+          else
             bun run ci:publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          fi
 
       - name: Deploy to npm.js Registry
         if: github.ref == 'refs/heads/master'
-        run: |
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: 'https://npm.pkg.github.com'
+      - run: |
           jq '.name="lighthouse-badges"' package.json > package.json.temp && mv -f package.json.temp package.json
           current_version=$(jq -r '.version' package.json)
           package_name=$(jq -r '.name' package.json)
-          # Check if version already exists using npm (for registry check)
-          npm config set registry https://registry.npmjs.org
-          npm config set //registry.npmjs.org/:_authToken ${NPM_AUTH_TOKEN}
-          [[ "$(npm show ${package_name} version 2>/dev/null || echo '')" ==  "${current_version}" ]] && \
-            echo "Current version ${current_version} already published" || \
+          registry_version=$(npm show ${package_name} version 2>/dev/null || echo '')
+          if [[ "${registry_version}" == "${current_version}" ]]; then
+            echo "Current version ${current_version} already published to npm"
+          else
             bun run ci:publish
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          fi
 
       - name: Set Environment Variables
         run: |
