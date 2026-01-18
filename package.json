@@ -8,30 +8,30 @@
   },
   "type": "module",
   "scripts": {
-    "app:install": "npm run build && cd dist && npm i -g .",
-    "app:reinstall": "npm-run-all app:uninstall app:install",
-    "app:uninstall": "npm uninstall -g @emazzotta/lighthouse-badges; npm uninstall -g .; npm uninstall -g lighthouse-badges",
-    "build": "npm run build:prepare && npm run build:compile && npm run build:copy-declarations",
+    "app:install": "bun run build && cd dist && bun install && BUN_BIN=$(bun pm bin -g) && mkdir -p \"$BUN_BIN\" && ln -sf \"$(pwd)/src/index.js\" \"$BUN_BIN/lighthouse-badges\" && chmod +x \"$BUN_BIN/lighthouse-badges\"",
+    "app:reinstall": "bun run app:uninstall && bun run app:install",
+    "app:uninstall": "BUN_BIN=$(bun pm bin -g 2>/dev/null || echo '') && [ -n \"$BUN_BIN\" ] && rm -f \"$BUN_BIN/lighthouse-badges\" 2>/dev/null || true",
+    "build": "bun run build:prepare && bun run build:compile && bun run build:copy-declarations",
     "build:compile": "tsc",
     "build:copy-declarations": "cp src/*.d.ts dist/src/ 2>/dev/null || true",
-    "build:prepare": "npm run clean && mkdir -p dist && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist",
-    "ci:publish": "npm run build && npm publish --prefix dist",
+    "build:prepare": "bun run clean && mkdir -p dist && sed 's#\"dist/src/index.js\"#\"src/index.js\"#' package.json > ./dist/package.json && cp README.md dist && cp LICENSE.md dist",
+    "ci:publish": "bun run build && cd dist && bun publish",
     "clean": "rm -rf *.svg *.html coverage dist results",
-    "docker:build": "npm run build && docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
-    "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c 'lighthouse-badges -rsu https://google.com && EXEC_PATH=/home/chrome/reports npm run system-test:verify --prefix /home/lighthouse'",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "pre-push": "npm-run-all lint:fix test:all",
+    "docker:build": "bun run build && docker build --build-arg VCS_REF=`git rev-parse --short HEAD` --build-arg BUILD_DATE=`date -u +\"%Y-%m-%dT%H:%M:%SZ\"` --build-arg VERSION=latest -t emazzotta/lighthouse-badges .",
+    "docker:system-test:run": "docker run emazzotta/lighthouse-badges /bin/sh -c 'lighthouse-badges -rsu https://google.com && EXEC_PATH=/home/chrome/reports cd /home/lighthouse && bun run system-test:verify'",
+    "lint": "bunx eslint .",
+    "lint:fix": "bunx eslint --fix .",
+    "pre-push": "bun run lint:fix && bun run test:all",
     "run:global-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; lighthouse-badges -rsu ${PAGE} -o results",
-    "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; node dist/src/index.js -rsu ${PAGE} -o results",
-    "start": "npm-run-all build run:local-installation",
-    "system-test:full-run": "npm-run-all clean build app:reinstall run:global-installation system-test:verify",
-    "system-test:light-run": "npm-run-all clean build run:local-installation system-test:verify",
+    "run:local-installation": "[ -z ${PAGE} ] && PAGE=https://google.com ; bun dist/src/index.js -rsu ${PAGE} -o results",
+    "start": "bun run build && bun run run:local-installation",
+    "system-test:full-run": "bun run clean && bun run build && bun run app:reinstall && bun run run:global-installation && bun run system-test:verify",
+    "system-test:light-run": "bun run clean && bun run build && bun run run:local-installation && bun run system-test:verify",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD/results ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:all": "npm-run-all test system-test:full-run",
-    "test:related": "jest --findRelatedTests",
-    "upgrade": "npx npm-check-updates -i && npm install && npm upgrade && npm run pre-push"
+    "test": "bun test",
+    "test:all": "bun run test && bun run system-test:full-run",
+    "test:related": "bun test",
+    "upgrade": "bunx npm-check-updates -i && bun install && bun update && bun run pre-push"
   },
   "husky": {
     "hooks": {
@@ -40,8 +40,8 @@
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "npm run lint:fix",
-      "npm run test:related"
+      "bun run lint:fix",
+      "bun run test:related"
     ]
   },
   "repository": {
@@ -58,23 +58,17 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "@jest/globals": "^30.2.0",
-    "@types/jest": "^30.0.0",
     "@types/node": "^25.0.9",
     "@typescript-eslint/eslint-plugin": "^8.53.0",
     "@typescript-eslint/parser": "^8.52.0",
     "eslint": "^9.39.2",
     "globals": "^17.0.0",
     "husky": "^9.1.7",
-    "jest": "^30.2.0",
     "lint-staged": "^16.2.7",
-    "npm-run-all": "^4.1.5",
-    "ts-jest": "^29.4.6",
     "typescript": "^5.9.3"
   },
   "engines": {
-    "npm": ">=7.0.0",
-    "node": ">=18.16"
+    "bun": ">=1.0.0"
   },
   "private": false,
   "author": "Emanuele Mazzotta",

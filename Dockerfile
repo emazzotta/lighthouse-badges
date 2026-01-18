@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM oven/bun:alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -22,7 +22,7 @@ RUN mkdir -p /home/lighthouse
 COPY dist /home/lighthouse/
 WORKDIR /home/lighthouse
 
-RUN npm install . && npm link && rm -rf /root/.npm
+RUN bun install . && BUN_BIN=$(bun pm bin -g) && mkdir -p "$BUN_BIN" && ln -sf "/home/lighthouse/src/index.js" "$BUN_BIN/lighthouse-badges" && chmod +x "$BUN_BIN/lighthouse-badges" && rm -rf /root/.bun
 
 # Set Chromium bin path
 ENV CHROME_PATH=/usr/bin/chromium-browser

@@ -77,17 +77,17 @@ See [here](https://github.com/GoogleChrome/lighthouse/blob/main/docs/configurati
 
 ### Run
 
-node >= 18 is required.
+Bun >= 1.0.0 is required.
 
-#### Option 1: npm
+#### Option 1: bun
 ```bash
-npm i -g lighthouse-badges
+bun install -g lighthouse-badges
 lighthouse-badges --url https://www.youtube.com/ -o test_results
 ```
 
-#### Option 2: npx
+#### Option 2: bunx
 ```bash
-npx lighthouse-badges --url https://www.youtube.com/ -o test_results
+bunx lighthouse-badges --url https://www.youtube.com/ -o test_results
 ```
 
 #### Option 3: Docker
@@ -102,7 +102,7 @@ docker run --rm \
 ### Develop
 
 ```bash
-npm run start # To run the lighthouse-badges code on google.com
+bun run start # To run the lighthouse-badges code on google.com
 ```
 
 ## Contributing

@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { describe, it, expect, beforeEach, afterEach, mock } from 'bun:test';
 import fs from 'fs';
 import {
   htmlReportsToFile,
@@ -154,8 +154,8 @@ describe('test lighthouse badges', () => {
         '--url', 'https://example.org',
       ]);
 
-      const calculateLighthouseMetrics = jest.fn<() => Promise<ProcessedLighthouseResult>>();
-      calculateLighthouseMetrics.mockResolvedValue(await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report));
+      const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report);
+      const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
       await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
       expect(output.length).toBe(2);
@@ -167,8 +167,8 @@ describe('test lighthouse badges', () => {
         '--url', 'https://example.org',
       ]);
 
-      const calculateLighthouseMetrics = jest.fn<() => Promise<ProcessedLighthouseResult>>();
-      calculateLighthouseMetrics.mockResolvedValue(await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report));
+      const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report);
+      const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
       await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
       expect(output.length).toBe(6);
@@ -180,8 +180,8 @@ describe('test lighthouse badges', () => {
         '--url', 'https://example.org',
       ]);
 
-      const calculateLighthouseMetrics = jest.fn<() => Promise<ProcessedLighthouseResult>>();
-      calculateLighthouseMetrics.mockResolvedValue(await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report));
+      const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report);
+      const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
       await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
       expect(output.length).toBe(1);
@@ -192,8 +192,8 @@ describe('test lighthouse badges', () => {
         '--url', 'https://example.org',
       ]);
 
-      const calculateLighthouseMetrics = jest.fn<() => Promise<ProcessedLighthouseResult>>();
-      calculateLighthouseMetrics.mockResolvedValue(await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report));
+      const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report);
+      const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
       await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
 
       expect(output.length).toBe(5);

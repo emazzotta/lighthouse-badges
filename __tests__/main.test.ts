@@ -1,28 +1,28 @@
-import { jest } from '@jest/globals';
+import { describe, it, expect, beforeEach, afterEach, spyOn, mock } from 'bun:test';
 import parser from '../src/argparser';
 import type { Spinner } from '../src/types';
 
-const mockProcessParameters = jest.fn<() => Promise<void>>();
+const mockProcessParameters = mock(() => Promise.resolve());
 
-jest.unstable_mockModule('../src/lighthouse-badges', () => ({
+mock.module('../src/lighthouse-badges', () => ({
   processParameters: mockProcessParameters,
-  calculateLighthouseMetrics: jest.fn(),
-  processRawLighthouseResult: jest.fn(),
-  metricsToSvg: jest.fn(),
-  htmlReportsToFile: jest.fn(),
+  calculateLighthouseMetrics: mock(),
+  processRawLighthouseResult: mock(),
+  metricsToSvg: mock(),
+  htmlReportsToFile: mock(),
 }));
 
 const handleUserInput = (await import('../src/main.js')).default;
 
 describe('test index', () => {
   let stderrOutput = '';
-  let parseMock: ReturnType<typeof jest.spyOn>;
+  let parseMock: ReturnType<typeof spyOn>;
   const spinnerFake: Spinner = { start: () => null, stop: () => null };
   const stderrWrite = process.stderr.write;
   const processExit = process.exit;
 
   beforeEach(() => {
-    parseMock = jest.spyOn(parser, 'parse_args');
+    parseMock = spyOn(parser, 'parse_args');
     process.stderr.write = (x: string | Uint8Array) => {
       stderrOutput += `${x}\n`;
       return true;
@@ -31,6 +31,7 @@ describe('test index', () => {
       // Mock exit
     }) as typeof process.exit;
     stderrOutput = '';
+    mockProcessParameters.mockClear();
   });
 
   afterEach(() => {

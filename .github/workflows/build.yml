@@ -24,31 +24,29 @@ jobs:
         with:
           version: latest
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20
-          cache: "npm"
+          bun-version: latest
 
-      - name: Cache node_modules
+      - name: Cache bun modules
         uses: actions/cache@v4
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-bun-modules-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
-            ${{ runner.os }}-modules-
+            ${{ runner.os }}-bun-modules-
 
       - name: Versions
         run: |
-          echo "node: $(node -v)"
-          echo "npm: $(npm -v)"
+          echo "bun: $(bun --version)"
           echo "Docker: $(docker -v)"
 
-      - name: NPM Build
+      - name: Bun Build
         run: |
-          npm install
-          npm run lint
-          npm run build
+          bun install
+          bun run lint
+          bun run build
 
       - name: Login to DockerHub
         if: github.ref == 'refs/heads/master'
@@ -68,7 +66,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
 
       - name: Unit & Integration Test
-        run: npm run test
+        run: bun run test
 
       - name: Install and Run Codecov Uploader
         run: |
@@ -76,22 +74,28 @@ jobs:
           chmod +x codecov
           ./codecov
 
-      - name: Node System Test
-        run: npm run system-test:light-run
+      - name: Bun System Test
+        run: bun run system-test:light-run
 
       - name: Docker System Test
-        run: npm run docker:system-test:run
+        run: bun run docker:system-test:run
+
+      - name: Setup Node.js (for npm registry checks)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Deploy to Github Registry
         if: github.ref == 'refs/heads/master'
         run: |
           package_name=$(jq -r '.name' package.json)
           current_version=$(jq -r '.version' package.json)
+          # Check if version already exists using npm (for registry check)
           npm config set registry https://npm.pkg.github.com
           npm config set //npm.pkg.github.com/:_authToken ${GITHUB_TOKEN}
-          [[ "$(npm show ${package_name} version)" ==  "${current_version}" ]] && \
+          [[ "$(npm show ${package_name} version 2>/dev/null || echo '')" ==  "${current_version}" ]] && \
             echo "Current version ${current_version} already published" || \
-            npm run ci:publish
+            bun run ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -101,11 +105,12 @@ jobs:
           jq '.name="lighthouse-badges"' package.json > package.json.temp && mv -f package.json.temp package.json
           current_version=$(jq -r '.version' package.json)
           package_name=$(jq -r '.name' package.json)
+          # Check if version already exists using npm (for registry check)
           npm config set registry https://registry.npmjs.org
           npm config set //registry.npmjs.org/:_authToken ${NPM_AUTH_TOKEN}
-          [[ "$(npm show ${package_name} version)" ==  "${current_version}" ]] && \
+          [[ "$(npm show ${package_name} version 2>/dev/null || echo '')" ==  "${current_version}" ]] && \
             echo "Current version ${current_version} already published" || \
-            npm run ci:publish
+            bun run ci:publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'bun:test';
 import { getAverageScore, getSquashedScore, percentageToColor } from '../src/calculations';
 
 describe('calculations', () => {
