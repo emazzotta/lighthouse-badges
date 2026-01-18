@@ -12,6 +12,7 @@ env:
 permissions:
   id-token: write  # Required for OIDC npm publish workflow
   contents: read
+  packages: write  # Required for GitHub Packages publish
 
 jobs:
   build:
