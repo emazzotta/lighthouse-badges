@@ -36,13 +36,28 @@ const loadLighthouseConfig = async (): Promise<LighthouseConfig> => {
   }
 };
 
-const handleUserInput = async (spinner: Spinner): Promise<void> => {
+interface Dependencies {
+  processParameters?: typeof processParameters;
+  calculateLighthouseMetrics?: typeof calculateLighthouseMetrics;
+  parseArgs?: typeof parser.parse_args;
+}
+
+const handleUserInput = async (
+  spinner: Spinner,
+  deps: Dependencies = {},
+): Promise<void> => {
+  const {
+    processParameters: processParametersFn = processParameters,
+    calculateLighthouseMetrics: calculateLighthouseMetricsFn = calculateLighthouseMetrics,
+    parseArgs = parser.parse_args,
+  } = deps;
+
   try {
     spinner.start();
-    const parsedArgs = await parser.parse_args();
+    const parsedArgs = await parseArgs();
     const lighthouseParameters = await loadLighthouseConfig();
 
-    await processParameters(parsedArgs, calculateLighthouseMetrics, lighthouseParameters);
+    await processParametersFn(parsedArgs, calculateLighthouseMetricsFn, lighthouseParameters);
 
     spinner.stop();
   } catch (err) {

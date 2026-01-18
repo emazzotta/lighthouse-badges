@@ -1,28 +1,14 @@
-import { describe, it, expect, beforeEach, afterEach, spyOn, mock } from 'bun:test';
-import parser from '../src/argparser';
-import type { Spinner } from '../src/types';
-
-const mockProcessParameters = mock(() => Promise.resolve());
-
-mock.module('../src/lighthouse-badges', () => ({
-  processParameters: mockProcessParameters,
-  calculateLighthouseMetrics: mock(),
-  processRawLighthouseResult: mock(),
-  metricsToSvg: mock(),
-  htmlReportsToFile: mock(),
-}));
-
-const handleUserInput = (await import('../src/main.js')).default;
+import { describe, it, expect, beforeEach, afterEach, mock } from 'bun:test';
+import type { Spinner, ParsedArgs } from '../src/types';
+import handleUserInput from '../src/main.js';
 
 describe('test index', () => {
   let stderrOutput = '';
-  let parseMock: ReturnType<typeof spyOn>;
   const spinnerFake: Spinner = { start: () => null, stop: () => null };
   const stderrWrite = process.stderr.write;
   const processExit = process.exit;
 
   beforeEach(() => {
-    parseMock = spyOn(parser, 'parse_args');
     process.stderr.write = (x: string | Uint8Array) => {
       stderrOutput += `${x}\n`;
       return true;
@@ -31,36 +17,52 @@ describe('test index', () => {
       // Mock exit
     }) as typeof process.exit;
     stderrOutput = '';
-    mockProcessParameters.mockClear();
   });
 
   afterEach(() => {
     process.stderr.write = stderrWrite;
     process.exit = processExit;
-    parseMock.mockRestore();
   });
 
   it('should invoke parse args and process parameters', async () => {
-    parseMock.mockReturnValue({ url: 'https://example.org', single_badge: false, badge_style: 'flat', save_report: false } as never);
-    mockProcessParameters.mockResolvedValue(undefined);
+    const mockParseArgs = mock(() =>
+      Promise.resolve({ url: 'https://example.org', single_badge: false, badge_style: 'flat', save_report: false } as ParsedArgs)
+    );
+    const mockProcessParameters = mock(() => Promise.resolve());
 
-    await handleUserInput(spinnerFake);
+    await handleUserInput(spinnerFake, {
+      parseArgs: mockParseArgs,
+      processParameters: mockProcessParameters,
+    });
 
-    expect(parser.parse_args).toHaveBeenCalledTimes(1);
+    expect(mockParseArgs).toHaveBeenCalledTimes(1);
     expect(mockProcessParameters).toHaveBeenCalledTimes(1);
     expect(stderrOutput).toBe('');
   });
 
   it('should handle parse errors gracefully', async () => {
-    await handleUserInput(spinnerFake);
+    const mockParseArgs = mock(() =>
+      Promise.reject(new Error('the following arguments are required: -u/--url'))
+    );
+
+    await handleUserInput(spinnerFake, {
+      parseArgs: mockParseArgs,
+    });
+
     expect(stderrOutput.includes('the following arguments are required: -u/--url')).toBe(true);
   });
 
   it('should handle processing errors gracefully', async () => {
-    parseMock.mockReturnValue({ url: 'https://example.org', single_badge: false, badge_style: 'flat', save_report: false } as never);
-    mockProcessParameters.mockImplementation(() => Promise.reject(new Error('Async error')));
+    const mockParseArgs = mock(() =>
+      Promise.resolve({ url: 'https://example.org', single_badge: false, badge_style: 'flat', save_report: false } as ParsedArgs)
+    );
+    const mockProcessParameters = mock(() => Promise.reject(new Error('Async error')));
 
-    await handleUserInput(spinnerFake);
+    await handleUserInput(spinnerFake, {
+      parseArgs: mockParseArgs,
+      processParameters: mockProcessParameters,
+    });
+
     expect(stderrOutput.includes('Error: Async error')).toBe(true);
   });
 });
