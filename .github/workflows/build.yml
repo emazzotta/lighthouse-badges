@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -30,7 +30,7 @@ jobs:
           bun-version: latest
 
       - name: Cache bun modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-bun-modules-${{ hashFiles('**/bun.lockb') }}
@@ -81,7 +81,7 @@ jobs:
         run: bun run docker:system-test:run
 
       - name: Setup Node.js (for npm registry checks)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
 
