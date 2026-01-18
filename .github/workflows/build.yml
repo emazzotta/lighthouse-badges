@@ -91,14 +91,7 @@ jobs:
           node-version: '24'
           registry-url: 'https://npm.pkg.github.com'
       - run: |
-          current_version=$(jq -r '.version' package.json)
-          package_name=$(jq -r '.name' package.json)
-          registry_version=$(npm show ${package_name} version 2>/dev/null || echo '')
-          if [[ "${registry_version}" == "${current_version}" ]]; then
-            echo "Current version ${current_version} already published to GitHub Packages"
-          else
-            bun run ci:publish
-          fi
+          bun run ci:publish
 
       - name: Deploy to npm.js Registry
         if: github.ref == 'refs/heads/master'
@@ -108,14 +101,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
       - run: |
           jq '.name="lighthouse-badges"' package.json > package.json.temp && mv -f package.json.temp package.json
-          current_version=$(jq -r '.version' package.json)
-          package_name=$(jq -r '.name' package.json)
-          registry_version=$(npm show ${package_name} version 2>/dev/null || echo '')
-          if [[ "${registry_version}" == "${current_version}" ]]; then
-            echo "Current version ${current_version} already published to npm"
-          else
-            bun run ci:publish
-          fi
+          bun run ci:publish
 
       - name: Set Environment Variables
         run: |
