@@ -1,48 +1,76 @@
 #!/bin/bash
-# Cross-package-manager global installation script
-# Tries canonical methods first, falls back to manual symlink if needed
+set -euo pipefail
 
-set -e
+detect_package_manager() {
+    for manager in npm bun yarn pnpm; do
+        if command -v "$manager" &>/dev/null; then
+            echo "$manager"
+            return 0
+        fi
+    done
+    return 1
+}
 
-cd dist
+install_with_package_manager() {
+    local manager="$1"
 
-# Detect package manager and use canonical method
-if command -v npm >/dev/null 2>&1; then
-  echo "Installing with npm..."
-  npm install -g . && exit 0
-fi
+    case "$manager" in
+        npm)
+            npm install -g .
+            ;;
+        bun)
+            bun install -g . 2>/dev/null
+            ;;
+        yarn)
+            yarn global add .
+            ;;
+        pnpm)
+            pnpm add -g .
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
 
-if command -v bun >/dev/null 2>&1; then
-  echo "Installing with bun..."
-  bun install -g . 2>/dev/null && exit 0
-fi
+determine_global_bin_directory() {
+    local bin_dir=""
 
-if command -v yarn >/dev/null 2>&1; then
-  echo "Installing with yarn..."
-  yarn global add . && exit 0
-fi
+    if command -v bun &>/dev/null; then
+        bin_dir=$(bun pm bin -g 2>/dev/null || echo "")
+    elif command -v npm &>/dev/null; then
+        bin_dir=$(npm bin -g 2>/dev/null || echo "")
+    fi
 
-if command -v pnpm >/dev/null 2>&1; then
-  echo "Installing with pnpm..."
-  pnpm add -g . && exit 0
-fi
+    echo "$bin_dir"
+}
 
-# Fallback: manual symlink creation
-echo "No package manager found, using manual symlink..."
-BIN_DIR=""
-if command -v bun >/dev/null 2>&1; then
-  BIN_DIR=$(bun pm bin -g 2>/dev/null || echo "")
-elif command -v npm >/dev/null 2>&1; then
-  BIN_DIR=$(npm bin -g 2>/dev/null || echo "")
-fi
+install_via_symlink() {
+    local bin_dir
+    bin_dir=$(determine_global_bin_directory)
 
-if [ -n "$BIN_DIR" ]; then
-  mkdir -p "$BIN_DIR"
-  ln -sf "$(pwd)/src/index.js" "$BIN_DIR/lighthouse-badges"
-  chmod +x "$BIN_DIR/lighthouse-badges"
-  echo "Installed via symlink to $BIN_DIR/lighthouse-badges"
-  exit 0
-fi
+    if [ -z "$bin_dir" ]; then
+        echo "Error: Could not determine global bin directory" >&2
+        exit 1
+    fi
 
-echo "Error: Could not determine global bin directory"
-exit 1
+    mkdir -p "$bin_dir"
+    ln -sf "$(pwd)/src/index.js" "$bin_dir/lighthouse-badges"
+    chmod +x "$bin_dir/lighthouse-badges"
+    echo "Installed via symlink to $bin_dir/lighthouse-badges"
+}
+
+main() {
+    cd dist
+
+    local manager
+    if manager=$(detect_package_manager); then
+        echo "Installing with $manager..."
+        install_with_package_manager "$manager"
+    else
+        echo "No package manager found, using manual symlink..."
+        install_via_symlink
+    fi
+}
+
+main

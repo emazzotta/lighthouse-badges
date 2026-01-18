@@ -94,7 +94,7 @@ jobs:
 
       - name: Publish to GitHub Packages
         if: github.ref == 'refs/heads/master'
-        run: bun run ci:publish
+        run: scripts/publish-if-new-version.sh "GitHub Packages"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -109,7 +109,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           jq '.name="lighthouse-badges"' package.json > package.json.temp && mv -f package.json.temp package.json
-          bun run ci:publish
+          scripts/publish-if-new-version.sh "npm.js"
 
       - name: Set Environment Variables
         run: |
