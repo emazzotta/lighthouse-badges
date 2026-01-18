@@ -8,9 +8,9 @@
   },
   "type": "module",
   "scripts": {
-    "app:install": "bun run build && cd dist && bun install && BUN_BIN=$(bun pm bin -g) && mkdir -p \"$BUN_BIN\" && ln -sf \"$(pwd)/src/index.js\" \"$BUN_BIN/lighthouse-badges\" && chmod +x \"$BUN_BIN/lighthouse-badges\"",
+    "app:install": "bun run build && bash scripts/install-global.sh",
     "app:reinstall": "bun run app:uninstall && bun run app:install",
-    "app:uninstall": "BUN_BIN=$(bun pm bin -g 2>/dev/null || echo '') && [ -n \"$BUN_BIN\" ] && rm -f \"$BUN_BIN/lighthouse-badges\" 2>/dev/null || true",
+    "app:uninstall": "bash scripts/uninstall-global.sh",
     "build": "bun run build:prepare && bun run build:compile && bun run build:copy-declarations",
     "build:compile": "tsc",
     "build:copy-declarations": "cp src/*.d.ts dist/src/ 2>/dev/null || true",
