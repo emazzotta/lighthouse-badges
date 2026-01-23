@@ -92,7 +92,7 @@ bunx lighthouse-badges --url https://www.youtube.com/ -o test_results
 
 #### Option 3: Docker
 ```bash
-# Warning, the docker version may alter the lighthouse results
+# May alter lighthouse results due to performance differences compared to running directly on host
 docker run --rm \
     -v $PWD/test_results:/home/chrome/reports \
     emazzotta/lighthouse-badges \
