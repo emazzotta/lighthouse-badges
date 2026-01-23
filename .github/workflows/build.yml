@@ -110,15 +110,17 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          tags: ${{ env.TAG_PREFIX }}:test-${{ env.PLATFORM_PAIR }}
+          tags: |
+            ${{ env.TAG_PREFIX }}:latest
+            ${{ env.TAG_PREFIX }}:test-${{ env.PLATFORM_PAIR }}
           cache-from: type=gha,scope=${{ matrix.platform }}
           cache-to: type=gha,mode=max,scope=${{ matrix.platform }}
-          load: ${{ matrix.platform == 'linux/amd64' }}
+          load: ${{ matrix.platform == 'linux/arm64' }}
           platforms: ${{ matrix.platform }}
           provenance: false
 
       - name: Docker System Test
-        if: matrix.platform == 'linux/amd64'
+        if: matrix.platform == 'linux/arm64'
         run: bun run docker:system-test:run
 
   docker-deploy:
