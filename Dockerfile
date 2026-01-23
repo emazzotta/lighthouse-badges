@@ -1,7 +1,10 @@
-FROM oven/bun:alpine
+FROM oven/bun:alpine AS chrome-base
 
-RUN apk --update --no-cache add chromium && \
-    mkdir -p /home/lighthouse
+RUN apk --update --no-cache add \
+    chromium \
+    && rm -rf /var/cache/apk/* /tmp/*
+
+FROM chrome-base AS app
 
 ARG BUILD_DATE
 ARG VCS_REF
