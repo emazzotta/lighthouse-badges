@@ -101,12 +101,16 @@ jobs:
         with:
           version: latest
 
+      - name: Set Environment Variables
+        run: |
+          echo "PLATFORM_PAIR=$(echo ${{ matrix.platform }} | tr / -)" >> $GITHUB_ENV
+
       - name: Docker Build (${{ matrix.platform }})
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
-          tags: ${{ env.TAG_PREFIX }}:test-${{ matrix.platform }}
+          tags: ${{ env.TAG_PREFIX }}:test-${{ env.PLATFORM_PAIR }}
           cache-from: type=gha,scope=${{ matrix.platform }}
           cache-to: type=gha,mode=max,scope=${{ matrix.platform }}
           load: ${{ matrix.platform == 'linux/amd64' }}
