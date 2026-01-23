@@ -18,15 +18,18 @@ LABEL maintainer="hello@mazzotta.me" \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
-COPY dist /home/lighthouse/
 WORKDIR /home/lighthouse
 
-RUN bun install . && \
-    BIN_DIR="/usr/local/bin" && \
+COPY dist/package.json dist/bun.lockb* ./
+RUN bun install --frozen-lockfile && \
+    rm -rf /root/.bun
+
+COPY dist .
+
+RUN BIN_DIR="/usr/local/bin" && \
     mkdir -p "$BIN_DIR" && \
     ln -sf "/home/lighthouse/src/index.js" "$BIN_DIR/lighthouse-badges" && \
-    chmod +x "$BIN_DIR/lighthouse-badges" && \
-    rm -rf /root/.bun
+    chmod +x "$BIN_DIR/lighthouse-badges"
 
 ENV CHROME_PATH=/usr/bin/chromium-browser
 

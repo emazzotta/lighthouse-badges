@@ -1,4 +1,4 @@
-name: build
+name: Build, Test & Deploy
 
 on:
   push:
@@ -60,7 +60,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Docker Build
+      - name: Docker Build (amd64 for testing)
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -69,6 +69,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           load: true
+          platforms: linux/amd64
+          provenance: false
 
       - name: Unit & Integration Test
         run: bun run test
@@ -115,7 +117,7 @@ jobs:
         run: |
           echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - name: Deploy to Dockerhub
+      - name: Deploy to Dockerhub (multi-arch)
         if: github.ref == 'refs/heads/master'
         uses: docker/build-push-action@v6
         with:
@@ -128,4 +130,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64,linux/arm64
+          provenance: false
+          sbom: false
 
