@@ -32,7 +32,7 @@ const loadLighthouseConfig = async (): Promise<LighthouseConfig> => {
     return JSON.parse(fileContent) as LighthouseConfig;
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    throw new Error(`Failed to load Lighthouse configuration from ${configPath}: ${errorMessage}`);
+    throw new Error(`Failed to load Lighthouse configuration from ${configPath}: ${errorMessage}`, { cause: error });
   }
 };
 
