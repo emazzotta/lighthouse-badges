@@ -1,6 +1,6 @@
 {
   "name": "@emazzotta/lighthouse-badges",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "dist/src/index.js",
   "bin": {
@@ -52,7 +52,7 @@
     "badge-maker": "^5.0.2",
     "chrome-launcher": "1.2.1",
     "clui": "^0.3.6",
-    "lighthouse": "^13.0.2",
+    "lighthouse": "^13.0.3",
     "ramda": "^0.32.0"
   },
   "devDependencies": {
