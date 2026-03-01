@@ -37,9 +37,9 @@ optional arguments:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
   -s, --single-badge    Output only one single badge averaging all lighthouse categories' scores
-  -b {flat,flat-square,plastic,for-the-badge,social}, --badge-style {flat,flat-square,plastic,for-the-badge,social}
+  -b, --badge-style {flat,flat-square,plastic,for-the-badge,social}
                         Define look and feel for the badge
-  -o OUTPUT_PATH, --output-path OUTPUT_PATH
+  -o, --output-path OUTPUT_PATH
                         Define output path for artifacts
   -r, --save-report     Save lighthouse report as html for every supplied url
 
