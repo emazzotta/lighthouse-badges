@@ -1,9 +1,8 @@
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs/promises';
 import { makeBadge } from 'badge-maker';
-import * as R from 'ramda';
 import lighthouse from 'lighthouse/core/index.cjs';
-import { statusMessage, urlEscaper } from './util.js';
+import { urlEscaper } from './util.js';
 import { getAverageScore, getSquashedScore, percentageToColor } from './calculations.js';
 import type {
   LighthouseMetrics,
@@ -15,30 +14,6 @@ import type {
   BadgeStyle,
 } from './types.js';
 
-const writeFileAsync = (filepath: string, content: string): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(filepath, content, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve();
-      }
-    });
-  });
-};
-
-const mkdirAsync = (dirPath: string): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    fs.mkdir(dirPath, { recursive: true }, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve();
-      }
-    });
-  });
-};
-
 const CHROME_FLAGS = [
   '--headless',
   '--no-sandbox',
@@ -47,26 +22,18 @@ const CHROME_FLAGS = [
   '--no-default-browser-check',
   '--no-first-run',
   '--disable-default-apps',
-] as const;
+];
 
-const createBadgeFilePath = (outputPath: string, metricKey: string): string => {
-  const sanitizedKey = metricKey.replace(/ /g, '_');
-  return path.join(outputPath, `${sanitizedKey}.svg`);
-};
+const badgeFilePath = (outputPath: string, metricKey: string): string =>
+  path.join(outputPath, `${metricKey.replace(/ /g, '_')}.svg`);
 
-const createBadge = (
-  metricKey: string,
-  score: number,
-  badgeStyle: BadgeStyle,
-): string => {
-  const color = percentageToColor(score);
-  return makeBadge({
+const buildBadgeSvg = (metricKey: string, score: number, badgeStyle: BadgeStyle): string =>
+  makeBadge({
     label: metricKey,
     message: `${score}%`,
-    color,
+    color: percentageToColor(score),
     style: badgeStyle,
   });
-};
 
 const saveBadge = async (
   outputPath: string,
@@ -74,19 +41,9 @@ const saveBadge = async (
   score: number,
   badgeStyle: BadgeStyle,
 ): Promise<void> => {
-  const filepath = createBadgeFilePath(outputPath, metricKey);
-  const svg = createBadge(metricKey, score, badgeStyle);
-
-  try {
-    await writeFileAsync(filepath, svg);
-    statusMessage(`Saved svg to ${filepath}\n`, `Failed to save svg to ${outputPath}`, null);
-  } catch (error) {
-    statusMessage(
-      `Saved svg to ${filepath}\n`,
-      `Failed to save svg to ${outputPath}`,
-      error as Error,
-    );
-  }
+  const filepath = badgeFilePath(outputPath, metricKey);
+  await fs.writeFile(filepath, buildBadgeSvg(metricKey, score, badgeStyle));
+  process.stdout.write(`Saved svg to ${filepath}\n`);
 };
 
 export const metricsToSvg = async (
@@ -94,15 +51,11 @@ export const metricsToSvg = async (
   badgeStyle: BadgeStyle,
   outputPath: string,
 ): Promise<void> => {
-  const savePromises = R.keys(lighthouseMetrics).map((metricKey: string) =>
-    saveBadge(outputPath, metricKey, lighthouseMetrics[metricKey], badgeStyle),
+  await Promise.all(
+    Object.entries(lighthouseMetrics).map(([metricKey, score]) =>
+      saveBadge(outputPath, metricKey, score, badgeStyle),
+    ),
   );
-  await Promise.all(savePromises);
-};
-
-const extractUrlFromReport = (report: LighthouseReport): string | null => {
-  const urls = R.keys(report);
-  return R.head(urls) || null;
 };
 
 const saveHtmlReport = async (
@@ -111,82 +64,39 @@ const saveHtmlReport = async (
   htmlContent: string,
 ): Promise<void> => {
   const filepath = path.join(outputPath, `${urlEscaper(url)}.html`);
-  try {
-    await writeFileAsync(filepath, htmlContent);
-    statusMessage(`Saved report to ${filepath}\n`, `Failed to save report to ${outputPath}`, null);
-  } catch (error) {
-    statusMessage(
-      `Saved report to ${filepath}\n`,
-      `Failed to save report to ${outputPath}`,
-      error as Error,
-    );
-  }
+  await fs.writeFile(filepath, htmlContent);
+  process.stdout.write(`Saved report to ${filepath}\n`);
 };
 
 export const htmlReportsToFile = async (
   htmlReports: LighthouseReport[],
   outputPath: string,
 ): Promise<void> => {
-  const savePromises = htmlReports
-    .map((report) => {
-      const url = extractUrlFromReport(report);
-      if (!url) {
-        return null;
-      }
-
-      const reportContent = report[url];
-      if (typeof reportContent === 'string') {
-        return saveHtmlReport(outputPath, url, reportContent);
-      }
-
-      return null;
-    })
-    .filter((promise): promise is Promise<void> => promise !== null);
-
+  const savePromises = htmlReports.flatMap((report) =>
+    Object.entries(report)
+      .filter((entry): entry is [string, string] => typeof entry[1] === 'string')
+      .map(([url, content]) => saveHtmlReport(outputPath, url, content)),
+  );
   await Promise.all(savePromises);
 };
 
-interface ArtifactGenerationParams {
-  reports: LighthouseReport[];
-  svg: {
-    results: LighthouseMetrics;
-    style: BadgeStyle;
-  };
-  outputPath: string;
-}
+const extractLighthouseMetrics = (categories: LighthouseLHR['categories']): LighthouseMetrics =>
+  Object.fromEntries(
+    Object.entries(categories).map(([category, { score }]) => [
+      `lighthouse ${category.toLowerCase()}`,
+      score * 100,
+    ]),
+  );
 
-const generateArtifacts = async ({
-  reports,
-  svg,
-  outputPath,
-}: ArtifactGenerationParams): Promise<void> => {
-  await Promise.all([
-    htmlReportsToFile(reports, outputPath),
-    metricsToSvg(svg.results, svg.style, outputPath),
-  ]);
-};
-
-const extractLighthouseMetrics = (categories: LighthouseLHR['categories']): LighthouseMetrics => {
-  const scores = R.keys(categories).map((category: string) => ({
-    [`lighthouse ${category.toLowerCase()}`]: categories[category].score * 100,
-  }));
-  return Object.assign({}, ...scores) as LighthouseMetrics;
-};
-
-export const processRawLighthouseResult = async (
+export const processRawLighthouseResult = (
   data: LighthouseLHR,
   html: string,
   url: string,
   shouldSaveReport: boolean,
-): Promise<ProcessedLighthouseResult> => {
-  const htmlReport = shouldSaveReport ? html : false;
-  const lighthouseMetrics = extractLighthouseMetrics(data.categories);
-
-  return {
-    metrics: lighthouseMetrics,
-    report: { [url]: htmlReport },
-  };
-};
+): ProcessedLighthouseResult => ({
+  metrics: extractLighthouseMetrics(data.categories),
+  report: { [url]: shouldSaveReport ? html : false },
+});
 
 type CalculateLighthouseMetricsFn = (
   url: string,
@@ -194,88 +104,46 @@ type CalculateLighthouseMetricsFn = (
   lighthouseParameters?: LighthouseConfig,
 ) => Promise<ProcessedLighthouseResult>;
 
-const launchChrome = async () => {
-  const chromeLauncher = await import('chrome-launcher');
-  return chromeLauncher.launch({ chromeFlags: [...CHROME_FLAGS] });
-};
-
-const runLighthouse = async (
-  url: string,
-  chromePort: number,
-  lighthouseParameters: LighthouseConfig,
-): Promise<{ report: string; lhr: LighthouseLHR }> => {
-  const options = {
-    logLevel: 'silent' as const,
-    output: 'html' as const,
-    port: chromePort,
-  };
-  return lighthouse(url, options, lighthouseParameters);
-};
-
-export const calculateLighthouseMetrics = async (
-  url: string,
-  shouldSaveReport: boolean,
-  lighthouseParameters: LighthouseConfig = {},
-): Promise<ProcessedLighthouseResult> => {
-  const chrome = await launchChrome();
+export const calculateLighthouseMetrics: CalculateLighthouseMetricsFn = async (
+  url,
+  shouldSaveReport,
+  lighthouseParameters = {},
+) => {
+  const { launch } = await import('chrome-launcher');
+  const chrome = await launch({ chromeFlags: CHROME_FLAGS });
 
   try {
-    const runnerResult = await runLighthouse(url, chrome.port, lighthouseParameters);
-    return processRawLighthouseResult(
-      runnerResult.lhr,
-      runnerResult.report,
+    const { lhr, report } = await lighthouse(
       url,
-      shouldSaveReport,
+      { logLevel: 'silent', output: 'html', port: chrome.port },
+      lighthouseParameters,
     );
+    return processRawLighthouseResult(lhr, report, url, shouldSaveReport);
   } finally {
     await chrome.kill();
   }
 };
 
-const ensureOutputDirectory = async (outputPath: string): Promise<void> => {
-  try {
-    await mkdirAsync(outputPath);
-  } catch {
-    throw new Error(`Failed to create output directory: ${outputPath}`);
-  }
-};
-
-const processUrl = async (
-  url: string,
-  shouldSaveReport: boolean,
-  lighthouseParameters: LighthouseConfig,
-  calculateFn: CalculateLighthouseMetricsFn,
-): Promise<ProcessedLighthouseResult> => {
-  return calculateFn(url, shouldSaveReport, lighthouseParameters);
-};
-
-const calculateMetricsResults = async (
-  metrics: LighthouseMetrics[],
-  useSingleBadge: boolean,
-): Promise<LighthouseMetrics> => {
-  return useSingleBadge ? getSquashedScore(metrics) : getAverageScore(metrics);
-};
-
 export const processParameters = async (
   parserArgs: ParsedArgs,
-  func: CalculateLighthouseMetricsFn,
+  calculateFn: CalculateLighthouseMetricsFn,
   lighthouseParameters: LighthouseConfig = {},
 ): Promise<void> => {
-  const outputPath = parserArgs.output_path || process.cwd();
-  await ensureOutputDirectory(outputPath);
+  const outputPath = parserArgs.output_path ?? process.cwd();
+  await fs.mkdir(outputPath, { recursive: true });
 
-  const results = await Promise.all([
-    processUrl(parserArgs.url, parserArgs.save_report, lighthouseParameters, func),
+  const { metrics, report } = await calculateFn(
+    parserArgs.url,
+    parserArgs.save_report,
+    lighthouseParameters,
+  );
+
+  const scoreResults = parserArgs.single_badge
+    ? getSquashedScore([metrics])
+    : getAverageScore([metrics]);
+
+  await Promise.all([
+    htmlReportsToFile([report], outputPath),
+    metricsToSvg(scoreResults, parserArgs.badge_style, outputPath),
   ]);
-
-  const metrics = R.pluck('metrics', results) as LighthouseMetrics[];
-  const reports = R.pluck('report', results) as LighthouseReport[];
-
-  const metricsResults = await calculateMetricsResults(metrics, parserArgs.single_badge);
-
-  await generateArtifacts({
-    reports,
-    svg: { results: metricsResults, style: parserArgs.badge_style },
-    outputPath,
-  });
 };

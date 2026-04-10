@@ -10,7 +10,6 @@
         "chrome-launcher": "1.2.1",
         "clui": "^0.3.6",
         "lighthouse": "^13.1.0",
-        "ramda": "^0.32.0",
       },
       "devDependencies": {
         "@eslint/js": "^10.0.1",
@@ -527,8 +526,6 @@
     "punycode": ["punycode@2.3.1", "", {}, "sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg=="],
 
     "puppeteer-core": ["puppeteer-core@24.40.0", "", { "dependencies": { "@puppeteer/browsers": "2.13.0", "chromium-bidi": "14.0.0", "debug": "^4.4.3", "devtools-protocol": "0.0.1581282", "typed-query-selector": "^2.12.1", "webdriver-bidi-protocol": "0.4.1", "ws": "^8.19.0" } }, "sha512-MWL3XbUCfVgGR0gRsidzT6oKJT2QydPLhMITU6HoVWiiv4gkb6gJi3pcdAa8q4HwjBTbqISOWVP4aJiiyUJvag=="],
-
-    "ramda": ["ramda@0.32.0", "", {}, "sha512-GQWAHhxhxWBWA8oIBr1XahFVjQ9Fic6MK9ikijfd4TZHfE2+urfk+irVlR5VOn48uwMgM+loRRBJd6Yjsbc0zQ=="],
 
     "require-directory": ["require-directory@2.1.1", "", {}, "sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q=="],
 

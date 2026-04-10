@@ -8,13 +8,9 @@ export interface ParsedArgs {
   url: string;
 }
 
-export interface LighthouseMetrics {
-  [key: string]: number;
-}
+export type LighthouseMetrics = Record<string, number>;
 
-export interface LighthouseReport {
-  [url: string]: string | false;
-}
+export type LighthouseReport = Record<string, string | false>;
 
 export interface ProcessedLighthouseResult {
   metrics: LighthouseMetrics;
@@ -32,12 +28,7 @@ export interface LighthouseConfig {
   [key: string]: unknown;
 }
 
-export interface LighthouseCategories {
-  [category: string]: {
-    score: number;
-    [key: string]: unknown;
-  };
-}
+export type LighthouseCategories = Record<string, { score: number; [key: string]: unknown }>;
 
 export interface LighthouseLHR {
   categories: LighthouseCategories;
@@ -53,4 +44,3 @@ export interface Spinner {
   start: () => void;
   stop: () => void;
 }
-
