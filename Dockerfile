@@ -20,8 +20,8 @@ LABEL maintainer="hello@mazzotta.me" \
 
 WORKDIR /home/lighthouse
 
-COPY dist/package.json dist/bun.lockb* ./
-RUN bun install --frozen-lockfile && \
+COPY dist/package.json dist/bun.lock ./
+RUN bun install --frozen-lockfile --production && \
     rm -rf /root/.bun
 
 COPY dist .
