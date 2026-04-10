@@ -1,8 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-readonly DIST_PACKAGE_JSON="dist/package.json"
-
 main() {
     local registry_name="${1:-}"
 
@@ -11,14 +9,9 @@ main() {
         exit 1
     fi
 
-    if [ ! -f "$DIST_PACKAGE_JSON" ]; then
-        echo "Error: $DIST_PACKAGE_JSON not found - run 'bun run build' first" >&2
-        exit 1
-    fi
-
     local package_name current_version registry_version
-    package_name=$(jq -r '.name' "$DIST_PACKAGE_JSON")
-    current_version=$(jq -r '.version' "$DIST_PACKAGE_JSON")
+    package_name=$(jq -r '.name' package.json)
+    current_version=$(jq -r '.version' package.json)
     registry_version=$(npm show "$package_name" version 2>/dev/null || echo '')
 
     if [ "$registry_version" = "$current_version" ]; then
