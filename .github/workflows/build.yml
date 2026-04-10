@@ -8,6 +8,7 @@ on:
 
 env:
   TAG_PREFIX: emazzotta/lighthouse-badges
+  BUN_VERSION: 1.3.12
 
 permissions:
   id-token: write
@@ -24,15 +25,15 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: ${{ env.BUN_VERSION }}
 
-      - name: Cache bun modules
+      - name: Cache bun dependencies
         uses: actions/cache@v5
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-bun-modules-${{ hashFiles('**/bun.lock') }}
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-bun-modules-
+            ${{ runner.os }}-bun-
 
       - name: Install, Lint, Build
         run: |
@@ -41,16 +42,17 @@ jobs:
           bun run build
 
       - name: Unit & Integration Test
-        run: bun run test
+        run: bun run test:coverage
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
 
       - name: System Test
         run: bun run system-test:light-run
-
-      - name: Install and Run Codecov Uploader
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov
 
       - name: Upload dist artifact
         uses: actions/upload-artifact@v6
@@ -68,15 +70,15 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: ${{ env.BUN_VERSION }}
 
-      - name: Cache bun modules
+      - name: Cache bun dependencies
         uses: actions/cache@v5
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-bun-modules-${{ hashFiles('**/bun.lock') }}
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-bun-modules-
+            ${{ runner.os }}-bun-
 
       - name: Install and Build
         run: |
@@ -131,8 +133,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set Environment Variables
-        run: echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      - name: Resolve image tags
+        run: |
+          echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          echo "PACKAGE_VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
 
       - name: Build and push multi-arch image
         uses: docker/build-push-action@v6
@@ -143,6 +147,7 @@ jobs:
           push: true
           tags: |
             ${{ env.TAG_PREFIX }}:latest
+            ${{ env.TAG_PREFIX }}:${{ env.PACKAGE_VERSION }}
             ${{ env.TAG_PREFIX }}:${{ env.GIT_SHA }}
           cache-from: |
             type=gha,scope=linux/amd64
@@ -164,15 +169,15 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: ${{ env.BUN_VERSION }}
 
-      - name: Cache bun modules
+      - name: Cache bun dependencies
         uses: actions/cache@v5
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-bun-modules-${{ hashFiles('**/bun.lock') }}
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-bun-modules-
+            ${{ runner.os }}-bun-
 
       - name: Install
         run: bun install --frozen-lockfile

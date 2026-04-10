@@ -29,6 +29,7 @@
     "system-test:light-run": "bun run clean && bun run build && bun run run:local && bun run system-test:verify",
     "system-test:verify": "[ -z ${EXEC_PATH} ] && EXEC_PATH=$PWD/results ; grep -q '<svg xmlns' ${EXEC_PATH}/*.svg && grep -q '<title>Lighthouse Report</title>' ${EXEC_PATH}/*.html",
     "test": "bun test",
+    "test:coverage": "bun test --coverage --coverage-reporter=lcov --coverage-dir=coverage",
     "test:all": "bun run test && bun run system-test:full-run",
     "upgrade": "bunx npm-check-updates -i && bun install && bun update && bun run pre-push"
   },
