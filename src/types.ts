@@ -28,16 +28,9 @@ export interface LighthouseConfig {
   [key: string]: unknown;
 }
 
-export type LighthouseCategories = Record<string, { score: number; [key: string]: unknown }>;
-
 export interface LighthouseLHR {
-  categories: LighthouseCategories;
+  categories: Record<string, { score: number; [key: string]: unknown }>;
   [key: string]: unknown;
-}
-
-export interface LighthouseRunnerResult {
-  report: string;
-  lhr: LighthouseLHR;
 }
 
 export interface Spinner {
