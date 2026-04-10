@@ -8,35 +8,23 @@ const COLOR_THRESHOLDS: ReadonlyArray<readonly [number, string]> = [
   [40, 'orange'],
 ];
 
-const POOR_COLOR = 'red';
+const sum = (values: number[]): number => values.reduce((a, b) => a + b, 0);
+
+const average = (values: number[]): number => Math.round(sum(values) / values.length);
 
 export const percentageToColor = (percentage: number): string =>
-  COLOR_THRESHOLDS.find(([threshold]) => percentage >= threshold)?.[1] ?? POOR_COLOR;
-
-const averageByCategory = (category: string, metrics: LighthouseMetrics[]): number => {
-  const sum = metrics.reduce((total, metric) => total + (metric[category] ?? 0), 0);
-  return Math.round(sum / metrics.length);
-};
+  COLOR_THRESHOLDS.find(([threshold]) => percentage >= threshold)?.[1] ?? 'red';
 
 export const getAverageScore = (metrics: LighthouseMetrics[]): LighthouseMetrics => {
   const [head] = metrics;
   if (!head) return {};
 
   return Object.fromEntries(
-    Object.keys(head).map((category) => [category, averageByCategory(category, metrics)]),
+    Object.keys(head).map((category) => [category, average(metrics.map((m) => m[category] ?? 0))]),
   );
 };
 
 export const getSquashedScore = (metrics: LighthouseMetrics[]): LighthouseMetrics => {
-  const [head] = metrics;
-  if (!head) return { lighthouse: 0 };
-
-  const totalScore = metrics.reduce(
-    (sum, metric) => sum + Object.values(metric).reduce((a, b) => a + b, 0),
-    0,
-  );
-  const totalCategories = Object.keys(head).length;
-  const averageScore = totalScore / (metrics.length * totalCategories);
-
-  return { lighthouse: Math.round(averageScore) };
+  const allScores = metrics.flatMap((m) => Object.values(m));
+  return { lighthouse: allScores.length === 0 ? 0 : average(allScores) };
 };

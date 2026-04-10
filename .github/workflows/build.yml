@@ -184,7 +184,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
 
       - name: Publish to GitHub Packages
-        run: scripts/publish-if-new-version.sh "GitHub Packages"
+        run: scripts/util.sh publish-if-new "GitHub Packages"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -200,4 +200,4 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Publish to npm.js Registry
-        run: scripts/publish-if-new-version.sh "npm.js"
+        run: scripts/util.sh publish-if-new "npm.js"

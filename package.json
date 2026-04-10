@@ -1,6 +1,6 @@
 {
   "name": "@emazzotta/lighthouse-badges",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "🚦Generate gh-badges (shields.io) based on Lighthouse performance.",
   "main": "dist/src/index.js",
   "bin": {
@@ -8,9 +8,9 @@
   },
   "type": "module",
   "scripts": {
-    "app:install": "bun run build && bash scripts/install-global.sh",
+    "app:install": "bun run build && scripts/util.sh install",
     "app:reinstall": "bun run app:uninstall && bun run app:install",
-    "app:uninstall": "bash scripts/uninstall-global.sh",
+    "app:uninstall": "scripts/util.sh uninstall",
     "build": "bun run build:prepare && bun run build:compile && bun run build:copy-declarations",
     "build:compile": "tsc",
     "build:copy-declarations": "cp src/*.d.ts dist/src/ 2>/dev/null || true",
