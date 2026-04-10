@@ -1,6 +1,4 @@
-.git
-.idea
-__tests__
-coverage
-hooks
-node_modules
+*
+!Dockerfile
+!dist
+!dist/**

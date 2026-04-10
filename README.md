@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/emazzotta/lighthouse-badges/workflows/build/badge.svg)](https://github.com/emazzotta/lighthouse-badges/actions)
+[![Build Status](https://github.com/emazzotta/lighthouse-badges/actions/workflows/build.yml/badge.svg)](https://github.com/emazzotta/lighthouse-badges/actions/workflows/build.yml)
 [![NPM downloads](https://img.shields.io/npm/dt/lighthouse-badges?color=blue)](https://www.npmjs.org/package/lighthouse-badges)
 [![NPM version](https://img.shields.io/npm/v/lighthouse-badges.svg)](https://www.npmjs.org/package/lighthouse-badges)
 [![License](https://img.shields.io/:license-mit-blue.svg?style=flat)](https://emanuelemazzotta.com/mit-license)

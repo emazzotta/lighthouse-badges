@@ -66,6 +66,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
       - name: Download dist artifact
         uses: actions/download-artifact@v7
         with:
@@ -90,9 +95,7 @@ jobs:
           provenance: false
 
       - name: Docker System Test
-        run: |
-          docker run ${{ env.TAG_PREFIX }}:latest /bin/sh -c \
-            'lighthouse-badges -rsu https://google.com && cd /home/lighthouse && EXEC_PATH=/home/chrome/reports bun run system-test:verify'
+        run: bun run docker:system-test:run
 
   docker-deploy:
     runs-on: ubuntu-latest
@@ -151,6 +154,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Download dist artifact
         uses: actions/download-artifact@v7
