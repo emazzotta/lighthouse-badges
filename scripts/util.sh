@@ -8,7 +8,7 @@ readonly PROJECT_ROOT
 
 install_global() {
     cd "$PROJECT_ROOT/dist"
-    bun install -g .
+    bun link
 }
 
 uninstall_global() {
