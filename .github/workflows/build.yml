@@ -9,6 +9,7 @@ on:
 env:
   TAG_PREFIX: emazzotta/lighthouse-badges
   BUN_VERSION: 1.3.12
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 permissions:
   id-token: write
