@@ -6,7 +6,7 @@
       "name": "@emazzotta/lighthouse-badges",
       "dependencies": {
         "argparse": "2.0.1",
-        "badge-maker": "^5.0.2",
+        "badge-maker": "^6.0.0",
         "chrome-launcher": "1.2.1",
         "clui": "^0.3.6",
         "lighthouse": "^13.4.0",
@@ -204,7 +204,7 @@
 
     "axe-core": ["axe-core@4.12.1", "", {}, "sha512-s7iGf5GaVMxEG0ENN9x+xTr7GFZCb1ZP/1uATUpCEK2X78nDB3RwbtFCo9pGAf9ru+VwoQ464DkaLEeRM08wJA=="],
 
-    "badge-maker": ["badge-maker@5.0.2", "", { "dependencies": { "anafanafo": "2.0.0", "css-color-converter": "^2.0.0" }, "bin": { "badge": "lib/badge-cli.js" } }, "sha512-Xd3YUmKPEShQcn6PFB03Wxq0RNJRFwVVroyRz0qIjSXwniYUGsGWNHqtNsQYi/Sbs8Ni7qAEf7LKgDOtcAoCDg=="],
+    "badge-maker": ["badge-maker@6.0.0", "", { "dependencies": { "anafanafo": "2.0.0", "css-color-converter": "^2.0.0" }, "bin": { "badge": "lib/badge-cli.js" } }, "sha512-+P5EsfmFWAR2cA9M0q20pa4OVOgnOXZkfRYUkQYHanECXCIg10ZnSBzelfBtEjt03b4Vac/yC1h55/wJPLmaOg=="],
 
     "balanced-match": ["balanced-match@4.0.4", "", {}, "sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA=="],
 
