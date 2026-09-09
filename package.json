@@ -64,7 +64,7 @@
     "eslint": "^10.9.1",
     "globals": "^17.11.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.4.1",
+    "lint-staged": "^17.5.0",
     "typescript": "^6.0.3"
   },
   "engines": {
