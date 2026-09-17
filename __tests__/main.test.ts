@@ -10,7 +10,7 @@ describe('handleUserInput', () => {
     stop: () => events.push('spinner.stop'),
   };
   const args: ParsedArgs = { url: 'https://example.org', single_badge: false, badge_style: 'flat', save_report: false };
-  const result: ProcessedLighthouseResult = { metrics: { 'lighthouse performance': 100 }, report: { 'https://example.org': false } };
+  const result: ProcessedLighthouseResult = { metrics: { 'lighthouse performance': 100 } };
   const stderrWrite = process.stderr.write;
   const processExit = process.exit;
 
