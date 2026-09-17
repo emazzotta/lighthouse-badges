@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import handleUserInput from './main.js';
-import CLI from 'clui';
+import { createSpinner } from './spinner.js';
 
-const spinner = new CLI.Spinner('Running Lighthouse, please wait...', ['◜', '◠', '◝', '◞', '◡', '◟']);
-await handleUserInput(spinner);
+await handleUserInput(createSpinner('Running Lighthouse, please wait...'));
