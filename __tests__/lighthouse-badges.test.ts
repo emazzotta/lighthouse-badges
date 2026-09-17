@@ -30,7 +30,7 @@ function getTestFiles(): string[] {
   return [];
 }
 
-describe('test lighthouse badges', () => {
+describe('lighthouse-badges', () => {
   beforeEach(() => {
     cleanupTestFiles();
     if (!fs.existsSync(TEST_OUTPUT_DIR)) {

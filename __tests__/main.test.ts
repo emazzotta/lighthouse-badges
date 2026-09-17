@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, mock } from 'bun:test';
 import type { Spinner, ParsedArgs, ProcessedLighthouseResult } from '../src/types';
 import handleUserInput from '../src/main.js';
 
-describe('test index', () => {
+describe('handleUserInput', () => {
   let stderrOutput = '';
   let events: string[] = [];
   const spinnerFake: Spinner = {
