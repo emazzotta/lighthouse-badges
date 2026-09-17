@@ -8,7 +8,7 @@ import {
   saveArtifacts,
   saveHtmlReport,
 } from '../src/lighthouse-badges';
-import parser from '../src/argparser';
+import { parseArgs } from '../src/argparser';
 import reportFixture from '../assets/report/emanuelemazzotta.com.json';
 import type { LighthouseLHR, LighthouseMetrics } from '../src/types';
 
@@ -104,14 +104,14 @@ describe('test lighthouse badges', () => {
   describe('the output path is prepared', () => {
     it('should create the output path when it is given', async () => {
       const outputPath = path.join(TEST_OUTPUT_DIR, 'nested');
-      const args = parser.parse_args(['--url', 'https://example.org', '--output-path', outputPath]);
+      const args = parseArgs(['--url', 'https://example.org', '--output-path', outputPath]);
 
       expect(await prepareOutputPath(args)).toBe(outputPath);
       expect(fs.existsSync(outputPath)).toBe(true);
     });
 
     it('should default to the working directory', async () => {
-      const args = parser.parse_args(['--url', 'https://example.org']);
+      const args = parseArgs(['--url', 'https://example.org']);
 
       expect(await prepareOutputPath(args)).toBe(process.cwd());
     });
@@ -119,7 +119,7 @@ describe('test lighthouse badges', () => {
 
   describe('the artifacts are saved for the parsed arguments', () => {
     it('should create single badge with report', async () => {
-      const args = parser.parse_args([
+      const args = parseArgs([
         '--single-badge',
         '--save-report',
         '--url', 'https://example.org',
@@ -136,7 +136,7 @@ describe('test lighthouse badges', () => {
     });
 
     it('should create multiple badges with report', async () => {
-      const args = parser.parse_args([
+      const args = parseArgs([
         '--save-report',
         '--url', 'https://example.org',
         '--output-path', TEST_OUTPUT_DIR,
@@ -150,7 +150,7 @@ describe('test lighthouse badges', () => {
     });
 
     it('should create single badge without report', async () => {
-      const args = parser.parse_args([
+      const args = parseArgs([
         '--single-badge',
         '--url', 'https://example.org',
         '--output-path', TEST_OUTPUT_DIR,
@@ -165,7 +165,7 @@ describe('test lighthouse badges', () => {
     });
 
     it('should create multiple badges without report', async () => {
-      const args = parser.parse_args([
+      const args = parseArgs([
         '--url', 'https://example.org',
         '--output-path', TEST_OUTPUT_DIR,
       ]);

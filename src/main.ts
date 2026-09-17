@@ -4,7 +4,7 @@ import {
   prepareOutputPath,
   saveArtifacts as defaultSave,
 } from './lighthouse-badges.js';
-import parser from './argparser.js';
+import { parseArgs as defaultParseArgs } from './argparser.js';
 import type { Spinner, LighthouseConfig } from './types.js';
 
 const DEFAULT_LIGHTHOUSE_CONFIG: LighthouseConfig = { extends: 'lighthouse:default' };
@@ -25,7 +25,7 @@ const loadLighthouseConfig = async (): Promise<LighthouseConfig> => {
 interface Dependencies {
   saveArtifacts?: typeof defaultSave;
   calculateLighthouseMetrics?: typeof defaultCalculate;
-  parseArgs?: typeof parser.parse_args;
+  parseArgs?: typeof defaultParseArgs;
 }
 
 const withSpinner = async <T>(spinner: Spinner, task: () => Promise<T>): Promise<T> => {
@@ -38,7 +38,7 @@ const withSpinner = async <T>(spinner: Spinner, task: () => Promise<T>): Promise
 };
 
 const handleUserInput = async (spinner: Spinner, deps: Dependencies = {}): Promise<void> => {
-  const parseArgs = deps.parseArgs ?? parser.parse_args;
+  const parseArgs = deps.parseArgs ?? defaultParseArgs;
   const calculate = deps.calculateLighthouseMetrics ?? defaultCalculate;
   const save = deps.saveArtifacts ?? defaultSave;
 

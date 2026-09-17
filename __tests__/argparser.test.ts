@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'bun:test';
-import parser from '../src/argparser';
+import { parseArgs } from '../src/argparser';
 
 describe('test argparser', () => {
   const baseUrl = 'https://emanuelemazzotta.com';
 
   it('should return expected default values', () => {
-    const actualArgs = parser.parse_args(['--url', baseUrl]);
+    const actualArgs = parseArgs(['--url', baseUrl]);
     expect(actualArgs.single_badge).toBe(false);
     expect(actualArgs.badge_style).toBe('flat');
     expect(actualArgs.save_report).toBe(false);
@@ -13,7 +13,7 @@ describe('test argparser', () => {
   });
 
   it('should overwrite values', () => {
-    const actualArgs = parser.parse_args([
+    const actualArgs = parseArgs([
       '--single-badge',
       '--save-report',
       '--badge-style', 'flat-square',

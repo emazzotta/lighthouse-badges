@@ -51,6 +51,4 @@ parser
     help: 'The lighthouse badge(s) will contain the score(s) of the supplied url',
   });
 
-export default {
-  parse_args: (args?: string[]): ParsedArgs => parser.parse_args(args) as unknown as ParsedArgs,
-};
+export const parseArgs = (args?: string[]): ParsedArgs => parser.parse_args(args) as ParsedArgs;
