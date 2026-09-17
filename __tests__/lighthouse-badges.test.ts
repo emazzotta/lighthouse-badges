@@ -2,15 +2,15 @@ import { describe, it, expect, beforeEach, afterEach } from 'bun:test';
 import fs from 'fs';
 import path from 'path';
 import {
-  htmlReportsToFile,
   metricsToSvg,
   prepareOutputPath,
   processRawLighthouseResult,
   saveArtifacts,
+  saveHtmlReport,
 } from '../src/lighthouse-badges';
 import parser from '../src/argparser';
 import reportFixture from '../assets/report/emanuelemazzotta.com.json';
-import type { LighthouseLHR, LighthouseMetrics, LighthouseReport } from '../src/types';
+import type { LighthouseLHR, LighthouseMetrics } from '../src/types';
 
 // Use a temporary directory for test outputs
 const TEST_OUTPUT_DIR = path.join(process.cwd(), '__test_output__');
@@ -43,70 +43,41 @@ describe('test lighthouse badges', () => {
   });
 
   describe('the lighthouse command results are processed as expected', () => {
-    it('should return correct metrics and no report', async () => {
-      const url = 'https://emanuelemazzotta.com';
-      const shouldSaveReport = false;
-      const result = await processRawLighthouseResult(reportFixture as LighthouseLHR, '', url, shouldSaveReport);
-      expect({
-        metrics: {
-          'lighthouse performance': 98,
-          'lighthouse pwa': 85,
-          'lighthouse accessibility': 100,
-          'lighthouse best-practices': 93,
-          'lighthouse seo': 100,
-        },
-        report: {
-          [url]: false,
-        },
-      }).toStrictEqual(result);
+    const expectedMetrics = {
+      'lighthouse performance': 98,
+      'lighthouse pwa': 85,
+      'lighthouse accessibility': 100,
+      'lighthouse best-practices': 93,
+      'lighthouse seo': 100,
+    };
+
+    it('should return integer percentages and no report', () => {
+      const result = processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://emanuelemazzotta.com', false);
+
+      expect(result).toStrictEqual({ metrics: expectedMetrics });
     });
 
-    it('should return correct metrics and a valid report', async () => {
-      const expectedHtmlReport = '<html>Fake report</html>';
+    it('should return the report for its url when it should be saved', () => {
       const url = 'https://emanuelemazzotta.com';
-      const shouldSaveReport = true;
-      const result = await processRawLighthouseResult(
-        reportFixture as LighthouseLHR,
-        expectedHtmlReport,
-        url,
-        shouldSaveReport,
-      );
-      expect({
-        metrics: {
-          'lighthouse performance': 98,
-          'lighthouse pwa': 85,
-          'lighthouse accessibility': 100,
-          'lighthouse best-practices': 93,
-          'lighthouse seo': 100,
-        },
-        report: {
-          [url]: expectedHtmlReport,
-        },
-      }).toStrictEqual(result);
+      const html = '<html>Fake report</html>';
+
+      const result = processRawLighthouseResult(reportFixture as LighthouseLHR, html, url, true);
+
+      expect(result).toStrictEqual({ metrics: expectedMetrics, report: { url, html } });
+    });
+
+    it('should round a fractional percentage', () => {
+      const lhr = { categories: { performance: { score: 0.955 } } };
+
+      expect(processRawLighthouseResult(lhr, '', 'https://example.org', false).metrics).toStrictEqual({ 'lighthouse performance': 96 });
     });
   });
 
-  describe('the html reports are saved correctly', () => {
-    it('should save html report', async () => {
-      const htmlReports: LighthouseReport[] = [
-        { 'https://emanuelemazzotta.com': 'a report' },
-        { 'https://emanuelemazzotta.com/cv': 'another report' },
-      ];
-      await htmlReportsToFile(htmlReports, TEST_OUTPUT_DIR);
+  describe('the html report is saved correctly', () => {
+    it('should save the report under the escaped url', async () => {
+      await saveHtmlReport(TEST_OUTPUT_DIR, { url: 'https://emanuelemazzotta.com/cv', html: 'a report' });
 
-      const files = getTestFiles();
-      expect(files.length).toBe(2);
-      expect(files.some(f => f.includes('emanuelemazzotta_com'))).toBe(true);
-      expect(files.some(f => f.includes('emanuelemazzotta_com_cv'))).toBe(true);
-    });
-
-    it('should not save html report if toggle is false', async () => {
-      const htmlReports: LighthouseReport[] = [
-        { 'https://example.com': false },
-        { 'https://example2.com': false },
-      ];
-      await htmlReportsToFile(htmlReports, TEST_OUTPUT_DIR);
-      expect(getTestFiles().length).toBe(0);
+      expect(getTestFiles()).toStrictEqual(['emanuelemazzotta_com_cv.html']);
     });
   });
 

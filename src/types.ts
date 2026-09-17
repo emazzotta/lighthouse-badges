@@ -10,11 +10,14 @@ export interface ParsedArgs {
 
 export type LighthouseMetrics = Record<string, number>;
 
-export type LighthouseReport = Record<string, string | false>;
+export interface HtmlReport {
+  readonly url: string;
+  readonly html: string;
+}
 
 export interface ProcessedLighthouseResult {
-  metrics: LighthouseMetrics;
-  report: LighthouseReport;
+  readonly metrics: LighthouseMetrics;
+  readonly report?: HtmlReport;
 }
 
 export interface LighthouseConfig {

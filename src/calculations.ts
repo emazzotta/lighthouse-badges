@@ -15,16 +15,7 @@ const average = (values: number[]): number => Math.round(sum(values) / values.le
 export const percentageToColor = (percentage: number): string =>
   COLOR_THRESHOLDS.find(([threshold]) => percentage >= threshold)?.[1] ?? 'red';
 
-export const getAverageScore = (metrics: LighthouseMetrics[]): LighthouseMetrics => {
-  const [head] = metrics;
-  if (!head) return {};
-
-  return Object.fromEntries(
-    Object.keys(head).map((category) => [category, average(metrics.map((m) => m[category] ?? 0))]),
-  );
-};
-
-export const getSquashedScore = (metrics: LighthouseMetrics[]): LighthouseMetrics => {
-  const allScores = metrics.flatMap((m) => Object.values(m));
-  return { lighthouse: allScores.length === 0 ? 0 : average(allScores) };
+export const squashScores = (metrics: LighthouseMetrics): LighthouseMetrics => {
+  const scores = Object.values(metrics);
+  return { lighthouse: scores.length === 0 ? 0 : average(scores) };
 };

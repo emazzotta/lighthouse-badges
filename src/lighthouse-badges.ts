@@ -3,10 +3,10 @@ import fs from 'fs/promises';
 import { makeBadge } from 'badge-maker';
 import lighthouse from 'lighthouse/core/index.cjs';
 import { urlEscaper } from './util.js';
-import { getAverageScore, getSquashedScore, percentageToColor } from './calculations.js';
+import { squashScores, percentageToColor } from './calculations.js';
 import type {
+  HtmlReport,
   LighthouseMetrics,
-  LighthouseReport,
   ProcessedLighthouseResult,
   LighthouseConfig,
   LighthouseLHR,
@@ -51,23 +51,10 @@ export const metricsToSvg = async (
   );
 };
 
-const saveHtmlReport = async (outputPath: string, url: string, html: string): Promise<void> => {
+export const saveHtmlReport = async (outputPath: string, { url, html }: HtmlReport): Promise<void> => {
   const filepath = path.join(outputPath, `${urlEscaper(url)}.html`);
   await fs.writeFile(filepath, html);
   process.stdout.write(`Saved report to ${filepath}\n`);
-};
-
-export const htmlReportsToFile = async (
-  htmlReports: LighthouseReport[],
-  outputPath: string,
-): Promise<void> => {
-  await Promise.all(
-    htmlReports.flatMap((report) =>
-      Object.entries(report).flatMap(([url, content]) =>
-        typeof content === 'string' ? [saveHtmlReport(outputPath, url, content)] : [],
-      ),
-    ),
-  );
 };
 
 export const processRawLighthouseResult = (
@@ -79,10 +66,10 @@ export const processRawLighthouseResult = (
   metrics: Object.fromEntries(
     Object.entries(lhr.categories).map(([category, { score }]) => [
       `lighthouse ${category.toLowerCase()}`,
-      score * 100,
+      Math.round(score * 100),
     ]),
   ),
-  report: { [url]: shouldSaveReport ? html : false },
+  ...(shouldSaveReport ? { report: { url, html } } : {}),
 });
 
 type CalculateLighthouseMetricsFn = (
@@ -122,10 +109,10 @@ export const saveArtifacts = async (
   outputPath: string,
   { metrics, report }: ProcessedLighthouseResult,
 ): Promise<void> => {
-  const scores = args.single_badge ? getSquashedScore([metrics]) : getAverageScore([metrics]);
+  const scores = args.single_badge ? squashScores(metrics) : metrics;
 
   await Promise.all([
-    htmlReportsToFile([report], outputPath),
+    report ? saveHtmlReport(outputPath, report) : Promise.resolve(),
     metricsToSvg(scores, args.badge_style, outputPath),
   ]);
 };

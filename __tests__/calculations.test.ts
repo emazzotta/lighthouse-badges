@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { getAverageScore, getSquashedScore, percentageToColor } from '../src/calculations';
+import { squashScores, percentageToColor } from '../src/calculations';
 
 describe('calculations', () => {
   describe('percentageToColor', () => {
@@ -28,79 +28,24 @@ describe('calculations', () => {
     });
   });
 
-  describe('getAverageScore', () => {
-    it('should calculate the expected average', () => {
-      const expectedResult = {
-        'lighthouse accessibility': 60,
-        'lighthouse performance': 51,
+  describe('squashScores', () => {
+    it('should average all categories into one score', () => {
+      expect(squashScores({ 'lighthouse accessibility': 100, 'lighthouse performance': 60 })).toStrictEqual({ lighthouse: 80 });
+    });
+
+    it('should round the average to the nearest integer', () => {
+      const metrics = {
+        'lighthouse accessibility': 100,
+        'lighthouse performance': 100,
+        'lighthouse seo': 55,
+        'lighthouse best-practices': 75,
       };
-      const input = [
-        { 'lighthouse accessibility': 100, 'lighthouse performance': 52 },
-        { 'lighthouse accessibility': 20, 'lighthouse performance': 50 },
-      ];
-      const actualResult = getAverageScore(input);
-      expect(expectedResult).toStrictEqual(actualResult);
+
+      expect(squashScores(metrics)).toStrictEqual({ lighthouse: 83 });
     });
 
-    it('should round the expected average correctly', () => {
-      const expectedResult = {
-        'lighthouse accessibility': 99,
-        'lighthouse performance': 99,
-        'lighthouse progressive web app': 99,
-        'lighthouse best practices': 99,
-      };
-      const input = [
-        {
-          'lighthouse accessibility': 100,
-          'lighthouse performance': 100,
-          'lighthouse progressive web app': 100,
-          'lighthouse best practices': 100,
-        },
-        {
-          'lighthouse accessibility': 98.9,
-          'lighthouse performance': 98.9,
-          'lighthouse progressive web app': 98.9,
-          'lighthouse best practices': 98.9,
-        },
-      ];
-      const actualResult = getAverageScore(input);
-      expect(expectedResult).toStrictEqual(actualResult);
-    });
-
-    it('should return empty object for empty input', () => {
-      const result = getAverageScore([]);
-      expect(result).toStrictEqual({});
-    });
-  });
-
-  describe('getSquashedScore', () => {
-    it('should calculate the expected squashed average', () => {
-      const expectedResult = { lighthouse: 50 };
-      const input = [
-        { 'lighthouse accessibility': 100, 'lighthouse performance': 60 },
-        { 'lighthouse accessibility': 20, 'lighthouse performance': 20 },
-      ];
-      const actualResult = getSquashedScore(input);
-      expect(expectedResult).toStrictEqual(actualResult);
-    });
-
-    it('should round the expected squashed average correctly', () => {
-      const expectedResult = { lighthouse: 83 };
-      const input = [
-        {
-          'lighthouse accessibility': 100,
-          'lighthouse performance': 100,
-          'lighthouse progressive web app': 55,
-          'lighthouse best practices': 75,
-        },
-      ];
-      const actualResult = getSquashedScore(input);
-      expect(expectedResult).toStrictEqual(actualResult);
-    });
-
-    it('should return zero score for empty input', () => {
-      const result = getSquashedScore([]);
-      expect(result).toStrictEqual({ lighthouse: 0 });
+    it('should return a zero score when there are no categories', () => {
+      expect(squashScores({})).toStrictEqual({ lighthouse: 0 });
     });
   });
 });
