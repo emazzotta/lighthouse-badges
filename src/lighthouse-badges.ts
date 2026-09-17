@@ -111,15 +111,17 @@ export const calculateLighthouseMetrics: CalculateLighthouseMetricsFn = async (
   }
 };
 
-export const processParameters = async (
-  args: ParsedArgs,
-  calculateFn: CalculateLighthouseMetricsFn,
-  lighthouseParameters: LighthouseConfig = {},
-): Promise<void> => {
+export const prepareOutputPath = async (args: ParsedArgs): Promise<string> => {
   const outputPath = args.output_path ?? process.cwd();
   await fs.mkdir(outputPath, { recursive: true });
+  return outputPath;
+};
 
-  const { metrics, report } = await calculateFn(args.url, args.save_report, lighthouseParameters);
+export const saveArtifacts = async (
+  args: ParsedArgs,
+  outputPath: string,
+  { metrics, report }: ProcessedLighthouseResult,
+): Promise<void> => {
   const scores = args.single_badge ? getSquashedScore([metrics]) : getAverageScore([metrics]);
 
   await Promise.all([

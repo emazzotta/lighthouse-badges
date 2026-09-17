@@ -1,7 +1,8 @@
 import fs from 'fs/promises';
 import {
   calculateLighthouseMetrics as defaultCalculate,
-  processParameters as defaultProcess,
+  prepareOutputPath,
+  saveArtifacts as defaultSave,
 } from './lighthouse-badges.js';
 import parser from './argparser.js';
 import type { Spinner, LighthouseConfig } from './types.js';
@@ -22,27 +23,35 @@ const loadLighthouseConfig = async (): Promise<LighthouseConfig> => {
 };
 
 interface Dependencies {
-  processParameters?: typeof defaultProcess;
+  saveArtifacts?: typeof defaultSave;
   calculateLighthouseMetrics?: typeof defaultCalculate;
   parseArgs?: typeof parser.parse_args;
 }
 
+const withSpinner = async <T>(spinner: Spinner, task: () => Promise<T>): Promise<T> => {
+  spinner.start();
+  try {
+    return await task();
+  } finally {
+    spinner.stop();
+  }
+};
+
 const handleUserInput = async (spinner: Spinner, deps: Dependencies = {}): Promise<void> => {
   const parseArgs = deps.parseArgs ?? parser.parse_args;
   const calculate = deps.calculateLighthouseMetrics ?? defaultCalculate;
-  const runProcess = deps.processParameters ?? defaultProcess;
+  const save = deps.saveArtifacts ?? defaultSave;
 
-  spinner.start();
   try {
     const args = await parseArgs();
+    const outputPath = await prepareOutputPath(args);
     const lighthouseParameters = await loadLighthouseConfig();
-    await runProcess(args, calculate, lighthouseParameters);
+    const result = await withSpinner(spinner, () => calculate(args.url, args.save_report, lighthouseParameters));
+    await save(args, outputPath, result);
   } catch (err) {
     const error = err instanceof Error ? err : new Error(String(err));
     process.stderr.write(`${error}\n`);
     process.exit(1);
-  } finally {
-    spinner.stop();
   }
 };
 

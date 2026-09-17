@@ -1,31 +1,22 @@
-import { describe, it, expect, beforeEach, afterEach, mock } from 'bun:test';
+import { describe, it, expect, beforeEach, afterEach } from 'bun:test';
 import fs from 'fs';
 import path from 'path';
 import {
   htmlReportsToFile,
   metricsToSvg,
-  processParameters,
+  prepareOutputPath,
   processRawLighthouseResult,
+  saveArtifacts,
 } from '../src/lighthouse-badges';
 import parser from '../src/argparser';
 import reportFixture from '../assets/report/emanuelemazzotta.com.json';
-import type { LighthouseLHR, LighthouseMetrics, LighthouseReport, ProcessedLighthouseResult, LighthouseConfig } from '../src/types';
+import type { LighthouseLHR, LighthouseMetrics, LighthouseReport } from '../src/types';
 
 // Use a temporary directory for test outputs
 const TEST_OUTPUT_DIR = path.join(process.cwd(), '__test_output__');
 
 function cleanupTestFiles() {
-  try {
-    if (fs.existsSync(TEST_OUTPUT_DIR)) {
-      const files = fs.readdirSync(TEST_OUTPUT_DIR);
-      for (const file of files) {
-        fs.unlinkSync(path.join(TEST_OUTPUT_DIR, file));
-      }
-      fs.rmdirSync(TEST_OUTPUT_DIR);
-    }
-  } catch {
-    // Ignore cleanup errors
-  }
+  fs.rmSync(TEST_OUTPUT_DIR, { recursive: true, force: true });
 }
 
 function getTestFiles(): string[] {
@@ -139,7 +130,23 @@ describe('test lighthouse badges', () => {
     });
   });
 
-  describe('test the main process function', () => {
+  describe('the output path is prepared', () => {
+    it('should create the output path when it is given', async () => {
+      const outputPath = path.join(TEST_OUTPUT_DIR, 'nested');
+      const args = parser.parse_args(['--url', 'https://example.org', '--output-path', outputPath]);
+
+      expect(await prepareOutputPath(args)).toBe(outputPath);
+      expect(fs.existsSync(outputPath)).toBe(true);
+    });
+
+    it('should default to the working directory', async () => {
+      const args = parser.parse_args(['--url', 'https://example.org']);
+
+      expect(await prepareOutputPath(args)).toBe(process.cwd());
+    });
+  });
+
+  describe('the artifacts are saved for the parsed arguments', () => {
     it('should create single badge with report', async () => {
       const args = parser.parse_args([
         '--single-badge',
@@ -149,8 +156,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report);
-      const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
-      await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
+      await saveArtifacts(args, TEST_OUTPUT_DIR, mockResult);
 
       const files = getTestFiles();
       expect(files.length).toBe(2);
@@ -166,8 +172,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report);
-      const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
-      await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
+      await saveArtifacts(args, TEST_OUTPUT_DIR, mockResult);
 
       const files = getTestFiles();
       expect(files.length).toBe(6);
@@ -181,8 +186,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report);
-      const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
-      await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
+      await saveArtifacts(args, TEST_OUTPUT_DIR, mockResult);
 
       const files = getTestFiles();
       expect(files.length).toBe(1);
@@ -196,8 +200,7 @@ describe('test lighthouse badges', () => {
       ]);
 
       const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report);
-      const calculateLighthouseMetrics = mock(() => Promise.resolve(mockResult));
-      await processParameters(args, calculateLighthouseMetrics as (url: string, shouldSaveReport: boolean, lighthouseParameters?: LighthouseConfig) => Promise<ProcessedLighthouseResult>);
+      await saveArtifacts(args, TEST_OUTPUT_DIR, mockResult);
 
       const files = getTestFiles();
       expect(files.length).toBe(5);
