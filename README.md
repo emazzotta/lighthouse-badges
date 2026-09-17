@@ -33,22 +33,25 @@ Ever wanted to brag about your site's awesome Lighthouse performance? Then this 
 ### Help
 
 ```txt
-usage: lighthouse-badges [-h] [-v] [-s] [-b {flat,flat-square,plastic,for-the-badge,social}] [-o OUTPUT_PATH] [-r] -u URL
+usage: lighthouse-badges [-h] [-v] [-s]
+                         [-b {flat,flat-square,plastic,for-the-badge,social}]
+                         [-o OUTPUT_PATH] [-r] -u URL
 
 Generate gh-badges (shields.io) based on lighthouse performance.
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
-  -v, --version         show program's version number and exit
-  -s, --single-badge    Output only one single badge averaging all lighthouse categories' scores
+  -v, --version         Show the version of the tool
+  -s, --single-badge    Output only one single badge averaging all lighthouse
+                        categories' scores
   -b, --badge-style {flat,flat-square,plastic,for-the-badge,social}
                         Define look and feel for the badge
   -o, --output-path OUTPUT_PATH
                         Define output path for artifacts
-  -r, --save-report     Save lighthouse report as html for every supplied url
+  -r, --save-report     Save the lighthouse report as html next to the badges
 
 Required arguments:
-  -u URL, --url URL     The lighthouse badge(s) will contain the score(s) of all the supplied url
+  -u, --url URL         The url whose lighthouse scores the badge(s) will show
 ```
 
 Additionally, you can pass parameters configurations to the lighthouse process directly via environment variable path to the config file:

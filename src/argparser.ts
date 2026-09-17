@@ -11,6 +11,7 @@ const BADGE_STYLES: readonly BadgeStyle[] = [
 ];
 
 const parser = new ArgumentParser({
+  prog: 'lighthouse-badges',
   description: 'Generate gh-badges (shields.io) based on lighthouse performance.',
   add_help: true,
 });
@@ -40,7 +41,7 @@ parser.add_argument('-o', '--output-path', {
 
 parser.add_argument('-r', '--save-report', {
   action: 'store_true',
-  help: 'Save lighthouse report as html for every supplied url',
+  help: 'Save the lighthouse report as html next to the badges',
 });
 
 parser
@@ -48,7 +49,7 @@ parser
   .add_argument('-u', '--url', {
     action: 'store',
     required: true,
-    help: 'The lighthouse badge(s) will contain the score(s) of the supplied url',
+    help: 'The url whose lighthouse scores the badge(s) will show',
   });
 
 export const parseArgs = (args?: string[]): ParsedArgs => parser.parse_args(args) as ParsedArgs;
