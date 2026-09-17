@@ -8,7 +8,7 @@
 [![Lighthouse](./assets/img/lighthouse.svg)](https://github.com/GoogleChrome/lighthouse)
 
 This package allows you to easily create Lighthouse badges for all Lighthouse categories.  
-Ever wanted to brag about your sites's awesome Lighthouse performance? Then this is the package for you!  
+Ever wanted to brag about your site's awesome Lighthouse performance? Then this is the package for you!  
 
 ## Examples
 
