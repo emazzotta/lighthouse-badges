@@ -10,7 +10,7 @@
 This package allows you to easily create Lighthouse badges for all Lighthouse categories.  
 Ever wanted to brag about your site's awesome Lighthouse performance? Then this is the package for you!  
 
-[![Lighthouse Badges in 24 seconds](./assets/brag/brag.gif)](./assets/brag/brag.mp4)
+https://github.com/user-attachments/assets/63dba4d3-7148-4545-8049-a9761babfc99
 
 <sub>Music: Happy Beats - Business Moves Vol. 9 by Sascha Ende ([ende.app](https://ende.app)), CC BY 4.0</sub>
 
