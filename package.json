@@ -51,15 +51,15 @@
     "argparse": "3.0.2",
     "badge-maker": "^6.0.0",
     "chrome-launcher": "1.2.1",
-    "lighthouse": "^13.4.1"
+    "lighthouse": "^13.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/argparse": "^2.0.17",
-    "@types/node": "^26.6.1",
+    "@types/node": "^26.6.2",
     "@typescript-eslint/eslint-plugin": "^8.70.0",
     "@typescript-eslint/parser": "^8.70.0",
-    "eslint": "^10.10.0",
+    "eslint": "^10.11.0",
     "globals": "^17.12.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
