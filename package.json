@@ -50,7 +50,7 @@
   "dependencies": {
     "argparse": "3.0.2",
     "badge-maker": "^6.0.0",
-    "chrome-launcher": "1.2.1",
+    "chrome-launcher": "1.2.2",
     "lighthouse": "^13.5.0"
   },
   "devDependencies": {
