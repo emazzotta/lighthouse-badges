@@ -48,7 +48,7 @@
     "url": "https://github.com/emazzotta/lighthouse-badges.git"
   },
   "dependencies": {
-    "argparse": "3.0.2",
+    "argparse": "3.0.3",
     "badge-maker": "^6.0.0",
     "chrome-launcher": "1.2.2",
     "lighthouse": "^13.5.0"
@@ -57,9 +57,9 @@
     "@eslint/js": "^10.0.1",
     "@types/argparse": "^2.0.17",
     "@types/node": "^26.6.5",
-    "@typescript-eslint/eslint-plugin": "^8.71.1",
+    "@typescript-eslint/eslint-plugin": "^8.71.2",
     "@typescript-eslint/parser": "^8.71.2",
-    "eslint": "^10.12.0",
+    "eslint": "^10.13.0",
     "globals": "^17.13.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
