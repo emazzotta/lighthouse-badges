@@ -48,7 +48,7 @@
     "url": "https://github.com/emazzotta/lighthouse-badges.git"
   },
   "dependencies": {
-    "argparse": "3.0.3",
+    "argparse": "3.0.4",
     "badge-maker": "^6.0.0",
     "chrome-launcher": "1.2.2",
     "lighthouse": "^13.5.0"
