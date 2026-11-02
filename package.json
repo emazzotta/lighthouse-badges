@@ -51,7 +51,7 @@
     "argparse": "3.0.4",
     "badge-maker": "^6.0.0",
     "chrome-launcher": "1.2.2",
-    "lighthouse": "^13.5.0"
+    "lighthouse": "^13.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
