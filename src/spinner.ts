@@ -2,11 +2,11 @@ import type { Spinner } from './types.js';
 
 const GLYPHS = ['◜', '◠', '◝', '◞', '◡', '◟'] as const;
 const FRAME_INTERVAL_MS = 70;
-const LINE_START = '[0G';
-const CLEAR_LINE = '[2K';
-const BRIGHT_CYAN = '[96m';
-const GREY = '[90m';
-const RESET = '[0m';
+const LINE_START = '\x1b[0G';
+const CLEAR_LINE = '\x1b[2K';
+const BRIGHT_CYAN = '\x1b[96m';
+const GREY = '\x1b[90m';
+const RESET = '\x1b[0m';
 
 interface SpinnerOptions {
   readonly write?: (text: string) => void;

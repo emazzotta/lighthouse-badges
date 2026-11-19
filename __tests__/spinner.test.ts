@@ -20,8 +20,8 @@ describe('spinner', () => {
 
     const frames = written.slice(0, -1);
     expect(frames.length).toBeGreaterThanOrEqual(6);
-    expect(frames[0]).toBe('[0G  [96m◜ [90mRunning Lighthouse, please wait...[0m');
-    expect(frames[1]).toBe('[0G  [96m◠ [90mRunning Lighthouse, please wait...[0m');
+    expect(frames[0]).toBe('\x1b[0G  \x1b[96m◜ \x1b[90mRunning Lighthouse, please wait...\x1b[0m');
+    expect(frames[1]).toBe('\x1b[0G  \x1b[96m◠ \x1b[90mRunning Lighthouse, please wait...\x1b[0m');
     expect(frames[6]).toBe(frames[0]);
   });
 
@@ -32,7 +32,7 @@ describe('spinner', () => {
       setTimeout(() => spinner.stop(), FRAME_INTERVAL_MS * 3);
     }, FRAME_INTERVAL_MS * 20);
 
-    expect(written.at(-1)).toBe('[0G[2K');
+    expect(written.at(-1)).toBe('\x1b[0G\x1b[2K');
     expect(written.length).toBeLessThan(10);
   });
 });
