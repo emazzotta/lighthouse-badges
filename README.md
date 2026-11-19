@@ -56,10 +56,10 @@ Additionally, you can pass parameters configurations to the lighthouse process d
 
 ```bash
 # The variable name matters, but the path can be anything
-export LIGHTHOUSE_BADGES_CONFIGURATION_PATH="~/.lhb-config.json" 
+export LIGHTHOUSE_BADGES_CONFIGURATION_PATH="$HOME/.lhb-config.json"
 
 # "extends": "lighthouse:default" is needed, the rest is optional
-cat << EOF >! $LIGHTHOUSE_BADGES_CONFIGURATION_PATH
+cat >| "$LIGHTHOUSE_BADGES_CONFIGURATION_PATH" << 'EOF'
 {
   "extends": "lighthouse:default",
   "settings": {
@@ -68,7 +68,7 @@ cat << EOF >! $LIGHTHOUSE_BADGES_CONFIGURATION_PATH
     },
     "onlyCategories": [
       "performance",
-      "pwa"
+      "seo"
     ],
     "formFactor": "mobile"
   }
