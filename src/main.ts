@@ -1,9 +1,5 @@
 import fs from 'fs/promises';
-import {
-  calculateLighthouseMetrics as defaultCalculate,
-  prepareOutputPath,
-  saveArtifacts as defaultSave,
-} from './lighthouse-badges.js';
+import { calculateLighthouseMetrics as defaultCalculate, saveArtifacts as defaultSave } from './lighthouse-badges.js';
 import { parseArgs as defaultParseArgs } from './argparser.js';
 import type { Spinner, LighthouseConfig } from './types.js';
 
@@ -49,10 +45,9 @@ const handleUserInput = async (spinner: Spinner, deps: Dependencies = {}): Promi
 
   try {
     const args = parseArgs();
-    const outputPath = await prepareOutputPath(args);
     const lighthouseParameters = await loadLighthouseConfig();
     const result = await withSpinner(spinner, () => calculate(args.url, args.save_report, lighthouseParameters));
-    await save(args, outputPath, result);
+    await save(args, result);
   } catch (err) {
     process.stderr.write(`${formatError(err)}\n`);
     process.exit(1);

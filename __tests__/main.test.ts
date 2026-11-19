@@ -1,4 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, mock } from 'bun:test';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
 import type { Spinner, ParsedArgs, ProcessedLighthouseResult } from '../src/types';
 import handleUserInput from '../src/main.js';
 
@@ -76,6 +79,17 @@ describe('handleUserInput', () => {
     expect(events).toEqual(['spinner.start', 'spinner.stop']);
     expect(saveArtifacts).not.toHaveBeenCalled();
     expect(stderrOutput.includes('Error: Async error')).toBe(true);
+    expect(exitCodes).toEqual([1]);
+  });
+
+  it('should not create the output directory when lighthouse fails', async () => {
+    const outputPath = path.join(os.tmpdir(), `lighthouse-badges-${process.pid}-${Date.now()}`);
+    const parseArgs = mock(() => ({ ...args, output_path: outputPath }));
+    const calculateLighthouseMetrics = mock(() => Promise.reject(new Error('Async error')));
+
+    await handleUserInput(spinnerFake, { parseArgs, calculateLighthouseMetrics });
+
+    expect(fs.existsSync(outputPath)).toBe(false);
     expect(exitCodes).toEqual([1]);
   });
 
