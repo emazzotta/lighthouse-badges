@@ -39,14 +39,6 @@ export default [
     },
   },
   {
-    files: ["**/__tests__/**/*.ts", "**/*.test.ts", "**/*.spec.ts"],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-      },
-    },
-  },
-  {
     files: ["**/*.js"],
     rules: {
       "no-underscore-dangle": ["warn", { "allow": ["__filename", "__dirname"] }],
