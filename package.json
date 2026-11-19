@@ -32,17 +32,6 @@
     "test:all": "bun run test && bun run system-test:full-run",
     "upgrade": "bunx npm-check-updates -i && bun install && bun update && bun run pre-push"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts}": [
-      "bun run lint:fix",
-      "bun run test"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/emazzotta/lighthouse-badges.git"
@@ -60,8 +49,6 @@
     "@typescript-eslint/parser": "^8.73.0",
     "eslint": "^10.15.0",
     "globals": "^17.14.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.6.1",
     "typescript": "^6.0.3"
   },
   "engines": {
