@@ -78,4 +78,17 @@ describe('handleUserInput', () => {
     expect(stderrOutput.includes('Error: Async error')).toBe(true);
     expect(exitCodes).toEqual([1]);
   });
+
+  it('should print the cause when the lighthouse configuration cannot be read', async () => {
+    process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH = '/nonexistent/lighthouse-badges-config.json';
+    const parseArgs = mock(() => args);
+    const calculateLighthouseMetrics = mock(() => Promise.resolve(result));
+
+    await handleUserInput(spinnerFake, { parseArgs, calculateLighthouseMetrics });
+
+    expect(stderrOutput).toContain('Failed to load Lighthouse configuration from /nonexistent/lighthouse-badges-config.json');
+    expect(stderrOutput).toContain('Caused by: Error: ENOENT');
+    expect(calculateLighthouseMetrics).not.toHaveBeenCalled();
+    expect(exitCodes).toEqual([1]);
+  });
 });

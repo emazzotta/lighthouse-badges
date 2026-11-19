@@ -37,6 +37,11 @@ const withSpinner = async <T>(spinner: Spinner, task: () => Promise<T>): Promise
   }
 };
 
+const formatError = (err: unknown): string => {
+  const error = err instanceof Error ? err : new Error(String(err));
+  return error.cause === undefined ? `${error}` : `${error}\nCaused by: ${formatError(error.cause)}`;
+};
+
 const handleUserInput = async (spinner: Spinner, deps: Dependencies = {}): Promise<void> => {
   const parseArgs = deps.parseArgs ?? defaultParseArgs;
   const calculate = deps.calculateLighthouseMetrics ?? defaultCalculate;
@@ -49,8 +54,7 @@ const handleUserInput = async (spinner: Spinner, deps: Dependencies = {}): Promi
     const result = await withSpinner(spinner, () => calculate(args.url, args.save_report, lighthouseParameters));
     await save(args, outputPath, result);
   } catch (err) {
-    const error = err instanceof Error ? err : new Error(String(err));
-    process.stderr.write(`${error}\n`);
+    process.stderr.write(`${formatError(err)}\n`);
     process.exit(1);
   }
 };
