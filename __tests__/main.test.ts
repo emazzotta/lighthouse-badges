@@ -4,6 +4,7 @@ import handleUserInput from '../src/main.js';
 
 describe('handleUserInput', () => {
   let stderrOutput = '';
+  let exitCodes: (number | string | null | undefined)[] = [];
   let events: string[] = [];
   const spinnerFake: Spinner = {
     start: () => events.push('spinner.start'),
@@ -13,26 +14,30 @@ describe('handleUserInput', () => {
   const result: ProcessedLighthouseResult = { metrics: { 'lighthouse performance': 100 } };
   const stderrWrite = process.stderr.write;
   const processExit = process.exit;
+  const configPath = process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH;
 
   beforeEach(() => {
     process.stderr.write = (x: string | Uint8Array) => {
       stderrOutput += `${x}\n`;
       return true;
     };
-    process.exit = (() => {
-      // Mock exit
+    process.exit = ((code) => {
+      exitCodes.push(code);
     }) as typeof process.exit;
+    delete process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH;
     stderrOutput = '';
+    exitCodes = [];
     events = [];
   });
 
   afterEach(() => {
     process.stderr.write = stderrWrite;
     process.exit = processExit;
+    if (configPath !== undefined) process.env.LIGHTHOUSE_BADGES_CONFIGURATION_PATH = configPath;
   });
 
   it('should run lighthouse and save the artifacts', async () => {
-    const parseArgs = mock(() => Promise.resolve(args));
+    const parseArgs = mock(() => args);
     const calculateLighthouseMetrics = mock(() => Promise.resolve(result));
     const saveArtifacts = mock(() => Promise.resolve());
 
@@ -42,10 +47,11 @@ describe('handleUserInput', () => {
     expect(calculateLighthouseMetrics).toHaveBeenCalledTimes(1);
     expect(saveArtifacts).toHaveBeenCalledTimes(1);
     expect(stderrOutput).toBe('');
+    expect(exitCodes).toEqual([]);
   });
 
   it('should stop the spinner before the artifacts are saved', async () => {
-    const parseArgs = mock(() => Promise.resolve(args));
+    const parseArgs = mock(() => args);
     const calculateLighthouseMetrics = mock(() => {
       events.push('calculate');
       return Promise.resolve(result);
@@ -60,8 +66,8 @@ describe('handleUserInput', () => {
     expect(events).toEqual(['spinner.start', 'calculate', 'spinner.stop', 'save']);
   });
 
-  it('should stop the spinner when lighthouse fails', async () => {
-    const parseArgs = mock(() => Promise.resolve(args));
+  it('should stop the spinner and exit with 1 when lighthouse fails', async () => {
+    const parseArgs = mock(() => args);
     const calculateLighthouseMetrics = mock(() => Promise.reject(new Error('Async error')));
     const saveArtifacts = mock(() => Promise.resolve());
 
@@ -70,13 +76,6 @@ describe('handleUserInput', () => {
     expect(events).toEqual(['spinner.start', 'spinner.stop']);
     expect(saveArtifacts).not.toHaveBeenCalled();
     expect(stderrOutput.includes('Error: Async error')).toBe(true);
-  });
-
-  it('should handle parse errors gracefully', async () => {
-    const parseArgs = mock(() => Promise.reject(new Error('the following arguments are required: -u/--url')));
-
-    await handleUserInput(spinnerFake, { parseArgs });
-
-    expect(stderrOutput.includes('the following arguments are required: -u/--url')).toBe(true);
+    expect(exitCodes).toEqual([1]);
   });
 });

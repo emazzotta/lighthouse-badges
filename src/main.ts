@@ -43,7 +43,7 @@ const handleUserInput = async (spinner: Spinner, deps: Dependencies = {}): Promi
   const save = deps.saveArtifacts ?? defaultSave;
 
   try {
-    const args = await parseArgs();
+    const args = parseArgs();
     const outputPath = await prepareOutputPath(args);
     const lighthouseParameters = await loadLighthouseConfig();
     const result = await withSpinner(spinner, () => calculate(args.url, args.save_report, lighthouseParameters));
