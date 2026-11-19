@@ -15,12 +15,10 @@ import type {
   BadgeStyle,
 } from './types.js';
 
-const CHROME_FLAGS = [
-  '--headless',
-  '--no-sandbox',
-  '--disable-gpu',
-  '--disable-dev-shm-usage',
-];
+const CHROME_FLAGS = ['--headless', '--disable-gpu', '--disable-dev-shm-usage'];
+
+export const buildChromeFlags = (env: NodeJS.ProcessEnv = process.env): string[] =>
+  env.LIGHTHOUSE_BADGES_DISABLE_SANDBOX === 'true' ? [...CHROME_FLAGS, '--no-sandbox'] : [...CHROME_FLAGS];
 
 const saveBadge = async (
   outputPath: string,
@@ -110,7 +108,7 @@ export const calculateLighthouseMetrics: CalculateLighthouseMetricsFn = async (
 ) => {
   const { launch } = await import('chrome-launcher');
   const { default: lighthouse } = await import('lighthouse');
-  const chrome = await launch({ chromeFlags: CHROME_FLAGS });
+  const chrome = await launch({ chromeFlags: buildChromeFlags() });
 
   try {
     const runnerResult = await lighthouse(url, buildLighthouseFlags(chrome.port, shouldSaveReport), lighthouseParameters);

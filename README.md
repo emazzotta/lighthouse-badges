@@ -80,6 +80,8 @@ lighthouse-badges --url https://www.youtube.com/
 
 See [here](https://github.com/GoogleChrome/lighthouse/blob/main/docs/configuration.md) for more configuration examples in the official lighthouse docs.
 
+Chrome runs with its sandbox. Where the sandbox cannot start, for example as root in a container, set `LIGHTHOUSE_BADGES_DISABLE_SANDBOX=true` to pass `--no-sandbox`. The Docker image sets it.
+
 ### Run
 
 Bun >= 1.0.0 is required.

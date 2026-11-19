@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'bun:test';
 import fs from 'fs';
 import path from 'path';
 import {
+  buildChromeFlags,
   buildLighthouseFlags,
   metricsToSvg,
   prepareOutputPath,
@@ -98,6 +99,17 @@ describe('lighthouse-badges', () => {
       expect(() => processRawLighthouseResult(lhr, '', 'https://example.org', false)).toThrow(
         'Lighthouse returned no categories for https://example.org',
       );
+    });
+  });
+
+  describe('the chrome flags', () => {
+    it('should keep the chrome sandbox by default', () => {
+      expect(buildChromeFlags({})).not.toContain('--no-sandbox');
+      expect(buildChromeFlags({})).toContain('--headless');
+    });
+
+    it('should disable the chrome sandbox when the environment asks for it', () => {
+      expect(buildChromeFlags({ LIGHTHOUSE_BADGES_DISABLE_SANDBOX: 'true' })).toContain('--no-sandbox');
     });
   });
 

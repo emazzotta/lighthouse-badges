@@ -31,7 +31,8 @@ RUN BIN_DIR="/usr/local/bin" && \
     ln -sf "/home/lighthouse/src/index.js" "$BIN_DIR/lighthouse-badges" && \
     chmod +x "$BIN_DIR/lighthouse-badges"
 
-ENV CHROME_PATH=/usr/bin/chromium-browser
+ENV CHROME_PATH=/usr/bin/chromium-browser \
+    LIGHTHOUSE_BADGES_DISABLE_SANDBOX=true
 
 RUN addgroup -S chrome && adduser -S -g chrome chrome \
     && mkdir -p /home/chrome/reports && chown -R chrome:chrome /home/chrome
