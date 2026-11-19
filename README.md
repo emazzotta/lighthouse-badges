@@ -84,7 +84,7 @@ Chrome runs with its sandbox. Where the sandbox cannot start, for example as roo
 
 ### Run
 
-Bun >= 1.0.0 is required.
+Options 1 and 2 install with Bun and run the command on Node.js >= 22.19, which Lighthouse 13 requires. The Docker image brings its own runtime.
 
 #### Option 1: bun
 ```bash

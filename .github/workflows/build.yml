@@ -41,6 +41,14 @@ jobs:
           bun run lint
           bun run build
 
+      - name: Setup Node.js at the supported minimum
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22.19'
+
+      - name: Run the built CLI on Node.js
+        run: node dist/src/index.js -v
+
       - name: Unit & Integration Test
         run: bun run test:coverage
 

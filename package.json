@@ -52,7 +52,8 @@
     "typescript": "^6.0.3"
   },
   "engines": {
-    "bun": ">=1.0.0"
+    "bun": ">=1.0.0",
+    "node": ">=22.19"
   },
   "private": false,
   "author": "Emanuele Mazzotta",
