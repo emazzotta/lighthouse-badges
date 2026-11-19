@@ -117,13 +117,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Resolve image tags
-        id: image-tags
+      - name: Resolve image tags and labels
+        id: image
         run: |
           {
             echo 'tags<<EOF'
             scripts/util.sh docker-tags "$TAG_PREFIX"
             echo 'EOF'
+            echo "version=$(jq -r '.version' package.json)"
+            echo "created=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           } >> "$GITHUB_OUTPUT"
 
       - name: Build and push multi-arch image
@@ -133,7 +135,11 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.image-tags.outputs.tags }}
+          tags: ${{ steps.image.outputs.tags }}
+          build-args: |
+            BUILD_DATE=${{ steps.image.outputs.created }}
+            VCS_REF=${{ github.sha }}
+            VERSION=${{ steps.image.outputs.version }}
           cache-from: |
             type=gha,scope=linux/amd64
             type=gha,scope=linux/arm64

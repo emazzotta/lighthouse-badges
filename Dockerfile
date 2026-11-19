@@ -3,21 +3,6 @@ FROM oven/bun:1.4.4-alpine
 RUN apk --update --no-cache add chromium && \
     mkdir -p /home/lighthouse
 
-ARG BUILD_DATE
-ARG VCS_REF
-ARG VERSION
-
-LABEL maintainer="hello@mazzotta.me" \
-    org.label-schema.build-date=$BUILD_DATE \
-    org.label-schema.name="Lighthouse Badges" \
-    org.label-schema.description="Generate gh-badges (shields.io) based on lighthouse performance." \
-    org.label-schema.url="https://github.com/emazzotta/lighthouse-badges" \
-    org.label-schema.vcs-ref=$VCS_REF \
-    org.label-schema.vcs-url="https://github.com/emazzotta/lighthouse-badges" \
-    org.label-schema.vendor="Emanuele Mazzotta" \
-    org.label-schema.version=$VERSION \
-    org.label-schema.schema-version="1.0"
-
 WORKDIR /home/lighthouse
 
 COPY dist/package.json dist/bun.lock ./
@@ -41,3 +26,18 @@ VOLUME /home/chrome/reports
 WORKDIR /home/chrome/reports
 
 USER chrome
+
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+
+LABEL org.opencontainers.image.title="Lighthouse Badges" \
+    org.opencontainers.image.description="Generate gh-badges (shields.io) based on lighthouse performance." \
+    org.opencontainers.image.url="https://github.com/emazzotta/lighthouse-badges" \
+    org.opencontainers.image.source="https://github.com/emazzotta/lighthouse-badges" \
+    org.opencontainers.image.vendor="Emanuele Mazzotta" \
+    org.opencontainers.image.authors="hello@mazzotta.me" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.created=$BUILD_DATE \
+    org.opencontainers.image.revision=$VCS_REF \
+    org.opencontainers.image.version=$VERSION
