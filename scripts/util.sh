@@ -26,12 +26,12 @@ publish_if_new() {
     fi
 
     cd "$PROJECT_ROOT"
-    local name version remote
+    local name version published
     name=$(jq -r '.name' package.json)
     version=$(jq -r '.version' package.json)
-    remote=$(npm show "$name" version 2>/dev/null || echo '')
+    published=$(npm view "${name}@${version}" version 2>/dev/null || echo '')
 
-    if [ "$remote" = "$version" ]; then
+    if [ "$published" = "$version" ]; then
         echo "${name}@${version} already published to ${registry}"
         return 0
     fi
@@ -47,7 +47,7 @@ Usage: $(basename "$0") <command> [args...]
 Commands:
   install                    Install the built package globally via bun
   uninstall                  Uninstall all global lighthouse-badges packages
-  publish-if-new <registry>  Publish to <registry> if version differs from remote
+  publish-if-new <registry>  Publish to <registry> unless it already has this version
 EOF
     exit 1
 }
