@@ -11,10 +11,18 @@ import {
   saveHtmlReport,
 } from '../src/lighthouse-badges';
 import { parseArgs } from '../src/argparser';
-import reportFixture from '../assets/report/emanuelemazzotta.com.json';
 import type { LighthouseLHR, LighthouseMetrics } from '../src/types';
 
-// Use a temporary directory for test outputs
+const LIGHTHOUSE_13_RESULT: LighthouseLHR = {
+  categories: {
+    performance: { score: 0.98 },
+    accessibility: { score: 1 },
+    'best-practices': { score: 0.93 },
+    seo: { score: 1 },
+    'agentic-browsing': { score: 0.85 },
+  },
+};
+
 const TEST_OUTPUT_DIR = path.join(process.cwd(), '__test_output__');
 
 function cleanupTestFiles() {
@@ -47,14 +55,14 @@ describe('lighthouse-badges', () => {
   describe('the lighthouse command results are processed as expected', () => {
     const expectedMetrics = {
       'lighthouse performance': 98,
-      'lighthouse pwa': 85,
       'lighthouse accessibility': 100,
       'lighthouse best-practices': 93,
       'lighthouse seo': 100,
+      'lighthouse agentic-browsing': 85,
     };
 
     it('should return integer percentages and no report', () => {
-      const result = processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://emanuelemazzotta.com', false);
+      const result = processRawLighthouseResult(LIGHTHOUSE_13_RESULT, '', 'https://emanuelemazzotta.com', false);
 
       expect(result).toStrictEqual({ metrics: expectedMetrics });
     });
@@ -63,7 +71,7 @@ describe('lighthouse-badges', () => {
       const url = 'https://emanuelemazzotta.com';
       const html = '<html>Fake report</html>';
 
-      const result = processRawLighthouseResult(reportFixture as LighthouseLHR, html, url, true);
+      const result = processRawLighthouseResult(LIGHTHOUSE_13_RESULT, html, url, true);
 
       expect(result).toStrictEqual({ metrics: expectedMetrics, report: { url, html } });
     });
@@ -132,10 +140,10 @@ describe('lighthouse-badges', () => {
     it('should save all svg files', async () => {
       const lighthouseMetrics: LighthouseMetrics = {
         'lighthouse performance': 100,
-        'lighthouse pwa': 85,
         'lighthouse accessibility': 100,
         'lighthouse best-practices': 93,
         'lighthouse seo': 100,
+        'lighthouse agentic-browsing': 85,
       };
 
       const badgeStyle = 'flat';
@@ -174,7 +182,7 @@ describe('lighthouse-badges', () => {
         '--output-path', TEST_OUTPUT_DIR,
       ]);
 
-      const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report);
+      const mockResult = processRawLighthouseResult(LIGHTHOUSE_13_RESULT, '<html>Fake report</html>', 'https://example.org', args.save_report);
       await saveArtifacts(args, mockResult);
 
       const files = getTestFiles();
@@ -190,7 +198,7 @@ describe('lighthouse-badges', () => {
         '--output-path', TEST_OUTPUT_DIR,
       ]);
 
-      const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '<html>Fake report</html>', 'https://example.org', args.save_report);
+      const mockResult = processRawLighthouseResult(LIGHTHOUSE_13_RESULT, '<html>Fake report</html>', 'https://example.org', args.save_report);
       await saveArtifacts(args, mockResult);
 
       const files = getTestFiles();
@@ -204,7 +212,7 @@ describe('lighthouse-badges', () => {
         '--output-path', TEST_OUTPUT_DIR,
       ]);
 
-      const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report);
+      const mockResult = processRawLighthouseResult(LIGHTHOUSE_13_RESULT, '', 'https://example.org', args.save_report);
       await saveArtifacts(args, mockResult);
 
       const files = getTestFiles();
@@ -218,7 +226,7 @@ describe('lighthouse-badges', () => {
         '--output-path', TEST_OUTPUT_DIR,
       ]);
 
-      const mockResult = await processRawLighthouseResult(reportFixture as LighthouseLHR, '', 'https://example.org', args.save_report);
+      const mockResult = processRawLighthouseResult(LIGHTHOUSE_13_RESULT, '', 'https://example.org', args.save_report);
       await saveArtifacts(args, mockResult);
 
       const files = getTestFiles();
