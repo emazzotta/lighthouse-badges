@@ -1,3 +1,5 @@
+import type { Config } from 'lighthouse';
+
 export const BADGE_STYLES = ['flat', 'flat-square', 'plastic', 'for-the-badge', 'social'] as const;
 
 export type BadgeStyle = (typeof BADGE_STYLES)[number];
@@ -22,26 +24,15 @@ export interface ProcessedLighthouseResult {
   readonly report?: HtmlReport;
 }
 
-export interface LighthouseConfig {
-  extends?: string;
-  settings?: {
-    extraHeaders?: Record<string, string>;
-    onlyCategories?: string[];
-    formFactor?: string;
-    [key: string]: unknown;
-  };
-  [key: string]: unknown;
-}
+export type LighthouseConfig = Config;
 
 export interface LighthouseCategory {
   score: number | null;
-  [key: string]: unknown;
 }
 
 export interface LighthouseLHR {
   categories: Record<string, LighthouseCategory>;
   runtimeError?: { code: string; message: string };
-  [key: string]: unknown;
 }
 
 export interface Spinner {
