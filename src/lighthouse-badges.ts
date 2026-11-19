@@ -19,9 +19,6 @@ const CHROME_FLAGS = [
   '--no-sandbox',
   '--disable-gpu',
   '--disable-dev-shm-usage',
-  '--no-default-browser-check',
-  '--no-first-run',
-  '--disable-default-apps',
 ];
 
 const saveBadge = async (
