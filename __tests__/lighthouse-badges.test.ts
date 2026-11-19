@@ -71,6 +71,17 @@ describe('lighthouse-badges', () => {
 
       expect(processRawLighthouseResult(lhr, '', 'https://example.org', false).metrics).toStrictEqual({ 'lighthouse performance': 96 });
     });
+
+    it('should throw the lighthouse runtime error when the page could not be audited', () => {
+      const lhr = {
+        categories: { performance: { score: null } },
+        runtimeError: { code: 'ERRORED_DOCUMENT_REQUEST', message: 'Lighthouse was unable to reliably load the page you requested.' },
+      } as unknown as LighthouseLHR;
+
+      expect(() => processRawLighthouseResult(lhr, '', 'https://unreachable.invalid', false)).toThrow(
+        'Lighthouse could not audit https://unreachable.invalid (ERRORED_DOCUMENT_REQUEST): Lighthouse was unable to reliably load the page you requested.',
+      );
+    });
   });
 
   describe('the html report is saved correctly', () => {

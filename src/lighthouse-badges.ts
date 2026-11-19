@@ -59,15 +59,21 @@ export const processRawLighthouseResult = (
   html: string,
   url: string,
   shouldSaveReport: boolean,
-): ProcessedLighthouseResult => ({
-  metrics: Object.fromEntries(
-    Object.entries(lhr.categories).map(([category, { score }]) => [
-      `lighthouse ${category.toLowerCase()}`,
-      Math.round(score * 100),
-    ]),
-  ),
-  ...(shouldSaveReport ? { report: { url, html } } : {}),
-});
+): ProcessedLighthouseResult => {
+  if (lhr.runtimeError) {
+    const { code, message } = lhr.runtimeError;
+    throw new Error(`Lighthouse could not audit ${url} (${code}): ${message}`);
+  }
+  return {
+    metrics: Object.fromEntries(
+      Object.entries(lhr.categories).map(([category, { score }]) => [
+        `lighthouse ${category.toLowerCase()}`,
+        Math.round(score * 100),
+      ]),
+    ),
+    ...(shouldSaveReport ? { report: { url, html } } : {}),
+  };
+};
 
 type CalculateLighthouseMetricsFn = (
   url: string,

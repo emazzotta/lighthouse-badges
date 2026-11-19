@@ -35,6 +35,7 @@ export interface LighthouseConfig {
 
 export interface LighthouseLHR {
   categories: Record<string, { score: number; [key: string]: unknown }>;
+  runtimeError?: { code: string; message: string };
   [key: string]: unknown;
 }
 
