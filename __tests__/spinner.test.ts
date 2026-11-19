@@ -13,7 +13,7 @@ const collectFrames = async (spin: (write: (text: string) => void) => void, wait
 describe('spinner', () => {
   it('should draw the message behind a cycling glyph on the same line', async () => {
     const written = await collectFrames((write) => {
-      const spinner = createSpinner('Running Lighthouse, please wait...', { write, intervalMs: FRAME_INTERVAL_MS });
+      const spinner = createSpinner('Running Lighthouse, please wait...', { write, intervalMs: FRAME_INTERVAL_MS, isTTY: true });
       spinner.start();
       setTimeout(() => spinner.stop(), FRAME_INTERVAL_MS * 20);
     }, FRAME_INTERVAL_MS * 30);
@@ -27,12 +27,22 @@ describe('spinner', () => {
 
   it('should clear the line and stop drawing when stopped', async () => {
     const written = await collectFrames((write) => {
-      const spinner = createSpinner('Running Lighthouse, please wait...', { write, intervalMs: FRAME_INTERVAL_MS });
+      const spinner = createSpinner('Running Lighthouse, please wait...', { write, intervalMs: FRAME_INTERVAL_MS, isTTY: true });
       spinner.start();
       setTimeout(() => spinner.stop(), FRAME_INTERVAL_MS * 3);
     }, FRAME_INTERVAL_MS * 20);
 
     expect(written.at(-1)).toBe('\x1b[0G\x1b[2K');
     expect(written.length).toBeLessThan(10);
+  });
+
+  it('should write nothing when the output is not a terminal', async () => {
+    const written = await collectFrames((write) => {
+      const spinner = createSpinner('Running Lighthouse, please wait...', { write, intervalMs: FRAME_INTERVAL_MS, isTTY: false });
+      spinner.start();
+      setTimeout(() => spinner.stop(), FRAME_INTERVAL_MS * 5);
+    }, FRAME_INTERVAL_MS * 10);
+
+    expect(written).toEqual([]);
   });
 });

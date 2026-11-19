@@ -11,9 +11,15 @@ const RESET = '\x1b[0m';
 interface SpinnerOptions {
   readonly write?: (text: string) => void;
   readonly intervalMs?: number;
+  readonly isTTY?: boolean;
 }
 
+const SILENT_SPINNER: Spinner = { start: () => {}, stop: () => {} };
+
 export const createSpinner = (message: string, options: SpinnerOptions = {}): Spinner => {
+  if (!(options.isTTY ?? process.stdout.isTTY === true)) {
+    return SILENT_SPINNER;
+  }
   const write = options.write ?? ((text: string) => { process.stdout.write(text); });
   const intervalMs = options.intervalMs ?? FRAME_INTERVAL_MS;
   let timer: ReturnType<typeof setInterval> | undefined;
