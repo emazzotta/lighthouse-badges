@@ -8,9 +8,9 @@ const COLOR_THRESHOLDS: ReadonlyArray<readonly [number, string]> = [
   [40, 'orange'],
 ];
 
-const sum = (values: number[]): number => values.reduce((a, b) => a + b, 0);
+const sum = (values: readonly number[]): number => values.reduce((a, b) => a + b, 0);
 
-const average = (values: number[]): number => Math.round(sum(values) / values.length);
+const average = (values: readonly number[]): number => Math.round(sum(values) / values.length);
 
 export const percentageToColor = (percentage: number): string =>
   COLOR_THRESHOLDS.find(([threshold]) => percentage >= threshold)?.[1] ?? 'red';

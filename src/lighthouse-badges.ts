@@ -15,7 +15,7 @@ import type {
   BadgeStyle,
 } from './types.js';
 
-const CHROME_FLAGS = ['--headless', '--disable-gpu', '--disable-dev-shm-usage'];
+const CHROME_FLAGS: readonly string[] = ['--headless', '--disable-gpu', '--disable-dev-shm-usage'];
 
 export const buildChromeFlags = (env: NodeJS.ProcessEnv = process.env): string[] =>
   env.LIGHTHOUSE_BADGES_DISABLE_SANDBOX === 'true' ? [...CHROME_FLAGS, '--no-sandbox'] : [...CHROME_FLAGS];

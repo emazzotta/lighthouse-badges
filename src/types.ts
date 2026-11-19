@@ -5,14 +5,14 @@ export const BADGE_STYLES = ['flat', 'flat-square', 'plastic', 'for-the-badge', 
 export type BadgeStyle = (typeof BADGE_STYLES)[number];
 
 export interface ParsedArgs {
-  single_badge: boolean;
-  badge_style: BadgeStyle;
-  output_path?: string;
-  save_report: boolean;
-  url: string;
+  readonly single_badge: boolean;
+  readonly badge_style: BadgeStyle;
+  readonly output_path?: string;
+  readonly save_report: boolean;
+  readonly url: string;
 }
 
-export type LighthouseMetrics = Record<string, number>;
+export type LighthouseMetrics = Readonly<Record<string, number>>;
 
 export interface HtmlReport {
   readonly url: string;
@@ -27,15 +27,15 @@ export interface ProcessedLighthouseResult {
 export type LighthouseConfig = Config;
 
 export interface LighthouseCategory {
-  score: number | null;
+  readonly score: number | null;
 }
 
 export interface LighthouseLHR {
-  categories: Record<string, LighthouseCategory>;
-  runtimeError?: { code: string; message: string };
+  readonly categories: Readonly<Record<string, LighthouseCategory>>;
+  readonly runtimeError?: { readonly code: string; readonly message: string };
 }
 
 export interface Spinner {
-  start: () => void;
-  stop: () => void;
+  readonly start: () => void;
+  readonly stop: () => void;
 }

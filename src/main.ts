@@ -19,9 +19,9 @@ const loadLighthouseConfig = async (): Promise<LighthouseConfig> => {
 };
 
 interface Dependencies {
-  saveArtifacts?: typeof defaultSave;
-  calculateLighthouseMetrics?: typeof defaultCalculate;
-  parseArgs?: typeof defaultParseArgs;
+  readonly saveArtifacts?: typeof defaultSave;
+  readonly calculateLighthouseMetrics?: typeof defaultCalculate;
+  readonly parseArgs?: typeof defaultParseArgs;
 }
 
 const withSpinner = async <T>(spinner: Spinner, task: () => Promise<T>): Promise<T> => {
