@@ -1,14 +1,6 @@
 import { ArgumentParser } from 'argparse';
 import packageJson from '../package.json' with { type: 'json' };
-import type { ParsedArgs, BadgeStyle } from './types.js';
-
-const BADGE_STYLES: readonly BadgeStyle[] = [
-  'flat',
-  'flat-square',
-  'plastic',
-  'for-the-badge',
-  'social',
-];
+import { BADGE_STYLES, type ParsedArgs } from './types.js';
 
 const parser = new ArgumentParser({
   prog: 'lighthouse-badges',

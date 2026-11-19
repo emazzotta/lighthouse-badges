@@ -1,4 +1,6 @@
-export type BadgeStyle = 'flat' | 'flat-square' | 'plastic' | 'for-the-badge' | 'social';
+export const BADGE_STYLES = ['flat', 'flat-square', 'plastic', 'for-the-badge', 'social'] as const;
+
+export type BadgeStyle = (typeof BADGE_STYLES)[number];
 
 export interface ParsedArgs {
   single_badge: boolean;
