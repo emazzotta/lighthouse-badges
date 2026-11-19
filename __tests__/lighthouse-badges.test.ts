@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'bun:test';
 import fs from 'fs';
 import path from 'path';
 import {
+  buildLighthouseFlags,
   metricsToSvg,
   prepareOutputPath,
   processRawLighthouseResult,
@@ -97,6 +98,13 @@ describe('lighthouse-badges', () => {
       expect(() => processRawLighthouseResult(lhr, '', 'https://example.org', false)).toThrow(
         'Lighthouse returned no categories for https://example.org',
       );
+    });
+  });
+
+  describe('the lighthouse flags', () => {
+    it('should ask for the html report only when it should be saved', () => {
+      expect(buildLighthouseFlags(9222, true)).toStrictEqual({ logLevel: 'silent', output: 'html', port: 9222 });
+      expect(buildLighthouseFlags(9222, false)).toStrictEqual({ logLevel: 'silent', output: 'json', port: 9222 });
     });
   });
 

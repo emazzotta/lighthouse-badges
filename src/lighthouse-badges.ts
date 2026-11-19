@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs/promises';
 import { makeBadge } from 'badge-maker';
+import type { Flags } from 'lighthouse';
 import { urlEscaper } from './util.js';
 import { squashScores, percentageToColor } from './calculations.js';
 import type {
@@ -90,6 +91,12 @@ export const processRawLighthouseResult = (
   };
 };
 
+export const buildLighthouseFlags = (port: number, shouldSaveReport: boolean): Flags => ({
+  logLevel: 'silent',
+  output: shouldSaveReport ? 'html' : 'json',
+  port,
+});
+
 type CalculateLighthouseMetricsFn = (
   url: string,
   shouldSaveReport: boolean,
@@ -106,11 +113,7 @@ export const calculateLighthouseMetrics: CalculateLighthouseMetricsFn = async (
   const chrome = await launch({ chromeFlags: CHROME_FLAGS });
 
   try {
-    const runnerResult = await lighthouse(
-      url,
-      { logLevel: 'silent', output: 'html', port: chrome.port },
-      lighthouseParameters,
-    );
+    const runnerResult = await lighthouse(url, buildLighthouseFlags(chrome.port, shouldSaveReport), lighthouseParameters);
     if (!runnerResult) {
       throw new Error(`Lighthouse returned no result for ${url}`);
     }
