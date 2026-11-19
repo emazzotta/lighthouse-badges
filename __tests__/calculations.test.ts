@@ -43,9 +43,5 @@ describe('calculations', () => {
 
       expect(squashScores(metrics)).toStrictEqual({ lighthouse: 83 });
     });
-
-    it('should return a zero score when there are no categories', () => {
-      expect(squashScores({})).toStrictEqual({ lighthouse: 0 });
-    });
   });
 });

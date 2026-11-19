@@ -82,6 +82,22 @@ describe('lighthouse-badges', () => {
         'Lighthouse could not audit https://unreachable.invalid (ERRORED_DOCUMENT_REQUEST): Lighthouse was unable to reliably load the page you requested.',
       );
     });
+
+    it('should throw naming the categories without a score when an audit errored', () => {
+      const lhr = { categories: { performance: { score: 0.9 }, seo: { score: null }, accessibility: { score: null } } } as unknown as LighthouseLHR;
+
+      expect(() => processRawLighthouseResult(lhr, '', 'https://example.org', false)).toThrow(
+        'Lighthouse returned no score for https://example.org in: seo, accessibility',
+      );
+    });
+
+    it('should throw when lighthouse returns no categories', () => {
+      const lhr = { categories: {} };
+
+      expect(() => processRawLighthouseResult(lhr, '', 'https://example.org', false)).toThrow(
+        'Lighthouse returned no categories for https://example.org',
+      );
+    });
   });
 
   describe('the html report is saved correctly', () => {

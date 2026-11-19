@@ -10,6 +10,7 @@ import type {
   ProcessedLighthouseResult,
   LighthouseConfig,
   LighthouseLHR,
+  LighthouseCategory,
   ParsedArgs,
   BadgeStyle,
 } from './types.js';
@@ -54,6 +55,26 @@ export const saveHtmlReport = async (outputPath: string, { url, html }: HtmlRepo
   process.stdout.write(`Saved report to ${filepath}\n`);
 };
 
+type CategoryEntry = [string, LighthouseCategory];
+type ScoredCategoryEntry = [string, LighthouseCategory & { score: number }];
+
+const isScored = (entry: CategoryEntry): entry is ScoredCategoryEntry => entry[1].score !== null;
+
+const categoriesToPercentages = (categories: Record<string, LighthouseCategory>, url: string): LighthouseMetrics => {
+  const entries = Object.entries(categories);
+  if (entries.length === 0) {
+    throw new Error(`Lighthouse returned no categories for ${url}`);
+  }
+  const scored = entries.filter(isScored);
+  if (scored.length < entries.length) {
+    const unscored = entries.filter((entry) => !isScored(entry)).map(([category]) => category);
+    throw new Error(`Lighthouse returned no score for ${url} in: ${unscored.join(', ')}`);
+  }
+  return Object.fromEntries(
+    scored.map(([category, { score }]) => [`lighthouse ${category.toLowerCase()}`, Math.round(score * 100)]),
+  );
+};
+
 export const processRawLighthouseResult = (
   lhr: LighthouseLHR,
   html: string,
@@ -65,12 +86,7 @@ export const processRawLighthouseResult = (
     throw new Error(`Lighthouse could not audit ${url} (${code}): ${message}`);
   }
   return {
-    metrics: Object.fromEntries(
-      Object.entries(lhr.categories).map(([category, { score }]) => [
-        `lighthouse ${category.toLowerCase()}`,
-        Math.round(score * 100),
-      ]),
-    ),
+    metrics: categoriesToPercentages(lhr.categories, url),
     ...(shouldSaveReport ? { report: { url, html } } : {}),
   };
 };

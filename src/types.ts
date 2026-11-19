@@ -33,8 +33,13 @@ export interface LighthouseConfig {
   [key: string]: unknown;
 }
 
+export interface LighthouseCategory {
+  score: number | null;
+  [key: string]: unknown;
+}
+
 export interface LighthouseLHR {
-  categories: Record<string, { score: number; [key: string]: unknown }>;
+  categories: Record<string, LighthouseCategory>;
   runtimeError?: { code: string; message: string };
   [key: string]: unknown;
 }
