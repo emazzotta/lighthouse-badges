@@ -118,9 +118,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Resolve image tags
+        id: image-tags
         run: |
-          echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-          echo "PACKAGE_VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+          {
+            echo 'tags<<EOF'
+            scripts/util.sh docker-tags "$TAG_PREFIX"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
 
       - name: Build and push multi-arch image
         uses: docker/build-push-action@v7
@@ -129,10 +133,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: |
-            ${{ env.TAG_PREFIX }}:latest
-            ${{ env.TAG_PREFIX }}:${{ env.PACKAGE_VERSION }}
-            ${{ env.TAG_PREFIX }}:${{ env.GIT_SHA }}
+          tags: ${{ steps.image-tags.outputs.tags }}
           cache-from: |
             type=gha,scope=linux/amd64
             type=gha,scope=linux/arm64

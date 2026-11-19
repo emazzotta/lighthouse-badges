@@ -13,6 +13,14 @@ const NPM_STUB = `case "$1 $2" in
   *) exit 1 ;;
 esac`;
 
+const IMAGE = 'emazzotta/lighthouse-badges';
+const COMMIT = 'abc1234';
+const GIT_STUB = `echo ${COMMIT}`;
+const DOCKER_STUB = `case "$*" in
+  ${PUBLISHED_VERSIONS.map((version) => `"buildx imagetools inspect ${IMAGE}:${version}"`).join('|')}) exit 0 ;;
+  *) exit 1 ;;
+esac`;
+
 const projects: string[] = [];
 
 const createProject = (version: string, stubs: Readonly<Record<string, string>>): string => {
@@ -71,6 +79,39 @@ describe('scripts/util.sh', () => {
 
       expect(result.exitCode).toBe(0);
       expect(readCalls(root)).toContain('bun run ci:publish');
+    });
+  });
+
+  describe('docker-tags', () => {
+    it('should tag latest, the commit and a version the image registry does not have', () => {
+      const root = createProject('1.5.8', { docker: DOCKER_STUB, git: GIT_STUB });
+
+      const result = runUtil(root, 'docker-tags', IMAGE);
+
+      expect(result.exitCode).toBe(0);
+      expect(result.stdout.toString().trim().split('\n')).toStrictEqual([
+        `${IMAGE}:latest`,
+        `${IMAGE}:${COMMIT}`,
+        `${IMAGE}:1.5.8`,
+      ]);
+    });
+
+    it('should leave out the version tag when the image registry already has that version', () => {
+      const root = createProject(LATEST_VERSION, { docker: DOCKER_STUB, git: GIT_STUB });
+
+      const result = runUtil(root, 'docker-tags', IMAGE);
+
+      expect(result.exitCode).toBe(0);
+      expect(result.stdout.toString().trim().split('\n')).toStrictEqual([`${IMAGE}:latest`, `${IMAGE}:${COMMIT}`]);
+    });
+
+    it('should fail without an image name', () => {
+      const root = createProject(LATEST_VERSION, { docker: DOCKER_STUB, git: GIT_STUB });
+
+      const result = runUtil(root, 'docker-tags');
+
+      expect(result.exitCode).toBe(1);
+      expect(result.stdout.toString()).toBe('');
     });
   });
 });
