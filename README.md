@@ -108,6 +108,8 @@ docker run --rm \
 
 ### Develop
 
+The build needs `jq` on the `PATH`.
+
 ```bash
 bun run start # To run the lighthouse-badges code on google.com
 ```
