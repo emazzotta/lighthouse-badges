@@ -1,4 +1,4 @@
-FROM oven/bun:1.4.4-alpine
+FROM oven/bun:1.4.5-alpine
 
 RUN apk --update --no-cache add chromium && \
     mkdir -p /home/lighthouse
